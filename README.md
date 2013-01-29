@@ -27,6 +27,9 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+* .gitignore Added
+* License Added
+
 ### 0.3.0.0 [01-29-2012] #
 
 * Initial github Push
