@@ -27,6 +27,10 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+### 0.3.1.1 [02-03-2013] #
+
+* Bezier Curve Demo works on mobile devices
+* Mobile Support Added, buttons always visible on mobile support
 * .gitignore Added
 * License Added
 

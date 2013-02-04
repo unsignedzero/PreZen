@@ -9,14 +9,14 @@
  *work on all screen sizes too.
  *
  *Created 01-25-2013
- *Version 0.3.1.0
+ *Version 0.3.1.1
  */
 
 var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName){
 
   var DEBUG = false;
   var showButtons = true;
-  var hideButtons = true;
+  var hideButtons = isMobile() ? false : true;
   
 //////////////////////////////////////////////////////////////////////////////
 //Creates the default variables it needs/uses

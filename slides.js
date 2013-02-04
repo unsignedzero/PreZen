@@ -175,7 +175,7 @@ externDrawFunctionArray.push(
     ));
     outLayerAry[6].add(createBullet(width/6, height/4+15*fontSize, fontSize));
     outLayerAry[6].add(drawText(
-      width/6, height/4+15*fontSize, "Application:Drawing Circles",
+      width/6, height/4+15*fontSize, "Application: Drawing Circles",
       fontSize+5, fontFamily
     ));
 
@@ -2443,7 +2443,7 @@ externDrawFunctionArray.push(
     
     //Refresh onclick
     //Updates only when successfully dragged
-    pointa.on("mouseon dragend" , function(){
+    pointa.on("mouseon touchmove dragmove" , function(){
       control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
       control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
       linea.setPoints([pointa.getX(),pointa.getY(),
@@ -2456,8 +2456,7 @@ externDrawFunctionArray.push(
       outLayerAry[3].draw();
     });
     
-    
-    pointb.on("mouseon dragend" , function(){
+    pointb.on("mouseon dragmove" , function(){
       control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
       control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
       linea.setPoints([pointa.getX(),pointa.getY(),
@@ -2470,7 +2469,7 @@ externDrawFunctionArray.push(
       outLayerAry[3].draw();
     });
     
-    pointc.on("mouseon dragend" , function(){
+    pointc.on("mouseon dragmove" , function(){
       control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
       control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
       linea.setPoints([pointa.getX(),pointa.getY(),
@@ -2732,7 +2731,7 @@ externDrawFunctionArray.push(
     
     //Refresh onclick
     //Updates only when the piece is dragged successfully
-    pointa.on("mouseon dragend" , function(){
+    pointa.on("mouseon dragmove" , function(){
       if( !inAnim ){
         shifta.setX(pointa.getX());
         shifta.setY(pointa.getY());
@@ -2753,7 +2752,7 @@ externDrawFunctionArray.push(
       outLayerAry[1].draw();
     });
     
-    pointb.on("mouseon dragend" , function(){
+    pointb.on("mouseon dragmove" , function(){
       if( !inAnim ){
         shifta.setX(pointa.getX());
         shifta.setY(pointa.getY());
@@ -2774,7 +2773,7 @@ externDrawFunctionArray.push(
       outLayerAry[1].draw();
     });
     
-    pointc.on("mouseon dragend" , function(){
+    pointc.on("mouseon dragmove" , function(){
       if( !inAnim ){
         shifta.setX(pointa.getX());
         shifta.setY(pointa.getY());
@@ -2795,7 +2794,7 @@ externDrawFunctionArray.push(
       outLayerAry[1].draw();
     });
     
-    control.on("mouseon dragend" , function(){
+    control.on("mouseon dragmove" , function(){
       splineq.setPoints(setPoints(pointa,control,pointc));
       outLayerAry[1].draw();
     });
