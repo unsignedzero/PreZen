@@ -1,17 +1,26 @@
-﻿ColorGamutXref.jpg, http://www.kevinconnery.com/imaging/samples/ColorGamutXref.jpg
-750px-CRT_color_enhanced.png, https://en.wikipedia.org/wiki/File:CRT_color_enhanced.png
-600px-CRT_screen._closeup.jpg, https://en.wikipedia.org/wiki/File:CRT_screen._closeup.jpg
-crt-monitor.jpg,http://www.buycoms.com/buyers-guide/monitor/images/crt-monitor.jpg
-45567-lg-55lh40-55-lcd-tv1.jpg, https://lh3.ggpht.com/_5uct4aQxOAc/TQwZFaT4YSI/AAAAAAAAAGg/FDWBqvQa3qk/s1600/45567-lg-55lh40-55-lcd-tv1.jpg
-800px-LCD_layers.svg.png, https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/LCD_layers.svg/800px-LCD_layers.svg.png
-OLED_schematic.svg.png, https://en.wikipedia.org/wiki/File:OLED_schematic.svg
-AMOLED-en.svg.png, https://en.wikipedia.org/wiki/File:AMOLED-en.svg
-Sony_XEL-1.jpg, https://upload.wikimedia.org/wikipedia/commons/3/36/Sony_XEL-1.jpg
-OLED_EarlyProduct.JPG, https://en.wikipedia.org/wiki/File:OLED_EarlyProduct.JPG
-Galaxy_Note_II_subpixels_representation.png, https://en.wikipedia.org/wiki/File:Galaxy_Note_II_subpixels_representation.png
-800px-LCDneg.jpg, https://en.wikipedia.org/wiki/File:LCDneg.jpg
+﻿Reference:
+Here is a list of all images used in the list as well as either the article in
+which the image appeared, or a direct link to the image self.
 
-active-matrix.jpg, https://en.wikipedia.org/wiki/File:OLED_EarlyProduct.JPG
-http://dreamdth.com/Thread-Article-Journey-from-LCD-to-AMOLED-The-Evolution-of-Displays
+The slide was created for educational purposes only .
+These slides are uploaded so that people creating slides can see how
+to place images and how to modify the ratio. 
+
+600px-CRT_screen._closeup.jpg, https://en.wikipedia.org/wiki/File:CRT_screen._closeup.jpg
+750px-CRT_color_enhanced.png, https://en.wikipedia.org/wiki/File:CRT_color_enhanced.png
+800px-LCD_layers.svg.png, https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/LCD_layers.svg/800px-LCD_layers.svg.png
+800px-LCDneg.jpg, https://en.wikipedia.org/wiki/File:LCDneg.jpg
+45567-lg-55lh40-55-lcd-tv1.jpg, https://lh3.ggpht.com/_5uct4aQxOAc/TQwZFaT4YSI/AAAAAAAAAGg/FDWBqvQa3qk/s1600/45567-lg-55lh40-55-lcd-tv1.jpg
+active-matrix.jpg, http://dreamdth.com/Thread-Article-Journey-from-LCD-to-AMOLED-The-Evolution-of-Displays
+AMOLED-en.svg.png, https://en.wikipedia.org/wiki/File:AMOLED-en.svg
+ColorGamutXref.jpg, http://www.kevinconnery.com/imaging/samples/ColorGamutXref.jpg
+crt-monitor.jpg,http://www.buycoms.com/buyers-guide/monitor/images/crt-monitor.jpg
+Galaxy_Note_II_subpixels_representation.png, https://en.wikipedia.org/wiki/File:Galaxy_Note_II_subpixels_representation.png
 image66.gif, http://www.tomshardware.com/reviews/tft-guide,116-5.html
-http://ts1.mm.bing.net/th?id=H.4797827237807764&pid=15.1&H=160&W=160
+IPS_Off & IPS_On, https://en.wikipedia.org/wiki/File:TN-LCD-schematic-MS-208kB.png
+OLED_EarlyProduct.JPG, https://en.wikipedia.org/wiki/File:OLED_EarlyProduct.JPG
+OLED_schematic.svg.png, https://en.wikipedia.org/wiki/File:OLED_schematic.svg
+Samsung-Galaxy-S3-in-Sapphire-black, http://www.androidtapp.com/samsung-galaxy-s3-tips-20-million-in-sales-in-record-100-days/samsung-galaxy-s3-in-sapphire-black/
+Sony_XEL-1.jpg, https://upload.wikimedia.org/wikipedia/commons/3/36/Sony_XEL-1.jpg
+test.jpg, self created
+TN_Twisted & TN_UnTwisted, https://upload.wikimedia.org/wikipedia/commons/7/74/Diagram_LCD_IPS.jpg
