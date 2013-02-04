@@ -1,0 +1,17 @@
+﻿ColorGamutXref.jpg, http://www.kevinconnery.com/imaging/samples/ColorGamutXref.jpg
+750px-CRT_color_enhanced.png, https://en.wikipedia.org/wiki/File:CRT_color_enhanced.png
+600px-CRT_screen._closeup.jpg, https://en.wikipedia.org/wiki/File:CRT_screen._closeup.jpg
+crt-monitor.jpg,http://www.buycoms.com/buyers-guide/monitor/images/crt-monitor.jpg
+45567-lg-55lh40-55-lcd-tv1.jpg, https://lh3.ggpht.com/_5uct4aQxOAc/TQwZFaT4YSI/AAAAAAAAAGg/FDWBqvQa3qk/s1600/45567-lg-55lh40-55-lcd-tv1.jpg
+800px-LCD_layers.svg.png, https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/LCD_layers.svg/800px-LCD_layers.svg.png
+OLED_schematic.svg.png, https://en.wikipedia.org/wiki/File:OLED_schematic.svg
+AMOLED-en.svg.png, https://en.wikipedia.org/wiki/File:AMOLED-en.svg
+Sony_XEL-1.jpg, https://upload.wikimedia.org/wikipedia/commons/3/36/Sony_XEL-1.jpg
+OLED_EarlyProduct.JPG, https://en.wikipedia.org/wiki/File:OLED_EarlyProduct.JPG
+Galaxy_Note_II_subpixels_representation.png, https://en.wikipedia.org/wiki/File:Galaxy_Note_II_subpixels_representation.png
+800px-LCDneg.jpg, https://en.wikipedia.org/wiki/File:LCDneg.jpg
+
+active-matrix.jpg, https://en.wikipedia.org/wiki/File:OLED_EarlyProduct.JPG
+http://dreamdth.com/Thread-Article-Journey-from-LCD-to-AMOLED-The-Evolution-of-Displays
+image66.gif, http://www.tomshardware.com/reviews/tft-guide,116-5.html
+http://ts1.mm.bing.net/th?id=H.4797827237807764&pid=15.1&H=160&W=160

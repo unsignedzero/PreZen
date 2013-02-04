@@ -20,4 +20,4 @@ var externTimer = 500;
  *Adding more slides than specified here will have unexpected results
  *and extra layers will not load correctly
  */
-var externMaxLayerCount = 7;
+var externMaxLayerCount = 8;

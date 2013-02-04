@@ -25,4 +25,7 @@ else{
   jwerty.key('→',function(){
     zxPowerPoint.next();
   });
+  jwerty.key('R',function(){
+    zxPowerPoint.reSize();
+  });
 }

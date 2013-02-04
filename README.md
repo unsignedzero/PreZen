@@ -30,13 +30,19 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 * .gitignore Added
 * License Added
 
-### 0.3.0.0 [01-29-2012] #
+### 0.3.1.0 [02-01-2013] #
+
+* Major portion of presentation completed
+* Resize Buttons and button added
+* Fixed year typo in README
+
+### 0.3.0.0 [01-29-2013] #
 
 * Initial github Push
 * Created README.md file
 * Bugfix, can't go back to the first slide
 
-### 0.2.0.0 [01-27-2012] #
+### 0.2.0.0 [01-27-2013] #
 
 * Added Jwerty Library so user can control slides via arrow keys
 * Created API so external libraries/user can control PreZen on the outside
@@ -46,14 +52,14 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 * Similar common CONSTANTS and values can be added to setObj, which will
   make it common to all slides
 
-### 0.1.0.0 [01-26-2012] #
+### 0.1.0.0 [01-26-2013] #
 
 * PreZen supports multiple slides
 * Factored code for drawing UI
 * One can transition between slides and parts of a slide now
 * Modified so now it can support an arbitrary amount of layers
 
-### 0.0.0.0 [01-25-2012] #
+### 0.0.0.0 [01-25-2013] #
 
 * External changes can be made in settings.js
 * Only works with one slide
