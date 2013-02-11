@@ -27,6 +27,9 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+* Added Plasma into the slides
+* Added Slide Count
+
 ### 0.3.1.1 [02-03-2013] #
 
 * Bezier Curve Demo works on mobile devices

@@ -14,6 +14,7 @@
 
 var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName){
 
+  var showSlideNumber = true;
   var DEBUG = false;
   var showButtons = true;
   var hideButtons = isMobile() ? false : true;
@@ -225,6 +226,10 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
       slideLayer = 0;
       slideLayerMax = slideArray[++slideIndex](globalOutLayerAry,
       width, height, setObj, supportFunc);
+      if ( showSlideNumber )
+        globalOutLayerAry[0].add(supportFunc.drawText(
+          width/16, height/16, slideIndex,
+          setObj.fontSize+10, setObj.fontFamily));
       fadeIn(globalOutLayerAry[slideLayer]).start();
     }
   }
@@ -236,6 +241,10 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
       slideLayerMax = slideArray[slideIndex](globalOutLayerAry,
       width, height, setObj, supportFunc);
       slideLayer = slideLayerMax-1;
+      if ( showSlideNumber )
+        globalOutLayerAry[0].add(supportFunc.drawText(
+          width/16, height/16, slideIndex,
+          setObj.fontSize+10, setObj.fontFamily));
       fadeInAll(globalOutLayerAry).start();
     }
   }

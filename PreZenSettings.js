@@ -16,6 +16,9 @@ var externOutlineShift = 20;
 //Sets the fade time (in ms)
 var externTimer = 500;
 
+//Show Debug Slides
+var showDebugSlide = false;
+
 /*Sets the max amount of layers PreZen should assume a slide should have
  *Adding more slides than specified here will have unexpected results
  *and extra layers will not load correctly

@@ -63,6 +63,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Test ZONE
 //////////////////////////////////////////////////////////////////////////////
+if( showDebugSlide ){
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -71,63 +72,59 @@ externDrawFunctionArray.push(
     var fontSize = settingsObj.fontSize;
     var fontFamily = settingsObj.fontFamily;
     var outlineShift = settingsObj.outlineShift;
-    var createBullet = supportFunc.createBullet;
+    var minDim = settingsObj.minDim;
 
     var center   = supportFunc.center;
-    var align    = supportFunc.align;
     var drawText = supportFunc.drawText;
+    var createBullet = supportFunc.createBullet;
+    var floor    = supportFunc.floor;
+
+    var imgAry = [];
+    var imgAryCur = -1;
 
     outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "CRT (Pros/Cons)",
+      width/2, outlineShift + 0.05*height, "Color Gamut",
       fontSize+20, fontFamily
     )));
+    outLayerAry[1].add(createBullet(width/2,height/4,fontSize));
     outLayerAry[1].add(drawText(
-      width/6, height/4-2*fontSize, "-Pros-",
-      fontSize+15, fontFamily
-    ));
-    outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
-    outLayerAry[1].add(drawText(
-      width/6, height/4, "No Input Lag",
-      fontSize+5, fontFamily
-    ));
-    outLayerAry[2].add(createBullet(width/6, height/4+2*fontSize, fontSize));
-    outLayerAry[2].add(drawText(
-      width/6, height/4+2*fontSize, "Flexible resolution/refresh rate",
-      fontSize+5, fontFamily
-    ));
-    outLayerAry[3].add(createBullet(width/6, height/4+4*fontSize, fontSize));
-    outLayerAry[3].add(drawText(
-      width/6, height/4+4*fontSize, "No color distortion and greater viewing angle",
-      fontSize+5, fontFamily
-    ));
-    outLayerAry[4].add(drawText(
-      width/6, height/4+8*fontSize, "-Cons-",
-      fontSize+15, fontFamily
-    ));
-    outLayerAry[4].add(createBullet(width/6, height/4+10*fontSize, fontSize));
-    outLayerAry[4].add(drawText(
-      width/6, height/4+10*fontSize, "Larger size/heavier weight",
-      fontSize+5, fontFamily
-    ));
-    outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
-    outLayerAry[5].add(drawText(
-      width/6, height/4+12*fontSize, "More power used compared to an LCD",
-      fontSize+5, fontFamily
-    ));
-    outLayerAry[6].add(createBullet(width/6, height/4+14*fontSize, fontSize));
-    outLayerAry[6].add(drawText(
-      width/6, height/4+14*fontSize, "Affected by magnetic field",
-      fontSize+5, fontFamily
-    ));
-    outLayerAry[7].add(createBullet(width/6, height/4+16*fontSize, fontSize));
-    outLayerAry[7].add(drawText(
-      width/6, height/4+16*fontSize, "Recycling is a problem",
+      width/2, height*(1/4), "What colors can be displayed?",
       fontSize+5, fontFamily
     ));
 
-    return 8;
+    imgAry.push(new Image());
+    imgAryCur +=1;
+    imgAry[imgAryCur].src = 'IMG/ColorGamutXref.jpg';
+    imgAry[imgAryCur].onload = function(){
+    };
+
+    outLayerAry[1].add(center(new Kinetic.Image({
+      x: width/4,
+      y: height/4,
+      width: minDim/2,
+      height: minDim/2,
+      image: imgAry[imgAryCur],
+    })));
+
+    outLayerAry[2].add(createBullet(width/2,height/4+6*fontSize,fontSize));
+    outLayerAry[2].add(drawText(
+      width/2, height*(1/4)+6*fontSize, "What can be seen in",
+      fontSize+5, fontFamily
+    ));
+    outLayerAry[2].add(drawText(
+      width/2, height*(1/4)+7*fontSize, "a print out?",
+      fontSize+5, fontFamily
+    ));
+    outLayerAry[3].add(createBullet(width/2,height/4+13*fontSize,fontSize));
+    outLayerAry[3].add(drawText(
+      width/2, height*(1/4)+13*fontSize, "Does it look good?",
+      fontSize+5, fontFamily
+    ));
+
+    return 4;
   }
 );
+}
 //////////////////////////////////////////////////////////////////////////////
 //TOC Slide
 externDrawFunctionArray.push(
@@ -158,28 +155,33 @@ externDrawFunctionArray.push(
       width/6, height/4+3*fontSize, "CRT",
       fontSize+5, fontFamily
     ));
-    outLayerAry[3].add(createBullet(width/6, height/4+6*fontSize, fontSize));
+		outLayerAry[3].add(createBullet(width/6, height/4+6*fontSize, fontSize));
     outLayerAry[3].add(drawText(
-      width/6, height/4+6*fontSize, "LCD",
+      width/6, height/4+6*fontSize, "Plasma",
       fontSize+5, fontFamily
     ));
     outLayerAry[4].add(createBullet(width/6, height/4+9*fontSize, fontSize));
     outLayerAry[4].add(drawText(
-      width/6, height/4+9*fontSize, "OLED",
+      width/6, height/4+9*fontSize, "LCD",
       fontSize+5, fontFamily
     ));
     outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
     outLayerAry[5].add(drawText(
-      width/6, height/4+12*fontSize, "AMOLED",
+      width/6, height/4+12*fontSize, "OLED",
       fontSize+5, fontFamily
     ));
     outLayerAry[6].add(createBullet(width/6, height/4+15*fontSize, fontSize));
     outLayerAry[6].add(drawText(
-      width/6, height/4+15*fontSize, "Application: Drawing Circles",
+      width/6, height/4+15*fontSize, "AMOLED",
+      fontSize+5, fontFamily
+    ));
+    outLayerAry[7].add(createBullet(width/6, height/4+18*fontSize, fontSize));
+    outLayerAry[7].add(drawText(
+      width/6, height/4+18*fontSize, "Application: Drawing Circles",
       fontSize+5, fontFamily
     ));
 
-    return 7;
+    return 8;
   }
 );
 //////////////////////////////////////////////////////////////////////////////
@@ -490,53 +492,6 @@ externDrawFunctionArray.push(
     var drawText = supportFunc.drawText;
 
     outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "CRT (Current State)",
-      fontSize+20, fontFamily
-    )));
-    outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
-    outLayerAry[1].add(drawText(
-      width/6, height/4, "Superceded by newer technology",
-      fontSize+5, fontFamily
-    ));
-    outLayerAry[2].add(drawText(
-      width/6, height/4+1*fontSize, "Mainly due to LCD",
-      fontSize, fontFamily
-    ));
-    outLayerAry[3].add(createBullet(width/6, height/4+5*fontSize, fontSize));
-    outLayerAry[3].add(drawText(
-      width/6, height/4+5*fontSize, "Still purchased for special markets",
-      fontSize+5, fontFamily
-    ));
-    outLayerAry[4].add(drawText(
-      width/6, height/4+6*fontSize, "Bought in the psychophysical field",
-      fontSize, fontFamily
-    ));
-    outLayerAry[5].add(createBullet(width/6, height/4+10*fontSize, fontSize));
-    outLayerAry[5].add(drawText(
-      width/6, height/4+10*fontSize, "Still in oscilloscopes and older homes",
-      fontSize+5, fontFamily
-    ));
-
-    return 6;
-  }
-);
-//////////////////////////////////////////////////////////////////////////////
-//Slide 6
-externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
-
-    supportFunc.clean(outLayerAry,settingsObj);
-
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var createBullet = supportFunc.createBullet;
-
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
-
-    outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "CRT (Pros/Cons)",
       fontSize+20, fontFamily
     )));
@@ -588,8 +543,191 @@ externDrawFunctionArray.push(
   }
 );
 //////////////////////////////////////////////////////////////////////////////
-//Part 3 LCD
+//Part 3 Plasma
+//////////////////////////////////////////////////////////////////////////////
+//Slide 6
+externDrawFunctionArray.push(
+  function(outLayerAry, width, height, settingsObj, supportFunc){
+
+    supportFunc.clean(outLayerAry,settingsObj);
+
+    var fontSize = settingsObj.fontSize;
+    var fontFamily = settingsObj.fontFamily;
+    var outlineShift = settingsObj.outlineShift;
+    var minDim = settingsObj.minDim;
+
+    var createBullet = supportFunc.createBullet;
+    var center   = supportFunc.center;
+    var align    = supportFunc.align;
+    var drawText = supportFunc.drawText;
+
+    var imgAry = [];
+    var imgAryCur = -1;
+
+    outLayerAry[0].add(center(drawText(
+      width/2, outlineShift + 0.05*height, "Plasma",
+      fontSize+20, fontFamily
+    )));
+
+    imgAry.push(new Image());
+    imgAryCur +=1;
+    imgAry[imgAryCur].src = 'IMG/Evolution_of_21st_century_plasma_displays.jpg';
+    imgAry[imgAryCur].onload = function(){
+    };
+
+    outLayerAry[1].add(align(new Kinetic.Image({
+      x: width/2,
+      y: height/2+height/20,
+      width: minDim/2.25,
+      height: minDim/1.5,
+      image: imgAry[imgAryCur],
+    })));
+
+    return 2;
+  }
+);
+//////////////////////////////////////////////////////////////////////////////
 //Slide 7
+externDrawFunctionArray.push(
+  function(outLayerAry, width, height, settingsObj, supportFunc){
+
+    supportFunc.clean(outLayerAry,settingsObj);
+
+    var fontSize = settingsObj.fontSize;
+    var fontFamily = settingsObj.fontFamily;
+    var outlineShift = settingsObj.outlineShift;
+    var minDim = settingsObj.minDim;
+
+    var createBullet = supportFunc.createBullet;
+    var center   = supportFunc.center;
+    var align    = supportFunc.align;
+    var drawText = supportFunc.drawText;
+
+    var imgAry = [];
+    var imgAryCur = -1;
+
+    outLayerAry[0].add(center(drawText(
+      width/2, outlineShift + 0.05*height, "Plasma (How they work)",
+      fontSize+20, fontFamily
+    )));
+
+    imgAry.push(new Image());
+    imgAryCur +=1;
+    imgAry[imgAryCur].src = 'IMG/Plasma-display-composition.svg.png';
+    imgAry[imgAryCur].onload = function(){
+    };
+
+    outLayerAry[1].add(center(new Kinetic.Image({
+      x: width/4,
+      y: height/4,
+      width: minDim/2,
+      height: minDim/2,
+      image: imgAry[imgAryCur],
+    })));
+
+    outLayerAry[1].add(drawText(
+      width/2-2*fontSize, height*(1/4), "1. Address Electrode",
+      fontSize+5, fontFamily
+    ));
+    outLayerAry[1].add(drawText(
+      width/2, height*(1/4)+fontSize, "Turns on the right pixel",
+      fontSize, fontFamily
+    ));
+
+    outLayerAry[2].add(drawText(
+      width/2-2*fontSize, height*(1/4)+3*fontSize, "2. Plasma Cells",
+      fontSize+5, fontFamily
+    ));
+    outLayerAry[2].add(drawText(
+      width/2, height*(1/4)+fontSize+3*fontSize, "Mercury is excited",
+      fontSize, fontFamily
+    ));
+    outLayerAry[3].add(drawText(
+      width/2, height*(1/4)+fontSize+5*fontSize, "Electrons excite noble gases",
+      fontSize, fontFamily
+    ));
+    outLayerAry[4].add(drawText(
+      width/2, height*(1/4)+fontSize+7*fontSize, "Phosporous lights up",
+      fontSize, fontFamily
+    ));
+
+    outLayerAry[5].add(drawText(
+      width/2-2*fontSize, height*(1/4)+10*fontSize, "3. Front Plate Glass",
+      fontSize+5, fontFamily
+    ));
+    outLayerAry[5].add(drawText(
+      width/2, height*(1/4)+fontSize+10*fontSize, "Light is shown on the display",
+      fontSize, fontFamily
+    ));
+
+    return 6;
+  }
+);
+//////////////////////////////////////////////////////////////////////////////
+//Slide 8
+externDrawFunctionArray.push(
+  function(outLayerAry, width, height, settingsObj, supportFunc){
+
+    supportFunc.clean(outLayerAry,settingsObj);
+
+    var fontSize = settingsObj.fontSize;
+    var fontFamily = settingsObj.fontFamily;
+    var outlineShift = settingsObj.outlineShift;
+    var minDim = settingsObj.minDim;
+
+    var createBullet = supportFunc.createBullet;
+    var center   = supportFunc.center;
+    var align    = supportFunc.align;
+    var drawText = supportFunc.drawText;
+
+    var imgAry = [];
+    var imgAryCur = -1;
+
+    outLayerAry[0].add(center(drawText(
+      width/2, outlineShift + 0.05*height, "Plasma (Pros/Cons)",
+      fontSize+20, fontFamily
+    )));
+
+    outLayerAry[1].add(drawText(
+      width/6, height/4-2*fontSize, "-Pros-",
+      fontSize+15, fontFamily
+    ));
+    outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
+    outLayerAry[1].add(drawText(
+      width/6, height/4, "Better Contrast Ratio",
+      fontSize+5, fontFamily
+    ));
+    outLayerAry[2].add(createBullet(width/6, height/4+2*fontSize, fontSize));
+    outLayerAry[2].add(drawText(
+      width/6, height/4+2*fontSize, "Lower Motion Blur",
+      fontSize+5, fontFamily
+    ));
+    outLayerAry[3].add(drawText(
+      width/6, height/4+8*fontSize, "-Cons-",
+      fontSize+15, fontFamily
+    ));
+    outLayerAry[3].add(createBullet(width/6, height/4+10*fontSize, fontSize));
+    outLayerAry[3].add(drawText(
+      width/6, height/4+10*fontSize, "Uses more power on average than LCD",
+      fontSize+5, fontFamily
+    ));
+    outLayerAry[4].add(createBullet(width/6, height/4+12*fontSize, fontSize));
+    outLayerAry[4].add(drawText(
+      width/6, height/4+12*fontSize, "Can't be used abouve 2km, due to pressure",
+      fontSize+5, fontFamily
+    ));
+    outLayerAry[5].add(createBullet(width/6, height/4+14*fontSize, fontSize));
+    outLayerAry[5].add(drawText(
+      width/6, height/4+14*fontSize, "Can't use AM radio",
+      fontSize+5, fontFamily
+    ));
+
+    return 6;
+  }
+);
+//////////////////////////////////////////////////////////////////////////////
+//Part 3 LCD
+//Slide 9
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -634,7 +772,7 @@ externDrawFunctionArray.push(
   }
 );
 //////////////////////////////////////////////////////////////////////////////
-//Slide 8
+//Slide 10
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -739,7 +877,7 @@ externDrawFunctionArray.push(
   }
 );
 //////////////////////////////////////////////////////////////////////////////
-//Slide 9
+//Slide 11
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -802,7 +940,7 @@ externDrawFunctionArray.push(
   }
 );
 //////////////////////////////////////////////////////////////////////////////
-//Slide 10
+//Slide 12
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -916,7 +1054,7 @@ externDrawFunctionArray.push(
   }
 );
 //////////////////////////////////////////////////////////////////////////////
-//Slide 11
+//Slide 13
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -957,7 +1095,7 @@ externDrawFunctionArray.push(
   }
 );
 //////////////////////////////////////////////////////////////////////////////
-//Slide 12
+//Slide 14
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -1024,7 +1162,7 @@ externDrawFunctionArray.push(
   }
 );
 //////////////////////////////////////////////////////////////////////////////
-//Slide 13
+//Slide 15
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -1066,7 +1204,7 @@ externDrawFunctionArray.push(
 );
 //////////////////////////////////////////////////////////////////////////////
 //Part 4 OLED
-//Slide 14
+//Slide 16
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -1111,7 +1249,7 @@ externDrawFunctionArray.push(
   }
 );
 //////////////////////////////////////////////////////////////////////////////
-//Slide 15
+//Slide 17
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -1215,7 +1353,7 @@ externDrawFunctionArray.push(
   }
 );
 //////////////////////////////////////////////////////////////////////////////
-//Slide 16
+//Slide 18
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -1282,7 +1420,7 @@ externDrawFunctionArray.push(
 );
 //////////////////////////////////////////////////////////////////////////////
 //Part 5 AMOLED
-//Slide 17
+//Slide 19
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -1402,7 +1540,7 @@ externDrawFunctionArray.push(
   }
 );
 //////////////////////////////////////////////////////////////////////////////
-//Slide 18
+//Slide 20
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -1468,7 +1606,7 @@ externDrawFunctionArray.push(
   }
 );
 //////////////////////////////////////////////////////////////////////////////
-//Slide 19
+//Slide 21
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -1587,7 +1725,7 @@ externDrawFunctionArray.push(
     }
     
     outLayerAry[5].add(drawText(
-      width/12, height/2 + 2.2*squareSide, "Can burn-in?",
+      width/12, height/2 + 2.2*squareSide, "Screen Resolution",
       squareSide/2, fontFamily
     ));
     
@@ -1600,7 +1738,7 @@ externDrawFunctionArray.push(
         height: squareSide,
         offset: [squareSide,squareSide],
         stroke: 'black',
-        fill: (i!=2) ? 'grey' : 'white',
+        fill: (i==2|i==1) ? 'grey' : 'white',
         strokeWidth: 5,
       }));
     }
@@ -1609,7 +1747,7 @@ externDrawFunctionArray.push(
 );
 //////////////////////////////////////////////////////////////////////////////
 //Part 6 Drawing
-//Slide 20
+//Slide 22
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
     supportFunc.clean(outLayerAry,settingsObj);
@@ -1676,7 +1814,7 @@ externDrawFunctionArray.push(
   }
 );
 //////////////////////////////////////////////////////////////////////////////
-//Slide 21
+//Slide 23
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -1756,7 +1894,7 @@ externDrawFunctionArray.push(
 );
 
 //////////////////////////////////////////////////////////////////////////////
-//Slide 22
+//Slide 24
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -1932,7 +2070,7 @@ externDrawFunctionArray.push(
 );
 
 //////////////////////////////////////////////////////////////////////////////
-//Slide 23
+//Slide 25
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -2061,7 +2199,7 @@ externDrawFunctionArray.push(
   }
 );
 //////////////////////////////////////////////////////////////////////////////
-//Slide 24
+//Slide 26
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -2194,7 +2332,7 @@ externDrawFunctionArray.push(
   }
 );
 //////////////////////////////////////////////////////////////////////////////
-//Slide 25
+//Slide 27
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -2330,7 +2468,7 @@ externDrawFunctionArray.push(
   }
 );
 /////////////////////////////////////////////////////////////////////////////
-//Sdlie 26
+//Sdlie 28
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -2486,7 +2624,7 @@ externDrawFunctionArray.push(
   }
 );
 /////////////////////////////////////////////////////////////////////////////
-//Slide 27
+//Slide 29
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -2570,7 +2708,7 @@ externDrawFunctionArray.push(
   }
 );
 /////////////////////////////////////////////////////////////////////////////
-//Slide 28
+//Slide 30
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
