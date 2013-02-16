@@ -8,26 +8,91 @@
  *and JavaScript. If text and locations are made to scale, then it will
  *work on all screen sizes too.
  *
- *Created 01-25-2013
- *Version 0.3.1.1
+ *Created 02-15-2013
+ *Version 0.3.1.2
  */
 
-var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName){
+/*
+var zxPowerPoint = (function(slideArray, width, height, maxLayerCount,
+                             containerName){
+*/
+/*
+})(externDrawFunctionArray, externWidth, externHeight, externMaxLayerCount,
+   'container');
+*/
+var zxPowerPoint = (function(settings){
 
-  var showSlideNumber = true;
-  var DEBUG = false;
-  var showButtons = true;
+  //Unfolding the settings object
+  var slideArray = settings["externDrawFunctionArray"];
+  var width = settings["externWidth"];
+  var height = settings["externHeight"];
+
+  var maxLayerCount = settings["externMaxLayerCount"];
+  var containerName = settings["container"];
+  var showSlideNumber = settings["showSlideNumber"];
+  var DEBUG = settings["externDEBUG"];
+
+  var showButtons = settings["externShowButtons"];
   var hideButtons = isMobile() ? false : true;
-  
+
+  var externFont = settings["externFont"];
+  var outlineShift = settings["externOutlineShift"];
+  var externTimer = settings["externTimer"];
+
+  //Input Error Scan
+  if(!slideArray){
+    alert("ERROR:No slide passed in");
+    throw new Error("No slide passed in");
+  }
+  if(!width){
+    alert("WARNING:externWidth not set. Default 800");
+    width = 800;
+  }
+  if(!height){
+    alert("WARNING:externHeight not set. Default 1000");
+    height = 1000;
+  }
+  if(!maxLayerCount){
+    alert("WARNING:externMaxLayerCount not set. Default 10");
+    maxLayerCount = 10;
+  }
+  if(!containerName ){
+    alert("ERROR:No container name passed");
+    throw new Error("No container name passed");
+  }
+  if(showSlideNumber === undefined){
+    alert("WARNING:showSlideNumber not set. Default false");
+    showSlideNumber = false;
+  }
+  if(!DEBUG){
+    alert("WARNING:externDEBUG not set. Default false");
+    DEBUG = false;
+  }
+  if(!showButtons){
+    alert("ERROR:externShowButtons not set. Default false");
+    showButtons = false;
+  }
+  if(!externFont){
+    alert("ERROR:externFont not set. Default Palatino");
+    externFont = 'Palatino';
+  }
+  if(!outlineShift){
+    alert("ERROR:externOutlineShift not set. Default 20");
+    outlineShift = 20;
+  }
+  if(!externTimer){
+    alert("ERROR:externTimer not set. Default 0.5s");
+    externTimer = 500;
+  }
+
 //////////////////////////////////////////////////////////////////////////////
 //Creates the default variables it needs/uses
   var stage = new Kinetic.Stage({
+
     container: containerName,
     width:  width,
     height: height,
   });
-
-  var outlineShift = externOutlineShift;
 
   var globalFrontLayer   = new Kinetic.Layer();
   var globalBackLayer    = new Kinetic.Layer();
@@ -50,7 +115,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
     setObj.fontSize  = height/32;
     setObj.animTime  = 2000;
     setObj.maxLayerCount = maxLayerCount;
-    setObj.outlineShift = externOutlineShift;
+    setObj.outlineShift = outlineShift;
     setObj.minDim = width > height ? height : width;
     setObj.maxDim = width > height ? width : height;
     setObj.PI = Math.PI;
@@ -103,7 +168,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
       fill: 'black',
       text: str,
     });
-  }
+  };
 
   supportFunc.createBullet = function(x,y,fontDelSize){
     fontDelSize = fontDelSize ? fontDelSize : height/32;
@@ -115,7 +180,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
       fill: 'black',
       radius: fontDelSize/2,
     });
-  }
+  };
 
   supportFunc.drawPixelCircle = function (
       LocalLayer, width, height, side, size, alt){
@@ -178,7 +243,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
       outLayerAry[i].removeChildren();
       outLayerAry[i].setOpacity(0.0);
     }
-  }
+  };
 
   supportFunc.floor = Math.floor;
 
@@ -194,7 +259,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
       fadeIn(outLayerAry[++slideLayer]).start();
     else
       nextSlide(outLayerAry);
-  }
+  };
 
   function previousSegment(outLayerAry){    
     //Call to unload previous anim is possible
@@ -202,7 +267,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
       fadeOut(outLayerAry[slideLayer--]).start();
     else
       previousSlide(outLayerAry);
-  }
+  };
   
   function nextSlide(outLayerAry){
     //Call to load the previous slide
@@ -210,7 +275,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
       fadeOutAll(outLayerAry,loadNextSlide).start();
     else
       globalCurAnim.end=true;
-  }
+  };
 
   function previousSlide(outLayerAry){    
     //Call to load the previous slide
@@ -218,7 +283,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
       fadeOutAll(outLayerAry,loadPreviousSlide).start();
     else
       globalCurAnim.end=true;
-  }
+  };
 
   function loadNextSlide(){
     //Loads the next slide if possible
@@ -232,7 +297,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
           setObj.fontSize+10, setObj.fontFamily));
       fadeIn(globalOutLayerAry[slideLayer]).start();
     }
-  }
+  };
 
   function loadPreviousSlide(){
     //Loads the previous slide if possible
@@ -247,7 +312,8 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
           setObj.fontSize+10, setObj.fontFamily));
       fadeInAll(globalOutLayerAry).start();
     }
-  }
+  };
+
 //////////////////////////////////////////////////////////////////////////////
   //Internal Support Functions
 
@@ -260,7 +326,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
       ret.push(OuterLayer[i].getOpacity() > 0.5 );
 
     return ret;
-  }
+  };
   
 //////////////////////////////////////////////////////////////////////////////
   //Animations for load functions
@@ -286,7 +352,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
     
     globalCurAnim.end = false;
     return globalCurAnim;
-  }
+  };
 
   function fadeOut(OutLayer, nextFunc){
     //Fades out one layer and possibly run the nextFunc
@@ -311,7 +377,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
     
     globalCurAnim.end = false;
     return globalCurAnim;
-  }
+  };
  
   function fadeInAll(OutLayerAry, nextFunc){
     //Fades in all layers, regardless of opacity
@@ -344,7 +410,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
     
     globalCurAnim.end = false;
     return globalCurAnim;
-  }
+  };
 
   function fadeInSelected(OutLayerAry, SelectAry, nextFunc){
     //Fades in selected layers, regardless of opacity
@@ -379,7 +445,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
     
     globalCurAnim.end = false;
     return globalCurAnim;
-  }
+  };
  
   function fadeOutAll(OutLayerAry, nextFunc, nextFuncArgs){
     //Fades out all layers, whose opacity is larger than 0.5
@@ -418,6 +484,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
     globalCurAnim.end = false;
     return globalCurAnim;
   };
+
 //////////////////////////////////////////////////////////////////////////////
   //Resize Functions
 
@@ -435,10 +502,10 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
 
     stage.setWidth(newWidth);
     stage.setHeight(newHeight);
-  }
+  };
 
   function reSize(OutLayerAry, width, height){
-    //Call this function to reszie the screen
+    //Call this function to resize the screen
     //Save State
     globalFadeUI = true;
 
@@ -481,7 +548,8 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
 
         globalBackLayer.removeChildren();
         globalFrontLayer.removeChildren();
-        frontUI(globalBackLayer, globalFrontLayer, funcArgs.width, funcArgs.height);
+        frontUI(globalBackLayer, globalFrontLayer, 
+                funcArgs.width, funcArgs.height);
 
         //Second animation to fade in UI
         (new Kinetic.Animation(function(frame){
@@ -507,7 +575,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
     },stage);
 
     return globalCurAnim;
-  }
+  };
 
 
   function reSizeAfter( funcArgs ){
@@ -515,9 +583,15 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
 
     slideLayerMax = slideArray[slideIndex](globalOutLayerAry,
     width, height, setObj, supportFunc);
-    fadeInSelected(funcArgs.OutLayerAry,funcArgs.state).start();
-  }
 
+    if ( showSlideNumber ){
+      globalOutLayerAry[0].add(supportFunc.drawText(
+        width/16, height/16, slideIndex,
+        setObj.fontSize+10, setObj.fontFamily));
+        }
+
+    fadeInSelected(funcArgs.OutLayerAry,funcArgs.state).start();
+  };
 
 //////////////////////////////////////////////////////////////////////////////
   function frontUI(localBackLayer, localFrontLayer, width, height){
@@ -651,7 +725,6 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
     });
 
     localFrontLayer.add(temp);
-    
   };
 
 //////////////////////////////////////////////////////////////////////////////
@@ -694,7 +767,7 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
 
   this.reSize = function(){
     externResize();
-  }
+  };
 
   this.next = function(){
     if(!globalFadeUI)
@@ -726,5 +799,8 @@ var zxPowerPoint = (function(slideArray,width,height,maxLayerCount,containerName
     previousSlide   : this.previousSlide,
   };
   
-})(externDrawFunctionArray,externWidth,externHeight,externMaxLayerCount,
-'container');
+/*
+})(externDrawFunctionArray, externWidth, externHeight, externMaxLayerCount,
+   'container');
+*/
+})(PreZenSettings);

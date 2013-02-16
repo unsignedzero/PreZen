@@ -1,6 +1,6 @@
 //Checks if the libraries exist
 if (zxPowerPoint == undefined||typeof(zxPowerPoint) != 'object' ){
-  alert("PowerPoint player missing. Halting execution.");
+  alert("ERROR:PreZen missing. Halting execution.");
   throw new Error("mainPP.js missing");
 }
 
@@ -8,7 +8,7 @@ zxPowerPoint.startUI();
 
 //Post-Processing for jwerty
 if (jwerty == undefined||typeof(jwerty) != 'object' ){
-  //alert("Jwerty Library Missing");
+  //alert("ERROR:Jwerty Library Missing");
   //throw new Error("Jwerty Library Missing");
 }
 else{

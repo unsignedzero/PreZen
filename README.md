@@ -14,6 +14,11 @@ so be prepared for that, although I doubt it will be drastic.
 If one codes it up using relative values,as positions for all the content,
 then it can potentially scale up, if done correctly.
 
+In addition, I have left function calls so that one doesn't have to click on
+the arrows keys to advance forward to go back to the previous slide. Jwerty
+is used in the background, see main.js to read inputs from the keyboard.
+As of now, this is fixed but might be changeable in the future.
+
 Included is a sample slide that I will use.
 
 Created by unsignedzero and started on 01-25-2013 as an idea.
@@ -27,6 +32,9 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+* Added to readme Jwerty info
+* Simplified the passing of settings into PreZen
+* Bugfix, slide number disappear when resizing
 * Added Plasma into the slides
 * Added Slide Count
 
