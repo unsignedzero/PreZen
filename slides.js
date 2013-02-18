@@ -75,53 +75,32 @@ externDrawFunctionArray.push(
     var minDim = settingsObj.minDim;
 
     var center   = supportFunc.center;
+    var align    = supportFunc.align;
     var drawText = supportFunc.drawText;
-    var createBullet = supportFunc.createBullet;
-    var floor    = supportFunc.floor;
 
     var imgAry = [];
     var imgAryCur = -1;
 
     outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Color Gamut",
+      width/2, outlineShift + 0.05*height, "Screen Comparision",
       fontSize+20, fontFamily
     )));
-    outLayerAry[1].add(createBullet(width/2,height/4,fontSize));
-    outLayerAry[1].add(drawText(
-      width/2, height*(1/4), "What colors can be displayed?",
-      fontSize+5, fontFamily
-    ));
-
+    
     imgAry.push(new Image());
     imgAryCur +=1;
-    imgAry[imgAryCur].src = 'IMG/ColorGamutXref.jpg';
+    imgAry[imgAryCur].src = 'IMG/CompareScreen.png';
     imgAry[imgAryCur].onload = function(){
     };
 
-    outLayerAry[1].add(center(new Kinetic.Image({
-      x: width/4,
-      y: height/4,
-      width: minDim/2,
-      height: minDim/2,
+    outLayerAry[1].add(align(new Kinetic.Image({
+      x: width/2,
+      y: height/2+height/20,
+      width: minDim/1,
+      height: minDim/4,
       image: imgAry[imgAryCur],
     })));
 
-    outLayerAry[2].add(createBullet(width/2,height/4+6*fontSize,fontSize));
-    outLayerAry[2].add(drawText(
-      width/2, height*(1/4)+6*fontSize, "What can be seen in",
-      fontSize+5, fontFamily
-    ));
-    outLayerAry[2].add(drawText(
-      width/2, height*(1/4)+7*fontSize, "a print out?",
-      fontSize+5, fontFamily
-    ));
-    outLayerAry[3].add(createBullet(width/2,height/4+13*fontSize,fontSize));
-    outLayerAry[3].add(drawText(
-      width/2, height*(1/4)+13*fontSize, "Does it look good?",
-      fontSize+5, fontFamily
-    ));
-
-    return 4;
+    return 2;
   }
 );
 }
@@ -1615,134 +1594,35 @@ externDrawFunctionArray.push(
     var fontSize = settingsObj.fontSize;
     var fontFamily = settingsObj.fontFamily;
     var outlineShift = settingsObj.outlineShift;
-    var PI = settingsObj.PI;
     var minDim = settingsObj.minDim;
-    
-    var createBullet = supportFunc.createBullet;
+
     var center   = supportFunc.center;
     var align    = supportFunc.align;
     var drawText = supportFunc.drawText;
-    var floor    = supportFunc.floor;
-    
-    
-    var i, max, sizeCount
-    
-    var squareSide = minDim/12;
-    var boardWidth = minDim/3;
+
+    var imgAry = [];
+    var imgAryCur = -1;
 
     outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Screen Comparsion",
+      width/2, outlineShift + 0.05*height, "Screen Comparision",
       fontSize+20, fontFamily
     )));
     
-    i = -1;
-    sizeCount = 4;
-    max = sizeCount*sizeCount;
-    //Draws first demo board
-    while( ++i < max ){
-      outLayerAry[1].add(new Kinetic.Rect({
-        x: width*(2/3) +( boardWidth/2) - floor(i/sizeCount)*squareSide,
-        y: height/2 + ((i%sizeCount)*squareSide),
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide,squareSide],
-        stroke: 'black',
-        strokeWidth: 5,
-      }));
-    }
-    
-    i = -1;
-    max = 4
-   while( ++i < max ){
-      outLayerAry[1].add(new Kinetic.Text({
-        x: width*(2/3) +(boardWidth/2) - (i+0.7)*squareSide,
-        y: height/3,
-        
-        fontSize: squareSide/2,
-        fontFamily: fontFamily,
-        
-        fill: 'black',
-        text: (i&2) ? (i&1 ? 'CRT' : 'LCD') : (i&1 ? 'OLED' : 'AMOLED'),
-        rotation: PI*3/2,
-      }));
-    }
-    
-    outLayerAry[2].add(drawText(
-      width/12, height/2-0.8*squareSide, "In Mass Production",
-      squareSide/2, fontFamily
-    ));
-    
-    i = -1;
-    while( ++i < max ){
-      outLayerAry[2].add(new Kinetic.Rect({
-        x: width*(2/3) +( boardWidth/2) - (i%sizeCount)*squareSide,
-        y: height/2,
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide,squareSide],
-        stroke: 'black',
-        fill: ((i&1)^1) ? 'grey' : 'white',
-        strokeWidth: 5,
-      }));
-    }
- 
-    outLayerAry[3].add(drawText(
-      width/12, height/2 + 0.2*squareSide, "Low Power Consumption",
-      squareSide/2, fontFamily
-    ));
-    
-    i = -1;
-    while( ++i < max ){
-      outLayerAry[3].add(new Kinetic.Rect({
-        x: width*(2/3) +( boardWidth/2) - (i%sizeCount)*squareSide,
-        y: height/2 + squareSide,
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide,squareSide],
-        stroke: 'black',
-        fill: (i^3) ? 'grey' : 'white',
-        strokeWidth: 5,
-      }));
-    }
- 
-    outLayerAry[4].add(drawText(
-      width/12, height/2 + 1.2*squareSide, "High Refresh Rate",
-      squareSide/2, fontFamily
-    ));
-    
-    i = -1;
-    while( ++i < max ){
-      outLayerAry[4].add(new Kinetic.Rect({
-        x: width*(2/3) +( boardWidth/2) - (i%sizeCount)*squareSide,
-        y: height/2 + 2*squareSide,
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide,squareSide],
-        stroke: 'black',
-        fill: (i!=2) ? 'grey' : 'white',
-        strokeWidth: 5,
-      }));
-    }
-    
-    outLayerAry[5].add(drawText(
-      width/12, height/2 + 2.2*squareSide, "Screen Resolution",
-      squareSide/2, fontFamily
-    ));
-    
-    i = -1;
-    while( ++i < max ){
-      outLayerAry[5].add(new Kinetic.Rect({
-        x: width*(2/3) +( boardWidth/2) - (i%sizeCount)*squareSide,
-        y: height/2 + 3*squareSide,
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide,squareSide],
-        stroke: 'black',
-        fill: (i==2|i==1) ? 'grey' : 'white',
-        strokeWidth: 5,
-      }));
-    }
-    return 6;
+    imgAry.push(new Image());
+    imgAryCur +=1;
+    imgAry[imgAryCur].src = 'IMG/CompareScreen.png';
+    imgAry[imgAryCur].onload = function(){
+    };
+
+    outLayerAry[1].add(align(new Kinetic.Image({
+      x: width/2,
+      y: height/2+height/20,
+      width: minDim/1,
+      height: minDim/4,
+      image: imgAry[imgAryCur],
+    })));
+
+    return 2;
   }
 );
 //////////////////////////////////////////////////////////////////////////////

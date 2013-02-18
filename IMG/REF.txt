@@ -14,6 +14,7 @@ to place images and how to modify the ratio.
 active-matrix.jpg, http://dreamdth.com/Thread-Article-Journey-from-LCD-to-AMOLED-The-Evolution-of-Displays
 AMOLED-en.svg.png, https://en.wikipedia.org/wiki/File:AMOLED-en.svg
 ColorGamutXref.jpg, http://www.kevinconnery.com/imaging/samples/ColorGamutXref.jpg
+CompareScreen.png, self created
 crt-monitor.jpg,http://www.buycoms.com/buyers-guide/monitor/images/crt-monitor.jpg
 Galaxy_Note_II_subpixels_representation.png, https://en.wikipedia.org/wiki/File:Galaxy_Note_II_subpixels_representation.png
 image66.gif, http://www.tomshardware.com/reviews/tft-guide,116-5.html
@@ -24,3 +25,4 @@ Samsung-Galaxy-S3-in-Sapphire-black, http://www.androidtapp.com/samsung-galaxy-s
 Sony_XEL-1.jpg, https://upload.wikimedia.org/wikipedia/commons/3/36/Sony_XEL-1.jpg
 test.jpg, self created
 TN_Twisted & TN_UnTwisted, https://upload.wikimedia.org/wikipedia/commons/7/74/Diagram_LCD_IPS.jpg
+
