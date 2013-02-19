@@ -28,9 +28,14 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 * Move common functions so they are created outside of PreZen
 * Jump to a specific slide/segment
-* Allow the user to hide the buttons
 
 # Version/Changelog #
+
+### 0.4.0.1 [02-18-2013] #
+
+* Debug Messages can be sent in from the outside
+* Debug Layer fades on mouse over
+* Debug Layer added
 
 ### 0.4.0.0 [02-18-2013] #
 

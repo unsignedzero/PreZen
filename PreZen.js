@@ -33,23 +33,23 @@ var zxPowerPoint = (function(settings){
   var externTimer = settings["externTimer"];
 
   //Input Error Scan
-  if(!slideArray){
+  if(!slideArray === undefined){
     alert("ERROR:No slide passed in");
     throw new Error("No slide passed in");
   }
-  if(!width){
+  if(!width === undefined){
     alert("WARNING:externWidth not set. Default 800");
     width = 800;
   }
-  if(!height){
+  if(!height === undefined){
     alert("WARNING:externHeight not set. Default 1000");
     height = 1000;
   }
-  if(!maxLayerCount){
+  if(!maxLayerCount === undefined){
     alert("WARNING:externMaxLayerCount not set. Default 10");
     maxLayerCount = 10;
   }
-  if(!containerName){
+  if(!containerName === undefined){
     alert("ERROR:No container name passed");
     throw new Error("No container name passed");
   }
@@ -57,25 +57,30 @@ var zxPowerPoint = (function(settings){
     alert("WARNING:showSlideNumber not set. Default false");
     showSlideNumber = false;
   }
-  if(!DEBUG){
+  if(DEBUG === undefined){
     alert("WARNING:externDEBUG not set. Default false");
     DEBUG = false;
   }
-  if(!showButtons){
+  if(!showButtons === undefined){
     alert("ERROR:externShowButtons not set. Default false");
     showButtons = false;
   }
-  if(!externFont){
+  if(!externFont === undefined){
     alert("ERROR:externFont not set. Default Palatino");
     externFont = 'Palatino';
   }
-  if(!outlineShift){
+  if(!outlineShift === undefined){
     alert("ERROR:externOutlineShift not set. Default 20");
     outlineShift = 20;
   }
-  if(!externTimer){
+  if(!externTimer === undefined){
     alert("ERROR:externTimer not set. Default 0.5s");
     externTimer = 500;
+  }
+
+  //Set Debug Settings
+  if(DEBUG){
+    hideButtons = false;
   }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -86,6 +91,7 @@ var zxPowerPoint = (function(settings){
     height: height,
   });
 
+  var globalDebugLayer   = new Kinetic.Layer();
   var globalFrontLayer   = new Kinetic.Layer();
   var globalBackLayer    = new Kinetic.Layer();
   var globalOutLayerAry  = [];
@@ -144,6 +150,14 @@ var zxPowerPoint = (function(settings){
     //Centers the graphic object
     temp.setOffset({
       x: temp.getWidth()>>1,
+      y: temp.getHeight()>>1
+    });
+    return (temp);
+  };
+
+  supportFunc.middle = function(temp){
+    //Centers the graphic object
+    temp.setOffset({
       y: temp.getHeight()>>1
     });
     return (temp);
@@ -578,7 +592,10 @@ var zxPowerPoint = (function(settings){
 
 //////////////////////////////////////////////////////////////////////////////
   function frontUI(localBackLayer, localFrontLayer, width, height){
-    //Sets up the initial screen for use
+    //Sets up the initial screen for use or on resizing
+    var debugStr;
+    var drawBox;
+    var contactBox;
     
     //Draws static background and sets up background
     //Outline
@@ -595,6 +612,52 @@ var zxPowerPoint = (function(settings){
 
     //Draws buttons and interfaces
     drawInterface(localFrontLayer, supportFunc, setObj);
+
+    if(DEBUG){
+      globalDebugLayer.removeChildren();
+      contactBox = supportFunc.align(new Kinetic.Rect({
+        x: width/2,
+        y: height*0.9-outlineShift,
+        width: width*0.8,
+        height: height*0.1,
+        stroke: 'black',
+        strokeWidth: 5,
+        cornerRadius: 5,
+        opacity: 0.0,
+      }));
+      drawBox = supportFunc.align(new Kinetic.Rect({
+        x: width/2,
+        y: height*0.9-outlineShift,
+        width: width*0.8,
+        height: height*0.1,
+        fill: 'black',
+        stroke: 'black',
+        strokeWidth: 5,
+        cornerRadius: 5,
+      }));
+      globalDebugLayer.add(drawBox);
+
+      debugMsg = (function(drawLayer, width, height){
+        var debugMsg = supportFunc.middle(supportFunc.drawText(
+          width*0.1+5,height*0.9-outlineShift,"DEBUG ON"));
+        debugMsg.setFill('white');
+        drawLayer.add(debugMsg);
+        return function(msg){
+          debugMsg.setText(msg);
+          drawLayer.draw();
+        };
+      })(globalDebugLayer, width, height);
+
+      contactBox.on('mouseover', function(){
+        globalDebugLayer.setOpacity(0.25);
+        globalDebugLayer.draw();
+      });
+      contactBox.on('mouseout', function(){
+        globalDebugLayer.setOpacity(1.0);
+        globalDebugLayer.draw();
+      });
+      globalDebugLayer.add(contactBox);
+    }
   };
 
   function drawInterface(interfaceLayer, supportFunc, setObj){
@@ -668,8 +731,8 @@ var zxPowerPoint = (function(settings){
         
         transObjAry[i].on('mouseover', function(){
           if(!globalUIBlock){
-            this.setOpacity(0.5);
-            this.label.setOpacity(0.5);
+            this.setOpacity(hideButtons ? 0.5 : 1.0);
+            this.label.setOpacity(hideButtons ? 0.5 : 1.0);
             interfaceLayer.draw();
           }
         });
@@ -752,8 +815,8 @@ var zxPowerPoint = (function(settings){
 
         temp.on('mouseover', function(){
           if(!globalUIBlock){
-            this.setOpacity(0.5);
-            this.label.setOpacity(0.5);
+            this.setOpacity(hideButtons ? 0.5 : 1.0);
+            this.label.setOpacity(hideButtons ? 0.5 : 1.0);
             interfaceLayer.draw();
           }
         });
@@ -858,7 +921,7 @@ var zxPowerPoint = (function(settings){
             },interfaceLayer)).start();
           }
         }
-      }
+      };
     })(navButtons, msgBoxHeight, interfaceLayer);
   }
 
@@ -875,6 +938,13 @@ var zxPowerPoint = (function(settings){
   function msgBoxChange(){
     //This is overwritten internally by drawInterface
     //so that it changes size on resizing the screen
+  }
+//////////////////////////////////////////////////////////////////////////////
+  //Debug Functions
+  function debugMsg(msg){
+    //Like msgBoxChange this will be overwritten, by frontUI,
+    //so resizing works
+    console.log(msg);
   }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -901,6 +971,9 @@ var zxPowerPoint = (function(settings){
         stage.add(globalOutLayerAry[i]);
 
       stage.add(globalFrontLayer);
+
+      if(DEBUG)
+        stage.add(globalDebugLayer);
     }
   };
 
@@ -926,6 +999,10 @@ var zxPowerPoint = (function(settings){
       msgBoxChange();
   }
 
+  this.setDebugMsg = function(msg){
+    debugMsg(msg);
+  }
+
   this.next = function(){
     if(!globalUIBlock)
       nextSegment(globalOutLayerAry);
@@ -949,6 +1026,7 @@ var zxPowerPoint = (function(settings){
 //////////////////////////////////////////////////////////////////////////////
   return{
     msgBoxChange    : this.msgBoxChange,
+    setDebugMsg     : this.setDebugMsg,
     reSize          : this.reSize,
     startUI         : this.startUI,
     next            : this.next,

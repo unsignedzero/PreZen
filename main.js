@@ -5,6 +5,7 @@ if (zxPowerPoint == undefined||typeof(zxPowerPoint) != 'object' ){
 }
 
 zxPowerPoint.startUI();
+zxPowerPoint.setDebugMsg("HELLO");
 
 //Post-Processing for jwerty
 if (jwerty == undefined||typeof(jwerty) != 'object' ){

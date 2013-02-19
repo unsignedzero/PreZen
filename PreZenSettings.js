@@ -50,7 +50,7 @@ var PreZenSettings = {
   container:'container',
 
   //DEBUG?
-  externDEBUG:true,
+  externDEBUG:false,
 
   //Button Show
   externShowButtons:true,
