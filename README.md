@@ -32,6 +32,11 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+### 0.4.0.0 [02-18-2013] #
+
+* Can be accessed via mouse or keyboard key N
+* Added a message box on the bottom on the screen
+* Refactored code so that the button interface is separate from background
 * Added to readme Jwerty info
 * Simplified the passing of settings into PreZen
 * Bugfix, slide number disappear when resizing

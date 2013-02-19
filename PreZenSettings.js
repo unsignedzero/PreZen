@@ -9,7 +9,6 @@ var showDebugSlide = false;
 
 /*Rather than pass multiple objects,
  *we will pass one object that contains all the other ones needed.
- *Should make life in the long run
  */
 var PreZenSettings = {
   //Slide Array
@@ -43,7 +42,7 @@ var PreZenSettings = {
 
   /*Sets the max amount of layers PreZen should assume a slide should have
    *Adding more slides than specified here will have unexpected results
-   *and extra layers will not load correctly
+   *and extra layers will not load correctly.
    */
   externMaxLayerCount:8,
 

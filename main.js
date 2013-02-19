@@ -10,6 +10,7 @@ zxPowerPoint.startUI();
 if (jwerty == undefined||typeof(jwerty) != 'object' ){
   //alert("ERROR:Jwerty Library Missing");
   //throw new Error("Jwerty Library Missing");
+  console.warn("WARN:jwerty not available");
 }
 else{
   //Setup for library support calls
@@ -27,5 +28,8 @@ else{
   });
   jwerty.key('R',function(){
     zxPowerPoint.reSize();
+  });
+  jwerty.key('N',function(){
+    zxPowerPoint.msgBoxChange();
   });
 }
