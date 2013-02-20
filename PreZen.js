@@ -9,8 +9,8 @@
  *work on all screen sizes too.
  *
  *Created 01-25-2013
- *Updated 02-18-2013
- *Version 0.3.1.2
+ *Updated 02-20-2013
+ *Version 0.4.0.1
  */
 
 var zxPowerPoint = (function(settings){
@@ -317,7 +317,6 @@ var zxPowerPoint = (function(settings){
 
 //////////////////////////////////////////////////////////////////////////////
   //Internal Support Functions
-
   function getLayerStatus(OuterLayer){
     var i, max = slideLayerMax;
     var ret = [];
@@ -488,7 +487,6 @@ var zxPowerPoint = (function(settings){
 
 //////////////////////////////////////////////////////////////////////////////
   //Resize Functions
-
   function reSizeSupport(newWidth, newHeight){
     //Loads the new values to resize the screen
 
@@ -577,7 +575,6 @@ var zxPowerPoint = (function(settings){
 
     return globalCurAnim;
   };
-
 
   function reSizeAfter(funcArgs){
     //Clean up reSizing function
@@ -723,6 +720,8 @@ var zxPowerPoint = (function(settings){
         transObjAry[i].call = transFunAry[i];
 
         transObjAry[i].label = temp;
+
+        transObjAry[i].onHover = false;
         
         transObjAry[i].on('tap mousedown', function(){
           if(!globalUIBlock)
@@ -733,12 +732,14 @@ var zxPowerPoint = (function(settings){
           if(!globalUIBlock){
             this.setOpacity(hideButtons ? 0.5 : 1.0);
             this.label.setOpacity(hideButtons ? 0.5 : 1.0);
+            this.onHover = true;
             interfaceLayer.draw();
           }
         });
 
         transObjAry[i].on('mouseout', function(){
-          if(!globalUIBlock){
+          if(this.onHover || !globalUIBlock){
+            this.onHover = false;
             this.setOpacity(hideButtons ? 0.0 : 0.5);
             this.label.setOpacity(hideButtons ? 0.0 : 0.5);
             interfaceLayer.draw();
@@ -756,8 +757,7 @@ var zxPowerPoint = (function(settings){
       height: globalMsgBoxVisible ? msgBoxHeight : 0,
       stroke: 'black',
       fill: 'White',
-      strokeWidth: 5,
-      cornerRadius: 5,
+      strokeWidth: 4,
     }));
 
     //Draw bottom nav
@@ -812,17 +812,20 @@ var zxPowerPoint = (function(settings){
 
         navButtons.push(temp);
         navButtons[i].label = textObj;
+        navButtons[i].onHover = false;
 
         temp.on('mouseover', function(){
           if(!globalUIBlock){
             this.setOpacity(hideButtons ? 0.5 : 1.0);
             this.label.setOpacity(hideButtons ? 0.5 : 1.0);
+            this.onHover = true;
             interfaceLayer.draw();
           }
         });
 
         temp.on('mouseout', function(){
-          if(!globalUIBlock){
+          if(this.onHover || !globalUIBlock){
+            this.onHover = false;
             this.setOpacity(hideButtons ? 0.0 : 0.5);
             this.label.setOpacity(hideButtons ? 0.0 : 0.5);
             interfaceLayer.draw();
@@ -836,11 +839,12 @@ var zxPowerPoint = (function(settings){
     interfaceLayer.add(msgBox);
 
     //Definition of msgBoxChange here
-    msgBoxChange = (function(navButtons, msgBoxHeight, interfaceLayer){
+    msgBoxChange = (function(navButtons, msgBoxHeight, interfaceLayer, msgBox){
       return function(){
         var i, max;
         if(!globalUIBlock){
           if(!globalMsgBoxVisible){
+            msgBox.setCornerRadius(5);
             globalUIBlock = true;
             max = navButtons.length;
             var ydelta = msgBoxHeight/externTimer;
@@ -900,6 +904,7 @@ var zxPowerPoint = (function(settings){
               
               if (externTimer < frame.time){
                 this.stop();
+                msgBox.setCornerRadius(0);
                 frame.time = 0;
                 i = -1;
                 y = height*0.9;
@@ -922,7 +927,7 @@ var zxPowerPoint = (function(settings){
           }
         }
       };
-    })(navButtons, msgBoxHeight, interfaceLayer);
+    })(navButtons, msgBoxHeight, interfaceLayer, msgBox);
   }
 
   function drawMeta(metaLayer, supportFunc, setObj){
@@ -984,7 +989,6 @@ var zxPowerPoint = (function(settings){
 
 //////////////////////////////////////////////////////////////////////////////
 //Public accessor functions
-
   this.startUI = function(){
     externStartUI();
   };
