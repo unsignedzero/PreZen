@@ -31,6 +31,7 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+* Cleaned up code and comments
 * Bugfix, corners of msgBox not shown when collapsed
 * Bugfix, when preforming global animations, buttons not stuck in "hover"
 

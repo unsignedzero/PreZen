@@ -3,13 +3,18 @@
  *
  *Allows one to "code" up a presentation aimed for browsers
  *This methodology will take a long longer than just using PowerPoint, or
- *related tools but on the flip side, ifdone correctly, will display
+ *related tools but on the flip side, if done correctly, it will display
  *properly on mostly all devices that support the KineticJS Lib
  *and JavaScript. If text and locations are made to scale, then it will
  *work on all screen sizes too.
  *
+ *Unlike PowerPoint, one can code up live demos that are embedded in the slide
+ *At the time of writing, pictures and images are supported and,
+ *will scale correctly
+ *
+ *
  *Created 01-25-2013
- *Updated 02-20-2013
+ *Updated 02-23-2013
  *Version 0.4.0.1
  */
 
@@ -82,7 +87,6 @@ var zxPowerPoint = (function(settings){
   if(DEBUG){
     hideButtons = false;
   }
-
 //////////////////////////////////////////////////////////////////////////////
 //Creates the default variables it needs/uses
   var stage = new Kinetic.Stage({
@@ -119,9 +123,11 @@ var zxPowerPoint = (function(settings){
     setObj.maxDim = width > height ? width : height;
     setObj.PI = Math.PI;
   var hasInitialized = false;
-
 //////////////////////////////////////////////////////////////////////////////
 //Creates a support object that passes local functions to the board
+//This will eventually be moved out and potentially broken into two pieces
+//User defined and system built
+//Perhaps prototypes?
   supportFunc.left = function (temp){
     //Left justifies the graphical object
     temp.setOffset({
@@ -259,7 +265,8 @@ var zxPowerPoint = (function(settings){
   supportFunc.sqrt = Math.sqrt;
 
 //////////////////////////////////////////////////////////////////////////////
-  //Load functions
+//Load functions
+//This are basic functions to load the next slide or segment
   function nextSegment(outLayerAry){
     //Call to load next anim ifpossible
     if(slideLayer+1 < slideLayerMax)
@@ -314,10 +321,10 @@ var zxPowerPoint = (function(settings){
       fadeInAll(globalOutLayerAry).start();
     }
   };
-
 //////////////////////////////////////////////////////////////////////////////
-  //Internal Support Functions
+//Internal Support Functions
   function getLayerStatus(OuterLayer){
+    //Creates a boolean of all active layers
     var i, max = slideLayerMax;
     var ret = [];
 
@@ -327,9 +334,8 @@ var zxPowerPoint = (function(settings){
 
     return ret;
   };
-  
 //////////////////////////////////////////////////////////////////////////////
-  //Animations for load functions
+//Animations for load functions
   function fadeIn(OutLayer, nextFunc){
     globalCurAnim.end = true;
     var localTimerLength = timerLength;
@@ -486,7 +492,7 @@ var zxPowerPoint = (function(settings){
   };
 
 //////////////////////////////////////////////////////////////////////////////
-  //Resize Functions
+//Resize Functions
   function reSizeSupport(newWidth, newHeight){
     //Loads the new values to resize the screen
 
@@ -525,7 +531,7 @@ var zxPowerPoint = (function(settings){
 
   function reSizeFadeOutUI(funcArgs){
     //reSize part 2. Fades out and in the UI
-    //DO NOT call this function
+    //DO NOT call this function directly
 
     //Saves local variables so repeatedly calls don't slow it down
     var localTimerLength = timerLength;
@@ -586,7 +592,6 @@ var zxPowerPoint = (function(settings){
 
     fadeInSelected(funcArgs.OutLayerAry,funcArgs.state).start();
   };
-
 //////////////////////////////////////////////////////////////////////////////
   function frontUI(localBackLayer, localFrontLayer, width, height){
     //Sets up the initial screen for use or on resizing
@@ -749,6 +754,7 @@ var zxPowerPoint = (function(settings){
         interfaceLayer.add(transObjAry[i]);
       }
     }
+
     //Draw Box
     msgBox = supportFunc.center(new Kinetic.Rect({
       x: width/2,
@@ -937,23 +943,21 @@ var zxPowerPoint = (function(settings){
         width/16, height/16, slideIndex,
         setObj.fontSize+10, setObj.fontFamily));
   }
-
 //////////////////////////////////////////////////////////////////////////////
-  //MsgBox functions
+//MsgBox functions
   function msgBoxChange(){
     //This is overwritten internally by drawInterface
     //so that it changes size on resizing the screen
   }
 //////////////////////////////////////////////////////////////////////////////
-  //Debug Functions
+//Debug Functions
   function debugMsg(msg){
     //Like msgBoxChange this will be overwritten, by frontUI,
     //so resizing works
     console.log(msg);
   }
-
 //////////////////////////////////////////////////////////////////////////////
-  //Extern Method calls
+//Extern Method calls
   function externStartUI(){
     if(!hasInitialized){
       hasInitialized = true;
@@ -986,7 +990,6 @@ var zxPowerPoint = (function(settings){
     if(!globalUIBlock)
       reSize(globalOutLayerAry,window.innerWidth-10,window.innerHeight-10);
   };
-
 //////////////////////////////////////////////////////////////////////////////
 //Public accessor functions
   this.startUI = function(){
@@ -1026,7 +1029,6 @@ var zxPowerPoint = (function(settings){
     if(!globalUIBlock)
       previousSlide(globalOutLayerAry);
   };
-
 //////////////////////////////////////////////////////////////////////////////
   return{
     msgBoxChange    : this.msgBoxChange,

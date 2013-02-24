@@ -42,7 +42,7 @@ externDrawFunctionArray.push(
     (new Kinetic.Animation(function(frame){
       circle.setAngleDeg(360*frame.time/animTime);
       circle.setRotationDeg(90*frame.time/animTime);
-      if (frame.time >= animTime){
+      if(frame.time >= animTime){
         this.stop();
         frame.time=0;
         circle.setAngleDeg(360);
@@ -63,7 +63,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Test ZONE
 //////////////////////////////////////////////////////////////////////////////
-if( showDebugSlide ){
+if(PreZenSettings.showDebugSlide){
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc){
 
@@ -201,9 +201,9 @@ externDrawFunctionArray.push(
     sizeCount = 4;
     max = sizeCount*sizeCount;
     //Draws first demo board
-    while( ++i < max ){
+    while(++i < max){
       outLayerAry[2].add(new Kinetic.Circle({
-        x: width/4 +( boardWidth/2) - floor(i/sizeCount)*squareSide,
+        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
         radius: squareSide/2,
         fill: i&2 ? (i&1 ? 'blue' : 'red') : (i&1 ? 'green' : 'white'),
@@ -224,9 +224,9 @@ externDrawFunctionArray.push(
 
     //Draws second demo board
     i = -1;
-    while( ++i < max ){
+    while(++i < max){
       outLayerAry[4].add(new Kinetic.Circle({
-        x: width/4 +( boardWidth/2) - floor(i/sizeCount)*squareSide,
+        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
         radius: squareSide/2,
         fill: (i<5||i==8) ? 'black' : 'white',
@@ -1674,7 +1674,7 @@ externDrawFunctionArray.push(
     (new Kinetic.Animation(function(frame){
       circlea.setAngleDeg(360*frame.time/animTime);
       circleb.setAngleDeg(360*frame.time/animTime);
-      if (frame.time >= animTime){
+      if(frame.time >= animTime){
         this.stop();
         frame.time=0;
         circlea.setAngleDeg(360);
@@ -1717,7 +1717,7 @@ externDrawFunctionArray.push(
       fontSize+20, fontFamily 
     )));
 
-    outLayerAry[1].add( new Kinetic.Wedge({
+    outLayerAry[1].add(new Kinetic.Wedge({
       x: width/4,
       y: height/2 - radius/2 + fontSize,
 
@@ -1744,7 +1744,7 @@ externDrawFunctionArray.push(
       width*3/4, height*1/3 + 3*fontSize, 'Possible',
       fontSize, fontFamily 
     )));
-    outLayerAry[4].add( new Kinetic.Wedge({
+    outLayerAry[4].add(new Kinetic.Wedge({
       x: width/4,
       y: height/2 - radius/2 + fontSize,
 
@@ -1829,7 +1829,7 @@ externDrawFunctionArray.push(
     i = -1;
     max = 2;
     //Create the interactive buttons for the demo
-    while( i++ < max ){
+    while(i++ < max){
       x = width/4 + (i&1?-minDim/16:minDim/16);
       y = height*(2/3);
 
@@ -1849,16 +1849,16 @@ externDrawFunctionArray.push(
         cornerRadius: 10,
       });
 
-      if ( i&1 )
+      if(i&1)
         buttonObjAry[i].call = function(sizeCurCount){
-        if ( sizeCurCount > 2 )
+        if(sizeCurCount > 2)
           drawPixelCircle(outLayerAry[1], width/4-(boardWidth/2),
             height/6, minDim/3, --sizeCount
           );
         };
       else
         buttonObjAry[i].call = function(sizeCurCount){
-        if ( sizeCurCount < 40 )
+        if(sizeCurCount < 40)
           drawPixelCircle(outLayerAry[1], width/4-(boardWidth/2),
             height/6, minDim/3, ++sizeCount
           );
@@ -1872,7 +1872,7 @@ externDrawFunctionArray.push(
     }
 
     //Draws the initial demo
-    drawPixelCircle( outLayerAry[1], width/4-(boardWidth/2),
+    drawPixelCircle(outLayerAry[1], width/4-(boardWidth/2),
       height/6, minDim/3, sizeCount
     );
 
@@ -1911,10 +1911,10 @@ externDrawFunctionArray.push(
     max = 4;
     
     //Draws the second set of squares, bottom
-    while( ++i < max ){
+    while(++i < max){
       outLayerAry[7].add(new Kinetic.Rect({
-        x: width*(2/3) -  ( i&1 ? squareSide : 0 ) + (squareSide),
-        y: height*(4/5) - ( i&2 ? squareSide : 0 ) + (squareSide),
+        x: width*(2/3) -  (i&1 ? squareSide : 0) + (squareSide),
+        y: height*(4/5) - (i&2 ? squareSide : 0) + (squareSide),
         width: squareSide,
         height: squareSide,
         offset: [squareSide,squareSide],
@@ -1990,9 +1990,9 @@ externDrawFunctionArray.push(
     sizeCount = 4;
     max = sizeCount*sizeCount;
     //Draws first demo board
-    while( ++i < max ){
+    while(++i < max){
       outLayerAry[3].add(new Kinetic.Rect({
-        x: width/4 +( boardWidth/2) - floor(i/sizeCount)*squareSide,
+        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
         width: squareSide,
         height: squareSide,
@@ -2020,9 +2020,9 @@ externDrawFunctionArray.push(
     sizeCount = 3;
     max = sizeCount*sizeCount;
     //Draws second demo board
-    while( ++i < max ){
+    while(++i < max){
       outLayerAry[6].add(new Kinetic.Rect({
-        x: width/4 +( boardWidth/2) - floor(i/sizeCount)*squareSide,
+        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height*(2/3) + ((i%sizeCount)*squareSide),
         width: squareSide,
         height: squareSide,
@@ -2043,12 +2043,12 @@ externDrawFunctionArray.push(
     sizeCount = 4;
     max = sizeCount*sizeCount;
     //Draws third demo board
-    while( ++i < max ){
+    while(++i < max){
       fill = 'grey';
-      if (i == 0||i == 3||i == 12||i == 15)
+      if(i == 0||i == 3||i == 12||i == 15)
         fill = 'black';
       outLayerAry[7].add(new Kinetic.Rect({
-        x: width/4 +( boardWidth/2) - floor(i/sizeCount)*squareSide,
+        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
         width: squareSide,
         height: squareSide,
@@ -2062,9 +2062,9 @@ externDrawFunctionArray.push(
     i = -1;
     sizeCount = 3;
     max = sizeCount*sizeCount;
-    while( ++i < max ){
+    while(++i < max){
       outLayerAry[7].add(new Kinetic.Rect({
-        x: width/4 +( boardWidth/2) - floor(i/sizeCount)*squareSide,
+        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
         width: squareSide,
         height: squareSide,
@@ -2171,9 +2171,9 @@ externDrawFunctionArray.push(
     sizeCount = 4;
     max = sizeCount*sizeCount;
     //Draws demo board
-    while( ++i < max ){
+    while(++i < max){
       outLayerAry[6].add(new Kinetic.Rect({
-        x: width/4 +( boardWidth/2) - floor(i/sizeCount)*squareSide,
+        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
         width: squareSide,
         height: squareSide,
@@ -2190,9 +2190,9 @@ externDrawFunctionArray.push(
     ));
     
     i = -1;
-    while( ++i < max ){
+    while(++i < max){
       outLayerAry[7].add(new Kinetic.Rect({
-        x: width/4 +( boardWidth/2) - floor(i/sizeCount)*squareSide,
+        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
         width: squareSide,
         height: squareSide,
@@ -2290,7 +2290,7 @@ externDrawFunctionArray.push(
     i = -1;
     max = 2;
     //Create the interactive buttons for the demo
-    while( i++ < max ){
+    while(i++ < max){
       x = width/4 + (i&1?-minDim/16:minDim/16);
       y = height*(2/3);
 
@@ -2310,10 +2310,10 @@ externDrawFunctionArray.push(
         cornerRadius: 10,
       });
 
-      if ( i&1 )
+      if(i&1)
         buttonObjAry[i].call = function(line){
           var q;
-          if ( (q = line.getStrokeWidth()) > 2 ){
+          if((q = line.getStrokeWidth()) > 2){
             q -=2;
             line.setStrokeWidth(q);
             //shape.setStrokeWidth(q);
@@ -2326,7 +2326,7 @@ externDrawFunctionArray.push(
       else
         buttonObjAry[i].call = function(line){
           var q;
-          if ( (q = line.getStrokeWidth()) < 40 ){
+          if((q = line.getStrokeWidth()) < 40){
             q +=2;
             line.setStrokeWidth(q);
             //shape.setStrokeWidth(q);
@@ -2619,7 +2619,7 @@ externDrawFunctionArray.push(
     //Refresh always (may lag system) 
     /*
     (new Kinetic.Animation(function(frame){
-      if( !inAnim ){
+      if(!inAnim){
         shifta.setX(pointa.getX());
         shifta.setY(pointa.getY());
         shiftb.setX(pointb.getX());
@@ -2750,7 +2750,7 @@ externDrawFunctionArray.push(
     //Refresh onclick
     //Updates only when the piece is dragged successfully
     pointa.on("mouseon dragmove" , function(){
-      if( !inAnim ){
+      if(!inAnim){
         shifta.setX(pointa.getX());
         shifta.setY(pointa.getY());
         shiftb.setX(pointb.getX());
@@ -2771,7 +2771,7 @@ externDrawFunctionArray.push(
     });
     
     pointb.on("mouseon dragmove" , function(){
-      if( !inAnim ){
+      if(!inAnim){
         shifta.setX(pointa.getX());
         shifta.setY(pointa.getY());
         shiftb.setX(pointb.getX());
@@ -2792,7 +2792,7 @@ externDrawFunctionArray.push(
     });
     
     pointc.on("mouseon dragmove" , function(){
-      if( !inAnim ){
+      if(!inAnim){
         shifta.setX(pointa.getX());
         shifta.setY(pointa.getY());
         shiftb.setX(pointb.getX());
@@ -2831,7 +2831,7 @@ externDrawFunctionArray.push(
     
     start.on('mousedown dragstart', function(){
       var t;
-      if ( !inAnim ){
+      if(!inAnim){
         inAnim = true; 
         (new Kinetic.Animation(function(frame){
           t = frame.time/maxTime;
@@ -2850,7 +2850,7 @@ externDrawFunctionArray.push(
           shiftc.setX((1-t)*shifta.getX()+t*shiftb.getX());
           shiftc.setY((1-t)*shifta.getY()+t*shiftb.getY());
           splineq.setPoints(setPoints(pointa,control,pointc));
-          if ( frame.time >= maxTime ){
+          if(frame.time >= maxTime){
             this.stop();
             frame.time = 0;
             linea.setPoints([pointa.getX(),pointa.getY(),
