@@ -82,7 +82,7 @@ externDrawFunctionArray.push(
     var imgAryCur = -1;
 
     outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Screen Comparision",
+      width/2, outlineShift + 0.05*height, "Screen Comparison",
       fontSize+20, fontFamily
     )));
     

@@ -31,6 +31,8 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+* Fixed typo
+* Updated Screen Comparison to match the slide deck
 * Cleaned up code and comments
 * Bugfix, corners of msgBox not shown when collapsed
 * Bugfix, when preforming global animations, buttons not stuck in "hover"
