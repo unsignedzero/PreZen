@@ -31,6 +31,7 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+* Fixed typos in slide
 * Fixed typo
 * Updated Screen Comparison to match the slide deck
 * Cleaned up code and comments

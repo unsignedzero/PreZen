@@ -692,7 +692,7 @@ externDrawFunctionArray.push(
     ));
     outLayerAry[4].add(createBullet(width/6, height/4+12*fontSize, fontSize));
     outLayerAry[4].add(drawText(
-      width/6, height/4+12*fontSize, "Can't be used abouve 2km, due to pressure",
+      width/6, height/4+12*fontSize, "Can't be used above 2km, due to pressure",
       fontSize+5, fontFamily
     ));
     outLayerAry[5].add(createBullet(width/6, height/4+14*fontSize, fontSize));
@@ -1254,7 +1254,7 @@ externDrawFunctionArray.push(
     )));
 
     outLayerAry[1].add(drawText(
-      width/2-2*fontSize, height*(1/4), "4  Atoms are stripped of electrons",
+      width/2-2*fontSize, height*(1/4), "1  Atoms are stripped of electrons",
       fontSize+5, fontFamily
     ));
     outLayerAry[1].add(drawText(
@@ -1285,7 +1285,7 @@ externDrawFunctionArray.push(
       fontSize, fontFamily
     ));
     outLayerAry[2].add(drawText(
-      width/2, height*(1/4)+5*fontSize, "conductive layer",
+      width/2, height*(1/4)+5*fontSize, "conductive layer (2)",
       fontSize, fontFamily
     ));
     outLayerAry[3].add(drawText(
@@ -1293,7 +1293,7 @@ externDrawFunctionArray.push(
       fontSize+5, fontFamily
     ));
     outLayerAry[3].add(drawText(
-      width/2, height*(1/4)+8*fontSize, "Creating Light",
+      width/2, height*(1/4)+8*fontSize, "creating Light (3)",
       fontSize, fontFamily
     ));
     outLayerAry[4].add(drawText(
@@ -1362,7 +1362,7 @@ externDrawFunctionArray.push(
     ));
     outLayerAry[2].add(createBullet(width/6, height/4+2*fontSize, fontSize));
     outLayerAry[2].add(drawText(
-      width/6, height/4+2*fontSize, "Response time 2-16ms",
+      width/6, height/4+2*fontSize, "Response time ~2-16ms",
       fontSize+5, fontFamily
     ));
 
