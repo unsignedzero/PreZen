@@ -56,6 +56,6 @@ var PreZenSettings = {
   externShowButtons:true,
 
   //Set outline border
-  externOutlineShift:20,
+  externOutlineShift:20
 };
 

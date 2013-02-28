@@ -1,7 +1,7 @@
 /*Created by David Tran (unsignedzero)
  *PreZen Slides
  *
- *Contained in this file is a working coded slide that I used in my 
+ *Contained in this file is a working coded slide that I used in my
  *presentation. This is by no means the only way to use PreZen.
  */
 
@@ -25,8 +25,8 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift+radius, 'What can you see in a display?',
-      fontSize+2, fontFamily
-      )));
+      fontSize+2, fontFamily)));
+
 
     circle = new Kinetic.Wedge({
       x: width/2,
@@ -36,7 +36,7 @@ externDrawFunctionArray.push(
 
       stroke: 'black',
       strokeWidth: 3,
-      angleDeg: 270,
+      angleDeg: 270
     });
 
     (new Kinetic.Animation(function(frame){
@@ -54,8 +54,8 @@ externDrawFunctionArray.push(
 
     outLayerAry[1].add(center(drawText(
       width/2, height*(3/4), 'Created by David Tran',
-      fontSize+2, fontFamily
-    )));
+      fontSize+2, fontFamily)));
+
 
     return 2;
   }
@@ -83,11 +83,11 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Screen Comparison",
-      fontSize+20, fontFamily
-    )));
-    
+      fontSize+20, fontFamily)));
+
+
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/CompareScreen.png';
     imgAry[imgAryCur].onload = function(){
     };
@@ -97,7 +97,7 @@ externDrawFunctionArray.push(
       y: height/2+height/20,
       width: minDim/1,
       height: minDim/4,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     return 2;
@@ -122,43 +122,43 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Overview",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
     outLayerAry[1].add(drawText(
       width/6, height/4, "Displays and Color Gamut",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(createBullet(width/6, height/4+3*fontSize, fontSize));
     outLayerAry[2].add(drawText(
       width/6, height/4+3*fontSize, "CRT",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
 		outLayerAry[3].add(createBullet(width/6, height/4+6*fontSize, fontSize));
     outLayerAry[3].add(drawText(
       width/6, height/4+6*fontSize, "Plasma",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[4].add(createBullet(width/6, height/4+9*fontSize, fontSize));
     outLayerAry[4].add(drawText(
       width/6, height/4+9*fontSize, "LCD",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
     outLayerAry[5].add(drawText(
       width/6, height/4+12*fontSize, "OLED",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[6].add(createBullet(width/6, height/4+15*fontSize, fontSize));
     outLayerAry[6].add(drawText(
       width/6, height/4+15*fontSize, "AMOLED",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[7].add(createBullet(width/6, height/4+18*fontSize, fontSize));
     outLayerAry[7].add(drawText(
       width/6, height/4+18*fontSize, "Application: Drawing Circles",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
 
     return 8;
   }
@@ -187,52 +187,52 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Displays",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
 
     outLayerAry[1].add(createBullet(width/2,height/4,fontSize));
 
     outLayerAry[1].add(drawText(
       width/2, height*(1/4), "Collection of Light Sources",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
 
-    i = -1;
+    i = 0;
     sizeCount = 4;
     max = sizeCount*sizeCount;
     //Draws first demo board
-    while(++i < max){
+    while(i < max){
       outLayerAry[2].add(new Kinetic.Circle({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
         radius: squareSide/2,
         fill: i&2 ? (i&1 ? 'blue' : 'red') : (i&1 ? 'green' : 'white'),
         stroke: 'black',
-        strokeWidth: 5,
+        strokeWidth: 5
       }));
+      i += 1;
     }
 
     outLayerAry[3].add(createBullet(width/2,height/4+4*fontSize,fontSize));
     outLayerAry[3].add(drawText(
       width/2, height*(1/4)+4*fontSize, "Easier way to display",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[3].add(drawText(
       width/2, height*(1/4)+5*fontSize, "information to the user",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
 
     //Draws second demo board
-    i = -1;
-    while(++i < max){
+    i = 0;
+    while(i < max){
       outLayerAry[4].add(new Kinetic.Circle({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
         radius: squareSide/2,
-        fill: (i<5||i==8) ? 'black' : 'white',
+        fill: (i<5||i===8) ? 'black' : 'white',
         stroke: 'black',
-        strokeWidth: 5,
+        strokeWidth: 5
       }));
+      i += 1;
     }
 
     return 5;
@@ -260,16 +260,16 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Color Gamut",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(createBullet(width/2,height/4,fontSize));
     outLayerAry[1].add(drawText(
       width/2, height*(1/4), "What colors can be displayed?",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/ColorGamutXref.jpg';
     imgAry[imgAryCur].onload = function(){
     };
@@ -279,23 +279,23 @@ externDrawFunctionArray.push(
       y: height/4,
       width: minDim/2,
       height: minDim/2,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     outLayerAry[2].add(createBullet(width/2,height/4+6*fontSize,fontSize));
     outLayerAry[2].add(drawText(
       width/2, height*(1/4)+6*fontSize, "What can be seen in",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(drawText(
       width/2, height*(1/4)+7*fontSize, "a print out?",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[3].add(createBullet(width/2,height/4+13*fontSize,fontSize));
     outLayerAry[3].add(drawText(
       width/2, height*(1/4)+13*fontSize, "Does it look good?",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
 
     return 4;
   }
@@ -322,15 +322,15 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "CRT",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(center(drawText(
       width/2, outlineShift + 0.1*height, "Cathode Ray Tube",
-      fontSize+10, fontFamily
-    )));
-    
+      fontSize+10, fontFamily)));
+
+
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/crt-monitor.jpg';
     imgAry[imgAryCur].onload = function(){
     };
@@ -340,7 +340,7 @@ externDrawFunctionArray.push(
       y: height/2+height/20,
       width: minDim/1.5,
       height: minDim/1.5,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     return 2;
@@ -369,20 +369,20 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "CRT (How they work)",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
 
     outLayerAry[1].add(drawText(
       width/2-2*fontSize, height*(1/4), "1. Electron Gun",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[1].add(drawText(
       width/2, height*(1/4)+fontSize, "Each color has a gun",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/750px-CRT_color_enhanced.png';
     imgAry[imgAryCur].onload = function(){
     };
@@ -392,48 +392,48 @@ externDrawFunctionArray.push(
       y: height/4,
       width: minDim/2,
       height: minDim/2,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     outLayerAry[2].add(drawText(
       width/2-2*fontSize, height*(1/4)+3*fontSize, "3/4. Electron Coils",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(drawText(
       width/2, height*(1/4)+4*fontSize, "There are two coils one for",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[2].add(drawText(
       width/2, height*(1/4)+5*fontSize, "horizontial and another for",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[2].add(drawText(
       width/2, height*(1/4)+6*fontSize, "vertical",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[3].add(drawText(
       width/2-2*fontSize, height*(1/4)+8*fontSize, "6. Color mask",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[3].add(drawText(
       width/2, height*(1/4)+9*fontSize, "Seperates the colors",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/2-2*fontSize, height*(1/4)+11*fontSize, "7. Phosphor Layer",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/2, height*(1/4)+12*fontSize, "The sub-pixel that lights up",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/2, height*(1/4)+13*fontSize, "when stuck by an electron",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/600px-CRT_screen._closeup.jpg';
     imgAry[imgAryCur].onload = function(){
     };
@@ -443,13 +443,13 @@ externDrawFunctionArray.push(
       y: height/4,
       width: minDim/2,
       height: minDim/2,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     outLayerAry[5].add(align(drawText(
       width/4, height*(1/5), "Sample Mask Image",
-      fontSize+5, fontFamily
-    )));
+      fontSize+5, fontFamily)));
+
 
     return 6;
   }
@@ -472,51 +472,51 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "CRT (Pros/Cons)",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(drawText(
       width/6, height/4-2*fontSize, "-Pros-",
-      fontSize+15, fontFamily
-    ));
+      fontSize+15, fontFamily));
+
     outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
     outLayerAry[1].add(drawText(
       width/6, height/4, "No Input Lag",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(createBullet(width/6, height/4+2*fontSize, fontSize));
     outLayerAry[2].add(drawText(
       width/6, height/4+2*fontSize, "Flexible resolution/refresh rate",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[3].add(createBullet(width/6, height/4+4*fontSize, fontSize));
     outLayerAry[3].add(drawText(
       width/6, height/4+4*fontSize, "No color distortion and greater viewing angle",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/6, height/4+8*fontSize, "-Cons-",
-      fontSize+15, fontFamily
-    ));
+      fontSize+15, fontFamily));
+
     outLayerAry[4].add(createBullet(width/6, height/4+10*fontSize, fontSize));
     outLayerAry[4].add(drawText(
       width/6, height/4+10*fontSize, "Larger size/heavier weight",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
     outLayerAry[5].add(drawText(
       width/6, height/4+12*fontSize, "More power used compared to an LCD",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[6].add(createBullet(width/6, height/4+14*fontSize, fontSize));
     outLayerAry[6].add(drawText(
       width/6, height/4+14*fontSize, "Affected by magnetic field",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[7].add(createBullet(width/6, height/4+16*fontSize, fontSize));
     outLayerAry[7].add(drawText(
       width/6, height/4+16*fontSize, "Recycling is a problem",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
 
     return 8;
   }
@@ -545,11 +545,11 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Plasma",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/Evolution_of_21st_century_plasma_displays.jpg';
     imgAry[imgAryCur].onload = function(){
     };
@@ -559,7 +559,7 @@ externDrawFunctionArray.push(
       y: height/2+height/20,
       width: minDim/2.25,
       height: minDim/1.5,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     return 2;
@@ -587,11 +587,11 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Plasma (How they work)",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/Plasma-display-composition.svg.png';
     imgAry[imgAryCur].onload = function(){
     };
@@ -601,43 +601,43 @@ externDrawFunctionArray.push(
       y: height/4,
       width: minDim/2,
       height: minDim/2,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     outLayerAry[1].add(drawText(
       width/2-2*fontSize, height*(1/4), "1. Address Electrode",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[1].add(drawText(
       width/2, height*(1/4)+fontSize, "Turns on the right pixel",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
 
     outLayerAry[2].add(drawText(
       width/2-2*fontSize, height*(1/4)+3*fontSize, "2. Plasma Cells",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(drawText(
       width/2, height*(1/4)+fontSize+3*fontSize, "Mercury is excited",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[3].add(drawText(
       width/2, height*(1/4)+fontSize+5*fontSize, "Electrons excite noble gases",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/2, height*(1/4)+fontSize+7*fontSize, "Phosporous lights up",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
 
     outLayerAry[5].add(drawText(
       width/2-2*fontSize, height*(1/4)+10*fontSize, "3. Front Plate Glass",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[5].add(drawText(
       width/2, height*(1/4)+fontSize+10*fontSize, "Light is shown on the display",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
 
     return 6;
   }
@@ -664,42 +664,42 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Plasma (Pros/Cons)",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
 
     outLayerAry[1].add(drawText(
       width/6, height/4-2*fontSize, "-Pros-",
-      fontSize+15, fontFamily
-    ));
+      fontSize+15, fontFamily));
+
     outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
     outLayerAry[1].add(drawText(
       width/6, height/4, "Better Contrast Ratio",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(createBullet(width/6, height/4+2*fontSize, fontSize));
     outLayerAry[2].add(drawText(
       width/6, height/4+2*fontSize, "Lower Motion Blur",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[3].add(drawText(
       width/6, height/4+8*fontSize, "-Cons-",
-      fontSize+15, fontFamily
-    ));
+      fontSize+15, fontFamily));
+
     outLayerAry[3].add(createBullet(width/6, height/4+10*fontSize, fontSize));
     outLayerAry[3].add(drawText(
       width/6, height/4+10*fontSize, "Uses more power on average than LCD",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[4].add(createBullet(width/6, height/4+12*fontSize, fontSize));
     outLayerAry[4].add(drawText(
       width/6, height/4+12*fontSize, "Can't be used above 2km, due to pressure",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[5].add(createBullet(width/6, height/4+14*fontSize, fontSize));
     outLayerAry[5].add(drawText(
       width/6, height/4+14*fontSize, "Can't use AM radio",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
 
     return 6;
   }
@@ -726,15 +726,15 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "LCD",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(center(drawText(
       width/2, outlineShift + 0.10*height, "Liquid Crystal Display",
-      fontSize+10, fontFamily
-    )));
-    
+      fontSize+10, fontFamily)));
+
+
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/45567-lg-55lh40-55-lcd-tv1.jpg';
     imgAry[imgAryCur].onload = function(){
     };
@@ -744,7 +744,7 @@ externDrawFunctionArray.push(
       y: height/2+height/20,
       width: minDim/1.5,
       height: minDim/1.5,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     return 2;
@@ -773,20 +773,20 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "LCD (How they work)",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
 
     outLayerAry[1].add(drawText(
       width/2-2*fontSize, height*(1/4), "1 Polarizing Filter",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[1].add(drawText(
       width/2, height*(1/4)+fontSize, "Forces only light in one direction",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/800px-LCD_layers.svg.png';
 
     outLayerAry[1].add(center(new Kinetic.Image({
@@ -794,47 +794,47 @@ externDrawFunctionArray.push(
       y: height/4,
       width: minDim/2,
       height: minDim/2,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     outLayerAry[2].add(drawText(
       width/2-2*fontSize, height*(1/4)+3*fontSize, "2 LCD cutout",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(drawText(
       width/2, height*(1/4)+4*fontSize, "Cut the screen into shapes",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[3].add(drawText(
       width/2-2*fontSize, height*(1/4)+6*fontSize, "3 Liqud Crystals",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[3].add(drawText(
       width/2, height*(1/4)+7*fontSize, "Bends to reflect light, as needed",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/2-2*fontSize, height*(1/4)+9*fontSize, "4 Electrodes",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/2, height*(1/4)+10*fontSize, "Power the crystal to bend them",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/2, height*(1/4)+11*fontSize, "Light will pass but be cancelled",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[5].add(drawText(
       width/2-2*fontSize, height*(1/4)+13*fontSize, "5 Polar Lens",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[5].add(drawText(
       width/2, height*(1/4)+14*fontSize, "Cancels any remaining light",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/800px-LCDneg.jpg';
     imgAry[imgAryCur].onload = function(){
     };
@@ -844,13 +844,13 @@ externDrawFunctionArray.push(
       y: height/4,
       width: minDim/2.33,
       height: minDim/3,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     outLayerAry[6].add(align(drawText(
       width/4, height*(1/5), "LCD with polar lens on top",
-      fontSize+5, fontFamily
-    )));
+      fontSize+5, fontFamily)));
+
 
     return 7;
   }
@@ -873,48 +873,48 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "LCD (Backlight Technology)",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
     outLayerAry[1].add(drawText(
       width/6, height/4, "CCFL - Cold Cathode Fluorescent Lamps",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[1].add(drawText(
       width/6, height/4+1*fontSize, "Diffuser and two polarizers to distribute the light",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[2].add(createBullet(width/6, height/4+4*fontSize, fontSize));
     outLayerAry[2].add(drawText(
       width/6, height/4+4*fontSize, "EL-WLED - Edge Lined - White LED",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(drawText(
       width/6, height/4+5*fontSize, "Diffuses white light across the back of LC array",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[3].add(createBullet(width/6, height/4+8*fontSize, fontSize));
     outLayerAry[3].add(drawText(
       width/6, height/4+8*fontSize, "WLED - White LED",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[3].add(drawText(
       width/6, height/4+9*fontSize, "Can be dimmed in certain spots to allow ",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[3].add(drawText(
       width/6, height/4+10*fontSize, "darker blacks and similarly brighter whites",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[4].add(createBullet(width/6, height/4+13*fontSize, fontSize));
     outLayerAry[4].add(drawText(
       width/6, height/4+13*fontSize, "RGB-LED - Red Green Blue - LED",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/6, height/4+14*fontSize, "CCFL-like color gamut but power efficient",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     return 5;
   }
 );
@@ -941,17 +941,17 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "LCD (Active Matrix)",
-      fontSize+20, fontFamily
-    )));
-    
+      fontSize+20, fontFamily)));
+
+
     outLayerAry[1].add(createBullet(width/2, height*(1/4), fontSize));
     outLayerAry[1].add(drawText(
       width/2, height*(1/4), "Twisted Nematic",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/TN_Twisted.png';
 
     outLayerAry[1].add(center(new Kinetic.Image({
@@ -959,16 +959,16 @@ externDrawFunctionArray.push(
       y: height/4,
       width: minDim/2.5,
       height: minDim/2,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
-    
+
     outLayerAry[2].add(drawText(
       width/2, height*(1/4)+fontSize, "Initially limited to shades of grey",
-      fontSize, fontFamily
-    ));
-    
+      fontSize, fontFamily));
+
+
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/TN_UnTwisted.png';
 
     outLayerAry[2].add(center(new Kinetic.Image({
@@ -976,22 +976,22 @@ externDrawFunctionArray.push(
       y: height/4,
       width: minDim/2.5,
       height: minDim/2,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     outLayerAry[3].add(drawText(
       width/2, height*(1/4)+2*fontSize, "Used early on in calculators",
-      fontSize, fontFamily
-    ));
-    
+      fontSize, fontFamily));
+
+
     outLayerAry[4].add(createBullet(width/2, height*(1/4)+7*fontSize, fontSize));
     outLayerAry[4].add(drawText(
       width/2, height*(1/4)+7*fontSize, "In-plane Switching",
-      fontSize+5, fontFamily
-    ));
-    
+      fontSize+5, fontFamily));
+
+
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/IPS_On.png';
 
     outLayerAry[4].add(center(new Kinetic.Image({
@@ -999,36 +999,36 @@ externDrawFunctionArray.push(
       y: height/4,
       width: minDim/2.5,
       height: minDim/2,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
-    
+
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/IPS_Off.png';
     imgAry[imgAryCur].onload = function(){
     };
-    
+
     outLayerAry[5].add(center(new Kinetic.Image({
       x: width/4,
       y: height/4,
       width: minDim/2.5,
       height: minDim/2,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
-    
+
     outLayerAry[5].add(drawText(
       width/2, height*(1/4)+8*fontSize, "Power plane parallel the crystal.",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[6].add(drawText(
       width/2, height*(1/4)+9*fontSize, "Faster response, better color,",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[6].add(drawText(
       width/2, height*(1/4)+10*fontSize, "better angles",
-      fontSize, fontFamily
-    ));  
- 
+      fontSize, fontFamily));
+
+
     return 7;
   }
 );
@@ -1053,11 +1053,11 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "LCD (Matrix and Backlight)",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/active-matrix.jpg';
     imgAry[imgAryCur].onload = function(){
     };
@@ -1067,7 +1067,7 @@ externDrawFunctionArray.push(
       y: height/2+height/20,
       width: minDim/1.125,
       height: minDim/1.5,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     return 2;
@@ -1091,52 +1091,52 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "LCD (Pros/Cons)",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(drawText(
       width/6, height/4-2*fontSize, "-Pros-",
-      fontSize+15, fontFamily
-    ));
+      fontSize+15, fontFamily));
+
     outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
     outLayerAry[1].add(drawText(
       width/6, height/4, "Compact and lighter",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(createBullet(width/6, height/4+2*fontSize, fontSize));
     outLayerAry[2].add(drawText(
       width/6, height/4+2*fontSize, "Lower power consumption",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[3].add(createBullet(width/6, height/4+4*fontSize, fontSize));
     outLayerAry[3].add(drawText(
       width/6, height/4+4*fontSize, "Any shape, any size",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
 
     outLayerAry[4].add(drawText(
       width/6, height/4+8*fontSize, "-Cons-",
-      fontSize+15, fontFamily
-    ));
+      fontSize+15, fontFamily));
+
     outLayerAry[4].add(createBullet(width/6, height/4+10*fontSize, fontSize));
     outLayerAry[4].add(drawText(
       width/6, height/4+10*fontSize, "Limited viewing angle",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
     outLayerAry[5].add(drawText(
       width/6, height/4+12*fontSize, "One native resolution",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[6].add(createBullet(width/6, height/4+14*fontSize, fontSize));
     outLayerAry[6].add(drawText(
       width/6, height/4+14*fontSize, "Dead/stuck pixel",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[7].add(createBullet(width/6, height/4+16*fontSize, fontSize));
     outLayerAry[7].add(drawText(
       width/6, height/4+16*fontSize, "Not good in sunlight",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     return 8;
   }
 );
@@ -1161,11 +1161,11 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "LCD Viewing Angle and Response Time",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/image66.gif';
     imgAry[imgAryCur].onload = function(){
     };
@@ -1175,7 +1175,7 @@ externDrawFunctionArray.push(
       y: height/2+height/20,
       width: minDim/1.25,
       height: minDim/1.5,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     return 2;
@@ -1203,15 +1203,15 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "OLED",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(center(drawText(
       width/2, outlineShift + 0.1*height, "Organic Light Emitting Diode",
-      fontSize+10, fontFamily
-    )));
+      fontSize+10, fontFamily)));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/Sony_XEL-1.jpg';
     imgAry[imgAryCur].onload = function(){
     };
@@ -1221,7 +1221,7 @@ externDrawFunctionArray.push(
       y: height/2+height/20,
       width: minDim/1.125,
       height: minDim/1.5,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     return 2;
@@ -1250,20 +1250,20 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "OLED (How they work) ",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
 
     outLayerAry[1].add(drawText(
       width/2-2*fontSize, height*(1/4), "1  Atoms are stripped of electrons",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[1].add(drawText(
       width/2, height*(1/4)+fontSize, "in the conductive layer (4)",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/OLED_schematic.svg.png';
     imgAry[imgAryCur].onload = function(){
     };
@@ -1273,44 +1273,44 @@ externDrawFunctionArray.push(
       y: height/4,
       width: minDim/2,
       height: minDim/4,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     outLayerAry[2].add(drawText(
       width/2-2*fontSize, height*(1/4)+3*fontSize, "2  Electrons from this layer",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(drawText(
       width/2, height*(1/4)+4*fontSize, "(emissive layer) are pulled to the",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[2].add(drawText(
       width/2, height*(1/4)+5*fontSize, "conductive layer (2)",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[3].add(drawText(
       width/2-2*fontSize, height*(1/4)+7*fontSize, "3 Holes and electrons collide",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[3].add(drawText(
       width/2, height*(1/4)+8*fontSize, "creating Light (3)",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/2, height*(1/4)+10*fontSize, "-Layers of Interest-",
-      fontSize+15, fontFamily
-    ));
+      fontSize+15, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/2, height*(1/4)+13*fontSize, "1 Cathode Layer (-)",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/2, height*(1/4)+15*fontSize, "5 Anode Layer (+)",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/OLED_EarlyProduct.JPG';
     imgAry[imgAryCur].onload = function(){
     };
@@ -1320,13 +1320,13 @@ externDrawFunctionArray.push(
       y: height/4,
       width: minDim/2,
       height: minDim/2,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     outLayerAry[5].add(align(drawText(
       width/4, height*(1/5), "Sample OLED Screen",
-      fontSize+5, fontFamily
-    )));
+      fontSize+5, fontFamily)));
+
 
     return 6;
   }
@@ -1349,51 +1349,51 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "OLED (Pros/Cons)",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(drawText(
       width/6, height/4-2*fontSize, "-Pros-",
-      fontSize+15, fontFamily
-    ));
+      fontSize+15, fontFamily));
+
     outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
     outLayerAry[1].add(drawText(
       width/6, height/4, "Flexible screens",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(createBullet(width/6, height/4+2*fontSize, fontSize));
     outLayerAry[2].add(drawText(
       width/6, height/4+2*fontSize, "Response time ~2-16ms",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
 
     outLayerAry[3].add(drawText(
       width/6, height/4+8*fontSize, "-Cons-",
-      fontSize+15, fontFamily
-    ));
+      fontSize+15, fontFamily));
+
     outLayerAry[3].add(createBullet(width/6, height/4+10*fontSize, fontSize));
     outLayerAry[3].add(drawText(
       width/6, height/4+10*fontSize, "Power consumption 60-80% more ",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[3].add(drawText(
       width/6, height/4+11*fontSize, "power with white backgrounds",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[4].add(createBullet(width/6, height/4+13*fontSize, fontSize));
     outLayerAry[4].add(drawText(
       width/6, height/4+13*fontSize, "14000 hour until blue is at 50% brightness",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[5].add(createBullet(width/6, height/4+15*fontSize, fontSize));
     outLayerAry[5].add(drawText(
       width/6, height/4+15*fontSize, "High Cost. $8,000",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[6].add(createBullet(width/6, height/4+17*fontSize, fontSize));
     outLayerAry[6].add(drawText(
       width/6, height/4+17*fontSize, "In Development Land",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     return 7;
   }
 );
@@ -1419,15 +1419,15 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "AMOLED",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(center(drawText(
       width/2, outlineShift + 0.1*height, "Active Matrix Organic LED",
-      fontSize+10, fontFamily
-    )));
+      fontSize+10, fontFamily)));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/Samsung-Galaxy-S3-in-Sapphire-black.jpg';
     imgAry[imgAryCur].onload = function(){
     };
@@ -1437,7 +1437,7 @@ externDrawFunctionArray.push(
       y: height/2+height/20,
       width: minDim/1.5,
       height: minDim/1.5,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     return 2;
@@ -1465,16 +1465,16 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "AMOLED (How they work)",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
 
     outLayerAry[1].add(drawText(
       width/2-2*fontSize, height*(1/4), "  Similar to OLED except...",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/AMOLED-en.svg.png';
     imgAry[imgAryCur].onload = function(){
     };
@@ -1484,20 +1484,20 @@ externDrawFunctionArray.push(
       y: height/4,
       width: minDim/2,
       height: minDim/4,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     outLayerAry[2].add(drawText(
       width/2-2*fontSize, height*(1/4)+3*fontSize, "  Anode layer replaced with",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(drawText(
       width/2, height*(1/4)+4*fontSize, "TFT active matrix",
-      fontSize, fontFamily
-    ));
- 
+      fontSize, fontFamily));
+
+
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/Galaxy_Note_II_subpixels_representation.png';
     imgAry[imgAryCur].onload = function(){
     };
@@ -1507,13 +1507,13 @@ externDrawFunctionArray.push(
       y: height/4,
       width: minDim/2,
       height: minDim/2,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     outLayerAry[3].add(align(drawText(
       width/4, height*(1/5), "Sample SubPixel Image",
-      fontSize+5, fontFamily
-    )));
+      fontSize+5, fontFamily)));
+
 
     return 4;
   }
@@ -1536,50 +1536,50 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "AMOLED (Pros/Cons)",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(drawText(
       width/6, height/4-2*fontSize, "-Pros-",
-      fontSize+15, fontFamily
-    ));
+      fontSize+15, fontFamily));
+
     outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
     outLayerAry[1].add(drawText(
       width/6, height/4, "10 year before noticable degeneration",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(createBullet(width/6, height/4+2*fontSize, fontSize));
     outLayerAry[2].add(drawText(
       width/6, height/4+2*fontSize, "Better image quality due to higher contrast ratios",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[3].add(createBullet(width/6, height/4+4*fontSize, fontSize));
     outLayerAry[3].add(drawText(
       width/6, height/4+4*fontSize, "Faster response time <1ms",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/6, height/4+8*fontSize, "-Cons-",
-      fontSize+15, fontFamily
-    ));
+      fontSize+15, fontFamily));
+
     outLayerAry[4].add(createBullet(width/6, height/4+10*fontSize, fontSize));
     outLayerAry[4].add(drawText(
       width/6, height/4+10*fontSize, "High Demand",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
     outLayerAry[5].add(drawText(
       width/6, height/4+12*fontSize, "Lower brightness than LCD",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[5].add(drawText(
       width/6, height/4+13*fontSize, "can be hard to see outside",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[6].add(createBullet(width/6, height/4+15*fontSize, fontSize));
     outLayerAry[6].add(drawText(
       width/6, height/4+15*fontSize, "Burn-ins, less so than CRTs",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
 
     return 7;
   }
@@ -1605,11 +1605,11 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Screen Comparision",
-      fontSize+20, fontFamily
-    )));
-    
+      fontSize+20, fontFamily)));
+
+
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/CompareScreen.png';
     imgAry[imgAryCur].onload = function(){
     };
@@ -1619,7 +1619,7 @@ externDrawFunctionArray.push(
       y: height/2+height/20,
       width: minDim/1,
       height: minDim/4,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     return 2;
@@ -1645,8 +1645,8 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift+radius, 'Applications',
-      fontSize+2, fontFamily
-      )));
+      fontSize+2, fontFamily)));
+
 
     circlea = new Kinetic.Wedge({
       x: width/2,
@@ -1656,9 +1656,9 @@ externDrawFunctionArray.push(
 
       stroke: 'black',
       strokeWidth: 3,
-      angleDeg: 270,
+      angleDeg: 270
     });
-    
+
     circleb = new Kinetic.Wedge({
       x: width/2,
       y: height/2 - radius/2,
@@ -1668,7 +1668,7 @@ externDrawFunctionArray.push(
       stroke: 'black',
       strokeWidth: 3,
       angleDeg: 90,
-      rotationDeg: -180,
+      rotationDeg: -180
     });
 
     (new Kinetic.Animation(function(frame){
@@ -1687,8 +1687,8 @@ externDrawFunctionArray.push(
 
     outLayerAry[1].add(center(drawText(
       width/2, outlineShift+radius*1.8, "Drawing Circles",
-      fontSize+2, fontFamily
-    )));
+      fontSize+2, fontFamily)));
+
 
     return 2;
   }
@@ -1714,8 +1714,8 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, 'Mathematic Model',
-      fontSize+20, fontFamily 
-    )));
+      fontSize+20, fontFamily)));
+
 
     outLayerAry[1].add(new Kinetic.Wedge({
       x: width/4,
@@ -1725,25 +1725,25 @@ externDrawFunctionArray.push(
       angleDeg: 360,
 
       stroke: 'black',
-      strokeWidth: 3,
+      strokeWidth: 3
     }));
 
     outLayerAry[1].add(center(drawText(
       width/4,height/2 - radius/2,'x^2 + y^2 = r^2',
-      fontSize, fontFamily 
-    )));
+      fontSize, fontFamily)));
+
     outLayerAry[2].add(center(drawText(
       width*3/4, height*1/3, 'Implications',
-      fontSize+15, fontFamily 
-    )));
+      fontSize+15, fontFamily)));
+
     outLayerAry[3].add(center(drawText(
       width*3/4, height*1/3 + 2*fontSize, 'Negative Radius',
-      fontSize+5, fontFamily 
-    )));
+      fontSize+5, fontFamily)));
+
     outLayerAry[4].add(center(drawText(
       width*3/4, height*1/3 + 3*fontSize, 'Possible',
-      fontSize, fontFamily 
-    )));
+      fontSize, fontFamily)));
+
     outLayerAry[4].add(new Kinetic.Wedge({
       x: width/4,
       y: height/2 - radius/2 + fontSize,
@@ -1754,20 +1754,20 @@ externDrawFunctionArray.push(
       fill: 'white',
       stroke: 'black',
       strokeWidth: 3,
-      rotationDeg: 180,
+      rotationDeg: 180
     }));
     outLayerAry[4].add(center(drawText(
       width/4,height/2 - radius/2,'x^2 + y^2 = (-r)^2',
-      fontSize, fontFamily 
-    )));
+      fontSize, fontFamily)));
+
     outLayerAry[5].add(center(drawText(
       width*3/4, height*1/3 + 5*fontSize, 'Perfect World Model',
-      fontSize+5, fontFamily 
-    )));
+      fontSize+5, fontFamily)));
+
     outLayerAry[6].add(center(drawText(
       width*3/4, height*1/3 + 6*fontSize, 'Impossible',
-      fontSize, fontFamily 
-    )));
+      fontSize, fontFamily)));
+
 
     return 7;
   }
@@ -1806,36 +1806,35 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Pixel Model",
-      fontSize+20, fontFamily  
-    )));
+      fontSize+20, fontFamily)));
 
     outLayerAry[2].add(center(drawText(
       width*(2/3), height*(1/4), "Representation",
-      fontSize+15, fontFamily 
-    )));
+      fontSize+15, fontFamily)));
+
     outLayerAry[2].add(center(drawText(
       width*(2/3), height*(1/4)+2*fontSize, "2d array of cell",
-      fontSize+5, fontFamily
-    )));
+      fontSize+5, fontFamily)));
+
     outLayerAry[3].add(center(drawText(
       width*(2/3), height*(1/4)+4*fontSize, "Color is just a number",
-      fontSize+5, fontFamily
-    )));
+      fontSize+5, fontFamily)));
+
     outLayerAry[3].add(center(drawText(
       width*(2/3), height*(1/4)+5*fontSize,"R:255,G:255,B:255",
-      fontSize, fontFamily
-    )));
+      fontSize, fontFamily)));
 
-    i = -1;
+
+    i = 0;
     max = 2;
     //Create the interactive buttons for the demo
-    while(i++ < max){
+    while(i < max){
       x = width/4 + (i&1?-minDim/16:minDim/16);
       y = height*(2/3);
 
       outLayerAry[2].add(align(drawText(
-        x, y, i&1 ? '-' : '+', fontSize+20, fontFamily
-      )));
+        x, y, i&1 ? '-' : '+', fontSize+20, fontFamily)));
+
 
       buttonObjAry[i] = new Kinetic.Rect({
         x: x,
@@ -1846,22 +1845,24 @@ externDrawFunctionArray.push(
 
         stroke: 'black',
         strokeWidth: 5,
-        cornerRadius: 10,
+        cornerRadius: 10
       });
 
       if(i&1)
         buttonObjAry[i].call = function(sizeCurCount){
-        if(sizeCurCount > 2)
+        if(sizeCurCount > 2){
+          sizeCount -= 1;
           drawPixelCircle(outLayerAry[1], width/4-(boardWidth/2),
-            height/6, minDim/3, --sizeCount
-          );
+            height/6, minDim/3, sizeCount);
+          }
         };
       else
         buttonObjAry[i].call = function(sizeCurCount){
-        if(sizeCurCount < 40)
+        if(sizeCurCount < 40){
+          sizeCount += 1;
           drawPixelCircle(outLayerAry[1], width/4-(boardWidth/2),
-            height/6, minDim/3, ++sizeCount
-          );
+            height/6, minDim/3, sizeCount);
+          }
         };
 
       buttonObjAry[i].on('tap mousedown', function(){
@@ -1869,25 +1870,25 @@ externDrawFunctionArray.push(
       });
 
       outLayerAry[2].add(buttonObjAry[i]);
+      i += 1;
     }
 
     //Draws the initial demo
     drawPixelCircle(outLayerAry[1], width/4-(boardWidth/2),
-      height/6, minDim/3, sizeCount
-    );
+      height/6, minDim/3, sizeCount);
 
     outLayerAry[4].add(center(drawText(
       width*(2/3), height*(1/3)+5*fontSize, "Problems",
-      fontSize+15, fontFamily
-    )));
+      fontSize+15, fontFamily)));
+
     outLayerAry[5].add(center(drawText(
       width*(2/3), height*(1/3)+7*fontSize,
-      "Blocky given smaller amount of pixels", fontSize, fontFamily
-    )));
+      "Blocky given smaller amount of pixels", fontSize, fontFamily)));
+
     outLayerAry[6].add(center(drawText(
       width*(2/3), height*(1/3)+9*fontSize, "Can be blurry if scaled",
-      fontSize, fontFamily
-    )));
+      fontSize, fontFamily)));
+
 
     temp = center(new Kinetic.Rect({
       x: width/4,
@@ -1897,7 +1898,7 @@ externDrawFunctionArray.push(
       stroke: 'black',
 
       strokeWidth: 5,
-      cornerRadius: 10,
+      cornerRadius: 10
     }));
 
     temp.on('tap mousedown', function(){
@@ -1907,11 +1908,11 @@ externDrawFunctionArray.push(
 
     outLayerAry[6].add(temp);
 
-    i = -1;
+    i = 0;
     max = 4;
-    
+
     //Draws the second set of squares, bottom
-    while(++i < max){
+    while(i < max){
       outLayerAry[7].add(new Kinetic.Rect({
         x: width*(2/3) -  (i&1 ? squareSide : 0) + (squareSide),
         y: height*(4/5) - (i&2 ? squareSide : 0) + (squareSide),
@@ -1919,8 +1920,9 @@ externDrawFunctionArray.push(
         height: squareSide,
         offset: [squareSide,squareSide],
         stroke: 'black',
-        strokeWidth: 5,
+        strokeWidth: 5
       }));
+      i += 1;
     }
 
     outLayerAry[7].add(new Kinetic.Rect({
@@ -1931,7 +1933,7 @@ externDrawFunctionArray.push(
       offset: [squareSide*(9/8),squareSide*(9/8)],
       stroke: 'black',
       fill: 'black',
-      strokeWidth: 5,
+      strokeWidth: 5
     }));
 
     outLayerAry[7].add(new Kinetic.Rect({
@@ -1942,7 +1944,7 @@ externDrawFunctionArray.push(
       offset: [squareSide*(9/8),squareSide*(9/8)],
       stroke: 'black',
       fill: 'grey',
-      strokeWidth: 5,
+      strokeWidth: 5
     }));
 
     return 8;
@@ -1972,25 +1974,25 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Pixel Model (cont'd)",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(drawText(
-      width/2, height*1/4, "Advantage", fontSize+15, fontFamily
-    ));
+      width/2, height*1/4, "Advantage", fontSize+15, fontFamily));
+
     outLayerAry[2].add(createBullet(width/2, height/4+3*fontSize,fontSize));
     outLayerAry[2].add(drawText(
-      width/2, height/4+3*fontSize, "Uniform", fontSize+5, fontFamily
-    ));
-    outLayerAry[3].add(drawText(
-      width/2, height/4+4*fontSize, "Every pixel has a value", fontSize, fontFamily
-    ));
+      width/2, height/4+3*fontSize, "Uniform", fontSize+5, fontFamily));
 
-    i = -1;
+    outLayerAry[3].add(drawText(
+      width/2, height/4+4*fontSize, "Every pixel has a value", fontSize, fontFamily));
+
+
+    i = 0;
     max = 2;
     sizeCount = 4;
     max = sizeCount*sizeCount;
     //Draws first demo board
-    while(++i < max){
+    while(i < max){
       outLayerAry[3].add(new Kinetic.Rect({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
@@ -1998,29 +2000,30 @@ externDrawFunctionArray.push(
         height: squareSide,
         offset: [squareSide,squareSide],
         stroke: 'black',
-        strokeWidth: 5,
+        strokeWidth: 5
       }));
+      i += 1;
     }
 
     outLayerAry[4].add(createBullet(width/2, height/4+7*fontSize,fontSize));
     outLayerAry[4].add(drawText(
       width/2, height*1/4+7*fontSize, "Easy to represent",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[5].add(drawText(
       width/2, height*1/4+8*fontSize, "All pixels are the same",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[6].add(drawText(
       width/2, height*1/4+9*fontSize, "Drawing is easy",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
 
-    i = -1;
+
+    i = 0;
     sizeCount = 3;
     max = sizeCount*sizeCount;
     //Draws second demo board
-    while(++i < max){
+    while(i < max){
       outLayerAry[6].add(new Kinetic.Rect({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height*(2/3) + ((i%sizeCount)*squareSide),
@@ -2029,23 +2032,24 @@ externDrawFunctionArray.push(
         offset: [squareSide,squareSide],
         stroke: 'black',
         strokeWidth: 5,
-        fill: i%2 ? 'white': 'black',
+        fill: i%2 ? 'white': 'black'
       }));
+      i += 1;
     }
 
     outLayerAry[7].add(createBullet(width/2, height/4+12*fontSize,fontSize));
     outLayerAry[7].add(drawText(
       width/2, height*1/4+12*fontSize, "Easy to compress",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
 
-    i = -1;
+
+    i = 0;
     sizeCount = 4;
     max = sizeCount*sizeCount;
     //Draws third demo board
-    while(++i < max){
+    while(i < max){
       fill = 'grey';
-      if(i == 0||i == 3||i == 12||i == 15)
+      if(i === 0||i === 3||i === 12||i === 15)
         fill = 'black';
       outLayerAry[7].add(new Kinetic.Rect({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
@@ -2055,14 +2059,15 @@ externDrawFunctionArray.push(
         offset: [squareSide,squareSide],
         stroke: 'black',
         strokeWidth: 5,
-        fill: fill,
+        fill: fill
       }));
+      i += 1;
     }
 
-    i = -1;
+    i = 0;
     sizeCount = 3;
     max = sizeCount*sizeCount;
-    while(++i < max){
+    while(i < max){
       outLayerAry[7].add(new Kinetic.Rect({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
@@ -2071,8 +2076,9 @@ externDrawFunctionArray.push(
         offset: [squareSide*(3/2),squareSide/2],
         stroke: 'black',
         strokeWidth: 5,
-        fill: i%2 ? 'white': 'black',
+        fill: i%2 ? 'white': 'black'
       }));
+      i += 1;
     }
 
     return 8;
@@ -2101,8 +2107,8 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Vector Model",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
 
     x = width/4;
     y = height/4;
@@ -2112,18 +2118,18 @@ externDrawFunctionArray.push(
       stroke: 'red',
       strokeWidth: 10,
       lineCap: 'round',
-      lineJoin: 'round',
+      lineJoin: 'round'
     }));
 
     outLayerAry[1].add(drawText(
       width/2, height/4, "Representation",
-      fontSize+15, fontFamily
-    ));
+      fontSize+15, fontFamily));
+
     outLayerAry[1].add(createBullet(width/2, height*(1/4)+3*fontSize,fontSize));
     outLayerAry[1].add(drawText(
       width/2, height*(1/4)+3*fontSize, "Magnitude and Direction",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
 
     x = width/4 - 20;
     y = height/4;
@@ -2132,7 +2138,7 @@ externDrawFunctionArray.push(
       stroke: 'blue',
       strokeWidth: 10,
       lineCap: 'round',
-      lineJoin: 'round',
+      lineJoin: 'round'
     }));
 
     x = width/4 - 20;
@@ -2142,36 +2148,36 @@ externDrawFunctionArray.push(
       stroke: 'blue',
       strokeWidth: 10,
       lineCap: 'round',
-      lineJoin: 'round',
+      lineJoin: 'round'
     }));
 
     outLayerAry[2].add(drawText(
       width/2, height/4+4*fontSize, "Stored as a tuple ",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[2].add(drawText(
       width/2, height/4+5*fontSize, "<50,50>",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[3].add(drawText(
       width/2, height/4+8*fontSize, "Problems",
-      fontSize+15, fontFamily
-    ));
+      fontSize+15, fontFamily));
+
     outLayerAry[4].add(createBullet(width/2, height/4+11*fontSize,fontSize));
     outLayerAry[4].add(drawText(
       width/2, height/4+11*fontSize, "No specific \"start\" point",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[5].add(drawText(
       width/2, height/4+12*fontSize,"<(" + width/4 + ',' + height/4 + "),50,50>",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
 
-    i = -1;
+
+    i = 0;
     sizeCount = 4;
     max = sizeCount*sizeCount;
     //Draws demo board
-    while(++i < max){
+    while(i < max){
       outLayerAry[6].add(new Kinetic.Rect({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
@@ -2179,18 +2185,19 @@ externDrawFunctionArray.push(
         height: squareSide,
         offset: [squareSide,squareSide],
         stroke: 'black',
-        strokeWidth: 5,
+        strokeWidth: 5
       }));
+      i += 1;
     }
 
     outLayerAry[6].add(createBullet(width/2, height*(1/4)+14*fontSize,fontSize));
     outLayerAry[6].add(drawText(
       width/2, height/4+14*fontSize, "How do you draw vectors?",
-      fontSize+5, fontFamily
-    ));
-    
-    i = -1;
-    while(++i < max){
+      fontSize+5, fontFamily));
+
+
+    i = 0;
+    while(i < max){
       outLayerAry[7].add(new Kinetic.Rect({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
@@ -2198,15 +2205,16 @@ externDrawFunctionArray.push(
         height: squareSide,
         offset: [squareSide,squareSide],
         stroke: 'black',
-        fill: (i==5)? 'red' : 'white',
-        strokeWidth: 5,
+        fill: (i===5)? 'red' : 'white',
+        strokeWidth: 5
       }));
+      i += 1;
     }
-    
+
     outLayerAry[7].add(drawText(
       width/2, height/4+15*fontSize, "Not simple to render or draw",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
 
     return 8;
   }
@@ -2226,24 +2234,24 @@ externDrawFunctionArray.push(
     var center   = supportFunc.center;
     var drawText = supportFunc.drawText;
     var align = supportFunc.align;
-    
+
     var buttonObjAry = [{},{}];
-    
+
     var squareSide = minDim/12;
-    
+
     var i, x, y, max, line, left;
     var addx, addy, shape;
-    
+
     addx = 0.35;
     addy = 0.35;
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Vector Model (cont'd)",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(center(drawText(
-      width*2/3, height*1/4, "Advantage", fontSize+15, fontFamily
-    )));
+      width*2/3, height*1/4, "Advantage", fontSize+15, fontFamily)));
+
     outLayerAry[2].add(shape = new Kinetic.Spline({
       points: [{ x:width/4, y:height/4 },
                { x:width/3, y:height/2 },
@@ -2258,45 +2266,45 @@ externDrawFunctionArray.push(
 
     outLayerAry[2].add(center(drawText(
       width*2/3, height*1/4+4*fontSize, "Mathematically represent curves",
-      fontSize+5, fontFamily
-    )));
-    
+      fontSize+5, fontFamily)));
+
+
     left = minDim/6;
     outLayerAry[3].add(new Kinetic.Polygon({
       points: [minDim*0.375-left,minDim*0.250,minDim*0.500-left,minDim*0.375,
                minDim*0.375-left,minDim*0.500,minDim*0.250-left,minDim*0.375],
       fill: 'white',
       stroke: 'black',
-      strikeWidth: 5,
+      strikeWidth: 5
     }));
-    
+
     outLayerAry[3].add(line = new Kinetic.Line({
       points: [minDim*0.3125-left+5*addx,minDim*0.4375-5*addy,
                minDim*0.4375-left-5*addx,minDim*0.3125+5*addy],
       stroke: 'blue',
       strokeWidth: 10,
-      lineCap: 'square',
+      lineCap: 'square'
     }));
-    
+
     outLayerAry[3].add(center(drawText(
       width*2/3, height*1/4+8*fontSize, "Infinite Zoom",
-      fontSize+5, fontFamily
-    )));
+      fontSize+5, fontFamily)));
+
     outLayerAry[4].add(center(drawText(
       width*2/3, height*1/4+12*fontSize, "Always Sharp",
-      fontSize+5, fontFamily
-    )));
-    
-    i = -1;
+      fontSize+5, fontFamily)));
+
+
+    i = 0;
     max = 2;
     //Create the interactive buttons for the demo
-    while(i++ < max){
+    while(i < max){
       x = width/4 + (i&1?-minDim/16:minDim/16);
       y = height*(2/3);
 
       outLayerAry[3].add(align(drawText(
-        x, y, i&1 ? '-' : '+', fontSize+20, fontFamily
-      )));
+        x, y, i&1 ? '-' : '+', fontSize+20, fontFamily)));
+
 
       buttonObjAry[i] = new Kinetic.Rect({
         x: x,
@@ -2307,7 +2315,7 @@ externDrawFunctionArray.push(
 
         stroke: 'black',
         strokeWidth: 5,
-        cornerRadius: 10,
+        cornerRadius: 10
       });
 
       if(i&1)
@@ -2342,6 +2350,7 @@ externDrawFunctionArray.push(
       });
 
       outLayerAry[3].add(buttonObjAry[i]);
+      i += 1;
     }
 
     return 5;
@@ -2362,8 +2371,8 @@ externDrawFunctionArray.push(
     var center   = supportFunc.center;
     var drawText = supportFunc.drawText;
     var createBullet = supportFunc.createBullet;
-    
-    var pointa, pointb, pointc, linea, lineb, 
+
+    var pointa, pointb, pointc, linea, lineb,
         splineq, control;
 
     function setPoints(a,b,c){
@@ -2371,27 +2380,27 @@ externDrawFunctionArray.push(
               { x: b.getX(), y: b.getY() },
               { x: c.getX(), y: c.getY() }];
     }
-        
+
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Drawing a curve",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(createBullet(width/8, height/4,fontSize));
     outLayerAry[1].add(drawText(
-      width/8, height/4, "One point is a point", fontSize, fontFamily
-    ));
+      width/8, height/4, "One point is a point", fontSize, fontFamily));
+
     outLayerAry[2].add(createBullet(width/8, height/4+2*fontSize,fontSize));
     outLayerAry[2].add(drawText(
-      width/8, height/4+2*fontSize, "Two points make a line (y=x)", fontSize, fontFamily
-    ));
+      width/8, height/4+2*fontSize, "Two points make a line (y=x)", fontSize, fontFamily));
+
     outLayerAry[3].add(createBullet(width/8, height/4+4*fontSize,fontSize));
     outLayerAry[3].add(drawText(
-      width/8, height/4+4*fontSize, "Three points can make a quadratic curve (y=x^2)", fontSize, fontFamily
-    ));
+      width/8, height/4+4*fontSize, "Three points can make a quadratic curve (y=x^2)", fontSize, fontFamily));
+
     outLayerAry[4].add(drawText(
-      width/8, height/4+5*fontSize, "The points must not all be collinear", fontSize, fontFamily
-    ));
-    
+      width/8, height/4+5*fontSize, "The points must not all be collinear", fontSize, fontFamily));
+
+
     pointa = new Kinetic.Circle({
       x: width*1/3,
       y: height*2/3,
@@ -2399,7 +2408,7 @@ externDrawFunctionArray.push(
       fill: 'red',
       stroke: 'black',
       strokeWidth: 5,
-      draggable:true,
+      draggable:true
     });
     pointb = new Kinetic.Circle({
       x: width*1/2,
@@ -2408,7 +2417,7 @@ externDrawFunctionArray.push(
       fill: 'yellow',
       stroke: 'black',
       strokeWidth: 5,
-      draggable:true,
+      draggable:true
     });
     pointc = new Kinetic.Circle({
       x: width*2/3,
@@ -2417,7 +2426,7 @@ externDrawFunctionArray.push(
       fill: 'blue',
       stroke: 'black',
       strokeWidth: 5,
-      draggable:true,
+      draggable:true
     });
     control = new Kinetic.Circle({
       x: (pointa.getX()+2*pointb.getX()+pointc.getX())/4,
@@ -2426,19 +2435,19 @@ externDrawFunctionArray.push(
       fill: 'purple',
       stroke: 'black',
       strokeWidth: 5,
-      draggable:true,
+      draggable:true
     });
     linea = new Kinetic.Line({
       points: [pointa.getX(),pointa.getY(),
                pointb.getX(),pointb.getY()],
       stroke: 'black',
-      strokeWidth: 3,
+      strokeWidth: 3
     });
     lineb = new Kinetic.Line({
       points: [pointb.getX(),pointb.getY(),
                pointc.getX(),pointc.getY()],
       stroke: 'black',
-      strokeWidth: 3,
+      strokeWidth: 3
     });
     splineq = new Kinetic.Spline({
       points: [{ x: pointa.getX(), y: pointa.getY() },
@@ -2447,18 +2456,18 @@ externDrawFunctionArray.push(
       stroke: 'green',
       strokeWidth: 10,
       lineCap: 'round',
-      tension: 0.5,
+      tension: 0.5
     });
 
     outLayerAry[2].add(linea);
-    
+
     outLayerAry[3].add(lineb);
     outLayerAry[3].add(splineq);
-    
+
     outLayerAry[1].add(pointa);
     outLayerAry[2].add(pointb);
     outLayerAry[3].add(pointc);
-    
+
     //Refresh onclick
     //Updates only when successfully dragged
     pointa.on("mouseon touchmove dragmove" , function(){
@@ -2473,7 +2482,7 @@ externDrawFunctionArray.push(
       outLayerAry[2].draw();
       outLayerAry[3].draw();
     });
-    
+
     pointb.on("mouseon dragmove" , function(){
       control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
       control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
@@ -2486,7 +2495,7 @@ externDrawFunctionArray.push(
       outLayerAry[2].draw();
       outLayerAry[3].draw();
     });
-    
+
     pointc.on("mouseon dragmove" , function(){
       control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
       control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
@@ -2499,7 +2508,7 @@ externDrawFunctionArray.push(
       outLayerAry[2].draw();
       outLayerAry[3].draw();
     });
-    
+
     return 5;
   }
 );
@@ -2521,68 +2530,68 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Bezier Curve Math, B(t)",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
     outLayerAry[1].add(drawText(
       width/6, height/4, "Given points x1, x2... xn",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(createBullet(width/6, height/4+2*fontSize, fontSize));
     outLayerAry[2].add(drawText(
       width/6, height/4+2*fontSize, "First Term:",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[2].add(drawText(
       width/6, height/4+3*fontSize, "(1-t)^n*t^0*(X1)",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
    outLayerAry[3].add(createBullet(width/6, height/4+5*fontSize, fontSize));
    outLayerAry[3].add(createBullet(width/6, height/4+5*fontSize, fontSize));
       outLayerAry[3].add(drawText(
       width/6, height/4+5*fontSize, "Kth Term:",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[3].add(drawText(
       width/6, height/4+6*fontSize, "[(1-t)^(n-k)*t^k]*(n C k)*(Xk)",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
    outLayerAry[4].add(createBullet(width/6, height/4+8*fontSize, fontSize));
    outLayerAry[4].add(createBullet(width/6, height/4+8*fontSize, fontSize));
       outLayerAry[4].add(drawText(
       width/6, height/4+8*fontSize, "Line from (a,b) to (c,d)",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/6, height/4+9*fontSize, "X(t) = (1-t)*a + t*c",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[4].add(drawText(
       width/6, height/4+10*fontSize, "Y(t) = (1-t)*b + t*d",
-      fontSize, fontFamily
-    ));
-    
+      fontSize, fontFamily));
+
+
     outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
     outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
       outLayerAry[5].add(drawText(
       width/6, height/4+12*fontSize, "Curve from (a,b) to (c,d) to (e,f)",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
     outLayerAry[5].add(drawText(
       width/6, height/4+13*fontSize, "X(t) = (1-t)^2*a + 2*(1-t)*t*c + t^2*e",
-      fontSize, fontFamily
-    ));
+      fontSize, fontFamily));
+
     outLayerAry[5].add(drawText(
       width/6, height/4+14*fontSize, "Y(t) = (1-t)^2*b + 2*(1-t)*t*d + t^2*f",
-      fontSize, fontFamily
-    ));
-    
+      fontSize, fontFamily));
+
+
     outLayerAry[6].add(createBullet(width/6, height/4+16*fontSize, fontSize));
     outLayerAry[6].add(createBullet(width/6, height/4+16*fontSize, fontSize));
       outLayerAry[6].add(drawText(
       width/6, height/4+16*fontSize, "0 ≤ t ≤ 1",
-      fontSize+5, fontFamily
-    ));
+      fontSize+5, fontFamily));
+
 
     return 7;
   }
@@ -2602,12 +2611,12 @@ externDrawFunctionArray.push(
     var center   = supportFunc.center;
     var drawText = supportFunc.drawText;
     var createBullet = supportFunc.createBullet;
-    
-    var pointa, pointb, pointc, linea, lineb, linec, shifta, shiftb, shiftc, 
+
+    var pointa, pointb, pointc, linea, lineb, linec, shifta, shiftb, shiftc,
         splineq, start, control;
-        
+
     var maxTime = 10000;
-    
+
     var inAnim = false;
 
     function setPoints(a,b,c){
@@ -2615,8 +2624,8 @@ externDrawFunctionArray.push(
               { x: b.getX(), y: b.getY() },
               { x: c.getX(), y: c.getY() }];
     }
-    
-    //Refresh always (may lag system) 
+
+    //Refresh always (may lag system)
     /*
     (new Kinetic.Animation(function(frame){
       if(!inAnim){
@@ -2639,12 +2648,12 @@ externDrawFunctionArray.push(
       outLayerAry[1].draw();
     }, outLayerAry[1])).start();
     */
-    
+
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Bezier Curve Example",
-      fontSize+20, fontFamily
-    )));
-    
+      fontSize+20, fontFamily)));
+
+
     pointa = new Kinetic.Circle({
       x: width/4,
       y: height/4,
@@ -2652,7 +2661,7 @@ externDrawFunctionArray.push(
       fill: 'red',
       stroke: 'black',
       strokeWidth: 5,
-      draggable:true,
+      draggable:true
     });
     pointb = new Kinetic.Circle({
       x: width/3,
@@ -2661,7 +2670,7 @@ externDrawFunctionArray.push(
       fill: 'yellow',
       stroke: 'black',
       strokeWidth: 5,
-      draggable:true,
+      draggable:true
     });
     pointc = new Kinetic.Circle({
       x: width/2,
@@ -2670,7 +2679,7 @@ externDrawFunctionArray.push(
       fill: 'blue',
       stroke: 'black',
       strokeWidth: 5,
-      draggable:true,
+      draggable:true
     });
     control = new Kinetic.Circle({
       x: (pointa.getX()+2*pointb.getX()+pointc.getX())/4,
@@ -2679,9 +2688,9 @@ externDrawFunctionArray.push(
       fill: 'purple',
       stroke: 'black',
       strokeWidth: 5,
-      draggable:true,
+      draggable:true
     });
-    
+
     start = new Kinetic.Circle({
       x: width/1.5,
       y: height/1.5,
@@ -2689,25 +2698,25 @@ externDrawFunctionArray.push(
       fill: 'green',
       stroke: 'black',
       strokeWidth: 4,
-      draggable:true,
+      draggable:true
     });
-    
+
     shifta = new Kinetic.Circle({
       x: -20,
       y: -20,
       radius: minDim/75,
       fill: 'black',
       stroke: 'black',
-      strokeWidth: 4,     
+      strokeWidth: 4
     });
-    
+
     shiftb = new Kinetic.Circle({
       x: -20,
       y: -20,
       radius: minDim/75,
       fill: 'black',
       stroke: 'black',
-      strokeWidth: 4,     
+      strokeWidth: 4
     });
     shiftc = new Kinetic.Circle({
       x: -20,
@@ -2715,38 +2724,38 @@ externDrawFunctionArray.push(
       radius: minDim/75,
       fill: 'orange',
       stroke: 'black',
-      strokeWidth: 4,     
+      strokeWidth: 4
     });
-    
+
     linec = new Kinetic.Line({
       points: [-20,-40,
                -40,-20],
       stroke: 'grey',
-      strokeWidth: 10,   
+      strokeWidth: 10
     });
-    
+
     splineq = new Kinetic.Spline({
       points: [{ x:-20, y:-20 }],
       stroke: 'green',
       strokeWidth: 10,
       lineCap: 'round',
-      tension: 0.5,
+      tension: 0.5
     });
-    
+
     outLayerAry[1].add(linea = new Kinetic.Line({
       points: [pointa.getX(),pointa.getY(),
                pointb.getX(),pointb.getY()],
       stroke: 'black',
-      strokeWidth: 3,
+      strokeWidth: 3
     }));
     outLayerAry[1].add(lineb = new Kinetic.Line({
       points: [pointb.getX(),pointb.getY(),
                pointc.getX(),pointc.getY()],
       stroke: 'black',
-      strokeWidth: 3,
+      strokeWidth: 3
     }));
-    
-    
+
+
     //Refresh onclick
     //Updates only when the piece is dragged successfully
     pointa.on("mouseon dragmove" , function(){
@@ -2769,7 +2778,7 @@ externDrawFunctionArray.push(
       splineq.setPoints(setPoints(pointa,control,pointc));
       outLayerAry[1].draw();
     });
-    
+
     pointb.on("mouseon dragmove" , function(){
       if(!inAnim){
         shifta.setX(pointa.getX());
@@ -2790,7 +2799,7 @@ externDrawFunctionArray.push(
       splineq.setPoints(setPoints(pointa,control,pointc));
       outLayerAry[1].draw();
     });
-    
+
     pointc.on("mouseon dragmove" , function(){
       if(!inAnim){
         shifta.setX(pointa.getX());
@@ -2811,28 +2820,28 @@ externDrawFunctionArray.push(
       splineq.setPoints(setPoints(pointa,control,pointc));
       outLayerAry[1].draw();
     });
-    
+
     control.on("mouseon dragmove" , function(){
       splineq.setPoints(setPoints(pointa,control,pointc));
       outLayerAry[1].draw();
     });
-    
+
     outLayerAry[1].add(linec);
     outLayerAry[1].add(shifta);
     outLayerAry[1].add(shiftb);
     outLayerAry[1].add(shiftc);
     outLayerAry[1].add(splineq);
     outLayerAry[1].add(control);
-    
+
     outLayerAry[1].add(pointa);
     outLayerAry[1].add(pointb);
     outLayerAry[1].add(pointc);
     outLayerAry[1].add(start);
-    
+
     start.on('mousedown dragstart', function(){
       var t;
       if(!inAnim){
-        inAnim = true; 
+        inAnim = true;
         (new Kinetic.Animation(function(frame){
           t = frame.time/maxTime;
           control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
@@ -2867,22 +2876,22 @@ externDrawFunctionArray.push(
             shiftc.setY(pointc.getY());
             linec.setPoints([shifta.getX(),shifta.getY(),
                              shiftb.getX(),shiftb.getY()]);
-            splineq.setPoints(setPoints(pointa,control,pointc));               
+            splineq.setPoints(setPoints(pointa,control,pointc));
             inAnim = false;
           }
         }, outLayerAry[1])).start();
       }
     });
-    
+
     outLayerAry[2].add(center(drawText(
       width/2, outlineShift + 0.1*height, "Drag the red, yellow, blue points",
-      fontSize+10, fontFamily
-    )));
-    
+      fontSize+10, fontFamily)));
+
+
     outLayerAry[3].add(center(drawText(
       width/2, outlineShift + 0.15*height,
-      "Click the green point to start the anim", fontSize, fontFamily
-    )));    
+      "Click the green point to start the anim", fontSize, fontFamily)));
+
     return 4;
   }
 );
@@ -2903,12 +2912,12 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "End of Presentation",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
     outLayerAry[1].add(align(drawText(
       width/2, height/2, "Questions?",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
 
     return 2;
   }
@@ -2934,11 +2943,11 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Image Sample Slide",
-      fontSize+20, fontFamily
-    )));
+      fontSize+20, fontFamily)));
+
 
     imgAry.push(new Image());
-    imgAryCur +=1;
+    imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/test.jpg';
     imgAry[imgAryCur].onload = function(){
     };
@@ -2948,7 +2957,7 @@ externDrawFunctionArray.push(
       y: height/2,
       width: minDim/4,
       height: minDim/4,
-      image: imgAry[imgAryCur],
+      image: imgAry[imgAryCur]
     })));
 
     return 2;
