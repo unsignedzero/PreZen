@@ -31,6 +31,13 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+## 0.4.1.0 [02-26-2013] #
+
+* Stable release
+* Fixed while loop issues because of removing ++ due to JSlint
+* Removed bitshift operators and replaced with division/multiplication
+* Cleaned up code warnings defined by JSlint
+* Created and set basic JSlint test
 * Fixed typos in slide
 * Fixed typo
 * Updated Screen Comparison to match the slide deck
