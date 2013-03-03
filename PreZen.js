@@ -19,32 +19,6 @@
  * \class PreZen
  */
 
-/*!
- * Private Property supportFunc
- * \property Definitions supportFunc
- */
-
-/*!
- * Document all support function stuff
- * \class supportFunc
- */
-
-/*!
- * Left justifies the graphical object
- * Given a Kinetic.Node object, this will left justify it
- * (this is the default option for all Kinetic.Node)
- * \fn Kinetic.Node supportFunc.left(temp)
- * \memberof supportFunc
- * \param Kinetic.Node temp input node to be left justified
- * \return Kinetic.Node left justified node object temp 
- */
-
-/* As of current, dOxygen is limited to only special comments outside 
- * the below function declaration. This may prove to be a problem but
- * then again, we can create *jsh and stuff all comments and related
- * there to fix the problem. More testing needed.
- */
-
 var zxPowerPoint = (function(settings) {
   "use strict";
 
