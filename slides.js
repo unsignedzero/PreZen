@@ -1,15 +1,28 @@
-/*Created by David Tran (unsignedzero)
- *PreZen Slides
+/* PreZen Slides
  *
- *Contained in this file is a working coded slide that I used in my
- *presentation. This is by no means the only way to use PreZen.
+ * Contained in this file is a working coded slide that I used in my
+ * presentation. This is by no means the only way to use PreZen.
+ * This is currently being updated and the code to create content
+ * is being placed in slideSupport while the code to place content
+ * will be located here.
+ *
+ *
+ * Created 01-25-2013
+ * Updated 03-03-2013
+ * Version 0.5.0.0
+ * Created by David Tran (unsignedzero)
+ */
+
+/* WARNING
+ * This code might eventually be modified as a list of functions, removing
+ * the global variable but also negating the need to build the list.
  */
 
 //////////////////////////////////////////////////////////////////////////////
 //Add Slides Output
 //Cover Slide
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
     supportFunc.clean(outLayerAry,settingsObj);
 
     var animTime = settingsObj.animTime;
@@ -39,10 +52,10 @@ externDrawFunctionArray.push(
       angleDeg: 270
     });
 
-    (new Kinetic.Animation(function(frame){
+    (new Kinetic.Animation(function(frame) {
       circle.setAngleDeg(360*frame.time/animTime);
       circle.setRotationDeg(90*frame.time/animTime);
-      if(frame.time >= animTime){
+      if (frame.time >= animTime) {
         this.stop();
         frame.time=0;
         circle.setAngleDeg(360);
@@ -63,9 +76,9 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Test ZONE
 //////////////////////////////////////////////////////////////////////////////
-if(PreZenSettings.showDebugSlide){
+if (PreZenSettings.showDebugSlide) {
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -89,7 +102,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/CompareScreen.png';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[1].add(align(new Kinetic.Image({
@@ -107,7 +120,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //TOC Slide
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -167,7 +180,7 @@ externDrawFunctionArray.push(
 //Part 1
 //Slide 1
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -200,7 +213,7 @@ externDrawFunctionArray.push(
     sizeCount = 4;
     max = sizeCount*sizeCount;
     //Draws first demo board
-    while(i < max){
+    while(i < max) {
       outLayerAry[2].add(new Kinetic.Circle({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
@@ -223,7 +236,7 @@ externDrawFunctionArray.push(
 
     //Draws second demo board
     i = 0;
-    while(i < max){
+    while(i < max) {
       outLayerAry[4].add(new Kinetic.Circle({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
@@ -241,7 +254,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 2
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -271,7 +284,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/ColorGamutXref.jpg';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[1].add(center(new Kinetic.Image({
@@ -304,7 +317,7 @@ externDrawFunctionArray.push(
 //Part 2 CRT
 //Slide 3
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -332,7 +345,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/crt-monitor.jpg';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[1].add(align(new Kinetic.Image({
@@ -349,7 +362,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 4
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -384,7 +397,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/750px-CRT_color_enhanced.png';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[1].add(center(new Kinetic.Image({
@@ -435,7 +448,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/600px-CRT_screen._closeup.jpg';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[5].add(center(new Kinetic.Image({
@@ -457,7 +470,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 5
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -526,7 +539,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 6
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -551,7 +564,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/Evolution_of_21st_century_plasma_displays.jpg';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[1].add(align(new Kinetic.Image({
@@ -568,7 +581,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 7
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -593,7 +606,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/Plasma-display-composition.svg.png';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[1].add(center(new Kinetic.Image({
@@ -645,7 +658,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 8
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -708,7 +721,7 @@ externDrawFunctionArray.push(
 //Part 3 LCD
 //Slide 9
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -736,7 +749,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/45567-lg-55lh40-55-lcd-tv1.jpg';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[1].add(align(new Kinetic.Image({
@@ -753,7 +766,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 10
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -836,7 +849,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/800px-LCDneg.jpg';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[6].add(center(new Kinetic.Image({
@@ -858,7 +871,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 11
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -921,7 +934,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 12
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -1005,7 +1018,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/IPS_Off.png';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[5].add(center(new Kinetic.Image({
@@ -1035,7 +1048,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 13
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -1059,7 +1072,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/active-matrix.jpg';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[1].add(align(new Kinetic.Image({
@@ -1076,7 +1089,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 14
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -1143,7 +1156,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 15
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -1167,7 +1180,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/image66.gif';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[1].add(align(new Kinetic.Image({
@@ -1185,7 +1198,7 @@ externDrawFunctionArray.push(
 //Part 4 OLED
 //Slide 16
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -1213,7 +1226,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/Sony_XEL-1.jpg';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[1].add(align(new Kinetic.Image({
@@ -1230,7 +1243,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 17
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -1265,7 +1278,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/OLED_schematic.svg.png';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[1].add(center(new Kinetic.Image({
@@ -1312,7 +1325,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/OLED_EarlyProduct.JPG';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[5].add(center(new Kinetic.Image({
@@ -1334,7 +1347,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 18
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -1401,7 +1414,7 @@ externDrawFunctionArray.push(
 //Part 5 AMOLED
 //Slide 19
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -1429,7 +1442,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/Samsung-Galaxy-S3-in-Sapphire-black.jpg';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[1].add(align(new Kinetic.Image({
@@ -1445,7 +1458,7 @@ externDrawFunctionArray.push(
 );
 //////////////////////////////////////////////////////////////////////////////
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -1476,7 +1489,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/AMOLED-en.svg.png';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[1].add(center(new Kinetic.Image({
@@ -1499,7 +1512,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/Galaxy_Note_II_subpixels_representation.png';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[3].add(center(new Kinetic.Image({
@@ -1521,7 +1534,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 20
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -1587,7 +1600,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 21
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -1611,7 +1624,7 @@ externDrawFunctionArray.push(
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/CompareScreen.png';
-    imgAry[imgAryCur].onload = function(){
+    imgAry[imgAryCur].onload = function() {
     };
 
     outLayerAry[1].add(align(new Kinetic.Image({
@@ -1629,7 +1642,7 @@ externDrawFunctionArray.push(
 //Part 6 Drawing
 //Slide 22
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
     supportFunc.clean(outLayerAry,settingsObj);
 
     var animTime = settingsObj.animTime;
@@ -1671,10 +1684,10 @@ externDrawFunctionArray.push(
       rotationDeg: -180
     });
 
-    (new Kinetic.Animation(function(frame){
+    (new Kinetic.Animation(function(frame) {
       circlea.setAngleDeg(360*frame.time/animTime);
       circleb.setAngleDeg(360*frame.time/animTime);
-      if(frame.time >= animTime){
+      if (frame.time >= animTime) {
         this.stop();
         frame.time=0;
         circlea.setAngleDeg(360);
@@ -1696,7 +1709,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 23
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -1776,7 +1789,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 24
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     //Creates the demo
     var drawPixelCircle = supportFunc.drawPixelCircle;
@@ -1828,7 +1841,7 @@ externDrawFunctionArray.push(
     i = 0;
     max = 2;
     //Create the interactive buttons for the demo
-    while(i < max){
+    while(i < max) {
       x = width/4 + (i&1?-minDim/16:minDim/16);
       y = height*(2/3);
 
@@ -1848,24 +1861,24 @@ externDrawFunctionArray.push(
         cornerRadius: 10
       });
 
-      if(i&1)
-        buttonObjAry[i].call = function(sizeCurCount){
-        if(sizeCurCount > 2){
+      if (i&1)
+        buttonObjAry[i].call = function(sizeCurCount) {
+        if (sizeCurCount > 2) {
           sizeCount -= 1;
-          drawPixelCircle(outLayerAry[1], width/4-(boardWidth/2),
+          drawPixelCircle(outLayerAry[1], supportFunc,  width/4-(boardWidth/2),
             height/6, minDim/3, sizeCount);
           }
         };
       else
-        buttonObjAry[i].call = function(sizeCurCount){
-        if(sizeCurCount < 40){
+        buttonObjAry[i].call = function(sizeCurCount) {
+        if (sizeCurCount < 40) {
           sizeCount += 1;
-          drawPixelCircle(outLayerAry[1], width/4-(boardWidth/2),
+          drawPixelCircle(outLayerAry[1], supportFunc, width/4-(boardWidth/2),
             height/6, minDim/3, sizeCount);
           }
         };
 
-      buttonObjAry[i].on('tap mousedown', function(){
+      buttonObjAry[i].on('tap mousedown', function() {
         this.call(sizeCount);
       });
 
@@ -1874,7 +1887,7 @@ externDrawFunctionArray.push(
     }
 
     //Draws the initial demo
-    drawPixelCircle(outLayerAry[1], width/4-(boardWidth/2),
+    drawPixelCircle(outLayerAry[1], supportFunc, width/4-(boardWidth/2),
       height/6, minDim/3, sizeCount);
 
     outLayerAry[4].add(center(drawText(
@@ -1901,8 +1914,8 @@ externDrawFunctionArray.push(
       cornerRadius: 10
     }));
 
-    temp.on('tap mousedown', function(){
-      drawPixelCircle(outLayerAry[1], width/4-(boardWidth/2),
+    temp.on('tap mousedown', function() {
+      drawPixelCircle(outLayerAry[1], supportFunc, width/4-(boardWidth/2),
         height/6, minDim/3, sizeCount, true);
     });
 
@@ -1912,7 +1925,7 @@ externDrawFunctionArray.push(
     max = 4;
 
     //Draws the second set of squares, bottom
-    while(i < max){
+    while(i < max) {
       outLayerAry[7].add(new Kinetic.Rect({
         x: width*(2/3) -  (i&1 ? squareSide : 0) + (squareSide),
         y: height*(4/5) - (i&2 ? squareSide : 0) + (squareSide),
@@ -1954,7 +1967,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 25
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -1992,7 +2005,7 @@ externDrawFunctionArray.push(
     sizeCount = 4;
     max = sizeCount*sizeCount;
     //Draws first demo board
-    while(i < max){
+    while(i < max) {
       outLayerAry[3].add(new Kinetic.Rect({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
@@ -2023,7 +2036,7 @@ externDrawFunctionArray.push(
     sizeCount = 3;
     max = sizeCount*sizeCount;
     //Draws second demo board
-    while(i < max){
+    while(i < max) {
       outLayerAry[6].add(new Kinetic.Rect({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height*(2/3) + ((i%sizeCount)*squareSide),
@@ -2047,9 +2060,9 @@ externDrawFunctionArray.push(
     sizeCount = 4;
     max = sizeCount*sizeCount;
     //Draws third demo board
-    while(i < max){
+    while(i < max) {
       fill = 'grey';
-      if(i === 0||i === 3||i === 12||i === 15)
+      if (i === 0||i === 3||i === 12||i === 15)
         fill = 'black';
       outLayerAry[7].add(new Kinetic.Rect({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
@@ -2067,7 +2080,7 @@ externDrawFunctionArray.push(
     i = 0;
     sizeCount = 3;
     max = sizeCount*sizeCount;
-    while(i < max){
+    while(i < max) {
       outLayerAry[7].add(new Kinetic.Rect({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
@@ -2087,7 +2100,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 26
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -2177,7 +2190,7 @@ externDrawFunctionArray.push(
     sizeCount = 4;
     max = sizeCount*sizeCount;
     //Draws demo board
-    while(i < max){
+    while(i < max) {
       outLayerAry[6].add(new Kinetic.Rect({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
@@ -2197,7 +2210,7 @@ externDrawFunctionArray.push(
 
 
     i = 0;
-    while(i < max){
+    while(i < max) {
       outLayerAry[7].add(new Kinetic.Rect({
         x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
         y: height/4 + ((i%sizeCount)*squareSide),
@@ -2222,7 +2235,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide 27
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -2298,7 +2311,7 @@ externDrawFunctionArray.push(
     i = 0;
     max = 2;
     //Create the interactive buttons for the demo
-    while(i < max){
+    while(i < max) {
       x = width/4 + (i&1?-minDim/16:minDim/16);
       y = height*(2/3);
 
@@ -2318,10 +2331,10 @@ externDrawFunctionArray.push(
         cornerRadius: 10
       });
 
-      if(i&1)
-        buttonObjAry[i].call = function(line){
+      if (i&1)
+        buttonObjAry[i].call = function(line) {
           var q;
-          if((q = line.getStrokeWidth()) > 2){
+          if ((q = line.getStrokeWidth()) > 2) {
             q -=2;
             line.setStrokeWidth(q);
             //shape.setStrokeWidth(q);
@@ -2332,9 +2345,9 @@ externDrawFunctionArray.push(
           }
         };
       else
-        buttonObjAry[i].call = function(line){
+        buttonObjAry[i].call = function(line) {
           var q;
-          if((q = line.getStrokeWidth()) < 40){
+          if ((q = line.getStrokeWidth()) < 40) {
             q +=2;
             line.setStrokeWidth(q);
             //shape.setStrokeWidth(q);
@@ -2345,7 +2358,7 @@ externDrawFunctionArray.push(
           }
         };
 
-      buttonObjAry[i].on('tap mousedown', function(){
+      buttonObjAry[i].on('tap mousedown', function() {
         this.call(line);
       });
 
@@ -2359,7 +2372,7 @@ externDrawFunctionArray.push(
 /////////////////////////////////////////////////////////////////////////////
 //Sdlie 28
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -2371,15 +2384,6 @@ externDrawFunctionArray.push(
     var center   = supportFunc.center;
     var drawText = supportFunc.drawText;
     var createBullet = supportFunc.createBullet;
-
-    var pointa, pointb, pointc, linea, lineb,
-        splineq, control;
-
-    function setPoints(a,b,c){
-      return [{ x: a.getX(), y: a.getY() },
-              { x: b.getX(), y: b.getY() },
-              { x: c.getX(), y: c.getY() }];
-    }
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Drawing a curve",
@@ -2400,114 +2404,17 @@ externDrawFunctionArray.push(
     outLayerAry[4].add(drawText(
       width/8, height/4+5*fontSize, "The points must not all be collinear", fontSize, fontFamily));
 
-
-    pointa = new Kinetic.Circle({
-      x: width*1/3,
-      y: height*2/3,
-      radius: minDim/50,
-      fill: 'red',
-      stroke: 'black',
-      strokeWidth: 5,
-      draggable:true
-    });
-    pointb = new Kinetic.Circle({
-      x: width*1/2,
-      y: height*3/4,
-      radius: minDim/50,
-      fill: 'yellow',
-      stroke: 'black',
-      strokeWidth: 5,
-      draggable:true
-    });
-    pointc = new Kinetic.Circle({
-      x: width*2/3,
-      y: height*2/3,
-      radius: minDim/50,
-      fill: 'blue',
-      stroke: 'black',
-      strokeWidth: 5,
-      draggable:true
-    });
-    control = new Kinetic.Circle({
-      x: (pointa.getX()+2*pointb.getX()+pointc.getX())/4,
-      y: (pointa.getY()+2*pointb.getY()+pointc.getY())/4,
-      radius: minDim/50,
-      fill: 'purple',
-      stroke: 'black',
-      strokeWidth: 5,
-      draggable:true
-    });
-    linea = new Kinetic.Line({
-      points: [pointa.getX(),pointa.getY(),
-               pointb.getX(),pointb.getY()],
-      stroke: 'black',
-      strokeWidth: 3
-    });
-    lineb = new Kinetic.Line({
-      points: [pointb.getX(),pointb.getY(),
-               pointc.getX(),pointc.getY()],
-      stroke: 'black',
-      strokeWidth: 3
-    });
-    splineq = new Kinetic.Spline({
-      points: [{ x: pointa.getX(), y: pointa.getY() },
-              { x: control.getX(), y: control.getY() },
-              { x: pointc.getX(), y: pointc.getY() }],
-      stroke: 'green',
-      strokeWidth: 10,
-      lineCap: 'round',
-      tension: 0.5
-    });
-
-    outLayerAry[2].add(linea);
-
-    outLayerAry[3].add(lineb);
-    outLayerAry[3].add(splineq);
-
-    outLayerAry[1].add(pointa);
-    outLayerAry[2].add(pointb);
-    outLayerAry[3].add(pointc);
-
-    //Refresh onclick
-    //Updates only when successfully dragged
-    pointa.on("mouseon touchmove dragmove" , function(){
-      control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
-      control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
-      linea.setPoints([pointa.getX(),pointa.getY(),
-                       pointb.getX(),pointb.getY()]);
-      lineb.setPoints([pointb.getX(),pointb.getY(),
-                       pointc.getX(),pointc.getY()]);
-      splineq.setPoints(setPoints(pointa,control,pointc));
-      outLayerAry[1].draw();
-      outLayerAry[2].draw();
-      outLayerAry[3].draw();
-    });
-
-    pointb.on("mouseon dragmove" , function(){
-      control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
-      control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
-      linea.setPoints([pointa.getX(),pointa.getY(),
-                       pointb.getX(),pointb.getY()]);
-      lineb.setPoints([pointb.getX(),pointb.getY(),
-                       pointc.getX(),pointc.getY()]);
-      splineq.setPoints(setPoints(pointa,control,pointc));
-      outLayerAry[1].draw();
-      outLayerAry[2].draw();
-      outLayerAry[3].draw();
-    });
-
-    pointc.on("mouseon dragmove" , function(){
-      control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
-      control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
-      linea.setPoints([pointa.getX(),pointa.getY(),
-                       pointb.getX(),pointb.getY()]);
-      lineb.setPoints([pointb.getX(),pointb.getY(),
-                       pointc.getX(),pointc.getY()]);
-      splineq.setPoints(setPoints(pointa,control,pointc));
-      outLayerAry[1].draw();
-      outLayerAry[2].draw();
-      outLayerAry[3].draw();
-    });
+    supportFunc.bezierExample( outLayerAry[1], outLayerAry[2],
+        outLayerAry[3], outLayerAry[4], minDim, width, height,
+        { pointax: width*1/3,
+          pointay: height*2/3,
+          pointbx: width*1/2,
+          pointby: height*3/4,
+          pointcx: width*2/3,
+          pointcy: height*2/3,
+          canDrag: false
+        }
+      );
 
     return 5;
   }
@@ -2515,7 +2422,7 @@ externDrawFunctionArray.push(
 /////////////////////////////////////////////////////////////////////////////
 //Slide 29
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -2599,7 +2506,7 @@ externDrawFunctionArray.push(
 /////////////////////////////////////////////////////////////////////////////
 //Slide 30
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -2612,281 +2519,19 @@ externDrawFunctionArray.push(
     var drawText = supportFunc.drawText;
     var createBullet = supportFunc.createBullet;
 
-    var pointa, pointb, pointc, linea, lineb, linec, shifta, shiftb, shiftc,
-        splineq, start, control;
-
-    var maxTime = 10000;
-
-    var inAnim = false;
-
-    function setPoints(a,b,c){
-      return [{ x: a.getX(), y: a.getY() },
-              { x: b.getX(), y: b.getY() },
-              { x: c.getX(), y: c.getY() }];
-    }
-
-    //Refresh always (may lag system)
-    /*
-    (new Kinetic.Animation(function(frame){
-      if(!inAnim){
-        shifta.setX(pointa.getX());
-        shifta.setY(pointa.getY());
-        shiftb.setX(pointb.getX());
-        shiftb.setY(pointb.getY());
-        shiftc.setX(pointa.getX());
-        shiftc.setY(pointa.getY());
-        linec.setPoints([shifta.getX(),shifta.getY(),
-                         shiftb.getX(),shiftb.getY()]);
-      }
-      control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
-      control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
-      linea.setPoints([pointa.getX(),pointa.getY(),
-                       pointb.getX(),pointb.getY()]);
-      lineb.setPoints([pointb.getX(),pointb.getY(),
-                       pointc.getX(),pointc.getY()]);
-      splineq.setPoints(setPoints(pointa,control,pointc));
-      outLayerAry[1].draw();
-    }, outLayerAry[1])).start();
-    */
-
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Bezier Curve Example",
       fontSize+20, fontFamily)));
 
-
-    pointa = new Kinetic.Circle({
-      x: width/4,
-      y: height/4,
-      radius: minDim/50,
-      fill: 'red',
-      stroke: 'black',
-      strokeWidth: 5,
-      draggable:true
-    });
-    pointb = new Kinetic.Circle({
-      x: width/3,
-      y: height/3,
-      radius: minDim/50,
-      fill: 'yellow',
-      stroke: 'black',
-      strokeWidth: 5,
-      draggable:true
-    });
-    pointc = new Kinetic.Circle({
-      x: width/2,
-      y: height/2,
-      radius: minDim/50,
-      fill: 'blue',
-      stroke: 'black',
-      strokeWidth: 5,
-      draggable:true
-    });
-    control = new Kinetic.Circle({
-      x: (pointa.getX()+2*pointb.getX()+pointc.getX())/4,
-      y: (pointa.getY()+2*pointb.getY()+pointc.getY())/4,
-      radius: minDim/50,
-      fill: 'purple',
-      stroke: 'black',
-      strokeWidth: 5,
-      draggable:true
-    });
-
-    start = new Kinetic.Circle({
-      x: width/1.5,
-      y: height/1.5,
-      radius: minDim/25,
-      fill: 'green',
-      stroke: 'black',
-      strokeWidth: 4,
-      draggable:true
-    });
-
-    shifta = new Kinetic.Circle({
-      x: -20,
-      y: -20,
-      radius: minDim/75,
-      fill: 'black',
-      stroke: 'black',
-      strokeWidth: 4
-    });
-
-    shiftb = new Kinetic.Circle({
-      x: -20,
-      y: -20,
-      radius: minDim/75,
-      fill: 'black',
-      stroke: 'black',
-      strokeWidth: 4
-    });
-    shiftc = new Kinetic.Circle({
-      x: -20,
-      y: -20,
-      radius: minDim/75,
-      fill: 'orange',
-      stroke: 'black',
-      strokeWidth: 4
-    });
-
-    linec = new Kinetic.Line({
-      points: [-20,-40,
-               -40,-20],
-      stroke: 'grey',
-      strokeWidth: 10
-    });
-
-    splineq = new Kinetic.Spline({
-      points: [{ x:-20, y:-20 }],
-      stroke: 'green',
-      strokeWidth: 10,
-      lineCap: 'round',
-      tension: 0.5
-    });
-
-    outLayerAry[1].add(linea = new Kinetic.Line({
-      points: [pointa.getX(),pointa.getY(),
-               pointb.getX(),pointb.getY()],
-      stroke: 'black',
-      strokeWidth: 3
-    }));
-    outLayerAry[1].add(lineb = new Kinetic.Line({
-      points: [pointb.getX(),pointb.getY(),
-               pointc.getX(),pointc.getY()],
-      stroke: 'black',
-      strokeWidth: 3
-    }));
-
-
-    //Refresh onclick
-    //Updates only when the piece is dragged successfully
-    pointa.on("mouseon dragmove" , function(){
-      if(!inAnim){
-        shifta.setX(pointa.getX());
-        shifta.setY(pointa.getY());
-        shiftb.setX(pointb.getX());
-        shiftb.setY(pointb.getY());
-        shiftc.setX(pointa.getX());
-        shiftc.setY(pointa.getY());
-        linec.setPoints([shifta.getX(),shifta.getY(),
-                         shiftb.getX(),shiftb.getY()]);
-      }
-      control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
-      control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
-      linea.setPoints([pointa.getX(),pointa.getY(),
-                       pointb.getX(),pointb.getY()]);
-      lineb.setPoints([pointb.getX(),pointb.getY(),
-                       pointc.getX(),pointc.getY()]);
-      splineq.setPoints(setPoints(pointa,control,pointc));
-      outLayerAry[1].draw();
-    });
-
-    pointb.on("mouseon dragmove" , function(){
-      if(!inAnim){
-        shifta.setX(pointa.getX());
-        shifta.setY(pointa.getY());
-        shiftb.setX(pointb.getX());
-        shiftb.setY(pointb.getY());
-        shiftc.setX(pointa.getX());
-        shiftc.setY(pointa.getY());
-        linec.setPoints([shifta.getX(),shifta.getY(),
-                         shiftb.getX(),shiftb.getY()]);
-      }
-      control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
-      control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
-      linea.setPoints([pointa.getX(),pointa.getY(),
-                       pointb.getX(),pointb.getY()]);
-      lineb.setPoints([pointb.getX(),pointb.getY(),
-                       pointc.getX(),pointc.getY()]);
-      splineq.setPoints(setPoints(pointa,control,pointc));
-      outLayerAry[1].draw();
-    });
-
-    pointc.on("mouseon dragmove" , function(){
-      if(!inAnim){
-        shifta.setX(pointa.getX());
-        shifta.setY(pointa.getY());
-        shiftb.setX(pointb.getX());
-        shiftb.setY(pointb.getY());
-        shiftc.setX(pointa.getX());
-        shiftc.setY(pointa.getY());
-        linec.setPoints([shifta.getX(),shifta.getY(),
-                         shiftb.getX(),shiftb.getY()]);
-      }
-      control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
-      control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
-      linea.setPoints([pointa.getX(),pointa.getY(),
-                       pointb.getX(),pointb.getY()]);
-      lineb.setPoints([pointb.getX(),pointb.getY(),
-                       pointc.getX(),pointc.getY()]);
-      splineq.setPoints(setPoints(pointa,control,pointc));
-      outLayerAry[1].draw();
-    });
-
-    control.on("mouseon dragmove" , function(){
-      splineq.setPoints(setPoints(pointa,control,pointc));
-      outLayerAry[1].draw();
-    });
-
-    outLayerAry[1].add(linec);
-    outLayerAry[1].add(shifta);
-    outLayerAry[1].add(shiftb);
-    outLayerAry[1].add(shiftc);
-    outLayerAry[1].add(splineq);
-    outLayerAry[1].add(control);
-
-    outLayerAry[1].add(pointa);
-    outLayerAry[1].add(pointb);
-    outLayerAry[1].add(pointc);
-    outLayerAry[1].add(start);
-
-    start.on('mousedown dragstart', function(){
-      var t;
-      if(!inAnim){
-        inAnim = true;
-        (new Kinetic.Animation(function(frame){
-          t = frame.time/maxTime;
-          control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
-          control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
-          linea.setPoints([pointa.getX(),pointa.getY(),
-                           pointb.getX(),pointb.getY()]);
-          lineb.setPoints([pointb.getX(),pointb.getY(),
-                           pointc.getX(),pointc.getY()]);
-          shifta.setX((1-t)*pointa.getX()+t*pointb.getX());
-          shifta.setY((1-t)*pointa.getY()+t*pointb.getY());
-          shiftb.setX((1-t)*pointb.getX()+t*pointc.getX());
-          shiftb.setY((1-t)*pointb.getY()+t*pointc.getY());
-          linec.setPoints([shifta.getX(),shifta.getY(),
-                           shiftb.getX(),shiftb.getY()]);
-          shiftc.setX((1-t)*shifta.getX()+t*shiftb.getX());
-          shiftc.setY((1-t)*shifta.getY()+t*shiftb.getY());
-          splineq.setPoints(setPoints(pointa,control,pointc));
-          if(frame.time >= maxTime){
-            this.stop();
-            frame.time = 0;
-            linea.setPoints([pointa.getX(),pointa.getY(),
-                            pointb.getX(),pointb.getY()]);
-            lineb.setPoints([pointb.getX(),pointb.getY(),
-                            pointc.getX(),pointc.getY()]);
-            control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
-            control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
-            shifta.setX(pointb.getX());
-            shifta.setY(pointb.getY());
-            shiftb.setX(pointc.getX());
-            shiftb.setY(pointc.getY());
-            shiftc.setX(pointc.getX());
-            shiftc.setY(pointc.getY());
-            linec.setPoints([shifta.getX(),shifta.getY(),
-                             shiftb.getX(),shiftb.getY()]);
-            splineq.setPoints(setPoints(pointa,control,pointc));
-            inAnim = false;
-          }
-        }, outLayerAry[1])).start();
-      }
-    });
+    supportFunc.bezierExample(outLayerAry[1], outLayerAry[1],
+        outLayerAry[1], outLayerAry[1], minDim, width, height,
+        { showAnim: true
+        }
+    );
 
     outLayerAry[2].add(center(drawText(
       width/2, outlineShift + 0.1*height, "Drag the red, yellow, blue points",
       fontSize+10, fontFamily)));
-
 
     outLayerAry[3].add(center(drawText(
       width/2, outlineShift + 0.15*height,
@@ -2898,7 +2543,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Slide END
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -2925,7 +2570,7 @@ externDrawFunctionArray.push(
 //////////////////////////////////////////////////////////////////////////////
 //Image Sample Slide
 externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc){
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -2945,12 +2590,9 @@ externDrawFunctionArray.push(
       width/2, outlineShift + 0.05*height, "Image Sample Slide",
       fontSize+20, fontFamily)));
 
-
     imgAry.push(new Image());
     imgAryCur += 1;
     imgAry[imgAryCur].src = 'IMG/test.jpg';
-    imgAry[imgAryCur].onload = function(){
-    };
 
     outLayerAry[1].add(center(new Kinetic.Image({
       x: width/2,

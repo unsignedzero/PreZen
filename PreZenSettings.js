@@ -1,4 +1,13 @@
-/*External Settings for PreZen
+/* PreZen Settings
+ *
+ * The settings file allows one to set PreZen's settings before loading it
+ * up. Any mistakes here will either be fixed by PreZen or halt execution
+ * of the code depending on which setting is incorrectly set.
+ *
+ *
+ * Updated 03-03-2013
+ * Version 0.5.0.0
+ * Created by David Tran (unsignedzero)
  */
 
 //Variable name that will contain the slide functions
@@ -56,6 +65,9 @@ var PreZenSettings = {
   externShowButtons:true,
 
   //Set outline border
-  externOutlineShift:20
+  externOutlineShift:20,
+
+  //Here we set the default support functions for the slide
+  supportFunc:{}
 };
 
