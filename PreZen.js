@@ -1,4 +1,4 @@
-/* PreZen
+/*! PreZen
  *
  * Allows one to "code" up a presentation aimed for browsers
  * This methodology will take a long longer than just using PowerPoint, or
@@ -16,6 +16,33 @@
  * Updated 03-03-2013
  * Version 0.5.0.0
  * Created by David Tran (unsignedzero)
+ * \class PreZen
+ */
+
+/*!
+ * Private Property supportFunc
+ * \property Definitions supportFunc
+ */
+
+/*!
+ * Document all support function stuff
+ * \class supportFunc
+ */
+
+/*!
+ * Left justifies the graphical object
+ * Given a Kinetic.Node object, this will left justify it
+ * (this is the default option for all Kinetic.Node)
+ * \fn Kinetic.Node supportFunc.left(temp)
+ * \memberof supportFunc
+ * \param Kinetic.Node temp input node to be left justified
+ * \return Kinetic.Node left justified node object temp 
+ */
+
+/* As of current, dOxygen is limited to only special comments outside 
+ * the below function declaration. This may prove to be a problem but
+ * then again, we can create *jsh and stuff all comments and related
+ * there to fix the problem. More testing needed.
  */
 
 var zxPowerPoint = (function(settings) {
@@ -134,6 +161,8 @@ var zxPowerPoint = (function(settings) {
 //Creates a support object that passes local functions to the board
 //Contained here are all local functions that will be used by PreZen
 //but can also be used by users
+
+
   supportFunc.left = function (temp) {
     //Left justifies the graphical object
     temp.setOffset({
