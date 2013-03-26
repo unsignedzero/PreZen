@@ -1,24 +1,26 @@
-/*Created by David Tran (unsignedzero)
- *PreZen
+/*! PreZen
  *
- *Allows one to "code" up a presentation aimed for browsers
- *This methodology will take a long longer than just using PowerPoint, or
- *related tools but on the flip side, if done correctly, it will display
- *properly on mostly all devices that support the KineticJS Lib
- *and JavaScript. If text and locations are made to scale, then it will
- *work on all screen sizes too.
+ * Allows one to "code" up a presentation aimed for browsers
+ * This methodology will take a long longer than just using PowerPoint, or
+ * related tools but on the flip side, if done correctly, it will display
+ * properly on mostly all devices that support the KineticJS Lib
+ * and JavaScript. If text and locations are made to scale, then it will
+ * work on all screen sizes too.
  *
- *Unlike PowerPoint, one can code up live demos that are embedded in the slide
- *At the time of writing, pictures and images are supported and,
- *will scale correctly
+ * Unlike PowerPoint, one can code up live demos that are embedded in the slide
+ * At the time of writing, pictures and images are supported and,
+ * will scale correctly
  *
  *
- *Created 01-25-2013
- *Updated 02-26-2013
- *Version 0.4.1.0
+ * Created 01-25-2013
+ * Updated 03-03-2013
+ * Version 0.5.0.0
+ * Created by David Tran (unsignedzero)
+ * \class PreZen
  */
 
-var zxPowerPoint = (function(settings){
+var zxPowerPoint = (function(settings) {
+  "use strict";
 
   //Unfolding the settings object
   var slideArray = settings["externDrawFunctionArray"];
@@ -31,60 +33,67 @@ var zxPowerPoint = (function(settings){
   var DEBUG = settings["externDEBUG"];
 
   var showButtons = settings["externShowButtons"];
-  var hideButtons = isMobile() ? false : true;
+  //var hideButtons = isMobile() ? false : true;
+  var hideButtons = true;
 
   var externFont = settings["externFont"];
   var outlineShift = settings["externOutlineShift"];
   var externTimer = settings["externTimer"];
 
+  var supportFunc = settings["supportFunc"];
+
   //Input Error Scan
-  if(!slideArray === undefined){
+  if (!slideArray === undefined) {
     alert("ERROR:No slide passed in");
     throw new Error("No slide passed in");
   }
-  if(!width === undefined){
+  if (!width === undefined) {
     alert("WARNING:externWidth not set. Default 800");
     width = 800;
   }
-  if(!height === undefined){
+  if (!height === undefined) {
     alert("WARNING:externHeight not set. Default 1000");
     height = 1000;
   }
-  if(!maxLayerCount === undefined){
+  if (!maxLayerCount === undefined) {
     alert("WARNING:externMaxLayerCount not set. Default 10");
     maxLayerCount = 10;
   }
-  if(!containerName === undefined){
+  if (!containerName === undefined) {
     alert("ERROR:No container name passed");
     throw new Error("No container name passed");
   }
-  if(showSlideNumber === undefined){
+  if (showSlideNumber === undefined) {
     alert("WARNING:showSlideNumber not set. Default false");
     showSlideNumber = false;
   }
-  if(DEBUG === undefined){
+  if (DEBUG === undefined) {
     alert("WARNING:externDEBUG not set. Default false");
     DEBUG = false;
   }
-  if(!showButtons === undefined){
+  if (showButtons === undefined) {
     alert("ERROR:externShowButtons not set. Default false");
     showButtons = false;
   }
-  if(!externFont === undefined){
+  if (externFont === undefined) {
     alert("ERROR:externFont not set. Default Palatino");
     externFont = 'Palatino';
   }
-  if(!outlineShift === undefined){
+  if (outlineShift === undefined) {
     alert("ERROR:externOutlineShift not set. Default 20");
     outlineShift = 20;
   }
-  if(!externTimer === undefined){
+  if (externTimer === undefined) {
     alert("ERROR:externTimer not set. Default 0.5s");
     externTimer = 500;
   }
+  if (supportFunc === undefined){
+    alert("ERROR:SupportFunc function object undefined. Default {}");
+    supportFunc = {};
+  }
 
   //Set Debug Settings
-  if(DEBUG){
+  if (DEBUG) {
     hideButtons = false;
   }
 //////////////////////////////////////////////////////////////////////////////
@@ -110,7 +119,6 @@ var zxPowerPoint = (function(settings){
   var slideIndexMax = slideArray.length - 1;
   
   var globalCurAnim = {};
-  var supportFunc = {};
 //////////////////////////////////////////////////////////////////////////////
 //Creates a settings object and passes it to the board
   var setObj = {};
@@ -125,51 +133,52 @@ var zxPowerPoint = (function(settings){
   var hasInitialized = false;
 //////////////////////////////////////////////////////////////////////////////
 //Creates a support object that passes local functions to the board
-//This will eventually be moved out and potentially broken into two pieces
-//User defined and system built
-//Perhaps prototypes?
-  supportFunc.left = function (temp){
+//Contained here are all local functions that will be used by PreZen
+//but can also be used by users
+
+
+  supportFunc.left = function (temp) {
     //Left justifies the graphical object
     temp.setOffset({
       x: 0
     });
-    return (temp);
+    return temp;
   };
 
-  supportFunc.center = function (temp){
+  supportFunc.center = function (temp) {
     //Center justifies the graphic object (hor only)
     temp.setOffset({
       x: temp.getWidth()/2
     });
-    return (temp);
+    return temp;
   };
 
-  supportFunc.right = function (temp){
+  supportFunc.right = function (temp) {
     //Right justifies the graphical object
     temp.setOffset({
       x: temp.getWidth()
     });
-    return (temp);
+    return temp;
   };
 
-  supportFunc.align = function(temp){
+  supportFunc.align = function(temp) {
     //Centers the graphic object
     temp.setOffset({
       x: temp.getWidth()/2,
       y: temp.getHeight()/2
     });
-    return (temp);
+    return temp;
   };
 
-  supportFunc.middle = function(temp){
+  supportFunc.middle = function(temp) {
     //Centers the graphic object
     temp.setOffset({
       y: temp.getHeight()/2
     });
-    return (temp);
+    return temp;
   };
 
-  supportFunc.drawText = function(x,y,str,fontDelSize,font){
+  supportFunc.drawText = function(x,y,str,fontDelSize,font) {
     //Faster call to drawText
     return new Kinetic.Text({
       x: x,
@@ -183,7 +192,7 @@ var zxPowerPoint = (function(settings){
     });
   };
 
-  supportFunc.createBullet = function(x,y,fontDelSize){
+  supportFunc.createBullet = function(x,y,fontDelSize) {
     fontDelSize = fontDelSize ? fontDelSize : height/32;
     //Creates bullets for text
     return new Kinetic.Circle({
@@ -195,65 +204,12 @@ var zxPowerPoint = (function(settings){
     });
   };
 
-  supportFunc.drawPixelCircle = function (
-      LocalLayer, width, height, side, size, alt){
-    var floor = supportFunc.floor;
-    var sqrt  = supportFunc.sqrt;
-    var abs   = supportFunc.abs;
-
-    var rad = floor(size&1 ? (size/2)-1 : size/2);
-    var sub = floor(size&1 ? (size/2) : (size/2)- 0.5);
-
-    var x, y, i, max, del, fill, tempval, stroke;
-
-    LocalLayer.removeChildren();
-    max = size * size;
-
-    i = 0;
-    del = side/size;
-    
-    stroke = size > 2 ? 'black' : 'grey';
-
-    while(i < max){
-      x = floor(i / size);
-      y = i % size;
-      tempval = abs(sqrt((x-sub)*(x-sub) + (y-sub)*(y-sub))-rad);
-      fill = tempval <= 0.5 ? 'black' : 'white';
-      if(alt && tempval <= 1.0 && tempval >= 0.5)
-        fill = 'grey';
-
-      LocalLayer.add(new Kinetic.Rect({
-        x: width  + del * x,
-        y: height + del * y,
-
-        width:  del,
-        height: del,
-
-        fill: fill,
-        stroke: stroke,
-        strokeWidth: 3
-      }));
-      i += 1;
-    }
-
-    //Reference circle for demo
-    if(size > 3)
-      LocalLayer.add(new Kinetic.Circle({
-        x: width + (side/2) - 1,
-        y: height + (side/2) - 1,
-        radius: side/2,
-        stroke: 'red',
-        strokeWidth: 5
-      }));
-    LocalLayer.draw();
-  };
-
-  supportFunc.clean = function(outLayerAry, setObj){
+  supportFunc.clean = function(outLayerAry, setObj) {
     var i, max;
 
     i = 0;
     max = setObj.maxLayerCount;
-    while(i < max){
+    while(i < max) {
       outLayerAry[i].removeChildren();
       outLayerAry[i].setOpacity(0.0);
       i += 1;
@@ -269,9 +225,9 @@ var zxPowerPoint = (function(settings){
 //////////////////////////////////////////////////////////////////////////////
 //Load functions
 //This are basic functions to load the next slide or segment
-  function nextSegment(outLayerAry){
+  function nextSegment(outLayerAry) {
     //Call to load next anim ifpossible
-    if(slideLayer+1 < slideLayerMax){
+    if (slideLayer+1 < slideLayerMax) {
       slideLayer += 1;
       fadeIn(outLayerAry[slideLayer]).start();
     }
@@ -279,9 +235,9 @@ var zxPowerPoint = (function(settings){
       nextSlide(outLayerAry);
   }
 
-  function previousSegment(outLayerAry){    
+  function previousSegment(outLayerAry) {    
     //Call to unload previous anim is possible
-    if(slideLayer > 0){
+    if (slideLayer > 0) {
       fadeOut(outLayerAry[slideLayer]).start();
       slideLayer -= 1;
       }
@@ -289,25 +245,25 @@ var zxPowerPoint = (function(settings){
       previousSlide(outLayerAry);
   }
   
-  function nextSlide(outLayerAry){
+  function nextSlide(outLayerAry) {
     //Call to load the previous slide
-    if(slideIndex < slideIndexMax)
+    if (slideIndex < slideIndexMax)
       fadeOutAll(outLayerAry,loadNextSlide).start();
     else
       globalCurAnim.end=true;
   }
 
-  function previousSlide(outLayerAry){    
+  function previousSlide(outLayerAry) {    
     //Call to load the previous slide
-    if(slideIndex > 0)
+    if (slideIndex > 0)
       fadeOutAll(outLayerAry,loadPreviousSlide).start();
     else
       globalCurAnim.end=true;
   }
 
-  function loadNextSlide(){
+  function loadNextSlide() {
     //Loads the next slide if possible
-    if(slideIndex < slideIndexMax){
+    if (slideIndex < slideIndexMax) {
       slideLayer = 0;
       slideIndex += 1;
       slideLayerMax = slideArray[slideIndex](globalOutLayerAry,
@@ -317,9 +273,9 @@ var zxPowerPoint = (function(settings){
     }
   }
 
-  function loadPreviousSlide(){
+  function loadPreviousSlide() {
     //Loads the previous slide if possible
-    if(slideIndex > 0){
+    if (slideIndex > 0) {
       slideIndex -= 1;
       slideLayerMax = slideArray[slideIndex](globalOutLayerAry,
       width, height, setObj, supportFunc);
@@ -330,13 +286,13 @@ var zxPowerPoint = (function(settings){
   }
 //////////////////////////////////////////////////////////////////////////////
 //Internal Support Functions
-  function getLayerStatus(OuterLayer){
+  function getLayerStatus(OuterLayer) {
     //Creates a boolean of all active layers
     var i, max = slideLayerMax;
     var ret = [];
 
     i = 0;
-    while(i < max){
+    while(i < max) {
       ret.push(OuterLayer[i].getOpacity() > 0.5);
       i += 1;
     }
@@ -345,22 +301,22 @@ var zxPowerPoint = (function(settings){
   }
 //////////////////////////////////////////////////////////////////////////////
 //Animations for load functions
-  function fadeIn(OutLayer, nextFunc){
+  function fadeIn(OutLayer, nextFunc) {
     globalCurAnim.end = true;
     var localTimerLength = timerLength;
     
-    globalCurAnim = new Kinetic.Animation(function(frame){
+    globalCurAnim = new Kinetic.Animation(function(frame) {
       OutLayer.setOpacity(frame.time/localTimerLength);
 
-      if(this.end){
+      if (this.end) {
         frame.time = localTimerLength;
       }
 
-      if(frame.time >= timerLength){
+      if (frame.time >= timerLength) {
         this.stop();
         frame.time = 0;
         OutLayer.setOpacity(1.0);
-        if(nextFunc)
+        if (nextFunc)
           nextFunc();
       }
     },OutLayer);
@@ -369,23 +325,23 @@ var zxPowerPoint = (function(settings){
     return globalCurAnim;
   }
 
-  function fadeOut(OutLayer, nextFunc){
+  function fadeOut(OutLayer, nextFunc) {
     //Fades out one layer and possibly run the nextFunc
     globalCurAnim.end = true;
     var localTimerLength = timerLength;
 
-    globalCurAnim = new Kinetic.Animation(function(frame){
+    globalCurAnim = new Kinetic.Animation(function(frame) {
       OutLayer.setOpacity(1 - frame.time/localTimerLength);
 
-      if(this.end){
+      if (this.end) {
         frame.time = localTimerLength;
       }
 
-      if(frame.time >= timerLength){
+      if (frame.time >= timerLength) {
         this.stop();
         frame.time = 0;
         OutLayer.setOpacity(0.0);
-        if(nextFunc)
+        if (nextFunc)
           nextFunc();
       }
     },OutLayer);
@@ -394,35 +350,35 @@ var zxPowerPoint = (function(settings){
     return globalCurAnim;
   }
  
-  function fadeInAll(OutLayerAry, nextFunc){
+  function fadeInAll(OutLayerAry, nextFunc) {
     //Fades in all layers, regardless of opacity
     globalCurAnim.end = true;
     var localTimerLength = timerLength;
     var curVal;
     var i,max = slideLayerMax;
     
-    globalCurAnim = new Kinetic.Animation(function(frame){
+    globalCurAnim = new Kinetic.Animation(function(frame) {
       curVal = frame.time/localTimerLength;
 
       i = 0;
-      while(i < max){
+      while(i < max) {
         OutLayerAry[i].setOpacity(curVal);
         i += 1;
       }
 
-      if(this.end){
+      if (this.end) {
         frame.time = localTimerLength;
       }
 
-      if(frame.time >= timerLength){
+      if (frame.time >= timerLength) {
         this.stop();
         frame.time = 0;
         i = 0;
-        while(i < max){
+        while(i < max) {
           OutLayerAry[i].setOpacity(1.0);
           i += 1;
         }
-        if(nextFunc)
+        if (nextFunc)
           nextFunc();
       }
     },stage);
@@ -431,37 +387,37 @@ var zxPowerPoint = (function(settings){
     return globalCurAnim;
   }
 
-  function fadeInSelected(OutLayerAry, SelectAry, nextFunc){
+  function fadeInSelected(OutLayerAry, SelectAry, nextFunc) {
     //Fades in selected layers, regardless of opacity
     globalCurAnim.end = true;
     var localTimerLength = timerLength;
     var curVal;
     var i,max = slideLayerMax;
     
-    globalCurAnim = new Kinetic.Animation(function(frame){
+    globalCurAnim = new Kinetic.Animation(function(frame) {
       curVal = frame.time/localTimerLength;
 
       i = 0;
-      while(i < max){
-        if(SelectAry[i])
+      while(i < max) {
+        if (SelectAry[i])
           OutLayerAry[i].setOpacity(curVal);
         i += 1;
       }
 
-      if(this.end){
+      if (this.end) {
         frame.time = localTimerLength;
       }
 
-      if(frame.time >= timerLength){
+      if (frame.time >= timerLength) {
         this.stop();
         frame.time = 0;
         i = 0;
-        while(i < max){
-          if(SelectAry[i])
+        while(i < max) {
+          if (SelectAry[i])
             OutLayerAry[i].setOpacity(1.0);
           i += 1;
         }
-        if(nextFunc)
+        if (nextFunc)
           nextFunc();
       }
     },stage);
@@ -470,7 +426,7 @@ var zxPowerPoint = (function(settings){
     return globalCurAnim;
   }
  
-  function fadeOutAll(OutLayerAry, nextFunc, nextFuncArgs){
+  function fadeOutAll(OutLayerAry, nextFunc, nextFuncArgs) {
     //Fades out all layers, whose opacity is larger than 0.5
     globalCurAnim.end = true;
     var localTimerLength = timerLength;
@@ -479,33 +435,33 @@ var zxPowerPoint = (function(settings){
     var seeLayer = [];
 
     i = 0;
-    while(i < max){
+    while(i < max) {
       seeLayer.push(OutLayerAry[i].getOpacity() > 0.5);
       i += 1;
     }
     
-    globalCurAnim = new Kinetic.Animation(function(frame){
+    globalCurAnim = new Kinetic.Animation(function(frame) {
       curVal = 1-frame.time/localTimerLength;
 
       i = 0;
-      while(i < max){
-        if(seeLayer[i])
+      while(i < max) {
+        if (seeLayer[i])
           OutLayerAry[i].setOpacity(curVal);
         i += 1;
       }
-      if(this.end){
+      if (this.end) {
         frame.time = localTimerLength;
       }
 
-      if(frame.time >= localTimerLength){
+      if (frame.time >= localTimerLength) {
         this.stop();
         frame.time = 0;
         i = 0;
-        while(i < max){
+        while(i < max) {
           OutLayerAry[i].setOpacity(0.0);
           i += 1;
         }
-        if(nextFunc)
+        if (nextFunc)
           nextFunc(nextFuncArgs);
       }
     },stage);
@@ -516,7 +472,7 @@ var zxPowerPoint = (function(settings){
 
 //////////////////////////////////////////////////////////////////////////////
 //Resize Functions
-  function reSizeSupport(newWidth, newHeight){
+  function reSizeSupport(newWidth, newHeight) {
     //Loads the new values to resize the screen
 
     //Add ratio checks
@@ -532,7 +488,7 @@ var zxPowerPoint = (function(settings){
     stage.setHeight(newHeight);
   }
 
-  function reSize(OutLayerAry, width, height){
+  function reSize(OutLayerAry, width, height) {
     //Call this function to resize the screen
     //Save State
     globalUIBlock = true;
@@ -544,7 +500,7 @@ var zxPowerPoint = (function(settings){
     funcArgs.height = height;
 
     //Fade Out
-    fadeOutAll(OutLayerAry, function(funcArgs){
+    fadeOutAll(OutLayerAry, function(funcArgs) {
       //On Animation finish...
       reSizeSupport(funcArgs.width, funcArgs.height);
       reSizeFadeOutUI(funcArgs).start();
@@ -552,7 +508,7 @@ var zxPowerPoint = (function(settings){
     }, funcArgs).start();
   }
 
-  function reSizeFadeOutUI(funcArgs){
+  function reSizeFadeOutUI(funcArgs) {
     //reSize part 2. Fades out and in the UI
     //DO NOT call this function directly
 
@@ -560,15 +516,16 @@ var zxPowerPoint = (function(settings){
     var localTimerLength = timerLength;
     var BackLayer = globalBackLayer;
     var FrontLayer = globalFrontLayer;
+    var curVal;
 
     //First animation to fade out UI
-    globalCurAnim = new Kinetic.Animation(function(frame){
+    globalCurAnim = new Kinetic.Animation(function(frame) {
       curVal = 1-frame.time/localTimerLength;
 
       BackLayer.setOpacity(curVal);
       FrontLayer.setOpacity(curVal);
 
-      if(frame.time >= localTimerLength){
+      if (frame.time >= localTimerLength) {
         this.stop();
         frame.time = 0;
         BackLayer.setOpacity(0.0);
@@ -580,14 +537,14 @@ var zxPowerPoint = (function(settings){
                 funcArgs.width, funcArgs.height);
 
         //Second animation to fade in UI
-        (new Kinetic.Animation(function(frame){
+        (new Kinetic.Animation(function(frame) {
 
           curVal = frame.time/localTimerLength;
 
           BackLayer.setOpacity(curVal);
           FrontLayer.setOpacity(curVal);
 
-          if(frame.time >= localTimerLength){
+          if (frame.time >= localTimerLength) {
             this.stop();
             frame.time = 0;
             BackLayer.setOpacity(curVal);
@@ -605,7 +562,7 @@ var zxPowerPoint = (function(settings){
     return globalCurAnim;
   }
 
-  function reSizeAfter(funcArgs){
+  function reSizeAfter(funcArgs) {
     //Clean up reSizing function
 
     slideLayerMax = slideArray[slideIndex](globalOutLayerAry,
@@ -616,7 +573,7 @@ var zxPowerPoint = (function(settings){
     fadeInSelected(funcArgs.OutLayerAry,funcArgs.state).start();
   }
 //////////////////////////////////////////////////////////////////////////////
-  function frontUI(localBackLayer, localFrontLayer, width, height){
+  function frontUI(localBackLayer, localFrontLayer, width, height) {
     //Sets up the initial screen for use or on resizing
     var debugStr;
     var drawBox;
@@ -639,7 +596,7 @@ var zxPowerPoint = (function(settings){
     drawInterface(localFrontLayer, supportFunc, setObj);
 
     //Sets up debug msgBox1
-    if(DEBUG){
+    if (DEBUG) {
       globalDebugLayer.removeChildren(); //Added to fix resizes
       contactBox = supportFunc.align(new Kinetic.Rect({
         x: width/2,
@@ -663,22 +620,22 @@ var zxPowerPoint = (function(settings){
       }));
       globalDebugLayer.add(drawBox);
 
-      debugMsg = (function(drawLayer, width, height){
+      debugMsg = (function(drawLayer, width, height) {
         var debugMsg = supportFunc.middle(supportFunc.drawText(
           width*0.1+5,height*0.9-outlineShift,"DEBUG ON"));
         debugMsg.setFill('white');
         drawLayer.add(debugMsg);
-        return function(msg){
+        return function(msg) {
           debugMsg.setText(msg);
           drawLayer.draw();
         };
       })(globalDebugLayer, width, height);
 
-      contactBox.on('mouseover', function(){
+      contactBox.on('mouseover', function() {
         globalDebugLayer.setOpacity(0.25);
         globalDebugLayer.draw();
       });
-      contactBox.on('mouseout', function(){
+      contactBox.on('mouseout', function() {
         globalDebugLayer.setOpacity(1.0);
         globalDebugLayer.draw();
       });
@@ -686,7 +643,7 @@ var zxPowerPoint = (function(settings){
     }
   }
 
-  function drawInterface(interfaceLayer, supportFunc, setObj){
+  function drawInterface(interfaceLayer, supportFunc, setObj) {
     //Sets up the buttons and interface the user can use
 
     var squareSide = setObj.minDim/16;
@@ -713,8 +670,8 @@ var zxPowerPoint = (function(settings){
     var navButtons = [];
     
     //Draw all the movement boxes
-    if(showButtons){
-      while(i < max){
+    if (showButtons) {
+      while(i < max) {
         x = squarePad + squareSide/2;
         x = i&1 ? width - x : x;
         y = height*(3/4) + (i&2 ? shiftDown : 0);
@@ -752,13 +709,13 @@ var zxPowerPoint = (function(settings){
 
         transObjAry[i].onHover = false;
         
-        transObjAry[i].on('tap mousedown', function(){
-          if(!globalUIBlock)
+        transObjAry[i].on('tap mousedown', function() {
+          if (!globalUIBlock)
             this.call(outLayerAry);
         });
         
-        transObjAry[i].on('mouseover', function(){
-          if(!globalUIBlock){
+        transObjAry[i].on('mouseover', function() {
+          if (!globalUIBlock) {
             this.setOpacity(hideButtons ? 0.5 : 1.0);
             this.label.setOpacity(hideButtons ? 0.5 : 1.0);
             this.onHover = true;
@@ -766,8 +723,8 @@ var zxPowerPoint = (function(settings){
           }
         });
 
-        transObjAry[i].on('mouseout', function(){
-          if(this.onHover || !globalUIBlock){
+        transObjAry[i].on('mouseout', function() {
+          if (this.onHover || !globalUIBlock) {
             this.onHover = false;
             this.setOpacity(hideButtons ? 0.0 : 0.5);
             this.label.setOpacity(hideButtons ? 0.0 : 0.5);
@@ -792,10 +749,10 @@ var zxPowerPoint = (function(settings){
     }));
 
     //Draw bottom nav
-    if(true){
+    if (true) {
       i = 0;
       max = 3;
-      while(i < max){
+      while(i < max) {
         x = width/2 + (i-1)*squareSide;
         y = height*0.9;
 
@@ -822,20 +779,20 @@ var zxPowerPoint = (function(settings){
           opacity: hideButtons ? 0.0 : 0.5
         }));
 
-        if(i===0){
-          temp.on('mousedown tap', function(){
+        if (i===0) {
+          temp.on('mousedown tap', function() {
             msgBoxChange();
           });
         }
-        else if(i == 1){
-          temp.on('mousedown tap', function(){
-            if(!globalUIBlock)
+        else if (i == 1) {
+          temp.on('mousedown tap', function() {
+            if (!globalUIBlock)
               reSize(globalOutLayerAry,window.innerWidth-10,window.innerHeight-10);
           });
         }
         else{
-          temp.on('mousedown tap', function(){
-            if(!globalUIBlock){
+          temp.on('mousedown tap', function() {
+            if (!globalUIBlock) {
               alert("NO");
             }
           });
@@ -845,8 +802,8 @@ var zxPowerPoint = (function(settings){
         navButtons[i].label = textObj;
         navButtons[i].onHover = false;
 
-        temp.on('mouseover', function(){
-          if(!globalUIBlock){
+        temp.on('mouseover', function() {
+          if (!globalUIBlock) {
             this.setOpacity(hideButtons ? 0.5 : 1.0);
             this.label.setOpacity(hideButtons ? 0.5 : 1.0);
             this.onHover = true;
@@ -854,8 +811,8 @@ var zxPowerPoint = (function(settings){
           }
         });
 
-        temp.on('mouseout', function(){
-          if(this.onHover || !globalUIBlock){
+        temp.on('mouseout', function() {
+          if (this.onHover || !globalUIBlock) {
             this.onHover = false;
             this.setOpacity(hideButtons ? 0.0 : 0.5);
             this.label.setOpacity(hideButtons ? 0.0 : 0.5);
@@ -872,20 +829,20 @@ var zxPowerPoint = (function(settings){
 
     //Definition of msgBoxChange here
     //This changes when screen resizes
-    msgBoxChange = (function(navButtons, msgBoxHeight, interfaceLayer, msgBox){
-      return function(){
+    msgBoxChange = (function(navButtons, msgBoxHeight, interfaceLayer, msgBox) {
+      return function() {
         var i, max;
-        if(!globalUIBlock){
+        if (!globalUIBlock) {
           //Sets up animation fadein
-          if(!globalMsgBoxVisible){
+          if (!globalMsgBoxVisible) {
             msgBox.setCornerRadius(5);
             globalUIBlock = true;
             max = navButtons.length;
             var ydelta = msgBoxHeight/externTimer;
-            (new Kinetic.Animation(function(frame){
+            (new Kinetic.Animation(function(frame) {
               i = 0;
               y = ydelta * frame.time;
-              while(i<max){
+              while(i<max) {
                 navButtons[i].setOffset({
                   y: y
                 });
@@ -897,12 +854,12 @@ var zxPowerPoint = (function(settings){
               msgBox.setY(height-outlineShift-y);
               msgBox.setHeight(ydelta*frame.time);
               
-              if (externTimer < frame.time){
+              if (externTimer < frame.time) {
                 this.stop();
                 frame.time = 0;
                 i = 0;
                 y = height - msgBoxHeight - outlineShift;
-                while(i<max){
+                while(i<max) {
                   navButtons[i].setOffset({
                     y: msgBoxHeight
                   });
@@ -923,10 +880,10 @@ var zxPowerPoint = (function(settings){
             globalUIBlock = true;
             max = navButtons.length;
             ydelta = msgBoxHeight/externTimer;
-            (new Kinetic.Animation(function(frame){
+            (new Kinetic.Animation(function(frame) {
               i = 0;
               y = ydelta * (externTimer-frame.time);
-              while(i<max){
+              while(i<max) {
                 navButtons[i].setOffset({
                   y: y
                 });
@@ -938,13 +895,13 @@ var zxPowerPoint = (function(settings){
               msgBox.setY(height-outlineShift-y);
               msgBox.setHeight(y);
               
-              if (externTimer < frame.time){
+              if (externTimer < frame.time) {
                 this.stop();
                 msgBox.setCornerRadius(0);
                 frame.time = 0;
                 i = 0;
                 y = height*0.9;
-                while(i<max){
+                while(i<max) {
                   navButtons[i].setOffset({
                     y: 0
                   });
@@ -967,35 +924,35 @@ var zxPowerPoint = (function(settings){
     })(navButtons, msgBoxHeight, interfaceLayer, msgBox);
   }
 
-  function drawMeta(metaLayer, supportFunc, setObj){
+  function drawMeta(metaLayer, supportFunc, setObj) {
     //Draws the meta data that updates frequently
-    if(showSlideNumber)
+    if (showSlideNumber)
       metaLayer.add(supportFunc.drawText(
           width/16, height/16, slideIndex,
           setObj.fontSize+10, setObj.fontFamily));
   }
 //////////////////////////////////////////////////////////////////////////////
 //MsgBox functions
-  function msgBoxChange(){
+  function msgBoxChange() {
     //This is overwritten internally by drawInterface
     //so that it changes size on resizing the screen
   }
 //////////////////////////////////////////////////////////////////////////////
 //Debug Functions
-  function debugMsg(msg){
+  function debugMsg(msg) {
     //Like msgBoxChange this will be overwritten, by frontUI,
     //so resizing works
     console.log(msg);
   }
 //////////////////////////////////////////////////////////////////////////////
 //Extern Method calls
-  function externStartUI(){
-    if(!hasInitialized){
+  function externStartUI() {
+    if (!hasInitialized) {
       hasInitialized = true;
       var i, max = maxLayerCount;
 
       i = 0;
-      while(i < max){
+      while(i < max) {
         globalOutLayerAry.push(new Kinetic.Layer());
         i += 1;
       }
@@ -1009,71 +966,72 @@ var zxPowerPoint = (function(settings){
       stage.add(globalBackLayer);
 
       i = 0;
-      while(i < max){
+      while(i < max) {
         stage.add(globalOutLayerAry[i]);
         i += 1;
       }
 
       stage.add(globalFrontLayer);
 
-      if(DEBUG)
+      if (DEBUG)
         stage.add(globalDebugLayer);
     }
   }
 
-  function externResize(){
-    if(!globalUIBlock)
+  function externResize() {
+    if (!globalUIBlock)
       reSize(globalOutLayerAry,window.innerWidth-10,window.innerHeight-10);
   }
 //////////////////////////////////////////////////////////////////////////////
 //Public accessor functions
-  this.startUI = function(){
+
+  self.startUI = function() {
     externStartUI();
   };
 
-  this.reSize = function(){
-    if(!globalUIBlock)
+  self.reSize = function() {
+    if (!globalUIBlock)
       externResize();
   };
 
-  this.msgBoxChange = function(){
-    if(!globalUIBlock)
+  self.msgBoxChange = function() {
+    if (!globalUIBlock)
       msgBoxChange();
   };
 
-  this.setDebugMsg = function(msg){
+  self.setDebugMsg = function(msg) {
     debugMsg(msg);
   };
 
-  this.next = function(){
-    if(!globalUIBlock)
+  self.next = function() {
+    if (!globalUIBlock)
       nextSegment(globalOutLayerAry);
   };
 
-  this.previous = function(){
-    if(!globalUIBlock)
+  self.previous = function() {
+    if (!globalUIBlock)
       previousSegment(globalOutLayerAry);
   };
 
-  this.nextSlide = function(){
-    if(!globalUIBlock)
+  self.nextSlide = function() {
+    if (!globalUIBlock)
       nextSlide(globalOutLayerAry);
   };
 
-  this.previousSlide = function(){
-    if(!globalUIBlock)
+  self.previousSlide = function() {
+    if (!globalUIBlock)
       previousSlide(globalOutLayerAry);
   };
 //////////////////////////////////////////////////////////////////////////////
   return{
-    msgBoxChange    : this.msgBoxChange,
-    setDebugMsg     : this.setDebugMsg,
-    reSize          : this.reSize,
-    startUI         : this.startUI,
-    next            : this.next,
-    previous        : this.previous,
-    nextSlide       : this.nextSlide,
-    previousSlide   : this.previousSlide
+    msgBoxChange    : self.msgBoxChange,
+    setDebugMsg     : self.setDebugMsg,
+    reSize          : self.reSize,
+    startUI         : self.startUI,
+    next            : self.next,
+    previous        : self.previous,
+    nextSlide       : self.nextSlide,
+    previousSlide   : self.previousSlide
   };
   
 })(PreZenSettings);

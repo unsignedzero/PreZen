@@ -8,16 +8,17 @@ this is built on Javascript so it will load on mostly all modern browsers
 that can run the KineticJS library.
 
 Unlike gojs, this is closer, at the time of writing, to a WIP than a polished
-product. This means that for example settings.js might be changed or removed
-so be prepared for that, although I doubt it will be drastic.
+product. 
 
 If one codes it up using relative values,as positions for all the content,
-then it can potentially scale up, if done correctly.
+then it can potentially scale up and work on any display size, 
+if done correctly.
 
 In addition, I have left function calls so that one doesn't have to click on
 the arrows keys to advance forward to go back to the previous slide. Jwerty
 is used in the background, see main.js to read inputs from the keyboard.
-As of now, this is fixed but might be changeable in the future.
+As of now, this is fixed but might be changeable in the future. Similarly, one
+can also resize and show "notes" on a slide via the keyboard.
 
 Included is a sample slide that I will use.
 
@@ -26,15 +27,22 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 # TO DO #
 ### PreZEN #
 
-* Move common functions so they are created outside of PreZen
-* Jump to a specific slide/segment
+* Add speaker notes on the slide
+* Add button/key to jump to a specific slide/segment
 
 # Version/Changelog #
 
 * Updated slides for class
 
-## 0.4.1.0 [02-26-2013] #
+## 0.5.0.0 [03-03-2013] #
+* Unified comments across js files to easier reading
+* Factored out supportFunc so users can define their own functions
+  local to their slides but also be able to use pre-defined functions
+* Adding use strict to some code and fixed bugs created by that
+* Slowly formatting code to make it easier to read and make it
+  uniform
 
+## 0.4.1.0 [02-28-2013] #
 * Stable release
 * Fixed while loop issues because of removing ++ due to JSlint
 * Removed bitshift operators and replaced with division/multiplication

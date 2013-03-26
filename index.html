@@ -22,9 +22,17 @@
   <body>
     <div id="container"></div>
 
+    <!-- External functions loaded here --!>
     <script type="application/javascript" src="mobile.js"></script>
+
+    <!-- This must be loaded before slides are loaded in --!>
     <script type="application/javascript" src="PreZenSettings.js"></script>
+
+    <!-- These two below can be loaded in any order --!>
     <script type="application/javascript" src="slides.js"></script>
+    <script type="application/javascript" src="slidesSupport.js"></script>
+
+    <!-- These two must be loaded in this order and after the above --!>
     <script type="application/javascript" src="PreZen.js"></script>
     <script type="application/javascript" src="main.js"></script>
 
