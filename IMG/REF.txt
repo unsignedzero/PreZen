@@ -26,3 +26,4 @@ Sony_XEL-1.jpg, https://upload.wikimedia.org/wikipedia/commons/3/36/Sony_XEL-1.j
 test.jpg, self created
 TN_Twisted & TN_UnTwisted, https://upload.wikimedia.org/wikipedia/commons/7/74/Diagram_LCD_IPS.jpg
 
+http://img.tomshardware.com/us/1999/06/30/tft_guide_/image65.gif

@@ -31,6 +31,8 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+* Updated slides for class
+
 ## 0.4.1.0 [02-26-2013] #
 
 * Stable release

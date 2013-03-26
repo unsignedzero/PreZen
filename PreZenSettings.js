@@ -13,12 +13,6 @@ var PreZenSettings = {
   //Variable name that will contain the slide functions
   externDrawFunctionArray:externDrawFunctionArray,
 
-  /*Sets the max amount of layers PreZen should assume a slide should have
-   *Adding more slides than specified here will have unexpected results
-   *and extra layers will not load correctly
-   */
-  externMaxLayerCount:8,
-
   //Sets the default font for PreZen
   externFont:'Palatino',
 
@@ -44,7 +38,7 @@ var PreZenSettings = {
    *Going backwards we will see everything but the extra layers will NOT 
    *be removed
    */
-  externMaxLayerCount:8,
+  externMaxLayerCount:9,
 
   //Container Name (Tag)
   container:'container',
