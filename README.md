@@ -32,7 +32,7 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
-* Updated slides for class
+* Updated slides for class by fixing typos and other graphical errors
 
 ## 0.5.0.0 [03-03-2013] #
 * Unified comments across js files to easier reading
