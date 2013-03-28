@@ -1427,7 +1427,7 @@ externDrawFunctionArray.push(
 
     outLayerAry[5].add(createBullet(width/6, height/4+15*fontSize, fontSize));
     outLayerAry[5].add(drawText(
-      width/6, height/4+15*fontSize, "5igh Cost. $8,000",
+      width/6, height/4+15*fontSize, "High Cost. $8,000",
       fontSize+5, fontFamily));
 
     outLayerAry[6].add(createBullet(width/6, height/4+17*fontSize, fontSize));
@@ -1674,12 +1674,7 @@ externDrawFunctionArray.push(
 
     outLayerAry[2].add(center(drawText(
       width/2, outlineShift + 0.20*height,
-      "1080p - (QFHD) 3840x2160",
-      fontSize+10, fontFamily)));
-
-    outLayerAry[2].add(center(drawText(
-      width/2, outlineShift + 0.20*height,
-      "1080p - (QFHD) 3840x2160",
+      "2160p - (QFHD) 3840x2160",
       fontSize+10, fontFamily)));
 
     outLayerAry[2].add(center(drawText(
