@@ -8,8 +8,8 @@
  *
  *
  * Created 01-25-2013
- * Updated 03-03-2013
- * Version 0.5.0.0
+ * Updated 04-05-2013
+ * Version 0.5.1.0
  * Created by David Tran (unsignedzero)
  */
 
@@ -40,7 +40,6 @@ externDrawFunctionArray.push(
       width/2, outlineShift+radius, 'What can you see in a display?',
       fontSize+2, fontFamily)));
 
-
     circle = new Kinetic.Wedge({
       x: width/2,
       y: height/2 - radius/2,
@@ -52,23 +51,23 @@ externDrawFunctionArray.push(
       angleDeg: 270
     });
 
-    (new Kinetic.Animation(function(frame) {
+    var ptr = new Kinetic.Animation(function(frame) {
       circle.setAngleDeg(360*frame.time/animTime);
       circle.setRotationDeg(90*frame.time/animTime);
       if (frame.time >= animTime) {
-        this.stop();
+        ptr.stop();
         frame.time=0;
         circle.setAngleDeg(360);
         circle.setRotationDeg(90);
       }
-    },outLayerAry[0])).start();
+    },outLayerAry[0]);
+    ptr.start();
 
     outLayerAry[0].add(circle);
 
     outLayerAry[1].add(center(drawText(
       width/2, height*(3/4), 'Created by David Tran',
       fontSize+2, fontFamily)));
-
 
     return 2;
   }
@@ -1744,16 +1743,19 @@ externDrawFunctionArray.push(
       rotationDeg: -180
     });
 
-    (new Kinetic.Animation(function(frame) {
-      circlea.setAngleDeg(360*frame.time/animTime);
-      circleb.setAngleDeg(360*frame.time/animTime);
-      if (frame.time >= animTime) {
-        this.stop();
-        frame.time=0;
-        circlea.setAngleDeg(360);
-        circleb.setAngleDeg(360);
-      }
-    },outLayerAry[0])).start();
+    (function (){
+      var ptr = new Kinetic.Animation(function(frame) {
+        circlea.setAngleDeg(360*frame.time/animTime);
+        circleb.setAngleDeg(360*frame.time/animTime);
+        if (frame.time >= animTime) {
+          ptr.stop();
+          frame.time=0;
+          circlea.setAngleDeg(360);
+          circleb.setAngleDeg(360);
+        }
+      },outLayerAry[0]);
+      ptr.start();
+    })();
 
     outLayerAry[0].add(circlea);
     outLayerAry[0].add(circleb);
@@ -2626,3 +2628,8 @@ externDrawFunctionArray.push(
     return 2;
   }
 );
+
+// Once we've added all the slides, we remove the global variable and keep
+// the pointer in PreZenSettings.externDrawFunctionArray
+
+externDrawFunctionArray = undefined;
