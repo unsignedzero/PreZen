@@ -52,16 +52,19 @@ externDrawFunctionArray.push(
       angleDeg: 270
     });
 
-    (new Kinetic.Animation(function(frame) {
-      circle.setAngleDeg(360*frame.time/animTime);
-      circle.setRotationDeg(90*frame.time/animTime);
-      if (frame.time >= animTime) {
-        this.stop();
-        frame.time=0;
-        circle.setAngleDeg(360);
-        circle.setRotationDeg(90);
-      }
-    },outLayerAry[0])).start();
+    (function (){
+      var ptr = new Kinetic.Animation(function(frame) {
+        circle.setAngleDeg(360*frame.time/animTime);
+        circle.setRotationDeg(90*frame.time/animTime);
+        if (frame.time >= animTime) {
+          ptr.stop();
+          frame.time=0;
+          circle.setAngleDeg(360);
+          circle.setRotationDeg(90);
+        }
+      },outLayerAry[0]);
+      ptr.start();
+    })();
 
     outLayerAry[0].add(circle);
 
@@ -1744,16 +1747,19 @@ externDrawFunctionArray.push(
       rotationDeg: -180
     });
 
-    (new Kinetic.Animation(function(frame) {
-      circlea.setAngleDeg(360*frame.time/animTime);
-      circleb.setAngleDeg(360*frame.time/animTime);
-      if (frame.time >= animTime) {
-        this.stop();
-        frame.time=0;
-        circlea.setAngleDeg(360);
-        circleb.setAngleDeg(360);
-      }
-    },outLayerAry[0])).start();
+    (function (){
+      var ptr = new Kinetic.Animation(function(frame) {
+        circlea.setAngleDeg(360*frame.time/animTime);
+        circleb.setAngleDeg(360*frame.time/animTime);
+        if (frame.time >= animTime) {
+          ptr.stop();
+          frame.time=0;
+          circlea.setAngleDeg(360);
+          circleb.setAngleDeg(360);
+        }
+      },outLayerAry[0]);
+      ptr.start();
+    })();
 
     outLayerAry[0].add(circlea);
     outLayerAry[0].add(circleb);

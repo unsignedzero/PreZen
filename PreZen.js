@@ -308,12 +308,12 @@ var zxPowerPoint = (function(settings) {
     globalCurAnim = new Kinetic.Animation(function(frame) {
       OutLayer.setOpacity(frame.time/localTimerLength);
 
-      if (this.end) {
+      if (globalCurAnim.end) {
         frame.time = localTimerLength;
       }
 
       if (frame.time >= timerLength) {
-        this.stop();
+        globalCurAnim.stop();
         frame.time = 0;
         OutLayer.setOpacity(1.0);
         if (nextFunc)
@@ -333,12 +333,12 @@ var zxPowerPoint = (function(settings) {
     globalCurAnim = new Kinetic.Animation(function(frame) {
       OutLayer.setOpacity(1 - frame.time/localTimerLength);
 
-      if (this.end) {
+      if (globalCurAnim.end) {
         frame.time = localTimerLength;
       }
 
       if (frame.time >= timerLength) {
-        this.stop();
+        globalCurAnim.stop();
         frame.time = 0;
         OutLayer.setOpacity(0.0);
         if (nextFunc)
@@ -366,12 +366,12 @@ var zxPowerPoint = (function(settings) {
         i += 1;
       }
 
-      if (this.end) {
+      if (globalCurAnim.end) {
         frame.time = localTimerLength;
       }
 
       if (frame.time >= timerLength) {
-        this.stop();
+        globalCurAnim.stop();
         frame.time = 0;
         i = 0;
         while(i < max) {
@@ -404,12 +404,12 @@ var zxPowerPoint = (function(settings) {
         i += 1;
       }
 
-      if (this.end) {
+      if (globalCurAnim.end) {
         frame.time = localTimerLength;
       }
 
       if (frame.time >= timerLength) {
-        this.stop();
+        globalCurAnim.stop();
         frame.time = 0;
         i = 0;
         while(i < max) {
@@ -449,12 +449,12 @@ var zxPowerPoint = (function(settings) {
           OutLayerAry[i].setOpacity(curVal);
         i += 1;
       }
-      if (this.end) {
+      if (globalCurAnim.end) {
         frame.time = localTimerLength;
       }
 
       if (frame.time >= localTimerLength) {
-        this.stop();
+        globalCurAnim.stop();
         frame.time = 0;
         i = 0;
         while(i < max) {
@@ -526,7 +526,7 @@ var zxPowerPoint = (function(settings) {
       FrontLayer.setOpacity(curVal);
 
       if (frame.time >= localTimerLength) {
-        this.stop();
+        globalCurAnim.stop();
         frame.time = 0;
         BackLayer.setOpacity(0.0);
         FrontLayer.setOpacity(0.0);
@@ -537,7 +537,7 @@ var zxPowerPoint = (function(settings) {
                 funcArgs.width, funcArgs.height);
 
         //Second animation to fade in UI
-        (new Kinetic.Animation(function(frame) {
+        globalCurAnim = new Kinetic.Animation(function(frame) {
 
           curVal = frame.time/localTimerLength;
 
@@ -545,7 +545,7 @@ var zxPowerPoint = (function(settings) {
           FrontLayer.setOpacity(curVal);
 
           if (frame.time >= localTimerLength) {
-            this.stop();
+            globalCurAnim.stop();
             frame.time = 0;
             BackLayer.setOpacity(curVal);
             FrontLayer.setOpacity(curVal);
@@ -554,7 +554,9 @@ var zxPowerPoint = (function(settings) {
             reSizeAfter(funcArgs);
           }
           
-        },stage)).start();
+        },stage);
+
+        globalCurAnim.start();
       }
       
     },stage);
@@ -839,85 +841,92 @@ var zxPowerPoint = (function(settings) {
             globalUIBlock = true;
             max = navButtons.length;
             var ydelta = msgBoxHeight/externTimer;
-            (new Kinetic.Animation(function(frame) {
-              i = 0;
-              y = ydelta * frame.time;
-              while(i<max) {
-                navButtons[i].setOffset({
-                  y: y
-                });
-                navButtons[i].label.setOffset({
-                  y: y
-                });
-                i += 1;
-              }
-              msgBox.setY(height-outlineShift-y);
-              msgBox.setHeight(ydelta*frame.time);
-              
-              if (externTimer < frame.time) {
-                this.stop();
-                frame.time = 0;
+            (function() {
+              var ptr = new Kinetic.Animation(function(frame) {
                 i = 0;
-                y = height - msgBoxHeight - outlineShift;
+                y = ydelta * frame.time;
                 while(i<max) {
                   navButtons[i].setOffset({
-                    y: msgBoxHeight
+                    y: y
                   });
                   navButtons[i].label.setOffset({
-                    y: msgBoxHeight
+                    y: y
                   });
                   i += 1;
                 }
-                msgBox.setY(y);
-                msgBox.setHeight(msgBoxHeight);
-                globalMsgBoxVisible = true;
-                globalUIBlock = false;
-              }
-            },interfaceLayer)).start();
+                msgBox.setY(height-outlineShift-y);
+                msgBox.setHeight(ydelta*frame.time);
+                
+                if (externTimer < frame.time) {
+                  ptr.stop();
+                  frame.time = 0;
+                  i = 0;
+                  y = height - msgBoxHeight - outlineShift;
+                  while(i<max) {
+                    navButtons[i].setOffset({
+                      y: msgBoxHeight
+                    });
+                    navButtons[i].label.setOffset({
+                      y: msgBoxHeight
+                    });
+                    i += 1;
+                  }
+                  msgBox.setY(y);
+                  msgBox.setHeight(msgBoxHeight);
+                  globalMsgBoxVisible = true;
+                  globalUIBlock = false;
+                }
+              },interfaceLayer);
+
+              ptr.start();
+            })();
           }
           //Sets up animation fadeout
           else{
             globalUIBlock = true;
             max = navButtons.length;
             ydelta = msgBoxHeight/externTimer;
-            (new Kinetic.Animation(function(frame) {
-              i = 0;
-              y = ydelta * (externTimer-frame.time);
-              while(i<max) {
-                navButtons[i].setOffset({
-                  y: y
-                });
-                navButtons[i].label.setOffset({
-                  y: y
-                });
-                i += 1;
-              }
-              msgBox.setY(height-outlineShift-y);
-              msgBox.setHeight(y);
-              
-              if (externTimer < frame.time) {
-                this.stop();
-                msgBox.setCornerRadius(0);
-                frame.time = 0;
+            (function() {
+              var ptr = new Kinetic.Animation(function(frame) {
                 i = 0;
-                y = height*0.9;
+                y = ydelta * (externTimer-frame.time);
                 while(i<max) {
                   navButtons[i].setOffset({
-                    y: 0
+                    y: y
                   });
-                  navButtons[i].setY(y);
                   navButtons[i].label.setOffset({
-                    y: 0
+                    y: y
                   });
-                  navButtons[i].label.setY(y+actionBoxHeight/4);
                   i += 1;
                 }
-                msgBox.setY(height-outlineShift);
-                msgBox.setHeight(0);
-                globalMsgBoxVisible = false;
-                globalUIBlock = false;
-              }
-            },interfaceLayer)).start();
+                msgBox.setY(height-outlineShift-y);
+                msgBox.setHeight(y);
+                
+                if (externTimer < frame.time) {
+                  this.stop();
+                  msgBox.setCornerRadius(0);
+                  frame.time = 0;
+                  i = 0;
+                  y = height*0.9;
+                  while(i<max) {
+                    navButtons[i].setOffset({
+                      y: 0
+                    });
+                    navButtons[i].setY(y);
+                    navButtons[i].label.setOffset({
+                      y: 0
+                    });
+                    navButtons[i].label.setY(y+actionBoxHeight/4);
+                    i += 1;
+                  }
+                  msgBox.setY(height-outlineShift);
+                  msgBox.setHeight(0);
+                  globalMsgBoxVisible = false;
+                  globalUIBlock = false;
+                }
+              },interfaceLayer);
+              ptr.start();
+            })();
           }
         }
       };
