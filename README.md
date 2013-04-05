@@ -34,6 +34,8 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+* Removed experiment branch files that was mixed into development
+
 ## 0.5.1.0 [04-05-2013] #
 
 * Removed extra global variables once they are used
