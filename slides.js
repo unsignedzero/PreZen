@@ -34,7 +34,26 @@ externDrawFunctionArray.push(
     var drawText = supportFunc.drawText;
 
     var radius = height*0.3;
+    var minDim = settingsObj.minDim;
+
     var circle;
+
+    var imgAry = [];
+    var imgAryCur = -1;
+
+    imgAry.push(new Image());
+    imgAryCur += 1;
+    imgAry[imgAryCur].src = 'IMG/SSU_logo3.jpg';
+    imgAry[imgAryCur].onload = function() {
+    };
+
+    outLayerAry[0].add(center(new Kinetic.Image({
+      x: minDim/10,
+      y: minDim/10,
+      width: minDim/10,
+      height: minDim/23,
+      image: imgAry[imgAryCur]
+    })));
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift+radius, 'What can you see in a display?',
@@ -50,7 +69,6 @@ externDrawFunctionArray.push(
       strokeWidth: 3,
       angleDeg: 270
     });
-
     var ptr = new Kinetic.Animation(function(frame) {
       circle.setAngleDeg(360*frame.time/animTime);
       circle.setRotationDeg(90*frame.time/animTime);
@@ -96,7 +114,6 @@ externDrawFunctionArray.push(
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Screen Comparison",
       fontSize+20, fontFamily)));
-
 
     imgAry.push(new Image());
     imgAryCur += 1;

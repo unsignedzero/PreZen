@@ -6,6 +6,8 @@ The slide was created for educational purposes only .
 These slides are uploaded so that people creating slides can see how
 to place images and how to modify the ratio. 
 
+The SSU_logo3.jpg belongs to SSU
+
 600px-CRT_screen._closeup.jpg, https://en.wikipedia.org/wiki/File:CRT_screen._closeup.jpg
 750px-CRT_color_enhanced.png, https://en.wikipedia.org/wiki/File:CRT_color_enhanced.png
 800px-LCD_layers.svg.png, https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/LCD_layers.svg/800px-LCD_layers.svg.png
