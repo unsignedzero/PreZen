@@ -10,7 +10,7 @@
  * Created by David Tran (unsignedzero)
  */
 
-//Variable name that will contain the slide functions
+//This will hold all the slide functions
 //This is created so its easier to call it, without repeated refinement
 var externDrawFunctionArray = [];
 
@@ -19,8 +19,18 @@ var externDrawFunctionArray = [];
  */
 var PreZenSettings = {
   //Slide Array
-  //Variable name that will contain the slide functions
+
+  //This will eventually hold the slides
   externDrawFunctionArray:externDrawFunctionArray,
+  //This yields the same result as..
+  /* var PreZenSettings = {
+   * ...
+   * externDrawFunctionArray = [];
+   * ...
+   * };
+   * var externDrawFunctionArray = PreZenSettings.externDrawFunctionArray;
+   *
+   */
 
   //Sets the default font for PreZen
   externFont:'Palatino',

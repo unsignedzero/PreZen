@@ -2,13 +2,13 @@
 
 PreZen is a PowerPoint-like code library that allows one to code up a 
 presentation rather than drag and drop it. Its main use is to allow one to
-code up demos and use them inside a presentation rather than take many
+code up demos and use them inside a browser rather than take many
 images of the animation and combine them together. As a plus side,
 this is built on Javascript so it will load on mostly all modern browsers
 that can run the KineticJS library.
 
-Unlike gojs, this is closer, at the time of writing, to a WIP than a polished
-product. 
+Eventually the slides will be updated to use generators to make it easier
+to create codes
 
 If one codes it up using relative values,as positions for all the content,
 then it can potentially scale up and work on any display size, 
@@ -16,11 +16,12 @@ if done correctly.
 
 In addition, I have left function calls so that one doesn't have to click on
 the arrows keys to advance forward to go back to the previous slide. Jwerty
-is used in the background, see main.js to read inputs from the keyboard.
+is used in the background, see main.js, to read inputs from the keyboard.
 As of now, this is fixed but might be changeable in the future. Similarly, one
 can also resize and show "notes" on a slide via the keyboard.
 
-Included is a sample slide that I will use.
+Included is a sample slide that I have used for my presentation in my
+Electrical Engineering Colloquium Class, as of 04-28-2013.
 
 Created by unsignedzero and started on 01-25-2013 as an idea.
 
@@ -29,9 +30,19 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 * Add speaker notes on the slide
 * Add button/key to jump to a specific slide/segment
+* Reduce the number of variables in each slide to 1, if possible
 
 # Version/Changelog #
 
+* Removed experiment branch files that was mixed into development
+
+## 0.5.1.0 [04-05-2013] #
+
+* Removed extra global variables once they are used
+* Supports Chrome Version 26.X which broke on 04-27-2013
+* Updated PreZen to support KineticJS 4.4 Library.
+  Transitions between pages are faster but the last animation in Firefox
+  appears to be slower
 * Updated slides for class by fixing typos and other graphical errors
 
 ## 0.5.0.0 [03-03-2013] #

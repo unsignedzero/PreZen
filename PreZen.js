@@ -13,8 +13,8 @@
  *
  *
  * Created 01-25-2013
- * Updated 03-03-2013
- * Version 0.5.0.0
+ * Updated 04-05-2013
+ * Version 0.5.1.0
  * Created by David Tran (unsignedzero)
  * \class PreZen
  */
@@ -303,135 +303,143 @@ var zxPowerPoint = (function(settings) {
 //Animations for load functions
   function fadeIn(OutLayer, nextFunc) {
     globalCurAnim.end = true;
-    var localTimerLength = timerLength;
     
-    globalCurAnim = new Kinetic.Animation(function(frame) {
-      OutLayer.setOpacity(frame.time/localTimerLength);
+    globalCurAnim = function (localTimerLength, nextFunc) {
+      var ptr = new Kinetic.Animation(function(frame) {
+        OutLayer.setOpacity(frame.time/localTimerLength);
 
-      if (this.end) {
-        frame.time = localTimerLength;
-      }
+        if (globalCurAnim.end) {
+          frame.time = localTimerLength;
+        }
 
-      if (frame.time >= timerLength) {
-        this.stop();
-        frame.time = 0;
-        OutLayer.setOpacity(1.0);
-        if (nextFunc)
-          nextFunc();
-      }
-    },OutLayer);
+        if (frame.time >= timerLength) {
+          ptr.stop();
+          frame.time = 0;
+          OutLayer.setOpacity(1.0);
+          if (nextFunc)
+            nextFunc();
+        }
+      },OutLayer);
+
+      return ptr;
+    };
     
     globalCurAnim.end = false;
-    return globalCurAnim;
+    return globalCurAnim(timerLength, nextFunc);
   }
 
   function fadeOut(OutLayer, nextFunc) {
     //Fades out one layer and possibly run the nextFunc
     globalCurAnim.end = true;
-    var localTimerLength = timerLength;
 
-    globalCurAnim = new Kinetic.Animation(function(frame) {
-      OutLayer.setOpacity(1 - frame.time/localTimerLength);
+    globalCurAnim = function(localTimerLength, nextFunc){
+      var ptr = new Kinetic.Animation(function(frame) {
+        OutLayer.setOpacity(1 - frame.time/localTimerLength);
 
-      if (this.end) {
-        frame.time = localTimerLength;
-      }
+        if (globalCurAnim.end) {
+          frame.time = localTimerLength;
+        }
 
-      if (frame.time >= timerLength) {
-        this.stop();
-        frame.time = 0;
-        OutLayer.setOpacity(0.0);
-        if (nextFunc)
-          nextFunc();
-      }
-    },OutLayer);
+        if (frame.time >= timerLength) {
+          ptr.stop();
+          frame.time = 0;
+          OutLayer.setOpacity(0.0);
+          if (nextFunc)
+            nextFunc();
+        }
+      },OutLayer);
+
+      return ptr;
+    };
     
     globalCurAnim.end = false;
-    return globalCurAnim;
+    return globalCurAnim(timerLength, nextFunc);
   }
  
   function fadeInAll(OutLayerAry, nextFunc) {
     //Fades in all layers, regardless of opacity
     globalCurAnim.end = true;
-    var localTimerLength = timerLength;
-    var curVal;
-    var i,max = slideLayerMax;
+    var curVal, i, max = slideLayerMax;
     
-    globalCurAnim = new Kinetic.Animation(function(frame) {
-      curVal = frame.time/localTimerLength;
+    globalCurAnim = function(localTimerLength, nextFunc){
+      var ptr = new Kinetic.Animation(function(frame) {
+        curVal = frame.time/localTimerLength;
 
-      i = 0;
-      while(i < max) {
-        OutLayerAry[i].setOpacity(curVal);
-        i += 1;
-      }
-
-      if (this.end) {
-        frame.time = localTimerLength;
-      }
-
-      if (frame.time >= timerLength) {
-        this.stop();
-        frame.time = 0;
         i = 0;
         while(i < max) {
-          OutLayerAry[i].setOpacity(1.0);
+          OutLayerAry[i].setOpacity(curVal);
           i += 1;
         }
-        if (nextFunc)
-          nextFunc();
-      }
-    },stage);
+
+        if (globalCurAnim.end) {
+          frame.time = localTimerLength;
+        }
+
+        if (frame.time >= timerLength) {
+          ptr.stop();
+          frame.time = 0;
+          i = 0;
+          while(i < max) {
+            OutLayerAry[i].setOpacity(1.0);
+            i += 1;
+          }
+          if (nextFunc)
+            nextFunc();
+        }
+      },stage);
+
+      return ptr;
+    };
     
     globalCurAnim.end = false;
-    return globalCurAnim;
+    return globalCurAnim(timerLength, nextFunc);
   }
 
   function fadeInSelected(OutLayerAry, SelectAry, nextFunc) {
     //Fades in selected layers, regardless of opacity
     globalCurAnim.end = true;
-    var localTimerLength = timerLength;
-    var curVal;
-    var i,max = slideLayerMax;
+    var curVal, i, max = slideLayerMax;
     
-    globalCurAnim = new Kinetic.Animation(function(frame) {
-      curVal = frame.time/localTimerLength;
+    globalCurAnim = function(localTimerLength, nextFunc){
+      var ptr = new Kinetic.Animation(function(frame) {
+        curVal = frame.time/localTimerLength;
 
-      i = 0;
-      while(i < max) {
-        if (SelectAry[i])
-          OutLayerAry[i].setOpacity(curVal);
-        i += 1;
-      }
-
-      if (this.end) {
-        frame.time = localTimerLength;
-      }
-
-      if (frame.time >= timerLength) {
-        this.stop();
-        frame.time = 0;
         i = 0;
         while(i < max) {
           if (SelectAry[i])
-            OutLayerAry[i].setOpacity(1.0);
+            OutLayerAry[i].setOpacity(curVal);
           i += 1;
         }
-        if (nextFunc)
-          nextFunc();
-      }
-    },stage);
+
+        if (globalCurAnim.end) {
+          frame.time = localTimerLength;
+        }
+
+        if (frame.time >= timerLength) {
+          ptr.stop();
+          frame.time = 0;
+          i = 0;
+          while(i < max) {
+            if (SelectAry[i])
+              OutLayerAry[i].setOpacity(1.0);
+            i += 1;
+          }
+          if (nextFunc)
+            nextFunc();
+        }
+      },stage);
+
+      return ptr;
+    };
     
     globalCurAnim.end = false;
-    return globalCurAnim;
+    return globalCurAnim(timerLength, nextFunc);
   }
  
   function fadeOutAll(OutLayerAry, nextFunc, nextFuncArgs) {
     //Fades out all layers, whose opacity is larger than 0.5
     globalCurAnim.end = true;
-    var localTimerLength = timerLength;
-    var curVal;
-    var i,max = slideLayerMax;
+    var i, max = slideLayerMax;
     var seeLayer = [];
 
     i = 0;
@@ -440,34 +448,41 @@ var zxPowerPoint = (function(settings) {
       i += 1;
     }
     
-    globalCurAnim = new Kinetic.Animation(function(frame) {
-      curVal = 1-frame.time/localTimerLength;
+    globalCurAnim = function(localTimerLength, OutLayerAry,
+        nextFunc, nextFuncArgs){
+      var curVal;
+      var ptr = new Kinetic.Animation(function(frame) {
+        curVal = 1-frame.time/localTimerLength;
 
-      i = 0;
-      while(i < max) {
-        if (seeLayer[i])
-          OutLayerAry[i].setOpacity(curVal);
-        i += 1;
-      }
-      if (this.end) {
-        frame.time = localTimerLength;
-      }
-
-      if (frame.time >= localTimerLength) {
-        this.stop();
-        frame.time = 0;
         i = 0;
         while(i < max) {
-          OutLayerAry[i].setOpacity(0.0);
+          if (seeLayer[i])
+            OutLayerAry[i].setOpacity(curVal);
           i += 1;
         }
-        if (nextFunc)
-          nextFunc(nextFuncArgs);
-      }
-    },stage);
+        if (globalCurAnim.end) {
+          frame.time = localTimerLength;
+        }
+
+        if (frame.time >= localTimerLength) {
+          ptr.stop();
+          frame.time = 0;
+          i = 0;
+          while(i < max) {
+            OutLayerAry[i].setOpacity(0.0);
+            i += 1;
+          }
+          if (nextFunc)
+            nextFunc(nextFuncArgs);
+        }
+      },stage);
+
+      return ptr;
+    };
     
     globalCurAnim.end = false;
-    return globalCurAnim;
+    return globalCurAnim(timerLength, OutLayerAry, 
+        nextFunc, nextFuncArgs);
   }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -526,7 +541,7 @@ var zxPowerPoint = (function(settings) {
       FrontLayer.setOpacity(curVal);
 
       if (frame.time >= localTimerLength) {
-        this.stop();
+        globalCurAnim.stop();
         frame.time = 0;
         BackLayer.setOpacity(0.0);
         FrontLayer.setOpacity(0.0);
@@ -537,7 +552,7 @@ var zxPowerPoint = (function(settings) {
                 funcArgs.width, funcArgs.height);
 
         //Second animation to fade in UI
-        (new Kinetic.Animation(function(frame) {
+        globalCurAnim = new Kinetic.Animation(function(frame) {
 
           curVal = frame.time/localTimerLength;
 
@@ -545,7 +560,7 @@ var zxPowerPoint = (function(settings) {
           FrontLayer.setOpacity(curVal);
 
           if (frame.time >= localTimerLength) {
-            this.stop();
+            globalCurAnim.stop();
             frame.time = 0;
             BackLayer.setOpacity(curVal);
             FrontLayer.setOpacity(curVal);
@@ -554,7 +569,9 @@ var zxPowerPoint = (function(settings) {
             reSizeAfter(funcArgs);
           }
           
-        },stage)).start();
+        },stage);
+
+        globalCurAnim.start();
       }
       
     },stage);
@@ -839,85 +856,93 @@ var zxPowerPoint = (function(settings) {
             globalUIBlock = true;
             max = navButtons.length;
             var ydelta = msgBoxHeight/externTimer;
-            (new Kinetic.Animation(function(frame) {
-              i = 0;
-              y = ydelta * frame.time;
-              while(i<max) {
-                navButtons[i].setOffset({
-                  y: y
-                });
-                navButtons[i].label.setOffset({
-                  y: y
-                });
-                i += 1;
-              }
-              msgBox.setY(height-outlineShift-y);
-              msgBox.setHeight(ydelta*frame.time);
-              
-              if (externTimer < frame.time) {
-                this.stop();
-                frame.time = 0;
+            (function() {
+              var ptr = new Kinetic.Animation(function(frame) {
                 i = 0;
-                y = height - msgBoxHeight - outlineShift;
+                y = ydelta * frame.time;
                 while(i<max) {
                   navButtons[i].setOffset({
-                    y: msgBoxHeight
+                    y: y
                   });
                   navButtons[i].label.setOffset({
-                    y: msgBoxHeight
+                    y: y
                   });
                   i += 1;
                 }
-                msgBox.setY(y);
-                msgBox.setHeight(msgBoxHeight);
-                globalMsgBoxVisible = true;
-                globalUIBlock = false;
-              }
-            },interfaceLayer)).start();
+                msgBox.setY(height-outlineShift-y);
+                msgBox.setHeight(ydelta*frame.time);
+                
+                if (externTimer < frame.time) {
+                  ptr.stop();
+                  frame.time = 0;
+                  i = 0;
+                  y = height - msgBoxHeight - outlineShift;
+                  while(i<max) {
+                    navButtons[i].setOffset({
+                      y: msgBoxHeight
+                    });
+                    navButtons[i].label.setOffset({
+                      y: msgBoxHeight
+                    });
+                    i += 1;
+                  }
+                  msgBox.setY(y);
+                  msgBox.setHeight(msgBoxHeight);
+                  globalMsgBoxVisible = true;
+                  globalUIBlock = false;
+                }
+              },interfaceLayer);
+
+              ptr.start();
+            })();
           }
           //Sets up animation fadeout
           else{
             globalUIBlock = true;
             max = navButtons.length;
             ydelta = msgBoxHeight/externTimer;
-            (new Kinetic.Animation(function(frame) {
-              i = 0;
-              y = ydelta * (externTimer-frame.time);
-              while(i<max) {
-                navButtons[i].setOffset({
-                  y: y
-                });
-                navButtons[i].label.setOffset({
-                  y: y
-                });
-                i += 1;
-              }
-              msgBox.setY(height-outlineShift-y);
-              msgBox.setHeight(y);
-              
-              if (externTimer < frame.time) {
-                this.stop();
-                msgBox.setCornerRadius(0);
-                frame.time = 0;
+            (function() {
+              var ptr = new Kinetic.Animation(function(frame) {
                 i = 0;
-                y = height*0.9;
+                y = ydelta * (externTimer-frame.time);
                 while(i<max) {
                   navButtons[i].setOffset({
-                    y: 0
+                    y: y
                   });
-                  navButtons[i].setY(y);
                   navButtons[i].label.setOffset({
-                    y: 0
+                    y: y
                   });
-                  navButtons[i].label.setY(y+actionBoxHeight/4);
                   i += 1;
                 }
-                msgBox.setY(height-outlineShift);
-                msgBox.setHeight(0);
-                globalMsgBoxVisible = false;
-                globalUIBlock = false;
-              }
-            },interfaceLayer)).start();
+                msgBox.setY(height-outlineShift-y);
+                msgBox.setHeight(y);
+                
+                if (externTimer < frame.time) {
+                  ptr.stop();
+                  msgBox.setCornerRadius(0);
+                  frame.time = 0;
+                  i = 0;
+                  y = height*0.9;
+                  while(i<max) {
+                    navButtons[i].setOffset({
+                      y: 0
+                    });
+                    navButtons[i].setY(y);
+                    navButtons[i].label.setOffset({
+                      y: 0
+                    });
+                    navButtons[i].label.setY(y+actionBoxHeight/4);
+                    i += 1;
+                  }
+                  msgBox.setY(height-outlineShift);
+                  msgBox.setHeight(0);
+                  globalMsgBoxVisible = false;
+                  globalUIBlock = false;
+                }
+              },interfaceLayer);
+
+              ptr.start();
+            })();
           }
         }
       };
@@ -1035,3 +1060,6 @@ var zxPowerPoint = (function(settings) {
   };
   
 })(PreZenSettings);
+
+//As the slides object is no longer needed globally, we will remove the reference
+PreZenSettings = undefined;

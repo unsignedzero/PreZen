@@ -10,8 +10,8 @@
  *
  *
  * Created 03-02-2013
- * Updated 03-03-2013
- * Version 0.5.0.0
+ * Updated 04-05-2013
+ * Version 0.5.1.0
  * Created by David Tran (unsignedzero)
  */
 
@@ -76,7 +76,7 @@ PreZenSettings.supportFunc = {
       shiftc.setY((1-t)*shifta.getY()+t*shiftb.getY());
       splineq.setPoints(setListPoints(pointa,control,pointc));
       if (frame.time >= maxTime) {
-        this.stop();
+        animObj.stop();
         frame.time = 0;
         linea.setPoints([pointa.getX(),pointa.getY(),
                         pointb.getX(),pointb.getY()]);
