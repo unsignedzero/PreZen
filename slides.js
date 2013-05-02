@@ -8,8 +8,8 @@
  *
  *
  * Created 01-25-2013
- * Updated 03-03-2013
- * Version 0.5.0.0
+ * Updated 04-05-2013
+ * Version 0.5.1.0
  * Created by David Tran (unsignedzero)
  */
 
@@ -34,12 +34,30 @@ externDrawFunctionArray.push(
     var drawText = supportFunc.drawText;
 
     var radius = height*0.3;
+    var minDim = settingsObj.minDim;
+
     var circle;
+
+    var imgAry = [];
+    var imgAryCur = -1;
+
+    imgAry.push(new Image());
+    imgAryCur += 1;
+    imgAry[imgAryCur].src = 'IMG/SSU_logo3.jpg';
+    imgAry[imgAryCur].onload = function() {
+    };
+
+    outLayerAry[0].add(center(new Kinetic.Image({
+      x: minDim/10,
+      y: minDim/10,
+      width: minDim/10,
+      height: minDim/23,
+      image: imgAry[imgAryCur]
+    })));
 
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift+radius, 'What can you see in a display?',
       fontSize+2, fontFamily)));
-
 
     circle = new Kinetic.Wedge({
       x: width/2,
@@ -51,24 +69,23 @@ externDrawFunctionArray.push(
       strokeWidth: 3,
       angleDeg: 270
     });
-
-    (new Kinetic.Animation(function(frame) {
+    var ptr = new Kinetic.Animation(function(frame) {
       circle.setAngleDeg(360*frame.time/animTime);
       circle.setRotationDeg(90*frame.time/animTime);
       if (frame.time >= animTime) {
-        this.stop();
+        ptr.stop();
         frame.time=0;
         circle.setAngleDeg(360);
         circle.setRotationDeg(90);
       }
-    },outLayerAry[0])).start();
+    },outLayerAry[0]);
+    ptr.start();
 
     outLayerAry[0].add(circle);
 
     outLayerAry[1].add(center(drawText(
       width/2, height*(3/4), 'Created by David Tran',
       fontSize+2, fontFamily)));
-
 
     return 2;
   }
@@ -97,7 +114,6 @@ externDrawFunctionArray.push(
     outLayerAry[0].add(center(drawText(
       width/2, outlineShift + 0.05*height, "Screen Comparison",
       fontSize+20, fontFamily)));
-
 
     imgAry.push(new Image());
     imgAryCur += 1;
@@ -1744,16 +1760,19 @@ externDrawFunctionArray.push(
       rotationDeg: -180
     });
 
-    (new Kinetic.Animation(function(frame) {
-      circlea.setAngleDeg(360*frame.time/animTime);
-      circleb.setAngleDeg(360*frame.time/animTime);
-      if (frame.time >= animTime) {
-        this.stop();
-        frame.time=0;
-        circlea.setAngleDeg(360);
-        circleb.setAngleDeg(360);
-      }
-    },outLayerAry[0])).start();
+    (function (){
+      var ptr = new Kinetic.Animation(function(frame) {
+        circlea.setAngleDeg(360*frame.time/animTime);
+        circleb.setAngleDeg(360*frame.time/animTime);
+        if (frame.time >= animTime) {
+          ptr.stop();
+          frame.time=0;
+          circlea.setAngleDeg(360);
+          circleb.setAngleDeg(360);
+        }
+      },outLayerAry[0]);
+      ptr.start();
+    })();
 
     outLayerAry[0].add(circlea);
     outLayerAry[0].add(circleb);
@@ -2626,3 +2645,8 @@ externDrawFunctionArray.push(
     return 2;
   }
 );
+
+// Once we've added all the slides, we remove the global variable and keep
+// the pointer in PreZenSettings.externDrawFunctionArray
+
+externDrawFunctionArray = undefined;
