@@ -113,72 +113,62 @@ externDrawFunctionArray.push(
     })));
 
     return 2;
-  }
-);
+  });
 }
 //////////////////////////////////////////////////////////////////////////////
 //TOC Slide
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    // End goal
+    /*
+     
+    supportFunc.clean(outLayerAry, settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var createBullet = supportFunc.createBullet;
+    var state = generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
+    // Make Settings changes here
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Overview",
-      fontSize+20, fontFamily)));
+    var bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
-    outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
-    outLayerAry[1].add(drawText(
-      width/6, height/4, "Displays and Color Gamut",
-      fontSize+5, fontFamily));
+    supportFunc.drawHeader(outLayerAry[0], state, "Header");
+    bulDrawObj.bulMainText(outLayerAry[1], "Msg")
+    ...
 
-    outLayerAry[2].add(createBullet(width/6, height/4+3*fontSize, fontSize));
-    outLayerAry[2].add(drawText(
-      width/6, height/4+3*fontSize, "CRT",
-      fontSize+5, fontFamily));
+     */
 
-		outLayerAry[3].add(createBullet(width/6, height/4+6*fontSize, fontSize));
-    outLayerAry[3].add(drawText(
-      width/6, height/4+6*fontSize, "Plasma",
-      fontSize+5, fontFamily));
+    // This is an example of using the new textGenerator
 
-    outLayerAry[4].add(createBullet(width/6, height/4+9*fontSize, fontSize));
-    outLayerAry[4].add(drawText(
-      width/6, height/4+9*fontSize, "LCD",
-      fontSize+5, fontFamily));
+    supportFunc.clean(outLayerAry, settingsObj);
 
-    outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
-    outLayerAry[5].add(drawText(
-      width/6, height/4+12*fontSize, "OLED",
-      fontSize+5, fontFamily));
+    // Here we store our state object, which will be passed once and sets up
+    // the generator
+    var bulDrawObj, state = generatorStateObject(settingsObj, supportFunc);
 
-    outLayerAry[6].add(createBullet(width/6, height/4+15*fontSize, fontSize));
-    outLayerAry[6].add(drawText(
-      width/6, height/4+15*fontSize, "AMOLED",
-      fontSize+5, fontFamily));
+    // Sets the default start position of the text list
+    state.curx = width/6;
+    state.cury = height/4;
 
-    outLayerAry[7].add(createBullet(width/6, height/4+18*fontSize, fontSize));
-    outLayerAry[7].add(drawText(
-      width/6, height/4+18*fontSize, "Table of technology comparison",
-      fontSize+5, fontFamily));
+    // We set the mainy shift to be a value
+    // Options include mainx, subx and suby. Values not set are 0
+    state.maintexty = 3*settingsObj.fontSize;
 
-    outLayerAry[8].add(createBullet(width/6, height/4+21*fontSize, fontSize));
-    outLayerAry[8].add(drawText(
-      width/6, height/4+21*fontSize, "Application: Drawing Circles",
-      fontSize+5, fontFamily));
+    bulDrawObj = bulletTextPosGenerator(state);
+
+    drawHeader(outLayerAry[0], state, "Overview");
+    bulDrawObj.bulMainText(outLayerAry[1], "Displays and Color Gamut");
+    bulDrawObj.bulMainText(outLayerAry[2], "CRT");
+    bulDrawObj.bulMainText(outLayerAry[3], "Plasma");
+    bulDrawObj.bulMainText(outLayerAry[4], "CRT");
+    bulDrawObj.bulMainText(outLayerAry[5], "OLED");
+    bulDrawObj.bulMainText(outLayerAry[6], "AMOLED");
+    bulDrawObj.bulMainText(outLayerAry[7], "Table of technology comparison");
+    bulDrawObj.bulMainText(outLayerAry[8], "Application: Drawing Circles");
 
     return 9;
   }
 );
+
 //////////////////////////////////////////////////////////////////////////////
 //Part 1
 //Slide 1
@@ -1683,7 +1673,7 @@ externDrawFunctionArray.push(
 
     imgAry.push(new Image());
     imgAryCur += 1;
-    imgAry[imgAryCur].src = 'IMG/Vector_Video_Standards2.svg.png',
+    imgAry[imgAryCur].src = 'IMG/Vector_Video_Standards2.svg.png';
     imgAry[imgAryCur].onload = function(){
     };
 

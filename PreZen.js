@@ -121,21 +121,24 @@ var zxPowerPoint = (function(settings) {
   var globalCurAnim = {};
 //////////////////////////////////////////////////////////////////////////////
 //Creates a settings object and passes it to the board
-  var setObj = {};
-    setObj.fontFamily = externFont;
-    setObj.fontSize  = height/32;
-    setObj.animTime  = 2000;
-    setObj.maxLayerCount = maxLayerCount;
-    setObj.outlineShift = outlineShift;
-    setObj.minDim = width > height ? height : width;
-    setObj.maxDim = width > height ? width : height;
-    setObj.PI = Math.PI;
+  var setObj = {
+    fontFamily    : externFont,
+    fontSize      : height/32,
+    animTime      : 2000,
+    maxLayerCount : maxLayerCount,
+    outlineShift  : outlineShift,
+    minDim        : width > height ? height : width,
+    maxDim        : width > height ? width  : height,
+    PI            : Math.PI,
+    height        : height,
+    width         : width
+  };
+
   var hasInitialized = false;
 //////////////////////////////////////////////////////////////////////////////
 //Creates a support object that passes local functions to the board
 //Contained here are all local functions that will be used by PreZen
 //but can also be used by users
-
 
   supportFunc.left = function (temp) {
     //Left justifies the graphical object
@@ -584,6 +587,9 @@ var zxPowerPoint = (function(settings) {
 
     slideLayerMax = slideArray[slideIndex](globalOutLayerAry,
     width, height, setObj, supportFunc);
+
+    setObj.height = height;
+    setObj.height = height;
 
     drawMeta(globalOutLayerAry[0], supportFunc, setObj);
 

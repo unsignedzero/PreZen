@@ -34,6 +34,10 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+* Created TOC with generators only.
+* Generators tested and implemented. (Now in Beta)
+* Added more functional to the generators, debug passing option, firstCall
+  no shift option, etc.
 * Removed experiment branch files that was mixed into development
 
 ## 0.5.1.0 [04-05-2013] #
