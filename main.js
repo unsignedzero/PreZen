@@ -4,14 +4,15 @@
  * libraries and files.
  *
  *
- * Updated 03-03-2013
- * Version 0.5.0.0
+ * Updated 04-08-2013
+ * Version 0.6.0.0 Beta 1
  * Created by David Tran (unsignedzero)
  */
 
 (function(){
+  "use strict";
 
-  //Checks if the libraries exist
+  // Checks if the libraries exist
   if (zxPowerPoint == undefined||typeof(zxPowerPoint) != 'object' ){
     alert("ERROR:PreZen missing. Halting execution.");
     throw new Error("mainPP.js missing");
@@ -19,17 +20,18 @@
 
   zxPowerPoint.startUI();
 
-  //Debug messages can be set via this method
+  // Debug messages can be set via this method
+  //var DEBUG = settings["externDEBUG"];
   //zxPowerPoint.setDebugMsg("HELLO");
 
-  //Post-Processing for jwerty Library
+  // Post-Processing for jwerty Library
   if (jwerty == undefined||typeof(jwerty) != 'object' ){
     //alert("ERROR:Jwerty Library Missing");
     //throw new Error("Jwerty Library Missing");
     console.warn("WARN:jwerty not available");
   }
   else{
-    //Setup for library support calls
+    // Setup for library support calls
     jwerty.key('↑', function(){
       zxPowerPoint.nextSlide();
     });

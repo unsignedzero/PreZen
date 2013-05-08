@@ -8,10 +8,9 @@
  * with the same name defined here. This list will eventually be commented
  * and enumerated here
  *
- *
  * Created 03-02-2013
- * Updated 04-05-2013
- * Version 0.5.1.0
+ * Updated 04-08-2013
+ * Version 0.6.0.0 Beta 1
  * Created by David Tran (unsignedzero)
  */
 
@@ -96,30 +95,6 @@ PreZenSettings.supportFunc = {
         inAnim = false;
       }
     }, outLayerA);
-
-    //Refresh always (may lag system)
-    /*
-    (new Kinetic.Animation(function(frame) {
-      if (!inAnim) {
-        shifta.setX(pointa.getX());
-        shifta.setY(pointa.getY());
-        shiftb.setX(pointb.getX());
-        shiftb.setY(pointb.getY());
-        shiftc.setX(pointa.getX());
-        shiftc.setY(pointa.getY());
-        linec.setPoints([shifta.getX(),shifta.getY(),
-                         shiftb.getX(),shiftb.getY()]);
-      }
-      control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
-      control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
-      linea.setPoints([pointa.getX(),pointa.getY(),
-                       pointb.getX(),pointb.getY()]);
-      lineb.setPoints([pointb.getX(),pointb.getY(),
-                       pointc.getX(),pointc.getY()]);
-      splineq.setPoints(setListPoints(pointa,control,pointc));
-      outLayerA.draw();
-    }, outLayerA)).start();
-    */
 
     //Define all elements on the screen
     pointa = new Kinetic.Circle({
@@ -326,6 +301,48 @@ PreZenSettings.supportFunc = {
         strokeWidth: 5
       }));
     LocalLayer.draw();
+  },
+
+  drawCircleArray : function(state, layer, colorfunc){
+    var i, max, x, y, boardWidth, squareSide, sizeCount, layer;
+
+      x = typeof state.x === "number" ? state.x : 0;
+      y = typeof state.y === "number" ? state.y : 0;
+      sizeCount = typeof state.sizeCount === "number" ? state.sizeCount : 0;
+
+      if ( typeof state.boardWidth === "number" ){
+        boardWidth = state.boardWidth;
+      }
+      else{
+        boardWidth = 0;
+        alert( "".join(["drawCircleArray was passed ",
+          state.boardWidth,
+          " as boardWidth which is not a number"
+          ]));
+      }
+
+      squareSide = boardWidth/sizeCount;
+
+    if ( typeof colorfunc !== "function" ){
+      colorfunc = function(i){
+        return "black";
+      }
+    }
+
+    i = 0;
+    max = sizeCount*sizeCount;
+
+    while(i < max) {
+      layer.add(new Kinetic.Circle({
+        x: x + (boardWidth/2) - Math.floor(i/sizeCount)*squareSide,
+        y: y + ((i%sizeCount)*squareSide),
+        radius: squareSide/2,
+        fill: colorfunc(i),
+        stroke: 'black',
+        strokeWidth: 5
+      }));
+      i += 1;
+    }
   }
 };
 

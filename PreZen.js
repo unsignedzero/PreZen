@@ -11,12 +11,10 @@
  * At the time of writing, pictures and images are supported and,
  * will scale correctly
  *
- *
  * Created 01-25-2013
- * Updated 04-05-2013
- * Version 0.5.1.0
+ * Updated 04-08-2013
+ * Version 0.6.0.0 Beta 1
  * Created by David Tran (unsignedzero)
- * \class PreZen
  */
 
 var zxPowerPoint = (function(settings) {
@@ -142,6 +140,8 @@ var zxPowerPoint = (function(settings) {
 
   supportFunc.left = function (temp) {
     //Left justifies the graphical object
+    "use strict";
+
     temp.setOffset({
       x: 0
     });
@@ -150,6 +150,8 @@ var zxPowerPoint = (function(settings) {
 
   supportFunc.center = function (temp) {
     //Center justifies the graphic object (hor only)
+    "use strict";
+     
     temp.setOffset({
       x: temp.getWidth()/2
     });
@@ -158,6 +160,8 @@ var zxPowerPoint = (function(settings) {
 
   supportFunc.right = function (temp) {
     //Right justifies the graphical object
+    "use strict";
+
     temp.setOffset({
       x: temp.getWidth()
     });
@@ -166,6 +170,8 @@ var zxPowerPoint = (function(settings) {
 
   supportFunc.align = function(temp) {
     //Centers the graphic object
+    "use strict";
+
     temp.setOffset({
       x: temp.getWidth()/2,
       y: temp.getHeight()/2
@@ -175,6 +181,8 @@ var zxPowerPoint = (function(settings) {
 
   supportFunc.middle = function(temp) {
     //Centers the graphic object
+    "use strict";
+
     temp.setOffset({
       y: temp.getHeight()/2
     });
@@ -183,6 +191,8 @@ var zxPowerPoint = (function(settings) {
 
   supportFunc.drawText = function(x,y,str,fontDelSize,font) {
     //Faster call to drawText
+    "use strict";
+
     return new Kinetic.Text({
       x: x,
       y: y,
@@ -196,6 +206,8 @@ var zxPowerPoint = (function(settings) {
   };
 
   supportFunc.createBullet = function(x,y,fontDelSize) {
+    "use strict";
+
     fontDelSize = fontDelSize ? fontDelSize : height/32;
     //Creates bullets for text
     return new Kinetic.Circle({
@@ -208,6 +220,8 @@ var zxPowerPoint = (function(settings) {
   };
 
   supportFunc.clean = function(outLayerAry, setObj) {
+    "use strict";
+
     var i, max;
 
     i = 0;
@@ -224,6 +238,328 @@ var zxPowerPoint = (function(settings) {
   supportFunc.abs = Math.abs;
 
   supportFunc.sqrt = Math.sqrt;
+
+  /* Test generator objects that will be updated accordingly and
+   * integrated into PreZen. Once integrated we will update the slides
+   *
+   * For this codeset to work we assume that externFont and height are
+   * well defined in PreZen.js
+   */
+
+  supportFunc.drawTextGenerator = function( input ){
+    // This function sets above textPosGenerator and acts as a front
+    // that generators text objects for KineticJS that can be drawn
+    //
+    // Data type and checks are done in the constructor of the respective
+    // generator objects
+    "use strict";
+
+    var textPosObj, fontSize, fontFamily, temp, tempTextObj;
+
+    textPosObj = supportFunc.textPosGenerator( input );
+
+    fontSize = ( typeof input.fontSize === "number" ) ?
+      fontSize : height/32;
+    fontFamily = ( typeof input.fontFamily === "number" ) ?
+      fontFamily : externFont;
+
+     temp = { fontSize: fontSize, fontFamily : externFont,
+         fill: 'black',
+         text: "" };
+
+     return { 
+       Text : function (str, type){
+
+         // General text function that will set the text as main or sub
+         // depending on type
+
+         tempTextObj = type ? textPosObj.subText() : textPosObj.mainText();
+
+         temp.x = tempTextObj.x;
+         temp.y = tempTextObj.y;
+         temp.str = str;
+         return supportFunc.drawText2(temp);
+       },
+
+       mainText : function (str){
+
+         // Text function sets text as mainText
+
+         tempTextObj = textPosObj.mainText();
+
+         temp.x = tempTextObj.x;
+         temp.y = tempTextObj.y;
+         temp.str = str;
+
+         return supportFunc.drawText2(temp);
+       },
+
+       subText : function (str){
+
+         // Text function sets text as subText
+
+         tempTextObj = textPosObj.subText();
+
+         temp.x = tempTextObj.x;
+         temp.y = tempTextObj.y;
+         temp.str = str;
+
+         return supportFunc.drawText2(temp);
+       }
+     };
+  };
+
+  supportFunc.bulletTextPosGenerator = function( input ){
+    // This function combines textPosGenerator with bullets
+    // giving users more options
+    //
+    // Data type and checks are done in the constructor of the respective
+    // generator objects
+    "use strict";
+
+    var layer, curObj, retObj,
+      textPosObj = supportFunc.textPosGenerator(input);
+
+    if ( typeof input.deltaFontSize === "number" )
+      input.deltaFontSize = 0;
+
+    retObj = { 
+      bulText : function (str, type){
+
+       // General text function that will set the text as main or sub
+       // depending on type
+
+       temp = { fontSize: fontSize, fontFamily : fontFamily,
+           fill: 'black',
+           text: str };
+
+       tempTextObj = type ? textPosObj.subtext() : textPosObj.maintext();
+
+       temp.x = tempTextObj.x;
+       temp.y = tempTextObj.y;
+       return temp;
+     },
+
+     bulMainText : function (layer, str){
+       // Text function sets text as mainText
+       curObj = textPosObj.mainText();
+
+       input.x = curObj.x;
+       input.y = curObj.y;
+       input.str = str;
+
+       layer.add(supportFunc.createBullet2(input));
+       layer.add(supportFunc.drawText2(input));
+     },
+
+     bulSubText : function (layer, str){
+       // Text function sets text as subText
+       curObj = textPosObj.subText();
+
+       input.x = curObj.x;
+       input.y = curObj.y;
+       input.str = str;
+
+       //layer.add(supportFunc.createBullet2(input));
+       layer.add(supportFunc.drawText2(input));
+     }
+   };
+
+   //We make all methods of the textPosGenerator publicly accessible
+   for ( var curMethod in textPosObj ) {
+     if ( textPosObj.hasOwnProperty(curMethod) ){
+       if ( typeof curMethod === "function" )
+        retObj[curMethod.name] = curMethod;
+      }
+    }
+   
+   return retObj;
+  };
+
+  supportFunc.createBullet2 = function( input ){
+    // Object facade version of createBullet
+    "use strict";
+
+    var x, y, fontSize;
+
+    x  = ( typeof input.x === "number" ) ? input.x : 0;
+    y  = ( typeof input.y === "number" ) ? input.y : 0;
+
+    fontSize = ( typeof input.fontSize === "number" ) ?
+      fontSize : input.height/32;
+
+    return input.createBullet(x, y, fontSize);
+  };
+
+  supportFunc.drawHeader = function(layer, input , str){
+    // Object facade that creates the header (non-existent in original)
+    "use strict";
+
+    layer.add(input.center(input.drawText(
+      input.width/2, input.outlineShift + 0.05*input.height, str,
+      input.fontSize+20, input.fontFamily)));
+  };
+
+  supportFunc.drawSubHeader = function(layer, input , str){
+    // Object facade that creates the subheader (non-existent in original)
+    "use strict";
+
+    layer.add(input.center(input.drawText(
+      input.width/2, input.outlineShift + 0.1*input.height, str,
+      input.fontSize+10, input.fontFamily)));
+  };
+
+  supportFunc.generatorStateObject = function(settingsObj, supportFunc){
+    // Assembles a generic state object that will be used in the generators
+    "use strict";
+
+    return {
+        // We set the default fluff settings
+        fontSize: settingsObj.fontSize, fontFamily: settingsObj.fontFamily,
+        width: settingsObj.width, height: settingsObj.height,
+        outlineShift: settingsObj.outlineShift,
+
+        // We load our functions here
+        drawText: supportFunc.drawText, createBullet: supportFunc.createBullet,
+        center: supportFunc.center,
+
+        // If we want the fonts to be bigger than the bullets set this
+        deltaFontSize: 5
+
+      };
+  };
+
+  supportFunc.drawText2 = function( input ){
+    // Object facade version of drawText
+    "use strict";
+
+    var x, y, fontSize, fontFamily, str;
+
+    x  = ( typeof input.x === "number" ) ? input.x : 0;
+    y  = ( typeof input.y === "number" ) ? input.y : 0;
+
+    fontSize = ( typeof input.fontSize === "number" ) ? input.fontSize : input.height/32;
+    fontSize += ( typeof input.deltaFontSize === "number" ) ? input.deltaFontSize : 0;
+    fontFamily = ( typeof input.fontFamily === "string" ) ? input.fontFamily : externFont;
+
+    str = ( typeof input.str === "string" ) ? input.str : "";
+
+    return supportFunc.drawText(x, y, str, fontSize, fontFamily);
+  };
+
+  supportFunc.textPosGenerator = function( input ){
+    // This function creates a generator object that will allow users
+    // to specify the spacing between bullet points (maintext)
+    // and substrings between lines of a bullet point (subtext)
+    "use strict";
+
+    var curx, cury, maintextx, maintexty, subtextx, subtexty,
+        DEBUG, firstCall;
+
+    // Check input
+    curx  = ( typeof input.curx === "number" ) ? input.curx : 0;
+    cury  = ( typeof input.cury === "number" ) ? input.cury : 0;
+    DEBUG = ( typeof input.DEBUG === "boolean" ) ? input.DEBUG : false;
+    firstCall = ( typeof input.firstCall === "boolean" ) ?
+      input.firstCall : true;
+
+    if ( typeof input.maintextx === "number" )
+      maintextx = input.maintextx;
+    else if ( DEBUG )
+      alert( new Error("input.maintextx in textPosGenerator not a number"));
+    else 
+      maintextx = 0;
+
+    if ( typeof input.maintexty === "number" )
+      maintexty = input.maintexty;
+    else if ( DEBUG )
+      alert(new Error("input.maintexty in textPosGenerator not a number"));
+    else
+      maintexty = 0;
+
+    if ( typeof input.subtextx === "number" )
+      subtextx = input.subtextx;
+    else if ( DEBUG )
+      alert(new Error("input.subtextx in textPosGenerator not a number"));
+    else
+      subtextx = 0;
+
+    if ( typeof input.subtexty === "number" )
+      subtexty = input.subtexty;
+    else if ( DEBUG )
+      alert(new Error("input.subtexty in textPosGenerator not a number"));
+    else
+      subtexty = 0;
+
+    return {
+      mainText : function(){
+
+        // Returns the new mainText coords
+
+        if ( !firstCall ){
+          curx += maintextx;
+          cury += maintexty;
+        }
+        else
+          firstCall = false;
+
+        return {
+          x: curx,
+          y: cury
+        };
+      },
+      subText : function(){
+
+        // Returns the new mainText coords
+
+        if ( !firstCall ){
+          curx += subtextx;
+          cury += subtexty;
+        }
+        else
+          firstCall = false;
+
+        return {
+          x: curx,
+          y: cury
+        };
+      }
+    };
+  };
+
+  supportFunc.imgPosGenerator = function(){
+    // This function creates a generator object that will allow users
+    // to create images on the fly and hides the ugly image editing details
+    "use strict";
+
+    var imgAry = [], imgAryCur = -1;
+
+    return {
+      pushImage : function(path){
+
+        // Adds the image to the array but creates the index as well
+
+        imgAry.push(new Image());
+        imgAryCur += 1;
+        imgAry[imgAryCur].src = path;
+        imgAry[imgAryCur].onload = function () {};
+
+        // Here we set the index publicly so that any external call can
+        // call and access the element, without accessing the internal
+        // variables
+        this[imgAryCur] = imgAry[imgAryCur];
+
+        return imgAry[imgAryCur];
+      },
+
+      curImage : function(){
+
+        // Allows users to access the "last" element in the array
+
+        return imgAryCur !== -1 ? imgAry[imgAryCur] : undefined;
+      }
+    };
+  };
 
 //////////////////////////////////////////////////////////////////////////////
 //Load functions
@@ -305,6 +641,8 @@ var zxPowerPoint = (function(settings) {
 //////////////////////////////////////////////////////////////////////////////
 //Animations for load functions
   function fadeIn(OutLayer, nextFunc) {
+    "use strict";
+
     globalCurAnim.end = true;
     
     globalCurAnim = function (localTimerLength, nextFunc) {
@@ -333,9 +671,13 @@ var zxPowerPoint = (function(settings) {
 
   function fadeOut(OutLayer, nextFunc) {
     //Fades out one layer and possibly run the nextFunc
+    "use strict";
+
     globalCurAnim.end = true;
 
     globalCurAnim = function(localTimerLength, nextFunc){
+      "use strict";
+
       var ptr = new Kinetic.Animation(function(frame) {
         OutLayer.setOpacity(1 - frame.time/localTimerLength);
 
@@ -361,10 +703,14 @@ var zxPowerPoint = (function(settings) {
  
   function fadeInAll(OutLayerAry, nextFunc) {
     //Fades in all layers, regardless of opacity
+    "use strict";
+
     globalCurAnim.end = true;
     var curVal, i, max = slideLayerMax;
     
     globalCurAnim = function(localTimerLength, nextFunc){
+      "use strict";
+
       var ptr = new Kinetic.Animation(function(frame) {
         curVal = frame.time/localTimerLength;
 
@@ -598,6 +944,8 @@ var zxPowerPoint = (function(settings) {
 //////////////////////////////////////////////////////////////////////////////
   function frontUI(localBackLayer, localFrontLayer, width, height) {
     //Sets up the initial screen for use or on resizing
+    "use strict";
+
     var debugStr;
     var drawBox;
     var contactBox;
@@ -668,6 +1016,7 @@ var zxPowerPoint = (function(settings) {
 
   function drawInterface(interfaceLayer, supportFunc, setObj) {
     //Sets up the buttons and interface the user can use
+    "use strict";
 
     var squareSide = setObj.minDim/16;
     var squarePad  = 20 + outlineShift;
@@ -853,7 +1202,11 @@ var zxPowerPoint = (function(settings) {
     //Definition of msgBoxChange here
     //This changes when screen resizes
     msgBoxChange = (function(navButtons, msgBoxHeight, interfaceLayer, msgBox) {
+      "use strict";
+
       return function() {
+        "use strict";
+
         var i, max;
         if (!globalUIBlock) {
           //Sets up animation fadein
@@ -978,6 +1331,8 @@ var zxPowerPoint = (function(settings) {
 //////////////////////////////////////////////////////////////////////////////
 //Extern Method calls
   function externStartUI() {
+    "use strict";
+
     if (!hasInitialized) {
       hasInitialized = true;
       var i, max = maxLayerCount;
@@ -1010,12 +1365,13 @@ var zxPowerPoint = (function(settings) {
   }
 
   function externResize() {
+    "use strict";
+
     if (!globalUIBlock)
       reSize(globalOutLayerAry,window.innerWidth-10,window.innerHeight-10);
   }
 //////////////////////////////////////////////////////////////////////////////
 //Public accessor functions
-
   self.startUI = function() {
     externStartUI();
   };

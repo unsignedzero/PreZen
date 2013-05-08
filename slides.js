@@ -8,8 +8,8 @@
  *
  *
  * Created 01-25-2013
- * Updated 04-05-2013
- * Version 0.5.1.0
+ * Updated 04-08-2013
+ * Version 0.6.0.0 Beta 1
  * Created by David Tran (unsignedzero)
  */
 
@@ -24,21 +24,31 @@
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     supportFunc.clean(outLayerAry,settingsObj);
+    "use strict";
 
     var animTime = settingsObj.animTime;
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
     var outlineShift = settingsObj.outlineShift;
 
     var center   = supportFunc.center;
-    var drawText = supportFunc.drawText;
 
     var radius = height*0.3;
     var circle;
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift+radius, 'What can you see in a display?',
-      fontSize+2, fontFamily)));
+    var state = supportFunc.generatorStateObject(settingsObj, supportFunc),
+        textGen;
+
+    state.fontSize -= 3;
+    state.curx = width/2;
+    state.cury = outlineShift + radius;
+
+    state.maintexty = height * (3/4) - (outlineShift + radius);
+
+    textGen = supportFunc.drawTextGenerator(state);
+
+    outLayerAry[0].add(center(textGen.mainText(
+      "What can you see in a display?")));
+    outLayerAry[1].add(center(textGen.mainText(
+      "Created by David Tran")));
 
     circle = new Kinetic.Wedge({
       x: width/2,
@@ -65,10 +75,6 @@ externDrawFunctionArray.push(
 
     outLayerAry[0].add(circle);
 
-    outLayerAry[1].add(center(drawText(
-      width/2, height*(3/4), 'Created by David Tran',
-      fontSize+2, fontFamily)));
-
     return 2;
   }
 );
@@ -78,38 +84,33 @@ externDrawFunctionArray.push(
 if (PreZenSettings.showDebugSlide) {
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
     supportFunc.clean(outLayerAry,settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var minDim = settingsObj.minDim;
+    var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(),
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc),
+      bulletTextPosGenerator = supportFunc.bulletTextPosGenerator,
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
+      fontSize = settingsObj.fontSize,
+      fontFamily = settingsObj.fontFamily,
+      outlineShift = settingsObj.outlineShift,
+      minDim = settingsObj.minDim,
 
-    var imgAry = [];
-    var imgAryCur = -1;
+      center   = supportFunc.center,
+      align    = supportFunc.align,
+      drawText = supportFunc.drawText;
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Screen Comparison",
-      fontSize+20, fontFamily)));
+    supportFunc.drawHeader(outLayerAry[0], state, "Screen Comparison");
 
-
-    imgAry.push(new Image());
-    imgAryCur += 1;
-    imgAry[imgAryCur].src = 'IMG/CompareScreen.png';
-    imgAry[imgAryCur].onload = function() {
-    };
+    imgDrawObj.pushImage('IMG/CompareScreen.png');
 
     outLayerAry[1].add(align(new Kinetic.Image({
       x: width/2,
       y: height/2+height/20,
       width: minDim/1,
       height: minDim/4,
-      image: imgAry[imgAryCur]
+      image: imgDrawObj.curImage()
     })));
 
     return 2;
@@ -119,31 +120,16 @@ externDrawFunctionArray.push(
 //TOC Slide
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc) {
-
-    // End goal
-    /*
-     
-    supportFunc.clean(outLayerAry, settingsObj);
-
-    var state = generatorStateObject(settingsObj, supportFunc);
-
-    // Make Settings changes here
-
-    var bulDrawObj = supportFunc.bulletTextPosGenerator(state);
-
-    supportFunc.drawHeader(outLayerAry[0], state, "Header");
-    bulDrawObj.bulMainText(outLayerAry[1], "Msg")
-    ...
-
-     */
+    "use strict";
 
     // This is an example of using the new textGenerator
-
     supportFunc.clean(outLayerAry, settingsObj);
 
     // Here we store our state object, which will be passed once and sets up
     // the generator
-    var bulDrawObj, state = generatorStateObject(settingsObj, supportFunc);
+    var bulDrawObj,
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc),
+      bulletTextPosGenerator = supportFunc.bulletTextPosGenerator;
 
     // Sets the default start position of the text list
     state.curx = width/6;
@@ -153,9 +139,11 @@ externDrawFunctionArray.push(
     // Options include mainx, subx and suby. Values not set are 0
     state.maintexty = 3*settingsObj.fontSize;
 
+    // Create generator object
     bulDrawObj = bulletTextPosGenerator(state);
 
-    drawHeader(outLayerAry[0], state, "Overview");
+    supportFunc.drawHeader(outLayerAry[0], state, "Overview");
+
     bulDrawObj.bulMainText(outLayerAry[1], "Displays and Color Gamut");
     bulDrawObj.bulMainText(outLayerAry[2], "CRT");
     bulDrawObj.bulMainText(outLayerAry[3], "Plasma");
@@ -174,72 +162,45 @@ externDrawFunctionArray.push(
 //Slide 1
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
     supportFunc.clean(outLayerAry,settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var minDim = settingsObj.minDim;
+    var bulDrawObj,
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc),
+      bulletTextPosGenerator = supportFunc.bulletTextPosGenerator;
 
-    var center   = supportFunc.center;
-    var drawText = supportFunc.drawText;
-    var createBullet = supportFunc.createBullet;
-    var floor    = supportFunc.floor;
+    state.curx = width/2;
+    state.cury = height/4;
 
-    var i, max, sizeCount;
-    var squareSide = width/16;
-    var boardWidth = width/4;
+    state.maintexty = 4*settingsObj.fontSize;
+    state.subtexty = settingsObj.fontSize;
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Displays",
-      fontSize+20, fontFamily)));
+    bulDrawObj = bulletTextPosGenerator(state);
 
+    supportFunc.drawHeader(outLayerAry[0], state, "Displays");
 
-    outLayerAry[1].add(createBullet(width/2,height/4,fontSize));
+    bulDrawObj.bulMainText(outLayerAry[1], "Collection of Light Sources");
+    bulDrawObj.bulMainText(outLayerAry[3], "Easier way to display");
+    bulDrawObj.bulSubText(outLayerAry[3], "information to the user");
 
-    outLayerAry[1].add(drawText(
-      width/2, height*(1/4), "Collection of Light Sources",
-      fontSize+5, fontFamily));
-
-    i = 0;
-    sizeCount = 4;
-    max = sizeCount*sizeCount;
-    //Draws first demo board
-    while(i < max) {
-      outLayerAry[2].add(new Kinetic.Circle({
-        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
-        y: height/4 + ((i%sizeCount)*squareSide),
-        radius: squareSide/2,
-        fill: i&2 ? (i&1 ? 'blue' : 'red') : (i&1 ? 'green' : 'white'),
-        stroke: 'black',
-        strokeWidth: 5
-      }));
-      i += 1;
+    //Creates state object that will be used for drawCircleArray
+    var stateArray = {
+      x: width/4,
+      y: height/4,
+      sizeCount: 4,
+      boardWidth: width/4
     }
 
-    outLayerAry[3].add(createBullet(width/2,height/4+4*fontSize,fontSize));
-    outLayerAry[3].add(drawText(
-      width/2, height*(1/4)+4*fontSize, "Easier way to display",
-      fontSize+5, fontFamily));
-
-    outLayerAry[3].add(drawText(
-      width/2, height*(1/4)+5*fontSize, "information to the user",
-      fontSize+5, fontFamily));
+    //Draws first demo board
+    supportFunc.drawCircleArray(stateArray, outLayerAry[2], (function(i){
+      return i&2 ? (i&1 ? 'blue' : 'red') : (i&1 ? 'green' : 'white');
+    }));
 
     //Draws second demo board
-    i = 0;
-    while(i < max) {
-      outLayerAry[4].add(new Kinetic.Circle({
-        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
-        y: height/4 + ((i%sizeCount)*squareSide),
-        radius: squareSide/2,
-        fill: (i<5||i===8) ? 'black' : 'white',
-        stroke: 'black',
-        strokeWidth: 5
-      }));
-      i += 1;
-    }
+    supportFunc.drawCircleArray(stateArray, outLayerAry[4], (function(i){
+      return (i<5||i===8) ? 'black' : 'white';
+    }));
 
     return 5;
   }
@@ -248,60 +209,41 @@ externDrawFunctionArray.push(
 //Slide 2
 externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
     supportFunc.clean(outLayerAry,settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var minDim = settingsObj.minDim;
+    var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(),
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc),
+      bulletTextPosGenerator = supportFunc.bulletTextPosGenerator,
 
-    var center   = supportFunc.center;
-    var drawText = supportFunc.drawText;
-    var createBullet = supportFunc.createBullet;
-    var floor    = supportFunc.floor;
+      minDim = settingsObj.minDim,
+      center = supportFunc.center;
 
-    var imgAry = [];
-    var imgAryCur = -1;
+    state.curx = width/2;
+    state.cury = height/4;
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Color Gamut",
-      fontSize+20, fontFamily)));
+    state.maintexty = 6*settingsObj.fontSize;
+    state.subtexty = settingsObj.fontSize;
 
-    outLayerAry[1].add(createBullet(width/2,height/4,fontSize));
-    outLayerAry[1].add(drawText(
-      width/2, height*(1/4), "What colors can be displayed?",
-      fontSize+5, fontFamily));
+    bulDrawObj = bulletTextPosGenerator(state);
 
+    supportFunc.drawHeader(outLayerAry[0], state, "Color Gamut");
 
-    imgAry.push(new Image());
-    imgAryCur += 1;
-    imgAry[imgAryCur].src = 'IMG/ColorGamutXref.jpg';
-    imgAry[imgAryCur].onload = function() {
-    };
+    bulDrawObj.bulMainText(outLayerAry[1], "What colors can be displayed?");
+    bulDrawObj.bulMainText(outLayerAry[2], "What can be seen in");
+    bulDrawObj.bulSubText(outLayerAry[2],  "a print out?");
+    bulDrawObj.bulMainText(outLayerAry[3], "Does it look good?");
+
+    imgDrawObj.pushImage('IMG/ColorGamutXref.jpg');
 
     outLayerAry[1].add(center(new Kinetic.Image({
       x: width/4,
       y: height/4,
       width: minDim/2,
       height: minDim/2,
-      image: imgAry[imgAryCur]
+      image: imgDrawObj.curImage()
     })));
-
-    outLayerAry[2].add(createBullet(width/2,height/4+6*fontSize,fontSize));
-    outLayerAry[2].add(drawText(
-      width/2, height*(1/4)+6*fontSize, "What can be seen in",
-      fontSize+5, fontFamily));
-
-    outLayerAry[2].add(drawText(
-      width/2, height*(1/4)+7*fontSize, "a print out?",
-      fontSize+5, fontFamily));
-
-    outLayerAry[3].add(createBullet(width/2,height/4+13*fontSize,fontSize));
-    outLayerAry[3].add(drawText(
-      width/2, height*(1/4)+13*fontSize, "Does it look good?",
-      fontSize+5, fontFamily));
-
 
     return 4;
   }

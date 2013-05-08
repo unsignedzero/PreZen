@@ -8,9 +8,10 @@ this is built on Javascript so it will load on mostly all modern browsers
 that can run the KineticJS library.
 
 Eventually the slides will be updated to use generators to make it easier
-to create codes
+to create codes. (In progress). With this update, creating slides will
+be much easier.
 
-If one codes it up using relative values,as positions for all the content,
+If one codes it up using relative values, as positions for all the content,
 then it can potentially scale up and work on any display size, 
 if done correctly.
 
@@ -34,7 +35,14 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
-* Created TOC with generators only.
+* Goal, apply the generator to all slides
+
+## 0.6.0.0 Beta 1 [04-08-2013] #
+### Generator Branch #
+
+* The intro and part 1 of the slides are converted to use generators now
+* Generators being tested as slides are being created
+* Added use strict to more functions used in the PreZen code base
 * Generators tested and implemented. (Now in Beta)
 * Added more functional to the generators, debug passing option, firstCall
   no shift option, etc.
