@@ -37,6 +37,15 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 * Goal, apply the generator to all slides
 
+## 0.6.0.0 Beta 3 [04-15-2013] #
+### Generator Branch #
+
+* Fixed indent mismatch in generators part of PreZen
+* Macros created to help automate process
+* Part 3 of the slides are converted to use generators
+* Additional default settings added to initial state object
+* Created additional default profile states that can be used
+
 ## 0.6.0.0 Beta 2 [04-15-2013] #
 ### Generator Branch #
 

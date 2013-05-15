@@ -13,7 +13,7 @@
  *
  * Created 01-25-2013
  * Updated 04-15-2013
- * Version 0.6.0.0 Beta 2
+ * Version 0.6.0.0 Beta 3
  * Created by David Tran (unsignedzero)
  */
 
@@ -137,7 +137,6 @@ var zxPowerPoint = (function(settings) {
 //Creates a support object that passes local functions to the board
 //Contained here are all local functions that will be used by PreZen
 //but can also be used by users
-
   supportFunc.left = function (temp) {
     //Left justifies the graphical object
     "use strict";
@@ -238,14 +237,13 @@ var zxPowerPoint = (function(settings) {
   supportFunc.abs = Math.abs;
 
   supportFunc.sqrt = Math.sqrt;
-
-  /* Test generator objects that will be updated accordingly and
-   * integrated into PreZen. Once integrated we will update the slides
-   *
-   * For this codeset to work we assume that externFont and height are
-   * well defined in PreZen.js
-   */
-
+//////////////////////////////////////////////////////////////////////////////
+/* Test generator objects that will be updated accordingly and
+ * integrated into PreZen. Once integrated we will update the slides
+ *
+ * For this codeset to work we assume that externFont and height are
+ * well defined in PreZen.js
+ */
   supportFunc.drawTextGenerator = function( input ){
     // This function sets above textPosGenerator and acts as a front
     // that generators text objects for KineticJS that can be drawn
@@ -352,46 +350,46 @@ var zxPowerPoint = (function(settings) {
        temp.x = tempTextObj.x;
        temp.y = tempTextObj.y;
        return temp;
-     },
+      },
 
-     bulMainText : function (layer, str){
-       // Text function sets text as mainText
-       curObj = textPosObj.mainText();
+      bulMainText : function (layer, str){
+        // Text function sets text as mainText
+        curObj = textPosObj.mainText();
 
-       input.x = curObj.x + mainBulXShift;
-       input.y = curObj.y;
-       input.str = str;
-       input.deltaFontSize = mainFontSizeDelta;
+        input.x = curObj.x + mainBulXShift;
+        input.y = curObj.y;
+        input.str = str;
+        input.deltaFontSize = mainFontSizeDelta;
 
-       if ( hasMainBul )
-         layer.add(supportFunc.createBullet2(input));
-       layer.add(supportFunc.drawText2(input));
-     },
+        if ( hasMainBul )
+          layer.add(supportFunc.createBullet2(input));
+        layer.add(supportFunc.drawText2(input));
+      },
 
-     bulSubText : function (layer, str){
-       // Text function sets text as subText
-       curObj = textPosObj.subText();
+      bulSubText : function (layer, str){
+        // Text function sets text as subText
+        curObj = textPosObj.subText();
 
-       input.x = curObj.x + subBulXShift;
-       input.y = curObj.y;
-       input.str = str;
-       input.deltaFontSize = subFontSizeDelta;
+        input.x = curObj.x + subBulXShift;
+        input.y = curObj.y;
+        input.str = str;
+        input.deltaFontSize = subFontSizeDelta;
 
-       if ( hasSubBul )
-         layer.add(supportFunc.createBullet2(input));
-       layer.add(supportFunc.drawText2(input));
-     }
-   };
+        if ( hasSubBul )
+          layer.add(supportFunc.createBullet2(input));
+        layer.add(supportFunc.drawText2(input));
+      }
+    };
 
-   //We make all methods of the textPosGenerator publicly accessible
-   for ( var curMethod in textPosObj ) {
-     if ( textPosObj.hasOwnProperty(curMethod) ){
-       if ( typeof curMethod === "function" )
-        retObj[curMethod.name] = curMethod;
+    //We make all methods of the textPosGenerator publicly accessible
+    for ( var curMethod in textPosObj ) {
+      if ( textPosObj.hasOwnProperty(curMethod) ){
+        if ( typeof curMethod === "function" )
+         retObj[curMethod.name] = curMethod;
       }
     }
    
-   return retObj;
+    return retObj;
   };
 
   supportFunc.createBullet2 = function( input ){
@@ -436,6 +434,10 @@ var zxPowerPoint = (function(settings) {
         fontSize: settingsObj.fontSize, fontFamily: settingsObj.fontFamily,
         width: settingsObj.width, height: settingsObj.height,
         outlineShift: settingsObj.outlineShift,
+
+        // We set default spacing. Change as needed
+        maintexty: 3*settingsObj.fontSize,
+        subtexty: settingsObj.fontSize,
 
         // We load our functions here
         drawText: supportFunc.drawText, createBullet: supportFunc.createBullet,
@@ -626,6 +628,39 @@ var zxPowerPoint = (function(settings) {
     };
   };
 
+  supportFunc.setProConState = function(state, settingsObj){
+    //Sets the default state to be used in a Pros/Cons slide
+
+    state.maintexty = 4*settingsObj.fontSize;
+    state.subtexty = 2*settingsObj.fontSize;
+
+    state.curx = width/6;
+    state.cury = height/4 - state.subtexty;
+
+    state.hasMainBul = false;
+    state.hasSubBul = true;
+
+    state.mainFontSizeDelta = 15;
+    state.subFontSizeDelta = 5;
+
+    return state;
+  };
+
+  supportFunc.setNumberedListState = function(state, settingsObj){
+    //Sets the default state in numbered list
+    state.curx = width/2;
+    state.cury = height/4;
+    state.mainBulXShift = -2*settingsObj.fontSize;
+
+    state.maintexty = 3*settingsObj.fontSize;
+    state.subtexty = settingsObj.fontSize;
+
+    state.hasMainBul = false;
+
+    state.mainFontSizeDelta = 5;
+
+    return state;
+  }
 //////////////////////////////////////////////////////////////////////////////
 //Load functions
 //This are basic functions to load the next slide or segment
@@ -898,7 +933,6 @@ var zxPowerPoint = (function(settings) {
     return globalCurAnim(timerLength, OutLayerAry, 
         nextFunc, nextFuncArgs);
   }
-
 //////////////////////////////////////////////////////////////////////////////
 //Resize Functions
   function reSizeSupport(newWidth, newHeight) {
@@ -1485,7 +1519,6 @@ var zxPowerPoint = (function(settings) {
     nextSlide       : self.nextSlide,
     previousSlide   : self.previousSlide
   };
-  
 })(PreZenSettings);
 
 //As the slides object is no longer needed globally, we will remove the reference
