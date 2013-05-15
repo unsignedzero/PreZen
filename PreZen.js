@@ -12,8 +12,8 @@
  * will scale correctly
  *
  * Created 01-25-2013
- * Updated 04-08-2013
- * Version 0.6.0.0 Beta 1
+ * Updated 04-15-2013
+ * Version 0.6.0.0 Beta 2
  * Created by David Tran (unsignedzero)
  */
 
@@ -317,11 +317,25 @@ var zxPowerPoint = (function(settings) {
     // generator objects
     "use strict";
 
-    var layer, curObj, retObj,
+    var layer, curObj, retObj, subBulXShift, mainBulXShift, hasMainBul,
+      hasSubBul, mainFontSizeDelta, subFontSizeDelta,
       textPosObj = supportFunc.textPosGenerator(input);
 
-    if ( typeof input.deltaFontSize === "number" )
-      input.deltaFontSize = 0;
+    if ( typeof input.deltaBulletFontSize === "number" )
+      input.deltaBulletFontSize = 0;
+
+    subBulXShift = ( typeof input.subBulXShift !== "number" ) ?
+      0 : input.subBulXShift;
+    mainBulXShift = ( typeof input.mainBulXShift !== "number" ) ?
+      0 : input.mainBulXShift;
+    subFontSizeDelta = ( typeof input.subFontSizeDelta !== "number" ) ?
+      0 : input.subFontSizeDelta;
+    mainFontSizeDelta = ( typeof input.mainFontSizeDelta !== "number" ) ?
+      0 : input.mainFontSizeDelta;
+    hasMainBul = ( typeof input.hasMainBul !== "boolean" ) ?
+      true : input.hasMainBul;
+    hasSubBul = ( typeof input.hasSubBul !== "boolean" ) ?
+      false : input.hasSubBul;
 
     retObj = { 
       bulText : function (str, type){
@@ -344,11 +358,13 @@ var zxPowerPoint = (function(settings) {
        // Text function sets text as mainText
        curObj = textPosObj.mainText();
 
-       input.x = curObj.x;
+       input.x = curObj.x + mainBulXShift;
        input.y = curObj.y;
        input.str = str;
+       input.deltaFontSize = mainFontSizeDelta;
 
-       layer.add(supportFunc.createBullet2(input));
+       if ( hasMainBul )
+         layer.add(supportFunc.createBullet2(input));
        layer.add(supportFunc.drawText2(input));
      },
 
@@ -356,11 +372,13 @@ var zxPowerPoint = (function(settings) {
        // Text function sets text as subText
        curObj = textPosObj.subText();
 
-       input.x = curObj.x;
+       input.x = curObj.x + subBulXShift;
        input.y = curObj.y;
        input.str = str;
+       input.deltaFontSize = subFontSizeDelta;
 
-       //layer.add(supportFunc.createBullet2(input));
+       if ( hasSubBul )
+         layer.add(supportFunc.createBullet2(input));
        layer.add(supportFunc.drawText2(input));
      }
    };
@@ -424,7 +442,7 @@ var zxPowerPoint = (function(settings) {
         center: supportFunc.center,
 
         // If we want the fonts to be bigger than the bullets set this
-        deltaFontSize: 5
+        deltaBulletFontSize: 5
 
       };
   };
@@ -438,9 +456,14 @@ var zxPowerPoint = (function(settings) {
     x  = ( typeof input.x === "number" ) ? input.x : 0;
     y  = ( typeof input.y === "number" ) ? input.y : 0;
 
-    fontSize = ( typeof input.fontSize === "number" ) ? input.fontSize : input.height/32;
-    fontSize += ( typeof input.deltaFontSize === "number" ) ? input.deltaFontSize : 0;
-    fontFamily = ( typeof input.fontFamily === "string" ) ? input.fontFamily : externFont;
+    fontSize = ( typeof input.fontSize === "number" ) ?
+      input.fontSize : input.height/32;
+    fontSize += ( typeof input.deltaBulletFontSize === "number" ) ?
+      input.deltaBulletFontSize : 0;
+    fontSize += ( typeof input.deltaFontSize === "number" ) ?
+      input.deltaFontSize : 0;
+    fontFamily = ( typeof input.fontFamily === "string" ) ?
+      input.fontFamily : externFont;
 
     str = ( typeof input.str === "string" ) ? input.str : "";
 
@@ -527,22 +550,30 @@ var zxPowerPoint = (function(settings) {
     };
   };
 
-  supportFunc.imgPosGenerator = function(){
+  supportFunc.imgPosGenerator = function(minDim){
     // This function creates a generator object that will allow users
     // to create images on the fly and hides the ugly image editing details
     "use strict";
 
-    var imgAry = [], imgAryCur = -1;
+    var imgAry = [], imgAryCur = -1, imgMetaAry = [],
+      curMeta, curImg = undefined;
 
     return {
       pushImage : function(path){
 
         // Adds the image to the array but creates the index as well
 
-        imgAry.push(new Image());
+        curImg = new Image();
+        curImg.src = path;
+        curImg.onload = function () {};
+
+        imgAry.push(curImg);
+
         imgAryCur += 1;
-        imgAry[imgAryCur].src = path;
-        imgAry[imgAryCur].onload = function () {};
+
+        // Pushes blank objects so imgMetaAry array aligns with imgAry
+
+        imgMetaAry.push({});
 
         // Here we set the index publicly so that any external call can
         // call and access the element, without accessing the internal
@@ -552,11 +583,45 @@ var zxPowerPoint = (function(settings) {
         return imgAry[imgAryCur];
       },
 
+      pushImage2 : function(path, scalex, scaley, alignFunc){
+
+        //Stores meta information for draw
+
+        var ret = this.pushImage(path);
+
+        curMeta = {
+          scalex: scalex,
+          scaley: scaley
+        };
+
+        if ( typeof alignFunc === "function")
+          curMeta.alignFunc = alignFunc;
+
+        imgMetaAry[imgAryCur] = curMeta;
+
+        return ret;
+      },
+
+      drawImage : function(layer, posx, posy){
+
+        var temp = new Kinetic.Image({
+          x: posx,
+          y: posy,
+          width: minDim/curMeta.scalex,
+          height: minDim/curMeta.scaley,
+          image: curImg
+        });
+
+        if ( curMeta.alignFunc ){
+          temp = curMeta.alignFunc(temp);
+        }
+
+        layer.add(temp);
+      },
+
       curImage : function(){
-
         // Allows users to access the "last" element in the array
-
-        return imgAryCur !== -1 ? imgAry[imgAryCur] : undefined;
+        return curImg;
       }
     };
   };

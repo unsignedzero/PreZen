@@ -5,14 +5,10 @@
  * of the code depending on which setting is incorrectly set.
  *
  *
- * Updated 03-03-2013
- * Version 0.5.0.0
+ * Updated 04-15-2013
+ * Version 0.6.0.0 Beta 2
  * Created by David Tran (unsignedzero)
  */
-
-//This will hold all the slide functions
-//This is created so its easier to call it, without repeated refinement
-var externDrawFunctionArray = [];
 
 /*Rather than pass multiple global objects,
  *we will pass one object that contains all the information needed
@@ -21,16 +17,7 @@ var PreZenSettings = {
   //Slide Array
 
   //This will eventually hold the slides
-  externDrawFunctionArray:externDrawFunctionArray,
-  //This yields the same result as..
-  /* var PreZenSettings = {
-   * ...
-   * externDrawFunctionArray = [];
-   * ...
-   * };
-   * var externDrawFunctionArray = PreZenSettings.externDrawFunctionArray;
-   *
-   */
+  //externDrawFunctionArray:[ function(drawArgs), ... function(drawArgs) ],
 
   //Sets the default font for PreZen
   externFont:'Palatino',

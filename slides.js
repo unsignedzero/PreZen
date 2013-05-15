@@ -8,20 +8,17 @@
  *
  *
  * Created 01-25-2013
- * Updated 04-08-2013
- * Version 0.6.0.0 Beta 1
+ * Updated 04-15-2013
+ * Version 0.6.0.0 Beta 2
  * Created by David Tran (unsignedzero)
  */
 
-/* WARNING
- * This code might eventually be modified as a list of functions, removing
- * the global variable but also negating the need to build the list.
- */
+//WARNING: We might indent at the add increasing GIT line count changed!
 
 //////////////////////////////////////////////////////////////////////////////
 //Add Slides Output
-//Cover Slide
-externDrawFunctionArray.push(
+//Slide 0 (Cover Slide)
+PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     supportFunc.clean(outLayerAry,settingsObj);
     "use strict";
@@ -77,48 +74,14 @@ externDrawFunctionArray.push(
 
     return 2;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
 //Test ZONE
 //////////////////////////////////////////////////////////////////////////////
-if (PreZenSettings.showDebugSlide) {
-externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc) {
-    "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
-
-    var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(),
-      state = supportFunc.generatorStateObject(settingsObj, supportFunc),
-      bulletTextPosGenerator = supportFunc.bulletTextPosGenerator,
-
-      fontSize = settingsObj.fontSize,
-      fontFamily = settingsObj.fontFamily,
-      outlineShift = settingsObj.outlineShift,
-      minDim = settingsObj.minDim,
-
-      center   = supportFunc.center,
-      align    = supportFunc.align,
-      drawText = supportFunc.drawText;
-
-    supportFunc.drawHeader(outLayerAry[0], state, "Screen Comparison");
-
-    imgDrawObj.pushImage('IMG/CompareScreen.png');
-
-    outLayerAry[1].add(align(new Kinetic.Image({
-      x: width/2,
-      y: height/2+height/20,
-      width: minDim/1,
-      height: minDim/4,
-      image: imgDrawObj.curImage()
-    })));
-
-    return 2;
-  });
-}
 //////////////////////////////////////////////////////////////////////////////
 //TOC Slide
-externDrawFunctionArray.push(
+//Slide 1
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
@@ -128,8 +91,7 @@ externDrawFunctionArray.push(
     // Here we store our state object, which will be passed once and sets up
     // the generator
     var bulDrawObj,
-      state = supportFunc.generatorStateObject(settingsObj, supportFunc),
-      bulletTextPosGenerator = supportFunc.bulletTextPosGenerator;
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
     // Sets the default start position of the text list
     state.curx = width/6;
@@ -140,7 +102,7 @@ externDrawFunctionArray.push(
     state.maintexty = 3*settingsObj.fontSize;
 
     // Create generator object
-    bulDrawObj = bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "Overview");
 
@@ -155,20 +117,18 @@ externDrawFunctionArray.push(
 
     return 9;
   }
-);
-
+,
 //////////////////////////////////////////////////////////////////////////////
-//Part 1
-//Slide 1
-externDrawFunctionArray.push(
+//Part 1 Intro
+//////////////////////////////////////////////////////////////////////////////
+//Slide 2
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
     supportFunc.clean(outLayerAry,settingsObj);
 
     var bulDrawObj,
-      state = supportFunc.generatorStateObject(settingsObj, supportFunc),
-      bulletTextPosGenerator = supportFunc.bulletTextPosGenerator;
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
     state.curx = width/2;
     state.cury = height/4;
@@ -176,7 +136,7 @@ externDrawFunctionArray.push(
     state.maintexty = 4*settingsObj.fontSize;
     state.subtexty = settingsObj.fontSize;
 
-    bulDrawObj = bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "Displays");
 
@@ -190,7 +150,7 @@ externDrawFunctionArray.push(
       y: height/4,
       sizeCount: 4,
       boardWidth: width/4
-    }
+    };
 
     //Draws first demo board
     supportFunc.drawCircleArray(stateArray, outLayerAry[2], (function(i){
@@ -204,21 +164,16 @@ externDrawFunctionArray.push(
 
     return 5;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 2
-externDrawFunctionArray.push(
+//Slide 3
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
     supportFunc.clean(outLayerAry,settingsObj);
 
-    var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(),
-      state = supportFunc.generatorStateObject(settingsObj, supportFunc),
-      bulletTextPosGenerator = supportFunc.bulletTextPosGenerator,
-
-      minDim = settingsObj.minDim,
-      center = supportFunc.center;
+    var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
     state.curx = width/2;
     state.cury = height/4;
@@ -226,7 +181,7 @@ externDrawFunctionArray.push(
     state.maintexty = 6*settingsObj.fontSize;
     state.subtexty = settingsObj.fontSize;
 
-    bulDrawObj = bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "Color Gamut");
 
@@ -235,250 +190,134 @@ externDrawFunctionArray.push(
     bulDrawObj.bulSubText(outLayerAry[2],  "a print out?");
     bulDrawObj.bulMainText(outLayerAry[3], "Does it look good?");
 
-    imgDrawObj.pushImage('IMG/ColorGamutXref.jpg');
-
-    outLayerAry[1].add(center(new Kinetic.Image({
-      x: width/4,
-      y: height/4,
-      width: minDim/2,
-      height: minDim/2,
-      image: imgDrawObj.curImage()
-    })));
+    imgDrawObj.pushImage2('IMG/ColorGamutXref.jpg', 2, 2, supportFunc.center);
+    imgDrawObj.drawImage(outLayerAry[1], width/4, height/4);
 
     return 4;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
 //Part 2 CRT
-//Slide 3
-externDrawFunctionArray.push(
+//////////////////////////////////////////////////////////////////////////////
+//Slide 4
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var minDim = settingsObj.minDim;
+    var imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
+    supportFunc.drawHeader(outLayerAry[0], state, "CRT");
 
-    var imgAry = [];
-    var imgAryCur = -1;
+    supportFunc.drawSubHeader(outLayerAry[1], state, "Cathode Ray Tube");
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "CRT",
-      fontSize+20, fontFamily)));
-
-    outLayerAry[1].add(center(drawText(
-      width/2, outlineShift + 0.1*height, "Cathode Ray Tube",
-      fontSize+10, fontFamily)));
-
-
-    imgAry.push(new Image());
-    imgAryCur += 1;
-    imgAry[imgAryCur].src = 'IMG/crt-monitor.jpg';
-    imgAry[imgAryCur].onload = function() {
-    };
-
-    outLayerAry[1].add(align(new Kinetic.Image({
-      x: width/2,
-      y: height/2+height/20,
-      width: minDim/1.5,
-      height: minDim/1.5,
-      image: imgAry[imgAryCur]
-    })));
+    imgDrawObj.pushImage2( 'IMG/crt-monitor.jpg', 1.5, 1.5, supportFunc.align);
+    imgDrawObj.drawImage(outLayerAry[1], width/2, height/2+height/20);
 
     return 2;
   }
-);
-//////////////////////////////////////////////////////////////////////////////
-//Slide 4
-externDrawFunctionArray.push(
-  function(outLayerAry, width, height, settingsObj, supportFunc) {
-
-    supportFunc.clean(outLayerAry,settingsObj);
-
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var minDim = settingsObj.minDim;
-
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
-    var createBullet = supportFunc.createBullet;
-    var floor    = supportFunc.floor;
-
-    var imgAry = [];
-    var imgAryCur = -1;
-
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "CRT (How they work)",
-      fontSize+20, fontFamily)));
-
-
-    outLayerAry[1].add(drawText(
-      width/2-2*fontSize, height*(1/4), "1. Electron Gun",
-      fontSize+5, fontFamily));
-
-    outLayerAry[1].add(drawText(
-      width/2, height*(1/4)+fontSize, "Each color has a gun",
-      fontSize, fontFamily));
-
-
-    imgAry.push(new Image());
-    imgAryCur += 1;
-    imgAry[imgAryCur].src = 'IMG/750px-CRT_color_enhanced.png';
-    imgAry[imgAryCur].onload = function() {
-    };
-
-    outLayerAry[1].add(center(new Kinetic.Image({
-      x: width/4,
-      y: height/4,
-      width: minDim/2,
-      height: minDim/2,
-      image: imgAry[imgAryCur]
-    })));
-
-    outLayerAry[2].add(drawText(
-      width/2-2*fontSize, height*(1/4)+3*fontSize, "2. Electron Path",
-      fontSize+5, fontFamily));
-
-    outLayerAry[3].add(drawText(
-      width/2-2*fontSize, height*(1/4)+5*fontSize, "3/4. Electron Coils",
-      fontSize+5, fontFamily));
-
-    outLayerAry[3].add(drawText(
-      width/2, height*(1/4)+6*fontSize, "There are two coils one for",
-      fontSize, fontFamily));
-
-    outLayerAry[3].add(drawText(
-      width/2, height*(1/4)+7*fontSize, "horizontial and another for",
-      fontSize, fontFamily));
-
-    outLayerAry[3].add(drawText(
-      width/2, height*(1/4)+8*fontSize, "vertical",
-      fontSize, fontFamily));
-
-    outLayerAry[4].add(drawText(
-      width/2-2*fontSize, height*(1/4)+10*fontSize, "5. Anode Connection",
-      fontSize+5, fontFamily));
-
-    outLayerAry[5].add(drawText(
-      width/2-2*fontSize, height*(1/4)+12*fontSize, "6. Color mask",
-      fontSize+5, fontFamily));
-
-    outLayerAry[5].add(drawText(
-      width/2, height*(1/4)+13*fontSize, "Seperates the colors",
-      fontSize, fontFamily));
-
-    outLayerAry[6].add(drawText(
-      width/2-2*fontSize, height*(1/4)+15*fontSize, "7. Phosphor Layer",
-      fontSize+5, fontFamily));
-
-    outLayerAry[6].add(drawText(
-      width/2, height*(1/4)+16*fontSize, "The sub-pixel that lights up",
-      fontSize, fontFamily));
-
-    outLayerAry[6].add(drawText(
-      width/2, height*(1/4)+17*fontSize, "when stuck by an electron",
-      fontSize, fontFamily));
-
-    imgAry.push(new Image());
-    imgAryCur += 1;
-    imgAry[imgAryCur].src = 'IMG/600px-CRT_screen._closeup.jpg';
-    imgAry[imgAryCur].onload = function() {
-    };
-
-    outLayerAry[7].add(center(new Kinetic.Image({
-      x: width/4,
-      y: height/4,
-      width: minDim/2,
-      height: minDim/2,
-      image: imgAry[imgAryCur]
-    })));
-
-    outLayerAry[7].add(align(drawText(
-      width/4, height*(1/5), "8 Sample Mask Image",
-      fontSize+5, fontFamily)));
-
-    return 8;
-  }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
 //Slide 5
-externDrawFunctionArray.push(
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var createBullet = supportFunc.createBullet;
+    var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
+    state.curx = width/2;
+    state.cury = height/4;
+    state.mainBulXShift = -2*settingsObj.fontSize;
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "CRT (Pros/Cons)",
-      fontSize+20, fontFamily)));
+    state.maintexty = 2*settingsObj.fontSize;
+    state.subtexty = settingsObj.fontSize;
 
-    outLayerAry[1].add(drawText(
-      width/6, height/4-2*fontSize, "-Pros-",
-      fontSize+15, fontFamily));
+    state.hasMainBul = false;
+    state.mainFontSizeDelta = 5;
 
-    outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
-    outLayerAry[1].add(drawText(
-      width/6, height/4, "No Input Lag",
-      fontSize+5, fontFamily));
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
-    outLayerAry[2].add(createBullet(width/6, height/4+2*fontSize, fontSize));
-    outLayerAry[2].add(drawText(
-      width/6, height/4+2*fontSize, "Flexible resolution/refresh rate",
-      fontSize+5, fontFamily));
+    supportFunc.drawHeader(outLayerAry[0], state, "CRT (How they work)");
 
-    outLayerAry[3].add(createBullet(width/6, height/4+4*fontSize, fontSize));
-    outLayerAry[3].add(drawText(
-      width/6, height/4+4*fontSize, "No color distortion and greater viewing angle",
-      fontSize+5, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[1], "1. Electron Gun");
+    bulDrawObj.bulSubText(outLayerAry[1], "Each color has a gun");
 
-    outLayerAry[4].add(drawText(
-      width/6, height/4+8*fontSize, "-Cons-",
-      fontSize+15, fontFamily));
+    imgDrawObj.pushImage2('IMG/750px-CRT_color_enhanced.png', 2, 2,
+        supportFunc.center);
+    imgDrawObj.drawImage(outLayerAry[1], width/4, height/4);
 
-    outLayerAry[4].add(createBullet(width/6, height/4+10*fontSize, fontSize));
-    outLayerAry[4].add(drawText(
-      width/6, height/4+10*fontSize, "Larger size/heavier weight",
-      fontSize+5, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[2], "2. Electron Path");
 
-    outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
-    outLayerAry[5].add(drawText(
-      width/6, height/4+12*fontSize, "More power used compared to an LCD",
-      fontSize+5, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[3], "3/4. Electron Coils");
+    bulDrawObj.bulSubText(outLayerAry[3], "There are two coils one for");
+    bulDrawObj.bulSubText(outLayerAry[3], "horizontial and another for");
+    bulDrawObj.bulSubText(outLayerAry[3], "vertical");
 
-    outLayerAry[6].add(createBullet(width/6, height/4+14*fontSize, fontSize));
-    outLayerAry[6].add(drawText(
-      width/6, height/4+14*fontSize, "Affected by magnetic field",
-      fontSize+5, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[4], "5. Anode Connection");
 
-    outLayerAry[7].add(createBullet(width/6, height/4+16*fontSize, fontSize));
-    outLayerAry[7].add(drawText(
-      width/6, height/4+16*fontSize, "Recycling is a problem",
-      fontSize+5, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[5], "6. Color mask");
+    bulDrawObj.bulSubText(outLayerAry[5], "Seperates the colors");
+
+    bulDrawObj.bulMainText(outLayerAry[6], "7. Phosphor Layer");
+    bulDrawObj.bulSubText(outLayerAry[6], "The sub-pixel that lights up");
+    bulDrawObj.bulSubText(outLayerAry[6], "when stuck by an electron");
+
+    imgDrawObj.pushImage2('IMG/600px-CRT_screen._closeup.jpg', 2, 2,
+        supportFunc.center);
+    imgDrawObj.drawImage(outLayerAry[7], width/4, height/4);
+
+    outLayerAry[7].add(supportFunc.align(supportFunc.drawText(
+      width/4, height*(1/5), "8. Sample Mask Image",
+      settingsObj.fontSize+5, settingsObj.fontFamily)));
 
     return 8;
   }
-);
+,
+//////////////////////////////////////////////////////////////////////////////
+//Slide 6
+  function(outLayerAry, width, height, settingsObj, supportFunc) {
+
+    supportFunc.clean(outLayerAry,settingsObj);
+
+    var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
+
+    state.maintexty = 4*settingsObj.fontSize;
+    state.subtexty = 2*settingsObj.fontSize;
+
+    state.curx = width/6;
+    state.cury = height/4 - state.subtexty;
+
+    state.hasMainBul = false;
+    state.hasSubBul = true;
+
+    state.mainFontSizeDelta = 15;
+    state.subFontSizeDelta = 5;
+
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+
+    supportFunc.drawHeader(outLayerAry[0], state, "CRT (Pros/Cons)");
+
+    bulDrawObj.bulMainText(outLayerAry[1], "-Pros-");
+    bulDrawObj.bulSubText(outLayerAry[1], "No Input Lag");
+    bulDrawObj.bulSubText(outLayerAry[2], "Flexible resolution/refresh rate");
+    bulDrawObj.bulSubText(outLayerAry[3],
+        "No color distortion and greater viewing angle");
+
+    bulDrawObj.bulMainText(outLayerAry[4], "-Cons-");
+    bulDrawObj.bulSubText(outLayerAry[4], "Larger size/heavier weight");
+    bulDrawObj.bulSubText(outLayerAry[5], "More power used compared to an LCD");
+    bulDrawObj.bulSubText(outLayerAry[6], "Affected by magnetic field");
+    bulDrawObj.bulSubText(outLayerAry[7], "Recycling is a problem");
+
+    return 8;
+  }
+,
 //////////////////////////////////////////////////////////////////////////////
 //Part 3 Plasma
 //////////////////////////////////////////////////////////////////////////////
-//Slide 6
-externDrawFunctionArray.push(
+//Slide 7
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -517,10 +356,9 @@ externDrawFunctionArray.push(
 
     return 2;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 7
-externDrawFunctionArray.push(
+//Slide 8
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -594,10 +432,9 @@ externDrawFunctionArray.push(
 
     return 6;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 8
-externDrawFunctionArray.push(
+//Slide 9
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -656,11 +493,11 @@ externDrawFunctionArray.push(
 
     return 6;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Part 3 LCD
-//Slide 9
-externDrawFunctionArray.push(
+//Part 4 LCD
+//////////////////////////////////////////////////////////////////////////////
+//Slide 10
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -702,10 +539,9 @@ externDrawFunctionArray.push(
 
     return 2;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 10
-externDrawFunctionArray.push(
+//Slide 11
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -807,10 +643,9 @@ externDrawFunctionArray.push(
 
     return 7;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 11
-externDrawFunctionArray.push(
+//Slide 12
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -870,10 +705,9 @@ externDrawFunctionArray.push(
 
     return 5;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 12
-externDrawFunctionArray.push(
+//Slide 13
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -986,10 +820,9 @@ externDrawFunctionArray.push(
 
     return 8;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 13
-externDrawFunctionArray.push(
+//Slide 14
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -1027,10 +860,9 @@ externDrawFunctionArray.push(
 
     return 2;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 14
-externDrawFunctionArray.push(
+//Slide 15
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -1094,10 +926,9 @@ externDrawFunctionArray.push(
 
     return 8;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 15
-externDrawFunctionArray.push(
+//Slide 16
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -1152,11 +983,11 @@ externDrawFunctionArray.push(
 
     return 3;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Part 4 OLED
-//Slide 16
-externDrawFunctionArray.push(
+//Part 5 OLED
+//////////////////////////////////////////////////////////////////////////////
+//Slide 17
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -1198,10 +1029,9 @@ externDrawFunctionArray.push(
 
     return 2;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 17
-externDrawFunctionArray.push(
+//Slide 18
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -1302,10 +1132,9 @@ externDrawFunctionArray.push(
 
     return 6;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 18
-externDrawFunctionArray.push(
+//Slide 19
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -1368,11 +1197,11 @@ externDrawFunctionArray.push(
 
     return 7;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Part 5 AMOLED
-//Slide 19
-externDrawFunctionArray.push(
+//Part 6 AMOLED
+//////////////////////////////////////////////////////////////////////////////
+//Slide 20
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -1414,9 +1243,9 @@ externDrawFunctionArray.push(
 
     return 2;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-externDrawFunctionArray.push(
+//Slide 21
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -1489,10 +1318,9 @@ externDrawFunctionArray.push(
 
     return 4;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 20
-externDrawFunctionArray.push(
+//Slide 22
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -1555,10 +1383,9 @@ externDrawFunctionArray.push(
 
     return 7;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 21
-externDrawFunctionArray.push(
+//Slide 23
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -1629,11 +1456,11 @@ externDrawFunctionArray.push(
 
     return 4;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Part 6 Drawing
-//Slide 22
-externDrawFunctionArray.push(
+//Part 7 Drawing
+//////////////////////////////////////////////////////////////////////////////
+//Slide 24
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     supportFunc.clean(outLayerAry,settingsObj);
 
@@ -1699,10 +1526,9 @@ externDrawFunctionArray.push(
 
     return 2;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 23
-externDrawFunctionArray.push(
+//Slide 25
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -1778,11 +1604,9 @@ externDrawFunctionArray.push(
 
     return 7;
   }
-);
-
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 24
-externDrawFunctionArray.push(
+//Slide 26
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     //Creates the demo
@@ -1956,11 +1780,9 @@ externDrawFunctionArray.push(
 
     return 8;
   }
-);
-
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 25
-externDrawFunctionArray.push(
+//Slide 27
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -2090,10 +1912,9 @@ externDrawFunctionArray.push(
 
     return 8;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 26
-externDrawFunctionArray.push(
+//Slide 28
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -2225,10 +2046,9 @@ externDrawFunctionArray.push(
 
     return 8;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide 27
-externDrawFunctionArray.push(
+//Slide 29
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -2362,10 +2182,9 @@ externDrawFunctionArray.push(
 
     return 5;
   }
-);
+,
 /////////////////////////////////////////////////////////////////////////////
-//Sdlie 28
-externDrawFunctionArray.push(
+//Slide 30
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -2412,10 +2231,9 @@ externDrawFunctionArray.push(
 
     return 5;
   }
-);
+,
 /////////////////////////////////////////////////////////////////////////////
-//Slide 29
-externDrawFunctionArray.push(
+//Slide 31
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -2496,10 +2314,9 @@ externDrawFunctionArray.push(
 
     return 7;
   }
-);
+,
 /////////////////////////////////////////////////////////////////////////////
-//Slide 30
-externDrawFunctionArray.push(
+//Slide 32
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -2533,10 +2350,9 @@ externDrawFunctionArray.push(
 
     return 4;
   }
-);
+,
 //////////////////////////////////////////////////////////////////////////////
-//Slide END
-externDrawFunctionArray.push(
+//Slide 33 (end slide)
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
     supportFunc.clean(outLayerAry,settingsObj);
@@ -2559,9 +2375,5 @@ externDrawFunctionArray.push(
 
     return 2;
   }
-);
+];
 
-// Once we've added all the slides, we remove the global variable and keep
-// the pointer in PreZenSettings.externDrawFunctionArray
-
-externDrawFunctionArray = undefined;

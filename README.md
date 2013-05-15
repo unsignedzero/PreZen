@@ -31,11 +31,21 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 * Add speaker notes on the slide
 * Add button/key to jump to a specific slide/segment
-* Reduce the number of variables in each slide to 1, if possible
+* Reduce the number of variables in each slide to the bare necessities , if possible
 
 # Version/Changelog #
 
 * Goal, apply the generator to all slides
+
+## 0.6.0.0 Beta 2 [04-15-2013] #
+### Generator Branch #
+
+* Updated PreZen slides file and settings to simply the creation of slides 
+  It is passed an array, rather than pushing elements on it. One less global
+  variable needed.
+* Part 2 of the slides are converted to use generators
+* Additional usage options added to image generator
+* Additional control options added to text generator
 
 ## 0.6.0.0 Beta 1 [04-08-2013] #
 ### Generator Branch #
