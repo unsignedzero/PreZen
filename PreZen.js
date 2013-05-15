@@ -13,7 +13,7 @@
  *
  * Created 01-25-2013
  * Updated 04-15-2013
- * Version 0.6.0.0 Beta 3
+ * Version 0.6.0.0 Beta 4
  * Created by David Tran (unsignedzero)
  */
 
@@ -316,6 +316,7 @@ var zxPowerPoint = (function(settings) {
     "use strict";
 
     var layer, curObj, retObj, subBulXShift, mainBulXShift, hasMainBul,
+      nextBulletState,
       hasSubBul, mainFontSizeDelta, subFontSizeDelta,
       textPosObj = supportFunc.textPosGenerator(input);
 
@@ -336,22 +337,6 @@ var zxPowerPoint = (function(settings) {
       false : input.hasSubBul;
 
     retObj = { 
-      bulText : function (str, type){
-
-       // General text function that will set the text as main or sub
-       // depending on type
-
-       temp = { fontSize: fontSize, fontFamily : fontFamily,
-           fill: 'black',
-           text: str };
-
-       tempTextObj = type ? textPosObj.subtext() : textPosObj.maintext();
-
-       temp.x = tempTextObj.x;
-       temp.y = tempTextObj.y;
-       return temp;
-      },
-
       bulMainText : function (layer, str){
         // Text function sets text as mainText
         curObj = textPosObj.mainText();
@@ -361,8 +346,12 @@ var zxPowerPoint = (function(settings) {
         input.str = str;
         input.deltaFontSize = mainFontSizeDelta;
 
-        if ( hasMainBul )
+        if ((nextBulletState === undefined && hasMainBul) || 
+            (nextBulletState !== undefined && nextBulletState)
+          )
           layer.add(supportFunc.createBullet2(input));
+        nextBulletState = undefined;
+
         layer.add(supportFunc.drawText2(input));
       },
 
@@ -375,9 +364,21 @@ var zxPowerPoint = (function(settings) {
         input.str = str;
         input.deltaFontSize = subFontSizeDelta;
 
-        if ( hasSubBul )
+        if ((nextBulletState === undefined && hasSubBul) || 
+            (nextBulletState !== undefined && nextBulletState)
+          )
           layer.add(supportFunc.createBullet2(input));
+        nextBulletState = undefined;
+
         layer.add(supportFunc.drawText2(input));
+      },
+
+      nextHasBullet : function(){
+        nextBulletState = true;
+      },
+
+      nextHasNoBullet : function(){
+        nextBulletState = false;
       }
     };
 
@@ -407,7 +408,7 @@ var zxPowerPoint = (function(settings) {
     return input.createBullet(x, y, fontSize);
   };
 
-  supportFunc.drawHeader = function(layer, input , str){
+  supportFunc.drawHeader = function(layer, input, str){
     // Object facade that creates the header (non-existent in original)
     "use strict";
 
@@ -416,7 +417,7 @@ var zxPowerPoint = (function(settings) {
       input.fontSize+20, input.fontFamily)));
   };
 
-  supportFunc.drawSubHeader = function(layer, input , str){
+  supportFunc.drawSubHeader = function(layer, input, str){
     // Object facade that creates the subheader (non-existent in original)
     "use strict";
 
@@ -441,7 +442,7 @@ var zxPowerPoint = (function(settings) {
 
         // We load our functions here
         drawText: supportFunc.drawText, createBullet: supportFunc.createBullet,
-        center: supportFunc.center,
+        center: supportFunc.center, align: supportFunc.align,
 
         // If we want the fonts to be bigger than the bullets set this
         deltaBulletFontSize: 5

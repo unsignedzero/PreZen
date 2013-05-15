@@ -9,8 +9,8 @@
  * and enumerated here
  *
  * Created 03-02-2013
- * Updated 04-08-2013
- * Version 0.6.0.0 Beta 1
+ * Updated 04-15-2013
+ * Version 0.6.0.0 Beta 4
  * Created by David Tran (unsignedzero)
  */
 
@@ -246,7 +246,6 @@ PreZenSettings.supportFunc = {
     outLayerA.add(pointa);
     outLayerB.add(pointb);
     outLayerC.add(pointc);
-
   },
 
   drawPixelCircle : function (LocalLayer, supportFunc, 
@@ -343,6 +342,15 @@ PreZenSettings.supportFunc = {
       }));
       i += 1;
     }
+  },
+
+  drawCaptionText : function(layer, input, str){
+    // Object facade that creates the subheader (non-existent in original)
+    "use strict";
+
+    layer.add(input.align(input.drawText(
+      input.width/4, input.height/5, str,
+      input.fontSize+5, input.fontFamily)));
   }
 };
 

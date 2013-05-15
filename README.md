@@ -37,7 +37,15 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 * Goal, apply the generator to all slides
 
-## 0.6.0.0 Beta 3 [04-15-2013] #
+* Corrected the dates for the README.
+
+## 0.6.0.0 Beta 4 [05-15-2013] #
+
+* Part 4 of the slides are converted to use generators
+* Added override option for bullets
+* Removed unused function in generator code base
+
+## 0.6.0.0 Beta 3 [05-15-2013] #
 ### Generator Branch #
 
 * Fixed indent mismatch in generators part of PreZen
@@ -46,7 +54,7 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 * Additional default settings added to initial state object
 * Created additional default profile states that can be used
 
-## 0.6.0.0 Beta 2 [04-15-2013] #
+## 0.6.0.0 Beta 2 [05-15-2013] #
 ### Generator Branch #
 
 * Updated PreZen slides file and settings to simply the creation of slides 
@@ -56,7 +64,7 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 * Additional usage options added to image generator
 * Additional control options added to text generator
 
-## 0.6.0.0 Beta 1 [04-08-2013] #
+## 0.6.0.0 Beta 1 [05-08-2013] #
 ### Generator Branch #
 
 * The intro and part 1 of the slides are converted to use generators now

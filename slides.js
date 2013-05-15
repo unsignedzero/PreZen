@@ -9,7 +9,7 @@
  *
  * Created 01-25-2013
  * Updated 04-15-2013
- * Version 0.6.0.0 Beta 3
+ * Version 0.6.0.0 Beta 4
  * Created by David Tran (unsignedzero)
  */
 
@@ -259,9 +259,7 @@ PreZenSettings.externDrawFunctionArray = [
         supportFunc.center);
     imgDrawObj.drawImage(outLayerAry[7], width/4, height/4);
 
-    outLayerAry[7].add(supportFunc.align(supportFunc.drawText(
-      width/4, height*(1/5), "8. Sample Mask Image",
-      settingsObj.fontSize+5, settingsObj.fontFamily)));
+    supportFunc.drawCaptionText(outLayerAry[7], state, "8. Sample Mask Image");
 
     return 8;
   }
@@ -441,9 +439,7 @@ PreZenSettings.externDrawFunctionArray = [
         supportFunc.center);
     imgDrawObj.drawImage(outLayerAry[6], width/4, height/4);
 
-    outLayerAry[6].add(supportFunc.align(supportFunc.drawText(
-      width/4, height*(1/5), "LCD with polar lens on top",
-      settingsObj.fontSize+5, settingsObj.fontFamily)));
+    supportFunc.drawCaptionText(outLayerAry[6], state, "LCD with polar lens on top");
 
     return 7;
   }
@@ -608,43 +604,20 @@ PreZenSettings.externDrawFunctionArray = [
 //////////////////////////////////////////////////////////////////////////////
 //Slide 17
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
     supportFunc.clean(outLayerAry,settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var minDim = settingsObj.minDim;
+    var imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
+    supportFunc.drawHeader(outLayerAry[0], state, "OLED");
 
-    var imgAry = [];
-    var imgAryCur = -1;
+    supportFunc.drawSubHeader(outLayerAry[1], state, "Organic Light Emitting Diode");
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "OLED",
-      fontSize+20, fontFamily)));
-
-    outLayerAry[1].add(center(drawText(
-      width/2, outlineShift + 0.1*height, "Organic Light Emitting Diode",
-      fontSize+10, fontFamily)));
-
-
-    imgAry.push(new Image());
-    imgAryCur += 1;
-    imgAry[imgAryCur].src = 'IMG/Sony_XEL-1.jpg';
-    imgAry[imgAryCur].onload = function() {
-    };
-
-    outLayerAry[1].add(align(new Kinetic.Image({
-      x: width/2,
-      y: height/2+height/20,
-      width: minDim/1.125,
-      height: minDim/1.5,
-      image: imgAry[imgAryCur]
-    })));
+    imgDrawObj.pushImage2('IMG/Sony_XEL-1.jpg', 1.125, 1.5,
+      supportFunc.align);
+    imgDrawObj.drawImage(outLayerAry[1], width/2, height/2+height/20);
 
     return 2;
   }
@@ -652,102 +625,51 @@ PreZenSettings.externDrawFunctionArray = [
 //////////////////////////////////////////////////////////////////////////////
 //Slide 18
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
     supportFunc.clean(outLayerAry,settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var minDim = settingsObj.minDim;
+    var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
-    var createBullet = supportFunc.createBullet;
-    var floor    = supportFunc.floor;
+    supportFunc.setNumberedListState(state, settingsObj);
+    state.maintexty = 2*settingsObj.fontSize;
 
-    var imgAry = [];
-    var imgAryCur = -1;
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "OLED (How they work) ",
-      fontSize+20, fontFamily)));
+    supportFunc.drawHeader(outLayerAry[0], state, "OLED (How they work) ");
 
+    bulDrawObj.bulMainText(outLayerAry[1], "1.  Atoms are stripped of electrons");
+    bulDrawObj.bulSubText(outLayerAry[1], "in the conductive layer (4)");
 
-    outLayerAry[1].add(drawText(
-      width/2-2*fontSize, height*(1/4), "1  Atoms are stripped of electrons",
-      fontSize+5, fontFamily));
+    imgDrawObj.pushImage2('IMG/OLED_schematic.svg.png', 2, 4,
+        supportFunc.center);
+    imgDrawObj.drawImage(outLayerAry[1], width/4, height/4);
 
-    outLayerAry[1].add(drawText(
-      width/2, height*(1/4)+fontSize, "in the conductive layer (4)",
-      fontSize, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[2], "2.  Electrons from this layer");
+    bulDrawObj.bulSubText(outLayerAry[2], "(emissive layer) are pulled to the");
+    bulDrawObj.bulSubText(outLayerAry[2], "conductive layer (2)");
 
+    bulDrawObj.bulMainText(outLayerAry[3], "3. Holes and electrons collide");
 
-    imgAry.push(new Image());
-    imgAryCur += 1;
-    imgAry[imgAryCur].src = 'IMG/OLED_schematic.svg.png';
-    imgAry[imgAryCur].onload = function() {
-    };
+    bulDrawObj.bulSubText(outLayerAry[3], "creating Light (3)");
 
-    outLayerAry[1].add(center(new Kinetic.Image({
-      x: width/4,
-      y: height/4,
-      width: minDim/2,
-      height: minDim/4,
-      image: imgAry[imgAryCur]
-    })));
+    //Update state and build new generator
+    state.maintexty = 3*settingsObj.fontSize;
+    state.mainFontSizeDelta = 15;
+    state.cury = height/4 + 10*settingsObj.fontSize;
 
-    outLayerAry[2].add(drawText(
-      width/2-2*fontSize, height*(1/4)+3*fontSize, "2  Electrons from this layer",
-      fontSize+5, fontFamily));
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
-    outLayerAry[2].add(drawText(
-      width/2, height*(1/4)+4*fontSize, "(emissive layer) are pulled to the",
-      fontSize, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[4], "-Layers of Interest-");
+    bulDrawObj.bulMainText(outLayerAry[4], "1 Cathode Layer (-)");
+    bulDrawObj.bulMainText(outLayerAry[4], "5 Anode Layer (+)");
 
-    outLayerAry[2].add(drawText(
-      width/2, height*(1/4)+5*fontSize, "conductive layer (2)",
-      fontSize, fontFamily));
+    imgDrawObj.pushImage2('IMG/OLED_EarlyProduct.JPG', 2, 2,
+        supportFunc.center);
+    imgDrawObj.drawImage(outLayerAry[5], width/4, height/4);
 
-    outLayerAry[3].add(drawText(
-      width/2-2*fontSize, height*(1/4)+7*fontSize, "3 Holes and electrons collide",
-      fontSize+5, fontFamily));
-
-    outLayerAry[3].add(drawText(
-      width/2, height*(1/4)+8*fontSize, "creating Light (3)",
-      fontSize, fontFamily));
-
-    outLayerAry[4].add(drawText(
-      width/2, height*(1/4)+10*fontSize, "-Layers of Interest-",
-      fontSize+15, fontFamily));
-
-    outLayerAry[4].add(drawText(
-      width/2, height*(1/4)+13*fontSize, "1 Cathode Layer (-)",
-      fontSize+5, fontFamily));
-
-    outLayerAry[4].add(drawText(
-      width/2, height*(1/4)+15*fontSize, "5 Anode Layer (+)",
-      fontSize+5, fontFamily));
-
-
-    imgAry.push(new Image());
-    imgAryCur += 1;
-    imgAry[imgAryCur].src = 'IMG/OLED_EarlyProduct.JPG';
-    imgAry[imgAryCur].onload = function() {
-    };
-
-    outLayerAry[5].add(center(new Kinetic.Image({
-      x: width/4,
-      y: height/4,
-      width: minDim/2,
-      height: minDim/2,
-      image: imgAry[imgAryCur]
-    })));
-
-    outLayerAry[5].add(align(drawText(
-      width/4, height*(1/5), "Sample OLED Screen",
-      fontSize+5, fontFamily)));
-
+    supportFunc.drawCaptionText(outLayerAry[5], state, "Sample OLED Screen");
 
     return 6;
   }
@@ -755,64 +677,30 @@ PreZenSettings.externDrawFunctionArray = [
 //////////////////////////////////////////////////////////////////////////////
 //Slide 19
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
     supportFunc.clean(outLayerAry,settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var createBullet = supportFunc.createBullet;
+    var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
+    supportFunc.setProConState(state, settingsObj);
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "OLED (Pros/Cons)",
-      fontSize+20, fontFamily)));
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
-    outLayerAry[1].add(drawText(
-      width/6, height/4-2*fontSize, "-Pros-",
-      fontSize+15, fontFamily));
+    supportFunc.drawHeader(outLayerAry[0], state, "OLED (Pros/Cons)");
 
-    outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
-    outLayerAry[1].add(drawText(
-      width/6, height/4, "Flexible screens",
-      fontSize+5, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[1], "-Pros-");
+    bulDrawObj.bulSubText(outLayerAry[1], "Flexible screens");
+    bulDrawObj.bulSubText(outLayerAry[2], "Response time ~2-16ms");
 
-    outLayerAry[2].add(createBullet(width/6, height/4+2*fontSize, fontSize));
-    outLayerAry[2].add(drawText(
-      width/6, height/4+2*fontSize, "Response time ~2-16ms",
-      fontSize+5, fontFamily));
-
-
-    outLayerAry[3].add(drawText(
-      width/6, height/4+8*fontSize, "-Cons-",
-      fontSize+15, fontFamily));
-
-    outLayerAry[3].add(createBullet(width/6, height/4+10*fontSize, fontSize));
-    outLayerAry[3].add(drawText(
-      width/6, height/4+10*fontSize, "Power consumption 60-80% more ",
-      fontSize+5, fontFamily));
-
-    outLayerAry[3].add(drawText(
-      width/6, height/4+11*fontSize, "power with white backgrounds",
-      fontSize, fontFamily));
-
-    outLayerAry[4].add(createBullet(width/6, height/4+13*fontSize, fontSize));
-    outLayerAry[4].add(drawText(
-      width/6, height/4+13*fontSize, "14000 hour until blue is at 50% brightness",
-      fontSize+5, fontFamily));
-
-    outLayerAry[5].add(createBullet(width/6, height/4+15*fontSize, fontSize));
-    outLayerAry[5].add(drawText(
-      width/6, height/4+15*fontSize, "High Cost. $8,000",
-      fontSize+5, fontFamily));
-
-    outLayerAry[6].add(createBullet(width/6, height/4+17*fontSize, fontSize));
-    outLayerAry[6].add(drawText(
-      width/6, height/4+17*fontSize, "In Development Land",
-      fontSize+5, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[3], "-Cons-");
+    bulDrawObj.bulSubText(outLayerAry[3], "Power consumption 60-80% more");
+    bulDrawObj.nextHasNoBullet();
+    bulDrawObj.bulSubText(outLayerAry[3], "power with white backgrounds");
+    bulDrawObj.bulSubText(outLayerAry[4], "14000 hour until blue is at 50% brightness");
+    bulDrawObj.bulSubText(outLayerAry[5], "High Cost. $8000");
+    bulDrawObj.bulSubText(outLayerAry[6], "In Development Land");
 
     return 7;
   }
