@@ -9,7 +9,7 @@
  *
  * Created 01-25-2013
  * Updated 05-16-2013
- * Version 0.6.0.0 Beta 5
+ * Version 0.6.0.0 Beta 6
  * Created by David Tran (unsignedzero)
  */
 
@@ -26,26 +26,24 @@ PreZenSettings.externDrawFunctionArray = [
     var animTime = settingsObj.animTime;
     var outlineShift = settingsObj.outlineShift;
 
-    var center   = supportFunc.center;
-
     var radius = height*0.3;
     var circle;
 
     var state = supportFunc.generatorStateObject(settingsObj, supportFunc),
         textGen;
 
-    state.fontSize -= 3;
     state.curx = width/2;
     state.cury = outlineShift + radius;
+    state.mainFontSizeDelta = -3;
+    state.hasMainBul = false;
+    state.alignFunc = supportFunc.center;
 
     state.maintexty = height * (3/4) - (outlineShift + radius);
 
-    textGen = supportFunc.drawTextGenerator(state);
+    textGen = supportFunc.bulletTextPosGenerator(state);
 
-    outLayerAry[0].add(center(textGen.mainText(
-      "What can you see in a display?")));
-    outLayerAry[1].add(center(textGen.mainText(
-      "Created by David Tran")));
+    textGen.bulMainText(outLayerAry[0], "What can you see in a display?");
+    textGen.bulMainText(outLayerAry[1], "Created by David Tran");
 
     circle = new Kinetic.Wedge({
       x: width/2,
@@ -834,44 +832,43 @@ PreZenSettings.externDrawFunctionArray = [
 //Slide 24
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     supportFunc.clean(outLayerAry, settingsObj);
+    "use strict";
 
-    var animTime = settingsObj.animTime;
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
+    var animTime = settingsObj.animTime,
+      circlea, circleb, circleState, radius = settingsObj.minDim*0.3,
+      bulDrawObj,
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var drawText = supportFunc.drawText;
+    state.curx = width/2;
+    state.cury = settingsObj.outlineShift + radius;
 
-    var radius = height*0.3;
-    var circlea, circleb;
+    state.subtexty = radius*0.8;
+    state.subFontSizeDelta = 2;
+    state.alignFunc = supportFunc.center;
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift+radius, 'Applications',
-      fontSize+2, fontFamily)));
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
-    circlea = new Kinetic.Wedge({
+    bulDrawObj.bulSubText(outLayerAry[0], 'Applications');
+    bulDrawObj.bulSubText(outLayerAry[1], "Drawing Circles");
+
+    //Drawing stuff here
+    circleState = {
       x: width/2,
       y: height/2 - radius/2,
-
       radius: radius,
 
       stroke: 'black',
       strokeWidth: 3,
       angleDeg: 270
-    });
+    };
 
-    circleb = new Kinetic.Wedge({
-      x: width/2,
-      y: height/2 - radius/2,
+    circlea = new Kinetic.Wedge(circleState);
 
-      radius: radius/2,
+    circleState.radius = radius/2;
+    circleState.angleDeg = 90;
+    circleState.rotationDeg = -180;
 
-      stroke: 'black',
-      strokeWidth: 3,
-      angleDeg: 90,
-      rotationDeg: -180
-    });
+    circleb = new Kinetic.Wedge(circleState);
 
     (function (){
       var ptr = new Kinetic.Animation(function(frame) {
@@ -879,7 +876,6 @@ PreZenSettings.externDrawFunctionArray = [
         circleb.setAngleDeg(360*frame.time/animTime);
         if (frame.time >= animTime) {
           ptr.stop();
-          frame.time=0;
           circlea.setAngleDeg(360);
           circleb.setAngleDeg(360);
         }
@@ -890,88 +886,69 @@ PreZenSettings.externDrawFunctionArray = [
     outLayerAry[0].add(circlea);
     outLayerAry[0].add(circleb);
 
-    outLayerAry[1].add(center(drawText(
-      width/2, outlineShift+radius*1.8, "Drawing Circles",
-      fontSize+2, fontFamily)));
-
-
     return 2;
   }
 ,
 //////////////////////////////////////////////////////////////////////////////
 //Slide 25
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
     supportFunc.clean(outLayerAry, settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
+    var fontSize = settingsObj.fontSize, 
+      radius = height*0.2, circleState,
+      bulLeftDrawObj, bulRightDrawObj,
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
-
-    var radius = height*0.2;
-
-    var temp;
-
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, 'Mathematic Model',
-      fontSize+20, fontFamily)));
-
-
-    outLayerAry[1].add(new Kinetic.Wedge({
+    // Due to the way layer works, we want text ABOVE the images
+    // so we create this first
+    circleState = {
       x: width/4,
       y: height/2 - radius/2 + fontSize,
 
       radius: radius,
       angleDeg: 360,
 
-      stroke: 'black',
+      fill: "white",
+      stroke: "black",
       strokeWidth: 3
-    }));
+    };
 
-    outLayerAry[1].add(center(drawText(
-      width/4, height/2 - radius/2, 'x^2 + y^2 = r^2',
-      fontSize, fontFamily)));
+    outLayerAry[1].add(new Kinetic.Wedge(circleState));
 
-    outLayerAry[2].add(center(drawText(
-      width*3/4, height*1/3, 'Implications',
-      fontSize+15, fontFamily)));
+    circleState.rotationDeg = 180;
 
-    outLayerAry[3].add(center(drawText(
-      width*3/4, height*1/3 + 2*fontSize, 'Negative Radius',
-      fontSize+5, fontFamily)));
+    outLayerAry[4].add(new Kinetic.Wedge(circleState));
 
-    outLayerAry[4].add(center(drawText(
-      width*3/4, height*1/3 + 3*fontSize, 'Possible',
-      fontSize, fontFamily)));
+    // Setup for text
+    state.curx = width*3/4;
+    state.cury = height/4;
+    state.hasMainBul = false;
+    state.alignFunc = supportFunc.center;
+    state.mainFontSizeDelta = 5;
+    state.subtexty = 1.5*settingsObj.fontSize;
 
-    outLayerAry[4].add(new Kinetic.Wedge({
-      x: width/4,
-      y: height/2 - radius/2 + fontSize,
+    bulRightDrawObj = supportFunc.bulletTextPosGenerator(state);
 
-      radius: radius,
-      angleDeg: 360,
+    state.curx = width/4;
+    state.cury = height/2 - radius/2;
+    state.maintexty = 0;
+    state.mainFontSizeDelta = 0;
 
-      fill: 'white',
-      stroke: 'black',
-      strokeWidth: 3,
-      rotationDeg: 180
-    }));
-    outLayerAry[4].add(center(drawText(
-      width/4, height/2 - radius/2, 'x^2 + y^2 = (-r)^2',
-      fontSize, fontFamily)));
+    bulLeftDrawObj = supportFunc.bulletTextPosGenerator(state);
 
-    outLayerAry[5].add(center(drawText(
-      width*3/4, height*1/3 + 5*fontSize, 'Perfect World Model',
-      fontSize+5, fontFamily)));
+    supportFunc.drawHeader(outLayerAry[0], state, "Mathematic Model");
 
-    outLayerAry[6].add(center(drawText(
-      width*3/4, height*1/3 + 6*fontSize, 'Impossible',
-      fontSize, fontFamily)));
+    bulRightDrawObj.nextFontSizeDelta(10);
+    bulRightDrawObj.bulMainText(outLayerAry[2], "Implications");
+    bulRightDrawObj.bulMainText(outLayerAry[3], "Negative Radius");
+    bulRightDrawObj.bulSubText(outLayerAry[4], "Possible");
+    bulRightDrawObj.bulMainText(outLayerAry[5], "Perfect World Model");
+    bulRightDrawObj.bulSubText(outLayerAry[6], "Impossible");
 
+    bulLeftDrawObj.bulMainText(outLayerAry[1], "x^2 + y^2 = r^2");
+    bulLeftDrawObj.bulMainText(outLayerAry[4], "x^2 + y^2 = (-r)^2");
 
     return 7;
   }
@@ -979,175 +956,40 @@ PreZenSettings.externDrawFunctionArray = [
 //////////////////////////////////////////////////////////////////////////////
 //Slide 26
   function(outLayerAry, width, height, settingsObj, supportFunc) {
-
-    //Creates the demo
-    var drawPixelCircle = supportFunc.drawPixelCircle;
+    "use strict";
 
     supportFunc.clean(outLayerAry, settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var minDim = settingsObj.minDim;
+    var bulDrawObj,
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
+    state.curx = width*2/3;
+    state.cury = height/4;
+    state.hasMainBul = false;
+    state.alignFunc = supportFunc.center;
+    state.subFontSizeDelta = -5;
+    state.mainFontSizeDelta = 15;
+    state.maintexty = 4*settingsObj.fontSize;
+    state.subtexty = 1.5*settingsObj.fontSize;
 
-    var radius = height*0.2;
-    var side = 50;
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
-    var squareSide = minDim/12;
-    var boardWidth = minDim/3;
+    supportFunc.drawHeader(outLayerAry[0], state, "Pixel Model");
 
-    var buttonObjAry = [{}, {}];
+    bulDrawObj.bulMainText(outLayerAry[2], "Representation");
 
-    var i, x, y, max, sizeCount, temp;
+    bulDrawObj.bulSubText(outLayerAry[2], "2d array of cell");
+    bulDrawObj.bulSubText(outLayerAry[3], "Color is just a number");
+    bulDrawObj.bulSubText(outLayerAry[3], "R:255 G:255 B:255");
 
-    sizeCount = 3;
+    bulDrawObj.bulMainText(outLayerAry[4], "Problems");
+    bulDrawObj.bulSubText(outLayerAry[5], "Blocky given smaller amount of pixels");
+    bulDrawObj.bulSubText(outLayerAry[6], "Can be blurry if scaled");
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Pixel Model",
-      fontSize+20, fontFamily)));
-
-    outLayerAry[2].add(center(drawText(
-      width*(2/3), height*(1/4), "Representation",
-      fontSize+15, fontFamily)));
-
-    outLayerAry[2].add(center(drawText(
-      width*(2/3), height*(1/4)+2*fontSize, "2d array of cell",
-      fontSize+5, fontFamily)));
-
-    outLayerAry[3].add(center(drawText(
-      width*(2/3), height*(1/4)+4*fontSize, "Color is just a number",
-      fontSize+5, fontFamily)));
-
-    outLayerAry[3].add(center(drawText(
-      width*(2/3), height*(1/4)+5*fontSize, "R:255, G:255, B:255",
-      fontSize, fontFamily)));
-
-
-    i = 0;
-    max = 2;
-    //Create the interactive buttons for the demo
-    while(i < max) {
-      x = width/4 + (i&1?-minDim/16:minDim/16);
-      y = height*(2/3);
-
-      outLayerAry[2].add(align(drawText(
-        x, y, i&1 ? '-' : '+', fontSize+20, fontFamily)));
-
-
-      buttonObjAry[i] = new Kinetic.Rect({
-        x: x,
-        y: y,
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide/2, squareSide/2],
-
-        stroke: 'black',
-        strokeWidth: 5,
-        cornerRadius: 10
-      });
-
-      if (i&1)
-        buttonObjAry[i].call = function(sizeCurCount) {
-        if (sizeCurCount > 2) {
-          sizeCount -= 1;
-          drawPixelCircle(outLayerAry[1], supportFunc,  width/4-(boardWidth/2),
-            height/6, minDim/3, sizeCount);
-          }
-        };
-      else
-        buttonObjAry[i].call = function(sizeCurCount) {
-        if (sizeCurCount < 40) {
-          sizeCount += 1;
-          drawPixelCircle(outLayerAry[1], supportFunc, width/4-(boardWidth/2),
-            height/6, minDim/3, sizeCount);
-          }
-        };
-
-      buttonObjAry[i].on('tap mousedown', function() {
-        this.call(sizeCount);
-      });
-
-      outLayerAry[2].add(buttonObjAry[i]);
-      i += 1;
-    }
-
-    //Draws the initial demo
-    drawPixelCircle(outLayerAry[1], supportFunc, width/4-(boardWidth/2),
-      height/6, minDim/3, sizeCount);
-
-    outLayerAry[4].add(center(drawText(
-      width*(2/3), height*(1/3)+5*fontSize, "Problems",
-      fontSize+15, fontFamily)));
-
-    outLayerAry[5].add(center(drawText(
-      width*(2/3), height*(1/3)+7*fontSize,
-      "Blocky given smaller amount of pixels", fontSize, fontFamily)));
-
-    outLayerAry[6].add(center(drawText(
-      width*(2/3), height*(1/3)+9*fontSize, "Can be blurry if scaled",
-      fontSize, fontFamily)));
-
-
-    temp = center(new Kinetic.Rect({
-      x: width/4,
-      y: height*(3/4),
-      width: squareSide,
-      height: squareSide,
-      stroke: 'black',
-
-      strokeWidth: 5,
-      cornerRadius: 10
-    }));
-
-    temp.on('tap mousedown', function() {
-      drawPixelCircle(outLayerAry[1], supportFunc, width/4-(boardWidth/2),
-        height/6, minDim/3, sizeCount, true);
-    });
-
-    outLayerAry[6].add(temp);
-
-    i = 0;
-    max = 4;
-
-    //Draws the second set of squares, bottom
-    while(i < max) {
-      outLayerAry[7].add(new Kinetic.Rect({
-        x: width*(2/3) -  (i&1 ? squareSide : 0) + (squareSide),
-        y: height*(4/5) - (i&2 ? squareSide : 0) + (squareSide),
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide, squareSide],
-        stroke: 'black',
-        strokeWidth: 5
-      }));
-      i += 1;
-    }
-
-    outLayerAry[7].add(new Kinetic.Rect({
-      x: width*(2/3) + (squareSide>>1),
-      y: height*(4/5) + (squareSide>>1),
-      width: squareSide*(5/4),
-      height: squareSide*(5/4),
-      offset: [squareSide*(9/8), squareSide*(9/8)],
-      stroke: 'black',
-      fill: 'black',
-      strokeWidth: 5
-    }));
-
-    outLayerAry[7].add(new Kinetic.Rect({
-      x: width*(2/3) + (squareSide*(3/2*9/8)),
-      y: height*(4/5) + (squareSide>>1),
-      width: squareSide*(5/4),
-      height: squareSide*(5/4),
-      offset: [squareSide*(9/8), squareSide*(9/8)],
-      stroke: 'black',
-      fill: 'grey',
-      strokeWidth: 5
-    }));
+    // For long pieces of code that work on the canvas I
+    // suggest placing it in a function so that the code that
+    // draws is separated from the text
+    supportFunc.pixelCircleDemo(outLayerAry, width, height, settingsObj, supportFunc);
 
     return 8;
   }
@@ -1155,131 +997,36 @@ PreZenSettings.externDrawFunctionArray = [
 //////////////////////////////////////////////////////////////////////////////
 //Slide 27
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
     supportFunc.clean(outLayerAry, settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
+    var bulDrawObj,
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var drawText = supportFunc.drawText;
-    var floor = supportFunc.floor;
-    var createBullet = supportFunc.createBullet;
+    state.curx = width/2;
+    state.cury = height/4;
+    state.mainFontSizeDelta = 5;
+    state.subFontSizeDelta = -5;
+    state.subtexty = 1.5*settingsObj.fontSize;
 
-    var squareSide = width/20;
-    var boardWidth = width/4;
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
-    var i, x, y, max, sizeCount, fill;
+    supportFunc.drawHeader(outLayerAry[0], state, "Pixel Model (cont'd)");
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Pixel Model (cont'd)",
-      fontSize+20, fontFamily)));
+    bulDrawObj.nextHasNoBullet();
+    bulDrawObj.nextFontSizeDelta(10);
+    bulDrawObj.bulMainText(outLayerAry[1], "Advantage");
 
-    outLayerAry[1].add(drawText(
-      width/2, height*1/4, "Advantage", fontSize+15, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[2], "Uniform");
+    bulDrawObj.bulSubText(outLayerAry[3], "Every pixel has a value");
 
-    outLayerAry[2].add(createBullet(width/2, height/4+3*fontSize, fontSize));
-    outLayerAry[2].add(drawText(
-      width/2, height/4+3*fontSize, "Uniform", fontSize+5, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[4], "Easy to represent");
+    bulDrawObj.bulSubText(outLayerAry[5], "All pixels are the same");
+    bulDrawObj.bulSubText(outLayerAry[6], "Drawing is easy");
+    bulDrawObj.bulMainText(outLayerAry[7], "Easy to compress");
 
-    outLayerAry[3].add(drawText(
-      width/2, height/4+4*fontSize, "Every pixel has a value", fontSize, fontFamily));
-
-
-    i = 0;
-    max = 2;
-    sizeCount = 4;
-    max = sizeCount*sizeCount;
-    //Draws first demo board
-    while(i < max) {
-      outLayerAry[3].add(new Kinetic.Rect({
-        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
-        y: height/4 + ((i%sizeCount)*squareSide),
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide, squareSide],
-        stroke: 'black',
-        strokeWidth: 5
-      }));
-      i += 1;
-    }
-
-    outLayerAry[4].add(createBullet(width/2, height/4+7*fontSize, fontSize));
-    outLayerAry[4].add(drawText(
-      width/2, height*1/4+7*fontSize, "Easy to represent",
-      fontSize+5, fontFamily));
-
-    outLayerAry[5].add(drawText(
-      width/2, height*1/4+8*fontSize, "All pixels are the same",
-      fontSize, fontFamily));
-
-    outLayerAry[6].add(drawText(
-      width/2, height*1/4+9*fontSize, "Drawing is easy",
-      fontSize, fontFamily));
-
-
-    i = 0;
-    sizeCount = 3;
-    max = sizeCount*sizeCount;
-    //Draws second demo board
-    while(i < max) {
-      outLayerAry[6].add(new Kinetic.Rect({
-        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
-        y: height*(2/3) + ((i%sizeCount)*squareSide),
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide, squareSide],
-        stroke: 'black',
-        strokeWidth: 5,
-        fill: i%2 ? 'white': 'black'
-      }));
-      i += 1;
-    }
-
-    outLayerAry[7].add(createBullet(width/2, height/4+12*fontSize, fontSize));
-    outLayerAry[7].add(drawText(
-      width/2, height*1/4+12*fontSize, "Easy to compress",
-      fontSize+5, fontFamily));
-
-
-    i = 0;
-    sizeCount = 4;
-    max = sizeCount*sizeCount;
-    //Draws third demo board
-    while(i < max) {
-      fill = 'grey';
-      if (i === 0||i === 3||i === 12||i === 15)
-        fill = 'black';
-      outLayerAry[7].add(new Kinetic.Rect({
-        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
-        y: height/4 + ((i%sizeCount)*squareSide),
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide, squareSide],
-        stroke: 'black',
-        strokeWidth: 5,
-        fill: fill
-      }));
-      i += 1;
-    }
-
-    i = 0;
-    sizeCount = 3;
-    max = sizeCount*sizeCount;
-    while(i < max) {
-      outLayerAry[7].add(new Kinetic.Rect({
-        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
-        y: height/4 + ((i%sizeCount)*squareSide),
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide*(3/2), squareSide/2],
-        stroke: 'black',
-        strokeWidth: 5,
-        fill: i%2 ? 'white': 'black'
-      }));
-      i += 1;
-    }
+    supportFunc.slide27Canvas(outLayerAry, width, height, settingsObj, supportFunc);
 
     return 8;
   }
@@ -1287,133 +1034,40 @@ PreZenSettings.externDrawFunctionArray = [
 //////////////////////////////////////////////////////////////////////////////
 //Slide 28
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
     supportFunc.clean(outLayerAry, settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
+    var bulDrawObj,
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var drawText = supportFunc.drawText;
-    var floor    = supportFunc.floor;
-    var createBullet = supportFunc.createBullet;
+    state.curx = width/2;
+    state.cury = height/4;
+    state.subFontSizeDelta = -5;
+    state.subtexty = 1.5*settingsObj.fontSize;
 
-    var squareSide = width/16;
-    var boardWidth = width/4;
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
-    var i, x, y, max, sizeCount;
+    supportFunc.drawHeader(outLayerAry[0], state, "Vector Model");
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Vector Model",
-      fontSize+20, fontFamily)));
+    bulDrawObj.nextHasNoBullet();
+    bulDrawObj.nextFontSizeDelta(10);
+    bulDrawObj.bulMainText(outLayerAry[1], "Representation");
 
+    bulDrawObj.bulMainText(outLayerAry[1], "Magnitude and Direction");
 
-    x = width/4;
-    y = height/4;
+    bulDrawObj.bulSubText(outLayerAry[2], "Stored as a tuple ");
+    bulDrawObj.bulSubText(outLayerAry[2], "<50, 50>");
 
-    outLayerAry[1].add(new Kinetic.Line({
-      points: [x, y+50, x+50, y, x+35, y, x+50, y, x+50, y+15, x+50, y],
-      stroke: 'red',
-      strokeWidth: 10,
-      lineCap: 'round',
-      lineJoin: 'round'
-    }));
+    bulDrawObj.nextHasNoBullet();
+    bulDrawObj.nextFontSizeDelta(10);
+    bulDrawObj.bulMainText(outLayerAry[3], "Problems");
 
-    outLayerAry[1].add(drawText(
-      width/2, height/4, "Representation",
-      fontSize+15, fontFamily));
-
-    outLayerAry[1].add(createBullet(width/2, height*(1/4)+3*fontSize, fontSize));
-    outLayerAry[1].add(drawText(
-      width/2, height*(1/4)+3*fontSize, "Magnitude and Direction",
-      fontSize+5, fontFamily));
-
-
-    x = width/4 - 20;
-    y = height/4;
-    outLayerAry[2].add(new Kinetic.Line({
-      points: [x, y+50, x+50, y, x+35, y, x+50, y, x+50, y+15, x+50, y],
-      stroke: 'blue',
-      strokeWidth: 10,
-      lineCap: 'round',
-      lineJoin: 'round'
-    }));
-
-    x = width/4 - 20;
-    y = height/4 + 20;
-    outLayerAry[2].add(new Kinetic.Line({
-      points: [x, y+100, x+100, y, x+85, y, x+100, y, x+100, y+15, x+100, y],
-      stroke: 'blue',
-      strokeWidth: 10,
-      lineCap: 'round',
-      lineJoin: 'round'
-    }));
-
-    outLayerAry[2].add(drawText(
-      width/2, height/4+4*fontSize, "Stored as a tuple ",
-      fontSize, fontFamily));
-
-    outLayerAry[2].add(drawText(
-      width/2, height/4+5*fontSize, "<50, 50>",
-      fontSize, fontFamily));
-
-    outLayerAry[3].add(drawText(
-      width/2, height/4+8*fontSize, "Problems",
-      fontSize+15, fontFamily));
-
-    outLayerAry[4].add(createBullet(width/2, height/4+11*fontSize, fontSize));
-    outLayerAry[4].add(drawText(
-      width/2, height/4+11*fontSize, "No specific \"start\" point",
-      fontSize+5, fontFamily));
-
-    outLayerAry[5].add(drawText(
-      width/2, height/4+12*fontSize, "<(" + width/4 + ', ' + height/4 + "), 50, 50>",
-      fontSize, fontFamily));
-
-
-    i = 0;
-    sizeCount = 4;
-    max = sizeCount*sizeCount;
-    //Draws demo board
-    while(i < max) {
-      outLayerAry[6].add(new Kinetic.Rect({
-        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
-        y: height/4 + ((i%sizeCount)*squareSide),
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide, squareSide],
-        stroke: 'black',
-        strokeWidth: 5
-      }));
-      i += 1;
-    }
-
-    outLayerAry[6].add(createBullet(width/2, height*(1/4)+14*fontSize, fontSize));
-    outLayerAry[6].add(drawText(
-      width/2, height/4+14*fontSize, "How do you draw vectors?",
-      fontSize+5, fontFamily));
-
-
-    i = 0;
-    while(i < max) {
-      outLayerAry[7].add(new Kinetic.Rect({
-        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
-        y: height/4 + ((i%sizeCount)*squareSide),
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide, squareSide],
-        stroke: 'black',
-        fill: (i===5)? 'red' : 'white',
-        strokeWidth: 5
-      }));
-      i += 1;
-    }
-
-    outLayerAry[7].add(drawText(
-      width/2, height/4+15*fontSize, "Not simple to render or draw",
-      fontSize, fontFamily));
-
+    bulDrawObj.bulMainText(outLayerAry[4], "No specific \"start\" point");
+    bulDrawObj.bulSubText(outLayerAry[5],
+        ["<(", width/4, ', ', height/4, "), 50, 50>"].join(""));
+    bulDrawObj.bulMainText(outLayerAry[6], "How do you draw vectors?");
+    bulDrawObj.bulSubText(outLayerAry[7], "Not simple to render or draw");
 
     return 8;
   }

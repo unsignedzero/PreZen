@@ -12,8 +12,8 @@
  * will scale correctly
  *
  * Created 01-25-2013
- * Updated 05-15-2013
- * Version 0.6.0.0 Beta 5
+ * Updated 05-16-2013
+ * Version 0.6.0.0 Beta 6
  * Created by David Tran (unsignedzero)
  */
 
@@ -316,12 +316,12 @@ var zxPowerPoint = (function(settings) {
     "use strict";
 
     var layer, curObj, retObj, subBulXShift, mainBulXShift, hasMainBul,
-      nextBulletState, alignFunc,
-      hasSubBul, mainFontSizeDelta, subFontSizeDelta,
+      nextBulletState, nextFontValue, alignFunc, 
+      hasSubBul, mainFontSizeDelta, subFontSizeDelta, DEBUG,
       textPosObj = supportFunc.textPosGenerator(input);
 
-    if ( typeof input.deltaBulletFontSize === "number" )
-      input.deltaBulletFontSize = 0;
+    DEBUG = ( typeof input.DEBUG === "boolean" ) ? 
+      input.DEBUG : false;
 
     subBulXShift = ( typeof input.subBulXShift !== "number" ) ?
       0 : input.subBulXShift;
@@ -331,10 +331,12 @@ var zxPowerPoint = (function(settings) {
       0 : input.subFontSizeDelta;
     mainFontSizeDelta = ( typeof input.mainFontSizeDelta !== "number" ) ?
       0 : input.mainFontSizeDelta;
+
     hasMainBul = ( typeof input.hasMainBul !== "boolean" ) ?
       true : input.hasMainBul;
     hasSubBul = ( typeof input.hasSubBul !== "boolean" ) ?
       false : input.hasSubBul;
+
     alignFunc = ( typeof input.alignFunc !== "function" ) ?
       (function(i){ return i; }) : input.alignFunc;
 
@@ -347,6 +349,9 @@ var zxPowerPoint = (function(settings) {
         input.y = curObj.y;
         input.str = str;
         input.deltaFontSize = mainFontSizeDelta;
+        input.nextFontValue = nextFontValue;
+
+        nextFontValue = undefined;
 
         if ((nextBulletState === undefined && hasMainBul) || 
             (nextBulletState !== undefined && nextBulletState))
@@ -364,6 +369,9 @@ var zxPowerPoint = (function(settings) {
         input.y = curObj.y;
         input.str = str;
         input.deltaFontSize = subFontSizeDelta;
+        input.nextFontValue = nextFontValue;
+
+        nextFontValue = undefined;
 
         if ((nextBulletState === undefined && hasSubBul) || 
             (nextBulletState !== undefined && nextBulletState))
@@ -379,6 +387,16 @@ var zxPowerPoint = (function(settings) {
 
       nextHasNoBullet : function(){
         nextBulletState = false;
+      },
+
+      nextFontSizeDelta : function(size){
+        if ( typeof size === "number" && size !== NaN ){
+          nextFontValue = size >= 0 ? size : -size;
+        }
+        else if ( DEBUG ){
+          alert( new Error(
+            "size of nextFontSize in bulletTextPosGenerator not a number"));
+        }
       }
     };
 
@@ -461,14 +479,20 @@ var zxPowerPoint = (function(settings) {
 
     fontSize = ( typeof input.fontSize === "number" ) ?
       input.fontSize : input.height/32;
-    fontSize += ( typeof input.deltaBulletFontSize === "number" ) ?
+    fontSize += ( typeof input.deltaBulletFontSize === "number" &&
+      input.deltaBulletFontSize !== NaN ) ?
       input.deltaBulletFontSize : 0;
-    fontSize += ( typeof input.deltaFontSize === "number" ) ?
+    fontSize += ( typeof input.deltaFontSize === "number" &&
+      input.deltaFontSize !== NaN ) ?
       input.deltaFontSize : 0;
+    fontSize += ( typeof input.nextFontValue === "number" &&
+      input.nextFontValue !== NaN ) ?
+      input.nextFontValue : 0;
     fontFamily = ( typeof input.fontFamily === "string" ) ?
       input.fontFamily : externFont;
 
-    str = ( typeof input.str === "string" ) ? input.str : "";
+    str = ( typeof input.str === "string" ) ?
+      input.str : "Nothing was passed in this call of drawText2";
 
     return supportFunc.drawText(x, y, str, fontSize, fontFamily);
   };

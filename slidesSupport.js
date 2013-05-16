@@ -9,8 +9,8 @@
  * and enumerated here
  *
  * Created 03-02-2013
- * Updated 04-15-2013
- * Version 0.6.0.0 Beta 4
+ * Updated 04-16-2013
+ * Version 0.6.0.0 Beta 6
  * Created by David Tran (unsignedzero)
  */
 
@@ -96,7 +96,7 @@ PreZenSettings.supportFunc = {
       }
     }, outLayerA);
 
-    //Define all elements on the screen
+    // Define all elements on the screen
     pointa = new Kinetic.Circle({
       x: setObj.pointax !== undefined ? setObj.pointax : width/4,
       y: setObj.pointay !== undefined ? setObj.pointay : height/4,
@@ -351,6 +351,266 @@ PreZenSettings.supportFunc = {
     layer.add(input.align(input.drawText(
       input.width/4, input.height/5, str,
       input.fontSize+5, input.fontFamily)));
+  },
+  
+  pixelCircleDemo : function(outLayerAry, width, height, settingsObj, supportFunc){
+    "use strict";
+
+    //Creates the demo
+    var drawPixelCircle = supportFunc.drawPixelCircle,
+      fontSize = settingsObj.fontSize,
+      fontFamily = settingsObj.fontFamily,
+      outlineShift = settingsObj.outlineShift,
+      minDim = settingsObj.minDim,
+
+      center   = supportFunc.center,
+      align    = supportFunc.align,
+      drawText = supportFunc.drawText,
+
+      radius = height*0.2,  side = 50, sizeCount = 3,
+      squareSide = minDim/12, boardWidth = minDim/3,
+      buttonObjAry = [{}, {}, {}],
+      i, x, y, max, temp, squareObj;
+
+    i = 0;
+    max = 2;
+    //Create the interactive buttons for the demo
+    while(i < max) {
+      x = width/4 + (i&1?-minDim/16:minDim/16);
+      y = height*(2/3);
+
+      outLayerAry[2].add(align(drawText(
+        x, y, i&1 ? '-' : '+', fontSize+20, fontFamily)));
+
+      buttonObjAry[i] = new Kinetic.Rect({
+        x: x,
+        y: y,
+        width: squareSide,
+        height: squareSide,
+        offset: [squareSide/2, squareSide/2],
+
+        stroke: 'black',
+        strokeWidth: 5,
+        cornerRadius: 10
+      });
+
+      // Loads the function that should be called for the onclick event
+      if (i&1)
+        buttonObjAry[i].call = function(sizeCurCount) {
+          if (sizeCurCount > 2) {
+            sizeCount -= 1;
+            drawPixelCircle(outLayerAry[1], supportFunc,  width/4-(boardWidth/2),
+              height/6, minDim/3, sizeCount);
+            }
+        };
+      else
+        buttonObjAry[i].call = function(sizeCurCount) {
+          if (sizeCurCount < 40) {
+            sizeCount += 1;
+            drawPixelCircle(outLayerAry[1], supportFunc, width/4-(boardWidth/2),
+              height/6, minDim/3, sizeCount);
+            }
+        };
+
+      // Add the onclick event
+      buttonObjAry[i].on('tap mousedown', function() {
+        this.call(sizeCount);
+      });
+
+      outLayerAry[2].add(buttonObjAry[i]);
+      i += 1;
+    }
+
+    //Adds on the last button
+    buttonObjAry[2] = center(new Kinetic.Rect({
+      x: width/4,
+      y: height*(3/4),
+      width: squareSide,
+      height: squareSide,
+      stroke: 'black',
+
+      strokeWidth: 5,
+      cornerRadius: 10
+    }));
+
+    buttonObjAry[2].on('tap mousedown', function() {
+      drawPixelCircle(outLayerAry[1], supportFunc, width/4-(boardWidth/2),
+        height/6, minDim/3, sizeCount, true);
+    });
+
+    outLayerAry[6].add(buttonObjAry[2]);
+
+    // Draws the initial demo
+    drawPixelCircle(outLayerAry[1], supportFunc, width/4-(boardWidth/2),
+      height/6, minDim/3, sizeCount);
+
+    squareObj = {
+        width: squareSide,
+        height: squareSide,
+        offset: [squareSide, squareSide],
+        stroke: 'black',
+        strokeWidth: 5
+    };
+
+    i = 0;
+    max = 4;
+    // Draws the second set of squares, bottom
+    while(i < max) {
+      squareObj.x = width*(2/3) -  (i&1 ? squareSide : 0) + (squareSide);
+      squareObj.y = height*(4/5) - (i&2 ? squareSide : 0) + (squareSide);
+      outLayerAry[7].add(new Kinetic.Rect(squareObj));
+      i += 1;
+    }
+
+    squareObj.x= width*(2/3) + (squareSide>>1);
+    squareObj.y= height*(4/5) + (squareSide>>1);
+    squareObj.width= squareSide*(5/4);
+    squareObj.height= squareSide*(5/4);
+    squareObj.offset= [squareSide*(9/8), squareSide*(9/8)];
+    squareObj.fill= 'black';
+
+    outLayerAry[7].add(new Kinetic.Rect(squareObj));
+
+    squareObj.x = width*(2/3) + (squareSide*(3/2*9/8));
+    squareObj.fill = "grey";
+
+    outLayerAry[7].add(new Kinetic.Rect(squareObj));
+  },
+
+  slide27Canvas :  function(outLayerAry, width, height, settingsObj, supportFunc){
+    "use strict";
+
+    var floor = supportFunc.floor,
+      squareSide = width/20,
+      boardWidth = width/4,
+      i, max, sizeCount, fill, squareObj;
+
+    squareObj = {
+        width: squareSide,
+        height: squareSide,
+        offset: [squareSide, squareSide],
+        stroke: 'black',
+        strokeWidth: 5
+    };
+
+    i = 0;
+    sizeCount = 4;
+    max = sizeCount*sizeCount;
+    // Draws first demo board
+    while(i < max) {
+      squareObj.x = width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide;
+      squareObj.y = height/4 + ((i%sizeCount)*squareSide);
+      outLayerAry[3].add(new Kinetic.Rect(squareObj));
+      i += 1;
+    }
+
+    i = 0;
+    sizeCount = 3;
+    max = sizeCount*sizeCount;
+    // Draws second demo board
+    while(i < max) {
+      squareObj.x = width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide;
+      squareObj.y = height*(2/3) + ((i%sizeCount)*squareSide);
+      squareObj.fill = i&1 ? 'white': 'black';
+      outLayerAry[6].add(new Kinetic.Rect(squareObj));
+      i += 1;
+    }
+
+    i = 0;
+    sizeCount = 4;
+    max = sizeCount*sizeCount;
+    // Draws third demo board
+    while(i < max) {
+      squareObj.x = width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide;
+      squareObj.y = height/4 + ((i%sizeCount)*squareSide);
+      squareObj.fill = (i === 0||i === 3||i === 12||i === 15) ? 'black' : 'grey';
+      outLayerAry[7].add(new Kinetic.Rect(squareObj));
+      i += 1;
+    }
+
+    i = 0;
+    sizeCount = 3;
+    max = sizeCount*sizeCount;
+    while(i < max) {
+      squareObj.x = (width/4 + (boardWidth/2) -
+        floor(i/sizeCount)*squareSide - squareSide/2);
+      squareObj.y = height/4 + ((i%sizeCount)*squareSide + squareSide/2);
+      squareObj.fill = i%2 ? 'white': 'black';
+      outLayerAry[7].add(new Kinetic.Rect(squareObj));
+      i += 1;
+    }
+  },
+
+  slize28Canvas : function(outLayerAry, width, height, settingsObj, supportFunc){
+    "use strict";
+
+    var floor    = supportFunc.floor,
+      squareSide = width/16,
+      boardWidth = width/4,
+      i, x, y, max, sizeCount, arrowObj, squareObj;
+
+    function arrowPos(x, y, z){
+      // JS does not have number points so these won't update on additional
+      // calls. Nothing says we can't wrap it around a function and update
+      // it that way
+      z = typeof z === "undefined" ? 1 : z;
+      return [x, y + (50*z), x + (50*z), y         , x + (35*z), y,
+              x + (50*z), y, x + (50*z), y + (15*z), x + (50*z), y];
+    }
+
+    // As with generator codes, we create an object and change the differences
+    // and repeat saving lines of code but also time as we don't generate
+    // a new object
+    x = width/4;
+    y = height/4;
+
+    arrowObj = {
+      points: [x, y+50, x+50, y, x+35, y, x+50, y, x+50, y+15, x+50, y],
+      stroke: 'red',
+      strokeWidth: 10,
+      lineCap: 'round',
+      lineJoin: 'round'
+    };
+
+    outLayerAry[1].add(new Kinetic.Line(arrowObj));
+
+    x = width/4 - 20;
+    arrowObj.points = arrowPos(x, y, 1);
+    arrowObj.stroke = 'blue';
+
+    outLayerAry[2].add(new Kinetic.Line(arrowObj));
+
+    y = height/4 + 20;
+    arrowObj.points = arrowPos(x, y, 2);
+
+    outLayerAry[2].add(new Kinetic.Line(arrowObj));
+
+    squareObj = {
+        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
+        y: height/4 + ((i%sizeCount)*squareSide),
+        width: squareSide,
+        height: squareSide,
+        offset: [squareSide, squareSide],
+        stroke: 'black',
+        strokeWidth: 5
+    };
+
+    i = 0;
+    sizeCount = 4;
+    max = sizeCount*sizeCount;
+
+    // Draws demo board. As both boards are on the same spot, we can
+    // draw them together with one loop
+    while(i < max) {
+      squareObj.x = width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide;
+      squareObj.y = height/4 + ((i%sizeCount)*squareSide);
+      squareObj.fill = undefined;
+      outLayerAry[6].add(new Kinetic.Rect(squareObj));
+      squareObj.fill = (i===5) ? 'red' : 'white';
+      outLayerAry[7].add(new Kinetic.Rect(squareObj));
+      i += 1;
+    }
+
   }
 };
 

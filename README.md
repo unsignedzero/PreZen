@@ -31,11 +31,24 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 * Add speaker notes on the slide
 * Add button/key to jump to a specific slide/segment
-* Reduce the number of variables in each slide to the bare necessities , if possible
+* Reduce the number of variables in each slide to the bare necessities, 
+  if possible
 
 # Version/Changelog #
 
 * Goal, apply the generator to all slides
+* Planning on removing drawTextGenerator and making bulletTextPosGenerator 
+  the new drawTextGenerator
+
+## 0.6.0.0 Beta 6 [05-16-2013] #
+### Generator Branch #
+
+* Removed KineticJS v4.3 library
+* Refactored canvas code to make it simpler and shorter
+* Moved longer canvas code in the first part of the slides in part 7
+  to slidesSupport.js when appropriate
+* Updated about half of the slides in part 7 to use generators
+* Added override option for font size
 
 ## 0.6.0.0 Beta 5 [05-16-2013] #
 ### Generator Branch #
