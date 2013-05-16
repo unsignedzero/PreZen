@@ -40,6 +40,12 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 * Planning on removing drawTextGenerator and making bulletTextPosGenerator 
   the new drawTextGenerator
 
+
+* Shrunk font size for a few slides
+* Updated permissions on LIB and IMG files to be read-only all
+* Updated permissions for icon file and License to be read-only all
+* Forgot to call canvas function for slide #28
+
 ## 0.6.0.0 Beta 6 [05-16-2013] #
 ### Generator Branch #
 

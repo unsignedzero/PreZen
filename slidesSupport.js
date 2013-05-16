@@ -541,7 +541,7 @@ PreZenSettings.supportFunc = {
     }
   },
 
-  slize28Canvas : function(outLayerAry, width, height, settingsObj, supportFunc){
+  slide28Canvas : function(outLayerAry, width, height, settingsObj, supportFunc){
     "use strict";
 
     var floor    = supportFunc.floor,

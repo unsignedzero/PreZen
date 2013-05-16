@@ -224,6 +224,7 @@ PreZenSettings.externDrawFunctionArray = [
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
     supportFunc.setNumberedListState(state, settingsObj);
+
     state.maintexty = 2*settingsObj.fontSize;
 
     bulDrawObj = supportFunc.bulletTextPosGenerator(state);
@@ -489,6 +490,7 @@ PreZenSettings.externDrawFunctionArray = [
     state.cury = height/4;
 
     state.maintexty = 5*settingsObj.fontSize;
+    state.subFontSizeDelta = -5;
 
     bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
@@ -1068,6 +1070,8 @@ PreZenSettings.externDrawFunctionArray = [
         ["<(", width/4, ', ', height/4, "), 50, 50>"].join(""));
     bulDrawObj.bulMainText(outLayerAry[6], "How do you draw vectors?");
     bulDrawObj.bulSubText(outLayerAry[7], "Not simple to render or draw");
+
+    supportFunc.slide28Canvas(outLayerAry, width, height, settingsObj, supportFunc);
 
     return 8;
   }

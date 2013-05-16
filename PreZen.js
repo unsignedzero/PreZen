@@ -456,7 +456,7 @@ var zxPowerPoint = (function(settings) {
 
         // We set default spacing. Change as needed
         maintexty: 3*settingsObj.fontSize,
-        subtexty: settingsObj.fontSize,
+        subtexty: 1.5*settingsObj.fontSize,
 
         // We load our functions here
         drawText: supportFunc.drawText, createBullet: supportFunc.createBullet,
