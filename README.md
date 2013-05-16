@@ -41,6 +41,8 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
   the new drawTextGenerator
 
 
+* Updated KineticJS library to version 4.5.1 
+  (no issues on Chrome or Firefox just yet)
 * Shrunk font size for a few slides
 * Updated permissions on LIB and IMG files to be read-only all
 * Updated permissions for icon file and License to be read-only all
