@@ -5,7 +5,7 @@
  * of the code depending on which setting is incorrectly set.
  *
  *
- * Updated 04-15-2013
+ * Updated 05-15-2013
  * Version 0.6.0.0 Beta 2
  * Created by David Tran (unsignedzero)
  */

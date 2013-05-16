@@ -12,8 +12,8 @@
  * will scale correctly
  *
  * Created 01-25-2013
- * Updated 04-15-2013
- * Version 0.6.0.0 Beta 4
+ * Updated 05-15-2013
+ * Version 0.6.0.0 Beta 5
  * Created by David Tran (unsignedzero)
  */
 
@@ -41,23 +41,23 @@ var zxPowerPoint = (function(settings) {
   var supportFunc = settings["supportFunc"];
 
   //Input Error Scan
-  if (!slideArray === undefined) {
+  if (slideArray === undefined) {
     alert("ERROR:No slide passed in");
     throw new Error("No slide passed in");
   }
-  if (!width === undefined) {
+  if (width === undefined) {
     alert("WARNING:externWidth not set. Default 800");
     width = 800;
   }
-  if (!height === undefined) {
+  if (height === undefined) {
     alert("WARNING:externHeight not set. Default 1000");
     height = 1000;
   }
-  if (!maxLayerCount === undefined) {
+  if (maxLayerCount === undefined) {
     alert("WARNING:externMaxLayerCount not set. Default 10");
     maxLayerCount = 10;
   }
-  if (!containerName === undefined) {
+  if (containerName === undefined) {
     alert("ERROR:No container name passed");
     throw new Error("No container name passed");
   }
@@ -316,7 +316,7 @@ var zxPowerPoint = (function(settings) {
     "use strict";
 
     var layer, curObj, retObj, subBulXShift, mainBulXShift, hasMainBul,
-      nextBulletState,
+      nextBulletState, alignFunc,
       hasSubBul, mainFontSizeDelta, subFontSizeDelta,
       textPosObj = supportFunc.textPosGenerator(input);
 
@@ -335,6 +335,8 @@ var zxPowerPoint = (function(settings) {
       true : input.hasMainBul;
     hasSubBul = ( typeof input.hasSubBul !== "boolean" ) ?
       false : input.hasSubBul;
+    alignFunc = ( typeof input.alignFunc !== "function" ) ?
+      (function(i){ return i; }) : input.alignFunc;
 
     retObj = { 
       bulMainText : function (layer, str){
@@ -347,12 +349,11 @@ var zxPowerPoint = (function(settings) {
         input.deltaFontSize = mainFontSizeDelta;
 
         if ((nextBulletState === undefined && hasMainBul) || 
-            (nextBulletState !== undefined && nextBulletState)
-          )
-          layer.add(supportFunc.createBullet2(input));
+            (nextBulletState !== undefined && nextBulletState))
+          layer.add(alignFunc(supportFunc.createBullet2(input)));
         nextBulletState = undefined;
 
-        layer.add(supportFunc.drawText2(input));
+        layer.add(alignFunc(supportFunc.drawText2(input)));
       },
 
       bulSubText : function (layer, str){
@@ -365,12 +366,11 @@ var zxPowerPoint = (function(settings) {
         input.deltaFontSize = subFontSizeDelta;
 
         if ((nextBulletState === undefined && hasSubBul) || 
-            (nextBulletState !== undefined && nextBulletState)
-          )
-          layer.add(supportFunc.createBullet2(input));
+            (nextBulletState !== undefined && nextBulletState))
+          layer.add(alignFunc(supportFunc.createBullet2(input)));
         nextBulletState = undefined;
 
-        layer.add(supportFunc.drawText2(input));
+        layer.add(alignFunc(supportFunc.drawText2(input)));
       },
 
       nextHasBullet : function(){
@@ -661,7 +661,7 @@ var zxPowerPoint = (function(settings) {
     state.mainFontSizeDelta = 5;
 
     return state;
-  }
+  };
 //////////////////////////////////////////////////////////////////////////////
 //Load functions
 //This are basic functions to load the next slide or segment
@@ -1035,7 +1035,7 @@ var zxPowerPoint = (function(settings) {
     width, height, setObj, supportFunc);
 
     setObj.height = height;
-    setObj.height = height;
+    setObj.width = width;
 
     drawMeta(globalOutLayerAry[0], supportFunc, setObj);
 

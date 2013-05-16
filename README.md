@@ -37,11 +37,19 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 * Goal, apply the generator to all slides
 
+## 0.6.0.0 Beta 5 [05-16-2013] #
+### Generator Branch #
+
+* Part 6 of the slides are converted to use generators
+* Added option in generator to align text
+* Fixed issue with checking for bad input data
+* Fixed width resizing issue, which didn't update.
 * Corrected the dates for the README.
 
 ## 0.6.0.0 Beta 4 [05-15-2013] #
+### Generator Branch #
 
-* Part 4 of the slides are converted to use generators
+* Part 4 and 5 of the slides are converted to use generators
 * Added override option for bullets
 * Removed unused function in generator code base
 

@@ -8,8 +8,8 @@
  *
  *
  * Created 01-25-2013
- * Updated 04-15-2013
- * Version 0.6.0.0 Beta 4
+ * Updated 05-16-2013
+ * Version 0.6.0.0 Beta 5
  * Created by David Tran (unsignedzero)
  */
 
@@ -20,7 +20,7 @@
 //Slide 0 (Cover Slide)
 PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
     "use strict";
 
     var animTime = settingsObj.animTime;
@@ -67,7 +67,7 @@ PreZenSettings.externDrawFunctionArray = [
         circle.setAngleDeg(360);
         circle.setRotationDeg(90);
       }
-    },outLayerAry[0]);
+    }, outLayerAry[0]);
     ptr.start();
 
     outLayerAry[0].add(circle);
@@ -117,7 +117,7 @@ PreZenSettings.externDrawFunctionArray = [
     "use strict";
 
     // This is an example of using the new textGenerator
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     // Here we store our state object, which will be passed once and sets up
     // the generator
@@ -168,7 +168,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -201,7 +201,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -209,7 +209,7 @@ PreZenSettings.externDrawFunctionArray = [
     supportFunc.drawHeader(outLayerAry[0], state, "CRT");
     supportFunc.drawSubHeader(outLayerAry[1], state, "Cathode Ray Tube");
 
-    imgDrawObj.pushImage2( 'IMG/crt-monitor.jpg', 1.5, 1.5, supportFunc.align);
+    imgDrawObj.pushImage2('IMG/crt-monitor.jpg', 1.5, 1.5, supportFunc.align);
     imgDrawObj.drawImage(outLayerAry[1], width/2, height/2+height/20);
 
     return 2;
@@ -220,7 +220,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -302,7 +302,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -320,7 +320,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -354,7 +354,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -384,7 +384,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -403,7 +403,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -449,7 +449,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var bulDrawObj,
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -482,7 +482,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -529,7 +529,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -548,7 +548,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -577,7 +577,7 @@ PreZenSettings.externDrawFunctionArray = [
 //Slide 16
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -606,7 +606,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -627,7 +627,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -679,7 +679,7 @@ PreZenSettings.externDrawFunctionArray = [
   function(outLayerAry, width, height, settingsObj, supportFunc) {
     "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
@@ -710,43 +710,19 @@ PreZenSettings.externDrawFunctionArray = [
 //////////////////////////////////////////////////////////////////////////////
 //Slide 20
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var minDim = settingsObj.minDim;
+    var imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
+    supportFunc.drawHeader(outLayerAry[0], state, "AMOLED");
+    supportFunc.drawSubHeader(outLayerAry[1], state, "Active Matrix Organic LED");
 
-    var imgAry = [];
-    var imgAryCur = -1;
-
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "AMOLED",
-      fontSize+20, fontFamily)));
-
-    outLayerAry[1].add(center(drawText(
-      width/2, outlineShift + 0.1*height, "Active Matrix Organic LED",
-      fontSize+10, fontFamily)));
-
-
-    imgAry.push(new Image());
-    imgAryCur += 1;
-    imgAry[imgAryCur].src = 'IMG/Samsung-Galaxy-S3-in-Sapphire-black.jpg';
-    imgAry[imgAryCur].onload = function() {
-    };
-
-    outLayerAry[1].add(align(new Kinetic.Image({
-      x: width/2,
-      y: height/2+height/20,
-      width: minDim/1.5,
-      height: minDim/1.5,
-      image: imgAry[imgAryCur]
-    })));
+    imgDrawObj.pushImage2('IMG/Samsung-Galaxy-S3-in-Sapphire-black.jpg', 1.5, 1.5,
+      supportFunc.align);
+    imgDrawObj.drawImage(outLayerAry[1], width/2, height/2+height/20);
 
     return 2;
   }
@@ -754,74 +730,31 @@ PreZenSettings.externDrawFunctionArray = [
 //////////////////////////////////////////////////////////////////////////////
 //Slide 21
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var minDim = settingsObj.minDim;
+    var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
-    var createBullet = supportFunc.createBullet;
-    var floor    = supportFunc.floor;
+    supportFunc.setNumberedListState(state, settingsObj);
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
-    var imgAry = [];
-    var imgAryCur = -1;
+    supportFunc.drawHeader(outLayerAry[0], state, "AMOLED (How they work)");
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "AMOLED (How they work)",
-      fontSize+20, fontFamily)));
+    bulDrawObj.bulMainText(outLayerAry[1], "  Similar to OLED except...");
+    bulDrawObj.bulMainText(outLayerAry[2], "  Anode layer replaced with");
+    bulDrawObj.bulSubText(outLayerAry[2], "TFT active matrix");
 
+    imgDrawObj.pushImage2('IMG/AMOLED-en.svg.png', 2, 4,
+        supportFunc.center);
+    imgDrawObj.drawImage(outLayerAry[1], width/4, height/4);
 
-    outLayerAry[1].add(drawText(
-      width/2-2*fontSize, height*(1/4), "  Similar to OLED except...",
-      fontSize+5, fontFamily));
+    imgDrawObj.pushImage2('IMG/Galaxy_Note_II_subpixels_representation.png', 2, 2,
+        supportFunc.center);
+    imgDrawObj.drawImage(outLayerAry[1], width/4, height/4);
 
-
-    imgAry.push(new Image());
-    imgAryCur += 1;
-    imgAry[imgAryCur].src = 'IMG/AMOLED-en.svg.png';
-    imgAry[imgAryCur].onload = function() {
-    };
-
-    outLayerAry[1].add(center(new Kinetic.Image({
-      x: width/4,
-      y: height/4,
-      width: minDim/2,
-      height: minDim/4,
-      image: imgAry[imgAryCur]
-    })));
-
-    outLayerAry[2].add(drawText(
-      width/2-2*fontSize, height*(1/4)+3*fontSize, "  Anode layer replaced with",
-      fontSize+5, fontFamily));
-
-    outLayerAry[2].add(drawText(
-      width/2, height*(1/4)+4*fontSize, "TFT active matrix",
-      fontSize, fontFamily));
-
-
-    imgAry.push(new Image());
-    imgAryCur += 1;
-    imgAry[imgAryCur].src = 'IMG/Galaxy_Note_II_subpixels_representation.png';
-    imgAry[imgAryCur].onload = function() {
-    };
-
-    outLayerAry[3].add(center(new Kinetic.Image({
-      x: width/4,
-      y: height/4,
-      width: minDim/2,
-      height: minDim/2,
-      image: imgAry[imgAryCur]
-    })));
-
-    outLayerAry[3].add(align(drawText(
-      width/4, height*(1/5), "Sample SubPixel Image",
-      fontSize+5, fontFamily)));
-
+    supportFunc.drawCaptionText(outLayerAry[3], state, "Sample SubPixel Image");
 
     return 4;
   }
@@ -829,64 +762,30 @@ PreZenSettings.externDrawFunctionArray = [
 //////////////////////////////////////////////////////////////////////////////
 //Slide 22
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var createBullet = supportFunc.createBullet;
+    var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
+    supportFunc.setProConState(state, settingsObj);
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "AMOLED (Pros/Cons)",
-      fontSize+20, fontFamily)));
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
-    outLayerAry[1].add(drawText(
-      width/6, height/4-2*fontSize, "-Pros-",
-      fontSize+15, fontFamily));
+    supportFunc.drawHeader(outLayerAry[0], state, "AMOLED (Pros/Cons)");
 
-    outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
-    outLayerAry[1].add(drawText(
-      width/6, height/4, "10 year before noticable degeneration",
-      fontSize+5, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[1], "-Pros-");
+    bulDrawObj.bulSubText(outLayerAry[1], "10 year before noticable degeneration");
+    bulDrawObj.bulSubText(outLayerAry[2], "Better image quality due to higher contrast ratios");
+    bulDrawObj.bulSubText(outLayerAry[3], "Faster response time <1ms");
 
-    outLayerAry[2].add(createBullet(width/6, height/4+2*fontSize, fontSize));
-    outLayerAry[2].add(drawText(
-      width/6, height/4+2*fontSize, "Better image quality due to higher contrast ratios",
-      fontSize+5, fontFamily));
-
-    outLayerAry[3].add(createBullet(width/6, height/4+4*fontSize, fontSize));
-    outLayerAry[3].add(drawText(
-      width/6, height/4+4*fontSize, "Faster response time <1ms",
-      fontSize+5, fontFamily));
-
-    outLayerAry[4].add(drawText(
-      width/6, height/4+8*fontSize, "-Cons-",
-      fontSize+15, fontFamily));
-
-    outLayerAry[4].add(createBullet(width/6, height/4+10*fontSize, fontSize));
-    outLayerAry[4].add(drawText(
-      width/6, height/4+10*fontSize, "High Demand (Low Supply)",
-      fontSize+5, fontFamily));
-
-    outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
-    outLayerAry[5].add(drawText(
-      width/6, height/4+12*fontSize, "Lower brightness than LCD",
-      fontSize+5, fontFamily));
-
-    outLayerAry[5].add(drawText(
-      width/6, height/4+13*fontSize, "can be hard to see outside",
-      fontSize, fontFamily));
-
-    outLayerAry[6].add(createBullet(width/6, height/4+15*fontSize, fontSize));
-    outLayerAry[6].add(drawText(
-      width/6, height/4+15*fontSize, "Burn-ins, less so than CRTs",
-      fontSize+5, fontFamily));
-
+    bulDrawObj.bulMainText(outLayerAry[4], "-Cons-");
+    bulDrawObj.bulSubText(outLayerAry[4], "High Demand (Low Supply)");
+    bulDrawObj.bulSubText(outLayerAry[5], "Lower brightness than LCD");
+    bulDrawObj.nextHasNoBullet();
+    bulDrawObj.bulSubText(outLayerAry[5], "can be hard to see outside");
+    bulDrawObj.bulSubText(outLayerAry[6], "Burn-ins");
 
     return 7;
   }
@@ -894,72 +793,37 @@ PreZenSettings.externDrawFunctionArray = [
 //////////////////////////////////////////////////////////////////////////////
 //Slide 23
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var minDim = settingsObj.minDim;
+    var bulDrawObj, imgDrawObj = supportFunc.imgPosGenerator(settingsObj.minDim),
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
+    state.fontSize += 10;
+    state.curx = width/2;
+    state.cury = 0.15*height;
 
-    var imgAry = [];
-    var imgAryCur = -1;
+    state.hasMainBul = false;
+    state.maintexty = 0.05*height;
+    state.alignFunc = supportFunc.center;
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Screen Comparision",
-      fontSize+20, fontFamily)));
+    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
 
-    imgAry.push(new Image());
-    imgAryCur += 1;
-    imgAry[imgAryCur].src = 'IMG/CompareScreen.png';
-    imgAry[imgAryCur].onload = function() {
-    };
+    supportFunc.setProConState(state, settingsObj);
 
-    outLayerAry[1].add(align(new Kinetic.Image({
-      x: width/2,
-      y: height/2+height/20,
-      width: minDim/1,
-      height: minDim/4,
-      image: imgAry[imgAryCur]
-    })));
+    supportFunc.drawHeader(outLayerAry[0], state, "Screen Comparision");
 
-    outLayerAry[2].add(center(drawText(
-      width/2, outlineShift + 0.1*height,
-      "SXGA - Super Extended Graphics Array 1280x1024",
-      fontSize+10, fontFamily)));
+    bulDrawObj.bulMainText(outLayerAry[2], "SXGA - Super Extended Graphics Array 1280x1024");
+    bulDrawObj.bulMainText(outLayerAry[2], "1080p - (FHD) 1980x1080");
+    bulDrawObj.bulMainText(outLayerAry[2], "2160p - (QFHD) 3840x2160");
+    bulDrawObj.bulMainText(outLayerAry[2], "WQXGA - Wide Quad Extended GA 2500x1600");
 
-    outLayerAry[2].add(center(drawText(
-      width/2, outlineShift + 0.15*height,
-      "1080p - (FHD) 1980x1080",
-      fontSize+10, fontFamily)));
+    imgDrawObj.pushImage2('IMG/CompareScreen.png', 1, 4, supportFunc.align);
+    imgDrawObj.drawImage(outLayerAry[1], width/2, height/2+height/20);
 
-    outLayerAry[2].add(center(drawText(
-      width/2, outlineShift + 0.20*height,
-      "2160p - (QFHD) 3840x2160",
-      fontSize+10, fontFamily)));
-
-    outLayerAry[2].add(center(drawText(
-      width/2, outlineShift + 0.25*height,
-      "WQXGA - Wide Quad Extended GA 2500x1600", 
-      fontSize+10, fontFamily)));
-
-    imgAry.push(new Image());
-    imgAryCur += 1;
-    imgAry[imgAryCur].src = 'IMG/Vector_Video_Standards2.svg.png';
-    imgAry[imgAryCur].onload = function(){
-    };
-
-    outLayerAry[3].add(align(new Kinetic.Image({
-      x: width/2,
-      y: height/2+height/20,
-      width: minDim/1,
-      height: minDim/1.25,
-      image: imgAry[imgAryCur]
-    })));
+    imgDrawObj.pushImage2('IMG/Vector_Video_Standards2.svg.png', 1, 1.25, supportFunc.align);
+    imgDrawObj.drawImage(outLayerAry[3], width/2, height/2+height/20);
 
     return 4;
   }
@@ -969,7 +833,7 @@ PreZenSettings.externDrawFunctionArray = [
 //////////////////////////////////////////////////////////////////////////////
 //Slide 24
   function(outLayerAry, width, height, settingsObj, supportFunc) {
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var animTime = settingsObj.animTime;
     var fontSize = settingsObj.fontSize;
@@ -1019,7 +883,7 @@ PreZenSettings.externDrawFunctionArray = [
           circlea.setAngleDeg(360);
           circleb.setAngleDeg(360);
         }
-      },outLayerAry[0]);
+      }, outLayerAry[0]);
       ptr.start();
     })();
 
@@ -1038,7 +902,7 @@ PreZenSettings.externDrawFunctionArray = [
 //Slide 25
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var fontSize = settingsObj.fontSize;
     var fontFamily = settingsObj.fontFamily;
@@ -1069,7 +933,7 @@ PreZenSettings.externDrawFunctionArray = [
     }));
 
     outLayerAry[1].add(center(drawText(
-      width/4,height/2 - radius/2,'x^2 + y^2 = r^2',
+      width/4, height/2 - radius/2, 'x^2 + y^2 = r^2',
       fontSize, fontFamily)));
 
     outLayerAry[2].add(center(drawText(
@@ -1097,7 +961,7 @@ PreZenSettings.externDrawFunctionArray = [
       rotationDeg: 180
     }));
     outLayerAry[4].add(center(drawText(
-      width/4,height/2 - radius/2,'x^2 + y^2 = (-r)^2',
+      width/4, height/2 - radius/2, 'x^2 + y^2 = (-r)^2',
       fontSize, fontFamily)));
 
     outLayerAry[5].add(center(drawText(
@@ -1119,7 +983,7 @@ PreZenSettings.externDrawFunctionArray = [
     //Creates the demo
     var drawPixelCircle = supportFunc.drawPixelCircle;
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var fontSize = settingsObj.fontSize;
     var fontFamily = settingsObj.fontFamily;
@@ -1136,7 +1000,7 @@ PreZenSettings.externDrawFunctionArray = [
     var squareSide = minDim/12;
     var boardWidth = minDim/3;
 
-    var buttonObjAry = [{},{}];
+    var buttonObjAry = [{}, {}];
 
     var i, x, y, max, sizeCount, temp;
 
@@ -1159,7 +1023,7 @@ PreZenSettings.externDrawFunctionArray = [
       fontSize+5, fontFamily)));
 
     outLayerAry[3].add(center(drawText(
-      width*(2/3), height*(1/4)+5*fontSize,"R:255,G:255,B:255",
+      width*(2/3), height*(1/4)+5*fontSize, "R:255, G:255, B:255",
       fontSize, fontFamily)));
 
 
@@ -1179,7 +1043,7 @@ PreZenSettings.externDrawFunctionArray = [
         y: y,
         width: squareSide,
         height: squareSide,
-        offset: [squareSide/2,squareSide/2],
+        offset: [squareSide/2, squareSide/2],
 
         stroke: 'black',
         strokeWidth: 5,
@@ -1256,7 +1120,7 @@ PreZenSettings.externDrawFunctionArray = [
         y: height*(4/5) - (i&2 ? squareSide : 0) + (squareSide),
         width: squareSide,
         height: squareSide,
-        offset: [squareSide,squareSide],
+        offset: [squareSide, squareSide],
         stroke: 'black',
         strokeWidth: 5
       }));
@@ -1268,7 +1132,7 @@ PreZenSettings.externDrawFunctionArray = [
       y: height*(4/5) + (squareSide>>1),
       width: squareSide*(5/4),
       height: squareSide*(5/4),
-      offset: [squareSide*(9/8),squareSide*(9/8)],
+      offset: [squareSide*(9/8), squareSide*(9/8)],
       stroke: 'black',
       fill: 'black',
       strokeWidth: 5
@@ -1279,7 +1143,7 @@ PreZenSettings.externDrawFunctionArray = [
       y: height*(4/5) + (squareSide>>1),
       width: squareSide*(5/4),
       height: squareSide*(5/4),
-      offset: [squareSide*(9/8),squareSide*(9/8)],
+      offset: [squareSide*(9/8), squareSide*(9/8)],
       stroke: 'black',
       fill: 'grey',
       strokeWidth: 5
@@ -1292,7 +1156,7 @@ PreZenSettings.externDrawFunctionArray = [
 //Slide 27
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var fontSize = settingsObj.fontSize;
     var fontFamily = settingsObj.fontFamily;
@@ -1315,7 +1179,7 @@ PreZenSettings.externDrawFunctionArray = [
     outLayerAry[1].add(drawText(
       width/2, height*1/4, "Advantage", fontSize+15, fontFamily));
 
-    outLayerAry[2].add(createBullet(width/2, height/4+3*fontSize,fontSize));
+    outLayerAry[2].add(createBullet(width/2, height/4+3*fontSize, fontSize));
     outLayerAry[2].add(drawText(
       width/2, height/4+3*fontSize, "Uniform", fontSize+5, fontFamily));
 
@@ -1334,14 +1198,14 @@ PreZenSettings.externDrawFunctionArray = [
         y: height/4 + ((i%sizeCount)*squareSide),
         width: squareSide,
         height: squareSide,
-        offset: [squareSide,squareSide],
+        offset: [squareSide, squareSide],
         stroke: 'black',
         strokeWidth: 5
       }));
       i += 1;
     }
 
-    outLayerAry[4].add(createBullet(width/2, height/4+7*fontSize,fontSize));
+    outLayerAry[4].add(createBullet(width/2, height/4+7*fontSize, fontSize));
     outLayerAry[4].add(drawText(
       width/2, height*1/4+7*fontSize, "Easy to represent",
       fontSize+5, fontFamily));
@@ -1365,7 +1229,7 @@ PreZenSettings.externDrawFunctionArray = [
         y: height*(2/3) + ((i%sizeCount)*squareSide),
         width: squareSide,
         height: squareSide,
-        offset: [squareSide,squareSide],
+        offset: [squareSide, squareSide],
         stroke: 'black',
         strokeWidth: 5,
         fill: i%2 ? 'white': 'black'
@@ -1373,7 +1237,7 @@ PreZenSettings.externDrawFunctionArray = [
       i += 1;
     }
 
-    outLayerAry[7].add(createBullet(width/2, height/4+12*fontSize,fontSize));
+    outLayerAry[7].add(createBullet(width/2, height/4+12*fontSize, fontSize));
     outLayerAry[7].add(drawText(
       width/2, height*1/4+12*fontSize, "Easy to compress",
       fontSize+5, fontFamily));
@@ -1392,7 +1256,7 @@ PreZenSettings.externDrawFunctionArray = [
         y: height/4 + ((i%sizeCount)*squareSide),
         width: squareSide,
         height: squareSide,
-        offset: [squareSide,squareSide],
+        offset: [squareSide, squareSide],
         stroke: 'black',
         strokeWidth: 5,
         fill: fill
@@ -1409,7 +1273,7 @@ PreZenSettings.externDrawFunctionArray = [
         y: height/4 + ((i%sizeCount)*squareSide),
         width: squareSide,
         height: squareSide,
-        offset: [squareSide*(3/2),squareSide/2],
+        offset: [squareSide*(3/2), squareSide/2],
         stroke: 'black',
         strokeWidth: 5,
         fill: i%2 ? 'white': 'black'
@@ -1424,7 +1288,7 @@ PreZenSettings.externDrawFunctionArray = [
 //Slide 28
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var fontSize = settingsObj.fontSize;
     var fontFamily = settingsObj.fontFamily;
@@ -1449,7 +1313,7 @@ PreZenSettings.externDrawFunctionArray = [
     y = height/4;
 
     outLayerAry[1].add(new Kinetic.Line({
-      points: [x,y+50,x+50,y,x+35,y,x+50,y,x+50,y+15,x+50,y],
+      points: [x, y+50, x+50, y, x+35, y, x+50, y, x+50, y+15, x+50, y],
       stroke: 'red',
       strokeWidth: 10,
       lineCap: 'round',
@@ -1460,7 +1324,7 @@ PreZenSettings.externDrawFunctionArray = [
       width/2, height/4, "Representation",
       fontSize+15, fontFamily));
 
-    outLayerAry[1].add(createBullet(width/2, height*(1/4)+3*fontSize,fontSize));
+    outLayerAry[1].add(createBullet(width/2, height*(1/4)+3*fontSize, fontSize));
     outLayerAry[1].add(drawText(
       width/2, height*(1/4)+3*fontSize, "Magnitude and Direction",
       fontSize+5, fontFamily));
@@ -1469,7 +1333,7 @@ PreZenSettings.externDrawFunctionArray = [
     x = width/4 - 20;
     y = height/4;
     outLayerAry[2].add(new Kinetic.Line({
-      points: [x,y+50,x+50,y,x+35,y,x+50,y,x+50,y+15,x+50,y],
+      points: [x, y+50, x+50, y, x+35, y, x+50, y, x+50, y+15, x+50, y],
       stroke: 'blue',
       strokeWidth: 10,
       lineCap: 'round',
@@ -1479,7 +1343,7 @@ PreZenSettings.externDrawFunctionArray = [
     x = width/4 - 20;
     y = height/4 + 20;
     outLayerAry[2].add(new Kinetic.Line({
-      points: [x,y+100,x+100,y,x+85,y,x+100,y,x+100,y+15,x+100,y],
+      points: [x, y+100, x+100, y, x+85, y, x+100, y, x+100, y+15, x+100, y],
       stroke: 'blue',
       strokeWidth: 10,
       lineCap: 'round',
@@ -1491,20 +1355,20 @@ PreZenSettings.externDrawFunctionArray = [
       fontSize, fontFamily));
 
     outLayerAry[2].add(drawText(
-      width/2, height/4+5*fontSize, "<50,50>",
+      width/2, height/4+5*fontSize, "<50, 50>",
       fontSize, fontFamily));
 
     outLayerAry[3].add(drawText(
       width/2, height/4+8*fontSize, "Problems",
       fontSize+15, fontFamily));
 
-    outLayerAry[4].add(createBullet(width/2, height/4+11*fontSize,fontSize));
+    outLayerAry[4].add(createBullet(width/2, height/4+11*fontSize, fontSize));
     outLayerAry[4].add(drawText(
       width/2, height/4+11*fontSize, "No specific \"start\" point",
       fontSize+5, fontFamily));
 
     outLayerAry[5].add(drawText(
-      width/2, height/4+12*fontSize,"<(" + width/4 + ',' + height/4 + "),50,50>",
+      width/2, height/4+12*fontSize, "<(" + width/4 + ', ' + height/4 + "), 50, 50>",
       fontSize, fontFamily));
 
 
@@ -1518,14 +1382,14 @@ PreZenSettings.externDrawFunctionArray = [
         y: height/4 + ((i%sizeCount)*squareSide),
         width: squareSide,
         height: squareSide,
-        offset: [squareSide,squareSide],
+        offset: [squareSide, squareSide],
         stroke: 'black',
         strokeWidth: 5
       }));
       i += 1;
     }
 
-    outLayerAry[6].add(createBullet(width/2, height*(1/4)+14*fontSize,fontSize));
+    outLayerAry[6].add(createBullet(width/2, height*(1/4)+14*fontSize, fontSize));
     outLayerAry[6].add(drawText(
       width/2, height/4+14*fontSize, "How do you draw vectors?",
       fontSize+5, fontFamily));
@@ -1538,7 +1402,7 @@ PreZenSettings.externDrawFunctionArray = [
         y: height/4 + ((i%sizeCount)*squareSide),
         width: squareSide,
         height: squareSide,
-        offset: [squareSide,squareSide],
+        offset: [squareSide, squareSide],
         stroke: 'black',
         fill: (i===5)? 'red' : 'white',
         strokeWidth: 5
@@ -1558,7 +1422,7 @@ PreZenSettings.externDrawFunctionArray = [
 //Slide 29
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var fontSize = settingsObj.fontSize;
     var fontFamily = settingsObj.fontFamily;
@@ -1569,7 +1433,7 @@ PreZenSettings.externDrawFunctionArray = [
     var drawText = supportFunc.drawText;
     var align = supportFunc.align;
 
-    var buttonObjAry = [{},{}];
+    var buttonObjAry = [{}, {}];
 
     var squareSide = minDim/12;
 
@@ -1605,16 +1469,16 @@ PreZenSettings.externDrawFunctionArray = [
 
     left = minDim/6;
     outLayerAry[3].add(new Kinetic.Polygon({
-      points: [minDim*0.375-left,minDim*0.250,minDim*0.500-left,minDim*0.375,
-               minDim*0.375-left,minDim*0.500,minDim*0.250-left,minDim*0.375],
+      points: [minDim*0.375-left, minDim*0.250, minDim*0.500-left, minDim*0.375,
+               minDim*0.375-left, minDim*0.500, minDim*0.250-left, minDim*0.375],
       fill: 'white',
       stroke: 'black',
       strikeWidth: 5
     }));
 
     outLayerAry[3].add(line = new Kinetic.Line({
-      points: [minDim*0.3125-left+5*addx,minDim*0.4375-5*addy,
-               minDim*0.4375-left-5*addx,minDim*0.3125+5*addy],
+      points: [minDim*0.3125-left+5*addx, minDim*0.4375-5*addy,
+               minDim*0.4375-left-5*addx, minDim*0.3125+5*addy],
       stroke: 'blue',
       strokeWidth: 10,
       lineCap: 'square'
@@ -1645,7 +1509,7 @@ PreZenSettings.externDrawFunctionArray = [
         y: y,
         width: squareSide,
         height: squareSide,
-        offset: [squareSide/2,squareSide/2],
+        offset: [squareSide/2, squareSide/2],
 
         stroke: 'black',
         strokeWidth: 5,
@@ -1659,8 +1523,8 @@ PreZenSettings.externDrawFunctionArray = [
             q -=2;
             line.setStrokeWidth(q);
             //shape.setStrokeWidth(q);
-            line.setPoints([minDim*0.3125-left+q*addx,minDim*0.4375-q*addy,
-                            minDim*0.4375-left-q*addx,minDim*0.3125+q*addy]);
+            line.setPoints([minDim*0.3125-left+q*addx, minDim*0.4375-q*addy,
+                            minDim*0.4375-left-q*addx, minDim*0.3125+q*addy]);
             outLayerAry[2].draw();
             outLayerAry[3].draw();
           }
@@ -1672,8 +1536,8 @@ PreZenSettings.externDrawFunctionArray = [
             q +=2;
             line.setStrokeWidth(q);
             //shape.setStrokeWidth(q);
-            line.setPoints([minDim*0.3125-left+q*addx,minDim*0.4375-q*addy,
-                            minDim*0.4375-left-q*addx,minDim*0.3125+q*addy]);
+            line.setPoints([minDim*0.3125-left+q*addx, minDim*0.4375-q*addy,
+                            minDim*0.4375-left-q*addx, minDim*0.3125+q*addy]);
             outLayerAry[2].draw();
             outLayerAry[3].draw();
           }
@@ -1694,7 +1558,7 @@ PreZenSettings.externDrawFunctionArray = [
 //Slide 30
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var fontSize = settingsObj.fontSize;
     var fontFamily = settingsObj.fontFamily;
@@ -1709,22 +1573,22 @@ PreZenSettings.externDrawFunctionArray = [
       width/2, outlineShift + 0.05*height, "Drawing a curve",
       fontSize+20, fontFamily)));
 
-    outLayerAry[1].add(createBullet(width/8, height/4,fontSize));
+    outLayerAry[1].add(createBullet(width/8, height/4, fontSize));
     outLayerAry[1].add(drawText(
       width/8, height/4, "One point is a point", fontSize, fontFamily));
 
-    outLayerAry[2].add(createBullet(width/8, height/4+2*fontSize,fontSize));
+    outLayerAry[2].add(createBullet(width/8, height/4+2*fontSize, fontSize));
     outLayerAry[2].add(drawText(
       width/8, height/4+2*fontSize, "Two points make a line (y=x)", fontSize, fontFamily));
 
-    outLayerAry[3].add(createBullet(width/8, height/4+4*fontSize,fontSize));
+    outLayerAry[3].add(createBullet(width/8, height/4+4*fontSize, fontSize));
     outLayerAry[3].add(drawText(
       width/8, height/4+4*fontSize, "Three points can make a quadratic curve (y=x^2)", fontSize, fontFamily));
 
     outLayerAry[4].add(drawText(
       width/8, height/4+5*fontSize, "The points must not all be collinear", fontSize, fontFamily));
 
-    supportFunc.bezierExample( outLayerAry[1], outLayerAry[2],
+    supportFunc.bezierExample(outLayerAry[1], outLayerAry[2],
         outLayerAry[3], outLayerAry[4], minDim, width, height,
         { pointax: width*1/3,
           pointay: height*2/3,
@@ -1743,7 +1607,7 @@ PreZenSettings.externDrawFunctionArray = [
 //Slide 31
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var fontSize = settingsObj.fontSize;
     var fontFamily = settingsObj.fontFamily;
@@ -1785,7 +1649,7 @@ PreZenSettings.externDrawFunctionArray = [
    outLayerAry[4].add(createBullet(width/6, height/4+8*fontSize, fontSize));
    outLayerAry[4].add(createBullet(width/6, height/4+8*fontSize, fontSize));
       outLayerAry[4].add(drawText(
-      width/6, height/4+8*fontSize, "Line from (a,b) to (c,d)",
+      width/6, height/4+8*fontSize, "Line from (a, b) to (c, d)",
       fontSize+5, fontFamily));
 
     outLayerAry[4].add(drawText(
@@ -1800,7 +1664,7 @@ PreZenSettings.externDrawFunctionArray = [
     outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
     outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
       outLayerAry[5].add(drawText(
-      width/6, height/4+12*fontSize, "Curve from (a,b) to (c,d) to (e,f)",
+      width/6, height/4+12*fontSize, "Curve from (a, b) to (c, d) to (e, f)",
       fontSize+5, fontFamily));
 
     outLayerAry[5].add(drawText(
@@ -1826,7 +1690,7 @@ PreZenSettings.externDrawFunctionArray = [
 //Slide 32
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var fontSize = settingsObj.fontSize;
     var fontFamily = settingsObj.fontFamily;
@@ -1862,7 +1726,7 @@ PreZenSettings.externDrawFunctionArray = [
 //Slide 33 (end slide)
   function(outLayerAry, width, height, settingsObj, supportFunc) {
 
-    supportFunc.clean(outLayerAry,settingsObj);
+    supportFunc.clean(outLayerAry, settingsObj);
 
     var fontSize = settingsObj.fontSize;
     var fontFamily = settingsObj.fontFamily;

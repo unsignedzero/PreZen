@@ -303,7 +303,7 @@ PreZenSettings.supportFunc = {
   },
 
   drawCircleArray : function(state, layer, colorfunc){
-    var i, max, x, y, boardWidth, squareSide, sizeCount, layer;
+    var i, max, x, y, boardWidth, squareSide, sizeCount;
 
       x = typeof state.x === "number" ? state.x : 0;
       y = typeof state.y === "number" ? state.y : 0;
@@ -325,7 +325,7 @@ PreZenSettings.supportFunc = {
     if ( typeof colorfunc !== "function" ){
       colorfunc = function(i){
         return "black";
-      }
+      };
     }
 
     i = 0;
