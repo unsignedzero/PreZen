@@ -31,10 +31,13 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 * Add speaker notes on the slide
 * Add button/key to jump to a specific slide/segment
-* Reduce the number of variables in each slide to the bare necessities, 
-  if possible
 
 # Version/Changelog #
+
+## 0.6.0.0 Codename: Tango [05-17-2013] #
+
+* Updating logistics for all files to be out of beta
+* Still works on Firefox 20 and Chrome 26 ok
 
 ## 0.6.0.0 Beta 8 [05-17-2013] #
 ### Generator Branch #

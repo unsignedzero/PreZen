@@ -6,7 +6,7 @@
  *
  * Created 01-29-2013
  * Updated 05-17-2013
- * Version 0.6.0.0 Beta 7
+ * Version 0.6.0.0 Tango
  * Created by David Tran (unsignedzero)
  */
 
