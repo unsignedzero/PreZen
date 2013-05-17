@@ -1,0 +1,10 @@
+Perhaps this is a silly commit but nevertheless learning about the generator
+pattern and applying it was a fun, but also painful process. In the act of 
+creating and using the above pattern, I've also implicitly used the facade 
+pattern, and decorate pattern and perhaps others to.
+
+It was a painful but very education three days for most of the code edits.
+I also learned a lot more with VIM and got a little more insight on how JS 
+works with objects. In any event, like the file name suggests this is an end
+for this branch and unless any other generator experiments are made, no
+updates will be merged into or out of this branch.
