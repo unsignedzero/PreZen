@@ -3,15 +3,24 @@
  * This support allows one to separate code that places and create content
  * from code that generates code/logic. All functions created here
  * are seen in all slides as supportFunc.<function name>.
- * 
+ *
  * Certain function names or defined in PreZen and will override any functions
  * with the same name defined here. This list will eventually be commented
  * and enumerated here
  *
  * Created 03-02-2013
  * Updated 05-17-2013
- * Version 0.6.0.0 Beta 7
+ * Version 0.6.0.0 Beta 8
  * Created by David Tran (unsignedzero)
+ */
+
+/* The code to draw a grid and the code to draw the buttons are not factored out.
+ *
+ * Drawing a grid - Many arguments need to be passed and a function for settings the
+ * x and one for setting a y needs to be used repeatedly. Not efficient.
+ *
+ * Drawing interactive buttons - Lots of parameters required used only a few times. Can
+ * be cached but requires updating when resizing canvas. Not worthwhile.
  */
 
 PreZenSettings.supportFunc = {
@@ -20,17 +29,15 @@ PreZenSettings.supportFunc = {
     "use strict";
 
     var pointa, pointb, pointc, linea, lineb, linec, shifta, shiftb, shiftc,
-        splineq, start, control, animObj,
-        t,
-        canDrag,
+        splineq, start, control, animObj, t, canDrag, circleObj, lineObj,
         maxTime = 10000,
         inAnim = false;
 
-    //The !! converts the object/primitive into a boolean type
+    // The !! converts the object/primitive into a boolean type
     canDrag = setObj.canDrag !== undefined ? (!!setObj.canDrag) : true;
 
-    //Set up support functions and objects
-    function setListPoints(a,b,c) {
+    // Set up support functions and objects
+    function setListPoints(a, b, c) {
       return [{ x: a.getX(), y: a.getY() },
               { x: b.getX(), y: b.getY() },
               { x: c.getX(), y: c.getY() }];
@@ -44,43 +51,43 @@ PreZenSettings.supportFunc = {
         shiftb.setY(pointb.getY());
         shiftc.setX(pointa.getX());
         shiftc.setY(pointa.getY());
-        linec.setPoints([shifta.getX(),shifta.getY(),
-                         shiftb.getX(),shiftb.getY()]);
+        linec.setPoints([shifta.getX(), shifta.getY(),
+                         shiftb.getX(), shiftb.getY()]);
       }
       control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
       control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
-      linea.setPoints([pointa.getX(),pointa.getY(),
-                       pointb.getX(),pointb.getY()]);
-      lineb.setPoints([pointb.getX(),pointb.getY(),
-                       pointc.getX(),pointc.getY()]);
-      splineq.setPoints(setListPoints(pointa,control,pointc));
+      linea.setPoints([pointa.getX(), pointa.getY(),
+                       pointb.getX(), pointb.getY()]);
+      lineb.setPoints([pointb.getX(), pointb.getY(),
+                       pointc.getX(), pointc.getY()]);
+      splineq.setPoints(setListPoints(pointa, control, pointc));
       outLayerA.draw();
     };
 
-    animObj = new Kinetic.Animation(function(frame) {
+    animObj = new Kinetic.Animation(function(frame){
       t = frame.time/maxTime;
       control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
       control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
-      linea.setPoints([pointa.getX(),pointa.getY(),
-                       pointb.getX(),pointb.getY()]);
-      lineb.setPoints([pointb.getX(),pointb.getY(),
-                       pointc.getX(),pointc.getY()]);
+      linea.setPoints([pointa.getX(), pointa.getY(),
+                       pointb.getX(), pointb.getY()]);
+      lineb.setPoints([pointb.getX(), pointb.getY(),
+                       pointc.getX(), pointc.getY()]);
       shifta.setX((1-t)*pointa.getX()+t*pointb.getX());
       shifta.setY((1-t)*pointa.getY()+t*pointb.getY());
       shiftb.setX((1-t)*pointb.getX()+t*pointc.getX());
       shiftb.setY((1-t)*pointb.getY()+t*pointc.getY());
-      linec.setPoints([shifta.getX(),shifta.getY(),
-                       shiftb.getX(),shiftb.getY()]);
+      linec.setPoints([shifta.getX(), shifta.getY(),
+                       shiftb.getX(), shiftb.getY()]);
       shiftc.setX((1-t)*shifta.getX()+t*shiftb.getX());
       shiftc.setY((1-t)*shifta.getY()+t*shiftb.getY());
-      splineq.setPoints(setListPoints(pointa,control,pointc));
+      splineq.setPoints(setListPoints(pointa, control, pointc));
       if (frame.time >= maxTime) {
         animObj.stop();
         frame.time = 0;
-        linea.setPoints([pointa.getX(),pointa.getY(),
-                        pointb.getX(),pointb.getY()]);
-        lineb.setPoints([pointb.getX(),pointb.getY(),
-                        pointc.getX(),pointc.getY()]);
+        linea.setPoints([pointa.getX(), pointa.getY(),
+                        pointb.getX(), pointb.getY()]);
+        lineb.setPoints([pointb.getX(), pointb.getY(),
+                        pointc.getX(), pointc.getY()]);
         control.setX((pointa.getX()+2*pointb.getX()+pointc.getX())/4);
         control.setY((pointa.getY()+2*pointb.getY()+pointc.getY())/4);
         shifta.setX(pointb.getX());
@@ -89,15 +96,14 @@ PreZenSettings.supportFunc = {
         shiftb.setY(pointc.getY());
         shiftc.setX(pointc.getX());
         shiftc.setY(pointc.getY());
-        linec.setPoints([shifta.getX(),shifta.getY(),
-                         shiftb.getX(),shiftb.getY()]);
-        splineq.setPoints(setListPoints(pointa,control,pointc));
+        linec.setPoints([shifta.getX(), shifta.getY(),
+                         shiftb.getX(), shiftb.getY()]);
+        splineq.setPoints(setListPoints(pointa, control, pointc));
         inAnim = false;
       }
     }, outLayerA);
 
-    // Define all elements on the screen
-    pointa = new Kinetic.Circle({
+    circleObj = {
       x: setObj.pointax !== undefined ? setObj.pointax : width/4,
       y: setObj.pointay !== undefined ? setObj.pointay : height/4,
       radius: minDim/50,
@@ -105,117 +111,86 @@ PreZenSettings.supportFunc = {
       stroke: 'black',
       strokeWidth: 5,
       draggable: canDrag
-    });
-    pointb = new Kinetic.Circle({
-      x: setObj.pointbx !== undefined ? setObj.pointbx : width/3,
-      y: setObj.pointby !== undefined ? setObj.pointby : height/3,
-      radius: minDim/50,
-      fill: 'yellow',
-      stroke: 'black',
-      strokeWidth: 5,
-      draggable: canDrag
-    });
-    pointc = new Kinetic.Circle({
-      x: setObj.pointcx !== undefined ? setObj.pointcx : width/2,
-      y: setObj.pointcy !== undefined ? setObj.pointcy : height/2,
-      radius: minDim/50,
-      fill: 'blue',
-      stroke: 'black',
-      strokeWidth: 5,
-      draggable: canDrag
-    });
-    control = new Kinetic.Circle({
-      x: (pointa.getX()+2*pointb.getX()+pointc.getX())/4,
-      y: (pointa.getY()+2*pointb.getY()+pointc.getY())/4,
-      radius: minDim/50,
-      fill: 'purple',
-      stroke: 'black',
-      strokeWidth: 5,
-      draggable: canDrag
-    });
-    start = new Kinetic.Circle({
-      x: setObj.startx !== undefined ? setObj.startx : width/1.5,
-      y: setObj.starty !== undefined ? setObj.starty : height/1.5,
-      radius: minDim/25,
-      fill: 'green',
-      stroke: 'black',
-      strokeWidth: 4,
-      draggable: canDrag
-    });
+    } ;
 
-    //Meta Points seen only during the animation
-    shifta = new Kinetic.Circle({
-      x: -20,
-      y: -20,
-      radius: minDim/75,
-      fill: 'black',
-      stroke: 'black',
-      strokeWidth: 4
-    });
-    shiftb = new Kinetic.Circle({
-      x: -20,
-      y: -20,
-      radius: minDim/75,
-      fill: 'black',
-      stroke: 'black',
-      strokeWidth: 4
-    });
-    shiftc = new Kinetic.Circle({
-      x: -20,
-      y: -20,
-      radius: minDim/75,
-      fill: 'orange',
-      stroke: 'black',
-      strokeWidth: 4
-    });
+    // Define all elements on the screen
+    pointa = new Kinetic.Circle(circleObj);
 
-    linec = new Kinetic.Line({
-      points: [-20,-40,
-               -40,-20],
-      stroke: 'grey',
-      strokeWidth: 10
-    });
+    circleObj.x = setObj.pointbx !== undefined ? setObj.pointbx : width/3;
+    circleObj.y = setObj.pointby !== undefined ? setObj.pointby : height/3;
+    circleObj.fill = 'yellow';
+    pointb = new Kinetic.Circle(circleObj);
 
-    //Resultant curve (spline) drawn
+    circleObj.x = setObj.pointcx !== undefined ? setObj.pointcx : width/2;
+    circleObj.y = setObj.pointcy !== undefined ? setObj.pointcy : height/2;
+    circleObj.fill = 'blue';
+    pointc = new Kinetic.Circle(circleObj);
+
+    circleObj.x = (pointa.getX()+2*pointb.getX()+pointc.getX())/4;
+    circleObj.y = (pointa.getY()+2*pointb.getY()+pointc.getY())/4;
+    circleObj.fill = 'purple';
+    control = new Kinetic.Circle(circleObj);
+
+    circleObj.x = setObj.startx !== undefined ? setObj.startx : width/1.5;
+    circleObj.y = setObj.starty !== undefined ? setObj.starty : height/1.5;
+    circleObj.fill = 'green';
+    circleObj.radius = minDim/25;
+    start = new Kinetic.Circle(circleObj);
+
+    // Meta Points seen only during the animation
+    circleObj.x = circleObj.y = -20;
+    circleObj.fill = 'black';
+    circleObj.strokeWidth = 4;
+    circleObj.radius = minDim/75;
+    circleObj.draggable = false;
+    shifta = new Kinetic.Circle(circleObj);
+    shiftb = new Kinetic.Circle(circleObj);
+
+    circleObj.fill = 'orange';
+    shiftc = new Kinetic.Circle(circleObj);
+
+    // Resultant curve (spline) drawn
     splineq = new Kinetic.Spline({
-      points: setListPoints(pointa,control,pointc),
+      points: setListPoints(pointa, control, pointc),
       stroke: 'green',
       strokeWidth: 10,
       lineCap: 'round',
       tension: 0.5
     });
 
-    //Meta bezier curve
-    linea = new Kinetic.Line({
-      points: [pointa.getX(),pointa.getY(),
-               pointb.getX(),pointb.getY()],
+    // Meta bezier curve
+    lineObj = {
+      points: [pointa.getX(), pointa.getY(),
+               pointb.getX(), pointb.getY()],
       stroke: 'black',
       strokeWidth: 3
-    });
-    lineb = new Kinetic.Line({
-      points: [pointb.getX(),pointb.getY(),
-               pointc.getX(),pointc.getY()],
-      stroke: 'black',
-      strokeWidth: 3
-    });
+    };
+    linea = new Kinetic.Line(lineObj);
 
-    //Refresh onclick
-    //Updates when piece is dragged or moved
+    lineObj.points = [pointb.getX(), pointb.getY(),
+                      pointc.getX(), pointc.getY()];
+    lineb = new Kinetic.Line(lineObj);
+
+    lineObj.points = [-20, -40, -40, -20];
+    lineObj.stroke = 'grey';
+    lineObj.strokeWidth = 10;
+    linec = new Kinetic.Line(lineObj);
+
+    // Refresh onclick
+    // Updates when piece is dragged or moved
     if (canDrag) {
       pointa.on("mouseon dragmove" , function() {
         onDragUpdate();
       });
-
       pointb.on("mouseon dragmove" , function() {
         onDragUpdate();
       });
-
       pointc.on("mouseon dragmove" , function() {
         onDragUpdate();
       });
 
       control.on("mouseon dragmove" , function() {
-        splineq.setPoints(setListPoints(pointa,control,pointc));
+        splineq.setPoints(setListPoints(pointa, control, pointc));
         outLayerA.draw();
       });
 
@@ -227,14 +202,13 @@ PreZenSettings.supportFunc = {
       });
     }
 
-    //Add all elements to layer
-
+    // Add all elements to layer
     outLayerB.add(linea);
     outLayerC.add(lineb);
     outLayerC.add(linec);
     outLayerC.add(splineq);
 
-    //Control points need to be visible
+    // Control points need to be visible
     if (setObj.showAnim !== undefined && setObj.showAnim ){
       outLayerD.add(shifta);
       outLayerD.add(shiftb);
@@ -248,7 +222,7 @@ PreZenSettings.supportFunc = {
     outLayerC.add(pointc);
   },
 
-  drawPixelCircle : function (LocalLayer, supportFunc, 
+  drawPixelCircle : function (LocalLayer, supportFunc,
       width, height, side, size, alt) {
     "use strict";
     var floor = supportFunc.floor;
@@ -265,7 +239,7 @@ PreZenSettings.supportFunc = {
 
     i = 0;
     del = side/size;
-    
+
     stroke = size > 2 ? 'black' : 'grey';
 
     while(i < max) {
@@ -290,7 +264,7 @@ PreZenSettings.supportFunc = {
       i += 1;
     }
 
-    //Reference circle for demo
+    // Reference circle for demo
     if (size > 3)
       LocalLayer.add(new Kinetic.Circle({
         x: width + (side/2) - 1,
@@ -352,11 +326,19 @@ PreZenSettings.supportFunc = {
       input.width/4, input.height/5, str,
       input.fontSize+5, input.fontFamily)));
   },
-  
+
+  defaultSquareSettings : function(squareSide){
+    return {width: squareSide,
+            height: squareSide,
+            offset: [squareSide, squareSide],
+            stroke: 'black',
+            strokeWidth: 5 };
+  },
+
   pixelCircleDemo : function(outLayerAry, width, height, settingsObj, supportFunc){
     "use strict";
 
-    //Creates the demo
+    // Creates the demo
     var drawPixelCircle = supportFunc.drawPixelCircle,
       fontSize = settingsObj.fontSize,
       fontFamily = settingsObj.fontFamily,
@@ -374,7 +356,7 @@ PreZenSettings.supportFunc = {
 
     i = 0;
     max = 2;
-    //Create the interactive buttons for the demo
+    // Create the interactive buttons for the demo
     while(i < max) {
       x = width/4 + (i&1?-minDim/16:minDim/16);
       y = height*(2/3);
@@ -421,7 +403,7 @@ PreZenSettings.supportFunc = {
       i += 1;
     }
 
-    //Adds on the last button
+    // Adds on the last button
     buttonObjAry[2] = center(new Kinetic.Rect({
       x: width/4,
       y: height*(3/4),
@@ -483,15 +465,9 @@ PreZenSettings.supportFunc = {
     var floor = supportFunc.floor,
       squareSide = width/20,
       boardWidth = width/4,
-      i, max, sizeCount, fill, squareObj;
+      i, max, sizeCount, fill, squareObj, metaObj;
 
-    squareObj = {
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide, squareSide],
-        stroke: 'black',
-        strokeWidth: 5
-    };
+    squareObj = supportFunc.defaultSquareSettings(squareSide);
 
     i = 0;
     sizeCount = 4;
@@ -585,15 +561,7 @@ PreZenSettings.supportFunc = {
 
     outLayerAry[2].add(new Kinetic.Line(arrowObj));
 
-    squareObj = {
-        x: width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide,
-        y: height/4 + ((i%sizeCount)*squareSide),
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide, squareSide],
-        stroke: 'black',
-        strokeWidth: 5
-    };
+    squareObj = supportFunc.defaultSquareSettings(squareSide);
 
     i = 0;
     sizeCount = 4;
@@ -659,7 +627,7 @@ PreZenSettings.supportFunc = {
 
     i = 0;
     max = 2;
-    //Create the interactive buttons for the demo
+    // Create the interactive buttons for the demo
     while(i < max) {
       x = width/4 + (i&1?-minDim/16:minDim/16);
       y = height*(2/3);
@@ -681,12 +649,12 @@ PreZenSettings.supportFunc = {
       buttonObjAry[i].state = i;
 
       buttonObjAry[i].call = function(line) {
-        var q, reDraw = false;;
-        if (this.state === 0 && (q = line.getStrokeWidth()) > 2) {
+        var q, reDraw = false;
+        if (this.state === 1 && (q = line.getStrokeWidth()) > 2) {
           q -=2;
           reDraw = true;
         }
-        else if (this.state === 1 && (q = line.getStrokeWidth()) < 40) {
+        else if (this.state === 0 && (q = line.getStrokeWidth()) < 40) {
           q += 2;
           reDraw = true;
         }

@@ -36,6 +36,18 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+## 0.6.0.0 Beta 8 [05-17-2013] #
+### Generator Branch #
+
+* Fixed some mistakes in comments and slides
+* User settings object created for user to store variables across slides
+  These variables are initialized under slidesSettings.js and in the slides
+  can be accessed under settingsObj.slideSetObj
+* Trailing whitespace and multiple blank lines removed. Extra space after \\\\
+  added for all comments. Added space after commas as needed
+* PreZen can be set to autoClean slides before the user interacts with it
+* Slides itself does not need to cleaned before using
+* undented once in slides.js
 * Reorder the definitions of the generator model
 
 ## 0.6.0.0 Beta 7 [05-17-2013] #

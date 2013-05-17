@@ -8,11 +8,11 @@
  *
  */
 
-//Source
-//http://stackoverflow.com/questions/11381673/javascript-solution-to-detect-mobile-browser
+// Source
+// http:// stackoverflow.com/questions/11381673/javascript-solution-to-detect-mobile-browser
 
 function isMobile(){
-  // if we want a more complete list use this: http://detectmobilebrowsers.com/
+  // if we want a more complete list use this: http:// detectmobilebrowsers.com/
   // str.test() is more efficient than str.match()
   // remember str.test is case sensitive
   "use strict";
@@ -20,5 +20,5 @@ function isMobile(){
   var _isMobile = (/iphone|ipod|android|ie|blackberry|fennec/).test(
        navigator.userAgent.toLowerCase());
   return false;
-  //return _isMobile;
+  // return _isMobile;
 }

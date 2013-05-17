@@ -6,8 +6,8 @@
  *
  *
  * Created 01-29-2013
- * Updated 05-15-2013
- * Version 0.6.0.0 Beta 7
+ * Updated 05-17-2013
+ * Version 0.6.0.0 Beta 8
  * Created by David Tran (unsignedzero)
  */
 
@@ -15,51 +15,52 @@
  *we will pass one object that contains all the information needed
  */
 var PreZenSettings = {
-  //Slide Array
+  // Slide Array
+  // externDrawFunctionArray:[ function(drawArgs), ... function(drawArgs) ],
 
-  //This will eventually hold the slides
-  //externDrawFunctionArray:[ function(drawArgs), ... function(drawArgs) ],
-
-  //Sets the default font for PreZen
+  // Sets the default font for PreZen
   externFont:'Palatino',
 
-  //Sets the padding for the outline
+  // Sets the padding for the outline
   externOutlineShift:20,
 
-  //Sets the default dimensions 
+  // Sets the default dimensions
   externWidth:1000,
   externHeight:800,
 
-  //Sets the fade time (in ms)
+  // Sets the fade time (in ms)
   externTimer:500,
 
-  //Show Debug Slides
+  // Show Debug Slides
   showDebugSlide:false,
 
-  //Show Slide Numbers
+  // Show Slide Numbers
   showSlideNumber:true,
+
+  //
+  autoClean:true,
 
   /*Sets the max amount of layers PreZen should assume a slide should have
    *Adding more slides than specified here will have unexpected results
    *and extra layers will not load correctly when going forward.
-   *Going backwards we will see everything but the extra layers will NOT 
+   *Going backwards we will see everything but the extra layers will NOT
    *be removed
    */
   externMaxLayerCount:9,
 
-  //Container Name (Tag)
+  // Container Name (Tag)
   container:'container',
 
-  //DEBUG Option
+  // DEBUG Option
   externDEBUG:false,
 
-  //Button Show
+  // Button Show
   externShowButtons:true,
 
-  //Set outline border
+  // Set outline border
   externOutlineShift:20,
 
-  //Here we set the default support functions for the slide
+  // Here we set the default support functions for the slide
   supportFunc:{}
 };
 
