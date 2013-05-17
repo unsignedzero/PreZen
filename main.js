@@ -4,8 +4,9 @@
  * libraries and files.
  *
  *
- * Updated 04-08-2013
- * Version 0.6.0.0 Beta 1
+ * Created 01-29-2013
+ * Updated 05-17-2013
+ * Version 0.6.0.0 Beta 7
  * Created by David Tran (unsignedzero)
  */
 

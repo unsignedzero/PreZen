@@ -36,11 +36,19 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
-* Goal, apply the generator to all slides
-* Planning on removing drawTextGenerator and making bulletTextPosGenerator 
-  the new drawTextGenerator
+* Reorder the definitions of the generator model
 
+## 0.6.0.0 Beta 7 [05-17-2013] #
+### Generator Branch #
 
+* Removed unused style tag in index.html
+* Added missing Create date for PreZenSettings.js, PreZenTestCode.js and
+  main.js
+* Renamed bulletTextPosGenerator to drawTextGenerator and removed the old 
+  definition
+* Cleaned up visual/miscellaneous issues spotted on final run
+* Converted the last part of the slides to use generators
+  All slides now use the new generator model
 * Updated KineticJS library to version 4.5.1 
   (no issues on Chrome or Firefox just yet)
 * Shrunk font size for a few slides

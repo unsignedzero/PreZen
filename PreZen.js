@@ -12,8 +12,8 @@
  * will scale correctly
  *
  * Created 01-25-2013
- * Updated 05-16-2013
- * Version 0.6.0.0 Beta 6
+ * Updated 05-17-2013
+ * Version 0.6.0.0 Beta 7
  * Created by David Tran (unsignedzero)
  */
 
@@ -238,76 +238,10 @@ var zxPowerPoint = (function(settings) {
 
   supportFunc.sqrt = Math.sqrt;
 //////////////////////////////////////////////////////////////////////////////
-/* Test generator objects that will be updated accordingly and
- * integrated into PreZen. Once integrated we will update the slides
- *
- * For this codeset to work we assume that externFont and height are
- * well defined in PreZen.js
- */
+//Generator Models and support functions
+//For this codeset to work we assume that externFont and height are
+//well defined in PreZen.js
   supportFunc.drawTextGenerator = function( input ){
-    // This function sets above textPosGenerator and acts as a front
-    // that generators text objects for KineticJS that can be drawn
-    //
-    // Data type and checks are done in the constructor of the respective
-    // generator objects
-    "use strict";
-
-    var textPosObj, fontSize, fontFamily, temp, tempTextObj;
-
-    textPosObj = supportFunc.textPosGenerator( input );
-
-    fontSize = ( typeof input.fontSize === "number" ) ?
-      fontSize : height/32;
-    fontFamily = ( typeof input.fontFamily === "number" ) ?
-      fontFamily : externFont;
-
-     temp = { fontSize: fontSize, fontFamily : externFont,
-         fill: 'black',
-         text: "" };
-
-     return { 
-       Text : function (str, type){
-
-         // General text function that will set the text as main or sub
-         // depending on type
-
-         tempTextObj = type ? textPosObj.subText() : textPosObj.mainText();
-
-         temp.x = tempTextObj.x;
-         temp.y = tempTextObj.y;
-         temp.str = str;
-         return supportFunc.drawText2(temp);
-       },
-
-       mainText : function (str){
-
-         // Text function sets text as mainText
-
-         tempTextObj = textPosObj.mainText();
-
-         temp.x = tempTextObj.x;
-         temp.y = tempTextObj.y;
-         temp.str = str;
-
-         return supportFunc.drawText2(temp);
-       },
-
-       subText : function (str){
-
-         // Text function sets text as subText
-
-         tempTextObj = textPosObj.subText();
-
-         temp.x = tempTextObj.x;
-         temp.y = tempTextObj.y;
-         temp.str = str;
-
-         return supportFunc.drawText2(temp);
-       }
-     };
-  };
-
-  supportFunc.bulletTextPosGenerator = function( input ){
     // This function combines textPosGenerator with bullets
     // giving users more options
     //
@@ -395,7 +329,7 @@ var zxPowerPoint = (function(settings) {
         }
         else if ( DEBUG ){
           alert( new Error(
-            "size of nextFontSize in bulletTextPosGenerator not a number"));
+            "size of nextFontSize in drawTextGenerator not a number"));
         }
       }
     };
@@ -455,8 +389,8 @@ var zxPowerPoint = (function(settings) {
         outlineShift: settingsObj.outlineShift,
 
         // We set default spacing. Change as needed
-        maintexty: 3*settingsObj.fontSize,
-        subtexty: 1.5*settingsObj.fontSize,
+        mainTexty: 3*settingsObj.fontSize,
+        subTexty: 1.2*settingsObj.fontSize,
 
         // We load our functions here
         drawText: supportFunc.drawText, createBullet: supportFunc.createBullet,
@@ -464,7 +398,6 @@ var zxPowerPoint = (function(settings) {
 
         // If we want the fonts to be bigger than the bullets set this
         deltaBulletFontSize: 5
-
       };
   };
 
@@ -503,7 +436,7 @@ var zxPowerPoint = (function(settings) {
     // and substrings between lines of a bullet point (subtext)
     "use strict";
 
-    var curx, cury, maintextx, maintexty, subtextx, subtexty,
+    var curx, cury, maintextx, mainTexty, subtextx, subTexty,
         DEBUG, firstCall;
 
     // Check input
@@ -520,12 +453,12 @@ var zxPowerPoint = (function(settings) {
     else 
       maintextx = 0;
 
-    if ( typeof input.maintexty === "number" )
-      maintexty = input.maintexty;
+    if ( typeof input.mainTexty === "number" )
+      mainTexty = input.mainTexty;
     else if ( DEBUG )
-      alert(new Error("input.maintexty in textPosGenerator not a number"));
+      alert(new Error("input.mainTexty in textPosGenerator not a number"));
     else
-      maintexty = 0;
+      mainTexty = 0;
 
     if ( typeof input.subtextx === "number" )
       subtextx = input.subtextx;
@@ -534,12 +467,12 @@ var zxPowerPoint = (function(settings) {
     else
       subtextx = 0;
 
-    if ( typeof input.subtexty === "number" )
-      subtexty = input.subtexty;
+    if ( typeof input.subTexty === "number" )
+      subTexty = input.subTexty;
     else if ( DEBUG )
-      alert(new Error("input.subtexty in textPosGenerator not a number"));
+      alert(new Error("input.subTexty in textPosGenerator not a number"));
     else
-      subtexty = 0;
+      subTexty = 0;
 
     return {
       mainText : function(){
@@ -548,7 +481,7 @@ var zxPowerPoint = (function(settings) {
 
         if ( !firstCall ){
           curx += maintextx;
-          cury += maintexty;
+          cury += mainTexty;
         }
         else
           firstCall = false;
@@ -564,7 +497,7 @@ var zxPowerPoint = (function(settings) {
 
         if ( !firstCall ){
           curx += subtextx;
-          cury += subtexty;
+          cury += subTexty;
         }
         else
           firstCall = false;
@@ -656,11 +589,11 @@ var zxPowerPoint = (function(settings) {
   supportFunc.setProConState = function(state, settingsObj){
     //Sets the default state to be used in a Pros/Cons slide
 
-    state.maintexty = 4*settingsObj.fontSize;
-    state.subtexty = 2*settingsObj.fontSize;
+    state.mainTexty = 4*settingsObj.fontSize;
+    state.subTexty = 2*settingsObj.fontSize;
 
     state.curx = width/6;
-    state.cury = height/4 - state.subtexty;
+    state.cury = height/4 - state.subTexty;
 
     state.hasMainBul = false;
     state.hasSubBul = true;
@@ -677,8 +610,8 @@ var zxPowerPoint = (function(settings) {
     state.cury = height/4;
     state.mainBulXShift = -2*settingsObj.fontSize;
 
-    state.maintexty = 3*settingsObj.fontSize;
-    state.subtexty = settingsObj.fontSize;
+    state.mainTexty = 3*settingsObj.fontSize;
+    state.subTexty = 1.6*settingsObj.fontSize;
 
     state.hasMainBul = false;
 

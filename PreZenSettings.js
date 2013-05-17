@@ -5,8 +5,9 @@
  * of the code depending on which setting is incorrectly set.
  *
  *
+ * Created 01-29-2013
  * Updated 05-15-2013
- * Version 0.6.0.0 Beta 2
+ * Version 0.6.0.0 Beta 7
  * Created by David Tran (unsignedzero)
  */
 

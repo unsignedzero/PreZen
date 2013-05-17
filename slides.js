@@ -8,8 +8,8 @@
  *
  *
  * Created 01-25-2013
- * Updated 05-16-2013
- * Version 0.6.0.0 Beta 6
+ * Updated 05-17-2013
+ * Version 0.6.0.0 Beta 7
  * Created by David Tran (unsignedzero)
  */
 
@@ -38,9 +38,9 @@ PreZenSettings.externDrawFunctionArray = [
     state.hasMainBul = false;
     state.alignFunc = supportFunc.center;
 
-    state.maintexty = height * (3/4) - (outlineShift + radius);
+    state.mainTexty = height * (3/4) - (outlineShift + radius);
 
-    textGen = supportFunc.bulletTextPosGenerator(state);
+    textGen = supportFunc.drawTextGenerator(state);
 
     textGen.bulMainText(outLayerAry[0], "What can you see in a display?");
     textGen.bulMainText(outLayerAry[1], "Created by David Tran");
@@ -91,7 +91,7 @@ PreZenSettings.externDrawFunctionArray = [
     state.curx = width/6;
     state.cury = height/4;
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "Overview");
 
@@ -129,10 +129,10 @@ PreZenSettings.externDrawFunctionArray = [
     // We set the mainy shift to be a value
     // Options include mainx, subx and suby.
     // See supportFunc.generatorStateObject for default values
-    state.maintexty = 4*settingsObj.fontSize;
+    state.mainTexty = 4*settingsObj.fontSize;
 
     // Create generator object
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "Displays");
 
@@ -174,10 +174,10 @@ PreZenSettings.externDrawFunctionArray = [
     state.curx = width/2;
     state.cury = height/4;
 
-    state.maintexty = 6*settingsObj.fontSize;
-    state.subtexty = settingsObj.fontSize;
+    state.mainTexty = 6*settingsObj.fontSize;
+    state.subTexty = settingsObj.fontSize;
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "Color Gamut");
 
@@ -225,9 +225,10 @@ PreZenSettings.externDrawFunctionArray = [
 
     supportFunc.setNumberedListState(state, settingsObj);
 
-    state.maintexty = 2*settingsObj.fontSize;
+    state.mainTexty = 2*settingsObj.fontSize;
+    //state.subFontSizeDelta = -5;
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "CRT (How they work)");
 
@@ -275,7 +276,7 @@ PreZenSettings.externDrawFunctionArray = [
 
     supportFunc.setProConState(state, settingsObj);
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "CRT (Pros/Cons)");
 
@@ -326,7 +327,7 @@ PreZenSettings.externDrawFunctionArray = [
 
     supportFunc.setNumberedListState(state, settingsObj);
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "Plasma (How they work)");
 
@@ -360,7 +361,7 @@ PreZenSettings.externDrawFunctionArray = [
 
     supportFunc.setProConState(state, settingsObj);
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "Plasma (Pros/Cons)");
 
@@ -408,9 +409,9 @@ PreZenSettings.externDrawFunctionArray = [
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
     supportFunc.setNumberedListState(state, settingsObj);
-    state.maintexty = 2*settingsObj.fontSize;
+    state.mainTexty = 2*settingsObj.fontSize;
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "LCD (How they work)");
 
@@ -455,8 +456,9 @@ PreZenSettings.externDrawFunctionArray = [
 
     state.curx = width/6;
     state.cury = height/4;
+    state.subTexty = 1.5*settingsObj.fontSize;
     
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "LCD (Backlight Technology)");
 
@@ -489,10 +491,9 @@ PreZenSettings.externDrawFunctionArray = [
     state.curx = width/2;
     state.cury = height/4;
 
-    state.maintexty = 5*settingsObj.fontSize;
-    state.subFontSizeDelta = -5;
+    state.mainTexty = 5*settingsObj.fontSize;
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "LCD (Active Matrix)");
 
@@ -555,7 +556,7 @@ PreZenSettings.externDrawFunctionArray = [
 
     supportFunc.setProConState(state, settingsObj);
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "LCD (Pros/Cons)");
 
@@ -633,9 +634,10 @@ PreZenSettings.externDrawFunctionArray = [
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
     supportFunc.setNumberedListState(state, settingsObj);
-    state.maintexty = 2*settingsObj.fontSize;
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    state.mainTexty = 2*settingsObj.fontSize;
+
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "OLED (How they work) ");
 
@@ -655,12 +657,15 @@ PreZenSettings.externDrawFunctionArray = [
     bulDrawObj.bulSubText(outLayerAry[3], "creating Light (3)");
 
     //Update state and build new generator
-    state.maintexty = 3*settingsObj.fontSize;
-    state.mainFontSizeDelta = 15;
-    state.cury = height/4 + 10*settingsObj.fontSize;
+    state.mainTexty = 3*settingsObj.fontSize;
+    state.mainFontSizeDelta = 5;
+    state.alignFunc = supportFunc.center;
+    state.curx = width*3/4;
+    state.cury = height/4 + 12*settingsObj.fontSize;
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
+    bulDrawObj.nextFontSizeDelta(10);
     bulDrawObj.bulMainText(outLayerAry[4], "-Layers of Interest-");
     bulDrawObj.bulMainText(outLayerAry[4], "1 Cathode Layer (-)");
     bulDrawObj.bulMainText(outLayerAry[4], "5 Anode Layer (+)");
@@ -686,7 +691,7 @@ PreZenSettings.externDrawFunctionArray = [
 
     supportFunc.setProConState(state, settingsObj);
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "OLED (Pros/Cons)");
 
@@ -738,7 +743,7 @@ PreZenSettings.externDrawFunctionArray = [
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
     supportFunc.setNumberedListState(state, settingsObj);
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "AMOLED (How they work)");
 
@@ -752,7 +757,7 @@ PreZenSettings.externDrawFunctionArray = [
 
     imgDrawObj.pushImage2('IMG/Galaxy_Note_II_subpixels_representation.png', 2, 2,
         supportFunc.center);
-    imgDrawObj.drawImage(outLayerAry[1], width/4, height/4);
+    imgDrawObj.drawImage(outLayerAry[3], width/4, height/4);
 
     supportFunc.drawCaptionText(outLayerAry[3], state, "Sample SubPixel Image");
 
@@ -771,7 +776,7 @@ PreZenSettings.externDrawFunctionArray = [
 
     supportFunc.setProConState(state, settingsObj);
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "AMOLED (Pros/Cons)");
 
@@ -805,10 +810,10 @@ PreZenSettings.externDrawFunctionArray = [
     state.cury = 0.15*height;
 
     state.hasMainBul = false;
-    state.maintexty = 0.05*height;
+    state.mainTexty = 0.05*height;
     state.alignFunc = supportFunc.center;
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.setProConState(state, settingsObj);
 
@@ -844,11 +849,11 @@ PreZenSettings.externDrawFunctionArray = [
     state.curx = width/2;
     state.cury = settingsObj.outlineShift + radius;
 
-    state.subtexty = radius*0.8;
+    state.subTexty = radius*0.8;
     state.subFontSizeDelta = 2;
     state.alignFunc = supportFunc.center;
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     bulDrawObj.bulSubText(outLayerAry[0], 'Applications');
     bulDrawObj.bulSubText(outLayerAry[1], "Drawing Circles");
@@ -929,16 +934,16 @@ PreZenSettings.externDrawFunctionArray = [
     state.hasMainBul = false;
     state.alignFunc = supportFunc.center;
     state.mainFontSizeDelta = 5;
-    state.subtexty = 1.5*settingsObj.fontSize;
+    state.subTexty = 1.5*settingsObj.fontSize;
 
-    bulRightDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulRightDrawObj = supportFunc.drawTextGenerator(state);
 
     state.curx = width/4;
     state.cury = height/2 - radius/2;
-    state.maintexty = 0;
+    state.mainTexty = 0;
     state.mainFontSizeDelta = 0;
 
-    bulLeftDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulLeftDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "Mathematic Model");
 
@@ -966,15 +971,14 @@ PreZenSettings.externDrawFunctionArray = [
       state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
     state.curx = width*2/3;
-    state.cury = height/4;
+    state.cury = height/6;
     state.hasMainBul = false;
     state.alignFunc = supportFunc.center;
-    state.subFontSizeDelta = -5;
     state.mainFontSizeDelta = 15;
-    state.maintexty = 4*settingsObj.fontSize;
-    state.subtexty = 1.5*settingsObj.fontSize;
+    state.mainTexty = 4*settingsObj.fontSize;
+    state.subTexty = 2*settingsObj.fontSize;
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "Pixel Model");
 
@@ -1009,10 +1013,9 @@ PreZenSettings.externDrawFunctionArray = [
     state.curx = width/2;
     state.cury = height/4;
     state.mainFontSizeDelta = 5;
-    state.subFontSizeDelta = -5;
-    state.subtexty = 1.5*settingsObj.fontSize;
+    state.subTexty = 2*settingsObj.fontSize;
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "Pixel Model (cont'd)");
 
@@ -1045,10 +1048,10 @@ PreZenSettings.externDrawFunctionArray = [
 
     state.curx = width/2;
     state.cury = height/4;
-    state.subFontSizeDelta = -5;
-    state.subtexty = 1.5*settingsObj.fontSize;
+    state.mainFontSizeDelta = 5;
+    state.subTexty = 2*settingsObj.fontSize;
 
-    bulDrawObj = supportFunc.bulletTextPosGenerator(state);
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
     supportFunc.drawHeader(outLayerAry[0], state, "Vector Model");
 
@@ -1057,7 +1060,6 @@ PreZenSettings.externDrawFunctionArray = [
     bulDrawObj.bulMainText(outLayerAry[1], "Representation");
 
     bulDrawObj.bulMainText(outLayerAry[1], "Magnitude and Direction");
-
     bulDrawObj.bulSubText(outLayerAry[2], "Stored as a tuple ");
     bulDrawObj.bulSubText(outLayerAry[2], "<50, 50>");
 
@@ -1079,135 +1081,30 @@ PreZenSettings.externDrawFunctionArray = [
 //////////////////////////////////////////////////////////////////////////////
 //Slide 29
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
     supportFunc.clean(outLayerAry, settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var minDim = settingsObj.minDim;
+    var bulDrawObj,
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var drawText = supportFunc.drawText;
-    var align = supportFunc.align;
+    state.curx = width*2/3;
+    state.cury = height/4;
+    state.hasMainBul = false;
+    state.alignFunc = supportFunc.center;
+    state.subTexty = 4*settingsObj.fontSize;
 
-    var buttonObjAry = [{}, {}];
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
-    var squareSide = minDim/12;
+    supportFunc.drawHeader(outLayerAry[0], state, "Vector Model (cont'd)");
 
-    var i, x, y, max, line, left;
-    var addx, addy, shape;
+    bulDrawObj.nextFontSizeDelta(10);
+    bulDrawObj.bulMainText(outLayerAry[1], "Advantage");
+    bulDrawObj.bulSubText(outLayerAry[2], "Mathematically represent curves");
+    bulDrawObj.bulSubText(outLayerAry[3], "Infinite Zoom");
+    bulDrawObj.bulSubText(outLayerAry[4], "Always Sharp");
 
-    addx = 0.35;
-    addy = 0.35;
-
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Vector Model (cont'd)",
-      fontSize+20, fontFamily)));
-
-    outLayerAry[1].add(center(drawText(
-      width*2/3, height*1/4, "Advantage", fontSize+15, fontFamily)));
-
-    outLayerAry[2].add(shape = new Kinetic.Spline({
-      points: [{ x:width/4, y:height/4 },
-               { x:width/3, y:height/2 },
-               { x:width/2, y:height/2 },
-               { x:width/2, y:height/3 },
-               { x:width/4, y:height/4 }],
-      stroke: 'blue',
-      strokeWidth: 5,
-      lineCap: 'round',
-      tension: 1
-    }));
-
-    outLayerAry[2].add(center(drawText(
-      width*2/3, height*1/4+4*fontSize, "Mathematically represent curves",
-      fontSize+5, fontFamily)));
-
-
-    left = minDim/6;
-    outLayerAry[3].add(new Kinetic.Polygon({
-      points: [minDim*0.375-left, minDim*0.250, minDim*0.500-left, minDim*0.375,
-               minDim*0.375-left, minDim*0.500, minDim*0.250-left, minDim*0.375],
-      fill: 'white',
-      stroke: 'black',
-      strikeWidth: 5
-    }));
-
-    outLayerAry[3].add(line = new Kinetic.Line({
-      points: [minDim*0.3125-left+5*addx, minDim*0.4375-5*addy,
-               minDim*0.4375-left-5*addx, minDim*0.3125+5*addy],
-      stroke: 'blue',
-      strokeWidth: 10,
-      lineCap: 'square'
-    }));
-
-    outLayerAry[3].add(center(drawText(
-      width*2/3, height*1/4+8*fontSize, "Infinite Zoom",
-      fontSize+5, fontFamily)));
-
-    outLayerAry[4].add(center(drawText(
-      width*2/3, height*1/4+12*fontSize, "Always Sharp",
-      fontSize+5, fontFamily)));
-
-
-    i = 0;
-    max = 2;
-    //Create the interactive buttons for the demo
-    while(i < max) {
-      x = width/4 + (i&1?-minDim/16:minDim/16);
-      y = height*(2/3);
-
-      outLayerAry[3].add(align(drawText(
-        x, y, i&1 ? '-' : '+', fontSize+20, fontFamily)));
-
-
-      buttonObjAry[i] = new Kinetic.Rect({
-        x: x,
-        y: y,
-        width: squareSide,
-        height: squareSide,
-        offset: [squareSide/2, squareSide/2],
-
-        stroke: 'black',
-        strokeWidth: 5,
-        cornerRadius: 10
-      });
-
-      if (i&1)
-        buttonObjAry[i].call = function(line) {
-          var q;
-          if ((q = line.getStrokeWidth()) > 2) {
-            q -=2;
-            line.setStrokeWidth(q);
-            //shape.setStrokeWidth(q);
-            line.setPoints([minDim*0.3125-left+q*addx, minDim*0.4375-q*addy,
-                            minDim*0.4375-left-q*addx, minDim*0.3125+q*addy]);
-            outLayerAry[2].draw();
-            outLayerAry[3].draw();
-          }
-        };
-      else
-        buttonObjAry[i].call = function(line) {
-          var q;
-          if ((q = line.getStrokeWidth()) < 40) {
-            q +=2;
-            line.setStrokeWidth(q);
-            //shape.setStrokeWidth(q);
-            line.setPoints([minDim*0.3125-left+q*addx, minDim*0.4375-q*addy,
-                            minDim*0.4375-left-q*addx, minDim*0.3125+q*addy]);
-            outLayerAry[2].draw();
-            outLayerAry[3].draw();
-          }
-        };
-
-      buttonObjAry[i].on('tap mousedown', function() {
-        this.call(line);
-      });
-
-      outLayerAry[3].add(buttonObjAry[i]);
-      i += 1;
-    }
+    supportFunc.slide29Canvas(outLayerAry, width, height, settingsObj, supportFunc);
 
     return 5;
   }
@@ -1215,47 +1112,33 @@ PreZenSettings.externDrawFunctionArray = [
 /////////////////////////////////////////////////////////////////////////////
 //Slide 30
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
     supportFunc.clean(outLayerAry, settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var minDim = settingsObj.minDim;
+    var bulDrawObj,
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var drawText = supportFunc.drawText;
-    var createBullet = supportFunc.createBullet;
+    state.curx = width/8;
+    state.cury = height/4;
+    state.mainTexty = 2*settingsObj.fontSize;
+    state.subFontSizeDelta = -5;
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Drawing a curve",
-      fontSize+20, fontFamily)));
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
-    outLayerAry[1].add(createBullet(width/8, height/4, fontSize));
-    outLayerAry[1].add(drawText(
-      width/8, height/4, "One point is a point", fontSize, fontFamily));
+    supportFunc.drawHeader(outLayerAry[0], state, "Drawing a curve");
 
-    outLayerAry[2].add(createBullet(width/8, height/4+2*fontSize, fontSize));
-    outLayerAry[2].add(drawText(
-      width/8, height/4+2*fontSize, "Two points make a line (y=x)", fontSize, fontFamily));
-
-    outLayerAry[3].add(createBullet(width/8, height/4+4*fontSize, fontSize));
-    outLayerAry[3].add(drawText(
-      width/8, height/4+4*fontSize, "Three points can make a quadratic curve (y=x^2)", fontSize, fontFamily));
-
-    outLayerAry[4].add(drawText(
-      width/8, height/4+5*fontSize, "The points must not all be collinear", fontSize, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[1], "One point is a point");
+    bulDrawObj.bulMainText(outLayerAry[2], "Two points make a line (y=x)");
+    bulDrawObj.bulMainText(outLayerAry[3], "Three points can make a quadratic curve (y=x^2)");
+    bulDrawObj.bulSubText(outLayerAry[4], "The points must not all be collinear");
 
     supportFunc.bezierExample(outLayerAry[1], outLayerAry[2],
-        outLayerAry[3], outLayerAry[4], minDim, width, height,
-        { pointax: width*1/3,
-          pointay: height*2/3,
-          pointbx: width*1/2,
-          pointby: height*3/4,
-          pointcx: width*2/3,
-          pointcy: height*2/3,
-          canDrag: false
-        }
+        outLayerAry[3], outLayerAry[4], settingsObj.minDim, width, height,
+        { pointax: width*1/3, pointay: height*2/3,
+          pointbx: width*1/2, pointby: height*3/4,
+          pointcx: width*2/3, pointcy: height*2/3,
+          canDrag: false }
       );
 
     return 5;
@@ -1264,82 +1147,39 @@ PreZenSettings.externDrawFunctionArray = [
 /////////////////////////////////////////////////////////////////////////////
 //Slide 31
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
     supportFunc.clean(outLayerAry, settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var createBullet = supportFunc.createBullet;
+    var bulDrawObj,
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
+    state.curx = width/6;
+    state.cury = height/4;
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Bezier Curve Math, B(t)",
-      fontSize+20, fontFamily)));
+    state.mainTexty = 2*settingsObj.fontSize;
 
-    outLayerAry[1].add(createBullet(width/6, height/4, fontSize));
-    outLayerAry[1].add(drawText(
-      width/6, height/4, "Given points x1, x2... xn",
-      fontSize+5, fontFamily));
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
-    outLayerAry[2].add(createBullet(width/6, height/4+2*fontSize, fontSize));
-    outLayerAry[2].add(drawText(
-      width/6, height/4+2*fontSize, "First Term:",
-      fontSize+5, fontFamily));
+    supportFunc.drawHeader(outLayerAry[0], state, "Bezier Curve Math, B(t)");
 
-    outLayerAry[2].add(drawText(
-      width/6, height/4+3*fontSize, "(1-t)^n*t^0*(X1)",
-      fontSize, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[1], "Given points x1, x2... xn");
 
-   outLayerAry[3].add(createBullet(width/6, height/4+5*fontSize, fontSize));
-   outLayerAry[3].add(createBullet(width/6, height/4+5*fontSize, fontSize));
-      outLayerAry[3].add(drawText(
-      width/6, height/4+5*fontSize, "Kth Term:",
-      fontSize+5, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[2], "First Term:");
+    bulDrawObj.bulSubText(outLayerAry[2], "(1-t)^n*t^0*(X1)");
 
-    outLayerAry[3].add(drawText(
-      width/6, height/4+6*fontSize, "[(1-t)^(n-k)*t^k]*(n C k)*(Xk)",
-      fontSize, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[3], "Kth Term:");
+    bulDrawObj.bulSubText(outLayerAry[3], "[(1-t)^(n-k)*t^k]*(n C k)*(Xk)");
 
-   outLayerAry[4].add(createBullet(width/6, height/4+8*fontSize, fontSize));
-   outLayerAry[4].add(createBullet(width/6, height/4+8*fontSize, fontSize));
-      outLayerAry[4].add(drawText(
-      width/6, height/4+8*fontSize, "Line from (a, b) to (c, d)",
-      fontSize+5, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[4], "Line from (a, b) to (c, d)");
+    bulDrawObj.bulSubText(outLayerAry[4], "X(t) = (1-t)*a + t*c");
+    bulDrawObj.bulSubText(outLayerAry[4], "Y(t) = (1-t)*b + t*d");
 
-    outLayerAry[4].add(drawText(
-      width/6, height/4+9*fontSize, "X(t) = (1-t)*a + t*c",
-      fontSize, fontFamily));
+    bulDrawObj.bulMainText(outLayerAry[5], "Curve from (a, b) to (c, d) to (e, f)");
+    bulDrawObj.bulSubText(outLayerAry[5], "X(t) = (1-t)^2*a + 2*(1-t)*t*c + t^2*e");
+    bulDrawObj.bulSubText(outLayerAry[5], "Y(t) = (1-t)^2*b + 2*(1-t)*t*d + t^2*f");
 
-    outLayerAry[4].add(drawText(
-      width/6, height/4+10*fontSize, "Y(t) = (1-t)*b + t*d",
-      fontSize, fontFamily));
-
-
-    outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
-    outLayerAry[5].add(createBullet(width/6, height/4+12*fontSize, fontSize));
-      outLayerAry[5].add(drawText(
-      width/6, height/4+12*fontSize, "Curve from (a, b) to (c, d) to (e, f)",
-      fontSize+5, fontFamily));
-
-    outLayerAry[5].add(drawText(
-      width/6, height/4+13*fontSize, "X(t) = (1-t)^2*a + 2*(1-t)*t*c + t^2*e",
-      fontSize, fontFamily));
-
-    outLayerAry[5].add(drawText(
-      width/6, height/4+14*fontSize, "Y(t) = (1-t)^2*b + 2*(1-t)*t*d + t^2*f",
-      fontSize, fontFamily));
-
-
-    outLayerAry[6].add(createBullet(width/6, height/4+16*fontSize, fontSize));
-    outLayerAry[6].add(createBullet(width/6, height/4+16*fontSize, fontSize));
-      outLayerAry[6].add(drawText(
-      width/6, height/4+16*fontSize, "0 ≤ t ≤ 1",
-      fontSize+5, fontFamily));
-
+    bulDrawObj.bulMainText(outLayerAry[6], "0 ≤ t ≤ 1");
 
     return 7;
   }
@@ -1347,35 +1187,28 @@ PreZenSettings.externDrawFunctionArray = [
 /////////////////////////////////////////////////////////////////////////////
 //Slide 32
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+    "use strict";
 
     supportFunc.clean(outLayerAry, settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
-    var minDim = settingsObj.minDim;
+    var bulDrawObj,
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var drawText = supportFunc.drawText;
-    var createBullet = supportFunc.createBullet;
+    state.curx = width/2;
+    state.cury = settingsObj.outlineShift + 0.15*height;
+    state.alignFunc = supportFunc.center;
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "Bezier Curve Example",
-      fontSize+20, fontFamily)));
+    bulDrawObj = supportFunc.drawTextGenerator(state);
+
+    supportFunc.drawHeader(outLayerAry[0], state, "Bezier Curve Example");
+    supportFunc.drawSubHeader(outLayerAry[2], state, "Drag the red, yellow and blue points");
+
+    bulDrawObj.bulSubText(outLayerAry[3], "Click the green point to start the anim");
 
     supportFunc.bezierExample(outLayerAry[1], outLayerAry[1],
-        outLayerAry[1], outLayerAry[1], minDim, width, height,
-        { showAnim: true
-        }
+        outLayerAry[1], outLayerAry[1], settingsObj.minDim, width, height,
+        { showAnim: true }
     );
-
-    outLayerAry[2].add(center(drawText(
-      width/2, outlineShift + 0.1*height, "Drag the red, yellow, blue points",
-      fontSize+10, fontFamily)));
-
-    outLayerAry[3].add(center(drawText(
-      width/2, outlineShift + 0.15*height,
-      "Click the green point to start the anim", fontSize, fontFamily)));
 
     return 4;
   }
@@ -1383,24 +1216,24 @@ PreZenSettings.externDrawFunctionArray = [
 //////////////////////////////////////////////////////////////////////////////
 //Slide 33 (end slide)
   function(outLayerAry, width, height, settingsObj, supportFunc) {
+     "use strict";
 
     supportFunc.clean(outLayerAry, settingsObj);
 
-    var fontSize = settingsObj.fontSize;
-    var fontFamily = settingsObj.fontFamily;
-    var outlineShift = settingsObj.outlineShift;
+    var bulDrawObj,
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc);
 
-    var center   = supportFunc.center;
-    var align    = supportFunc.align;
-    var drawText = supportFunc.drawText;
+    state.curx = width/2;
+    state.cury = height/2;
+    state.mainFontSizeDelta = 20;
+    state.hasMainBul = false;
+    state.alignFunc = supportFunc.center;
 
-    outLayerAry[0].add(center(drawText(
-      width/2, outlineShift + 0.05*height, "End of Presentation",
-      fontSize+20, fontFamily)));
+    bulDrawObj = supportFunc.drawTextGenerator(state);
 
-    outLayerAry[1].add(align(drawText(
-      width/2, height/2, "Questions?",
-      fontSize+20, fontFamily)));
+    supportFunc.drawHeader(outLayerAry[0], state, "End of Presentation");
+
+    bulDrawObj.bulMainText(outLayerAry[1], "Questions?");
 
     return 2;
   }

@@ -9,8 +9,8 @@
  * and enumerated here
  *
  * Created 03-02-2013
- * Updated 04-16-2013
- * Version 0.6.0.0 Beta 6
+ * Updated 05-17-2013
+ * Version 0.6.0.0 Beta 7
  * Created by David Tran (unsignedzero)
  */
 
@@ -610,7 +610,102 @@ PreZenSettings.supportFunc = {
       outLayerAry[7].add(new Kinetic.Rect(squareObj));
       i += 1;
     }
+  },
 
+  slide29Canvas : function(outLayerAry, width, height, settingsObj, supportFunc){
+    "use strict";
+
+    var fontSize = settingsObj.fontSize,
+        fontFamily = settingsObj.fontFamily,
+        outlineShift = settingsObj.outlineShift,
+        minDim = settingsObj.minDim,
+
+        center   = supportFunc.center,
+        drawText = supportFunc.drawText,
+        align = supportFunc.align,
+
+        buttonObjAry = [{}, {}],
+        squareSide = minDim/12,
+        i, x, y, max, line, left, addx = 0.35, addy = 0.35, shape;
+
+    outLayerAry[2].add(shape = new Kinetic.Spline({
+      points: [{ x:width/4, y:height/4 },
+               { x:width/3, y:height/2 },
+               { x:width/2, y:height/2 },
+               { x:width/2, y:height/3 },
+               { x:width/4, y:height/4 }],
+      stroke: 'blue',
+      strokeWidth: 5,
+      lineCap: 'round',
+      tension: 1
+    }));
+
+    left = minDim/6;
+    outLayerAry[3].add(new Kinetic.Polygon({
+      points: [minDim*0.375-left, minDim*0.250, minDim*0.500-left, minDim*0.375,
+               minDim*0.375-left, minDim*0.500, minDim*0.250-left, minDim*0.375],
+      fill: 'white',
+      stroke: 'black',
+      strikeWidth: 5
+    }));
+
+    outLayerAry[3].add(line = new Kinetic.Line({
+      points: [minDim*0.3125-left+5*addx, minDim*0.4375-5*addy,
+               minDim*0.4375-left-5*addx, minDim*0.3125+5*addy],
+      stroke: 'blue',
+      lineCap: 'square',
+      strokeWidth: 10
+    }));
+
+    i = 0;
+    max = 2;
+    //Create the interactive buttons for the demo
+    while(i < max) {
+      x = width/4 + (i&1?-minDim/16:minDim/16);
+      y = height*(2/3);
+
+      outLayerAry[3].add(align(drawText(
+        x, y, i&1 ? '-' : '+', fontSize+20, fontFamily)));
+
+      buttonObjAry[i] = new Kinetic.Rect({
+        x: x,
+        y: y,
+        width: squareSide,
+        height: squareSide,
+        offset: [squareSide/2, squareSide/2],
+
+        stroke: 'black',
+        strokeWidth: 5,
+        cornerRadius: 10
+      });
+      buttonObjAry[i].state = i;
+
+      buttonObjAry[i].call = function(line) {
+        var q, reDraw = false;;
+        if (this.state === 0 && (q = line.getStrokeWidth()) > 2) {
+          q -=2;
+          reDraw = true;
+        }
+        else if (this.state === 1 && (q = line.getStrokeWidth()) < 40) {
+          q += 2;
+          reDraw = true;
+        }
+        if (reDraw){
+          line.setStrokeWidth(q);
+          line.setPoints([minDim*0.3125-left+q*addx, minDim*0.4375-q*addy,
+                          minDim*0.4375-left-q*addx, minDim*0.3125+q*addy]);
+          outLayerAry[2].draw();
+          outLayerAry[3].draw();
+        }
+      };
+
+      buttonObjAry[i].on('tap mousedown', function() {
+        this.call(line);
+      });
+
+      outLayerAry[3].add(buttonObjAry[i]);
+      i += 1;
+    }
   }
 };
 
