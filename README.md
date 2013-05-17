@@ -8,9 +8,10 @@ this is built on Javascript so it will load on mostly all modern browsers
 that can run the KineticJS library.
 
 Eventually the slides will be updated to use generators to make it easier
-to create codes
+to create codes. (In progress). With this update, creating slides will
+be much easier.
 
-If one codes it up using relative values,as positions for all the content,
+If one codes it up using relative values, as positions for all the content,
 then it can potentially scale up and work on any display size, 
 if done correctly.
 
@@ -30,10 +31,97 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 * Add speaker notes on the slide
 * Add button/key to jump to a specific slide/segment
-* Reduce the number of variables in each slide to 1, if possible
+* Reduce the number of variables in each slide to the bare necessities, 
+  if possible
 
 # Version/Changelog #
 
+## 0.6.0.0 Beta 8 [05-17-2013] #
+### Generator Branch #
+
+* Fixed some mistakes in comments and slides
+* User settings object created for user to store variables across slides
+  These variables are initialized under slidesSettings.js and in the slides
+  can be accessed under settingsObj.slideSetObj
+* Trailing whitespace and multiple blank lines removed. Extra space after \\\\
+  added for all comments. Added space after commas as needed
+* PreZen can be set to autoClean slides before the user interacts with it
+* Slides itself does not need to cleaned before using
+* undented once in slides.js
+* Reorder the definitions of the generator model
+
+## 0.6.0.0 Beta 7 [05-17-2013] #
+### Generator Branch #
+
+* Removed unused style tag in index.html
+* Added missing Create date for PreZenSettings.js, PreZenTestCode.js and
+  main.js
+* Renamed bulletTextPosGenerator to drawTextGenerator and removed the old 
+  definition
+* Cleaned up visual/miscellaneous issues spotted on final run
+* Converted the last part of the slides to use generators
+  All slides now use the new generator model
+* Updated KineticJS library to version 4.5.1 
+  (no issues on Chrome or Firefox just yet)
+* Shrunk font size for a few slides
+* Updated permissions on LIB and IMG files to be read-only all
+* Updated permissions for icon file and License to be read-only all
+* Forgot to call canvas function for slide #28
+
+## 0.6.0.0 Beta 6 [05-16-2013] #
+### Generator Branch #
+
+* Removed KineticJS v4.3 library
+* Refactored canvas code to make it simpler and shorter
+* Moved longer canvas code in the first part of the slides in part 7
+  to slidesSupport.js when appropriate
+* Updated about half of the slides in part 7 to use generators
+* Added override option for font size
+
+## 0.6.0.0 Beta 5 [05-16-2013] #
+### Generator Branch #
+
+* Part 6 of the slides are converted to use generators
+* Added option in generator to align text
+* Fixed issue with checking for bad input data
+* Fixed width resizing issue, which didn't update.
+* Corrected the dates for the README.
+
+## 0.6.0.0 Beta 4 [05-15-2013] #
+### Generator Branch #
+
+* Part 4 and 5 of the slides are converted to use generators
+* Added override option for bullets
+* Removed unused function in generator code base
+
+## 0.6.0.0 Beta 3 [05-15-2013] #
+### Generator Branch #
+
+* Fixed indent mismatch in generators part of PreZen
+* Macros created to help automate process
+* Part 3 of the slides are converted to use generators
+* Additional default settings added to initial state object
+* Created additional default profile states that can be used
+
+## 0.6.0.0 Beta 2 [05-15-2013] #
+### Generator Branch #
+
+* Updated PreZen slides file and settings to simply the creation of slides 
+  It is passed an array, rather than pushing elements on it. One less global
+  variable needed.
+* Part 2 of the slides are converted to use generators
+* Additional usage options added to image generator
+* Additional control options added to text generator
+
+## 0.6.0.0 Beta 1 [05-08-2013] #
+### Generator Branch #
+
+* The intro and part 1 of the slides are converted to use generators now
+* Generators being tested as slides are being created
+* Added use strict to more functions used in the PreZen code base
+* Generators tested and implemented. (Now in Beta)
+* Added more functional to the generators, debug passing option, firstCall
+  no shift option, etc.
 * Removed experiment branch files that was mixed into development
 
 ## 0.5.1.0 [04-05-2013] #
