@@ -34,6 +34,8 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+* Created gh-pages to use GitHub pages
+
 ## 0.6.0.0 Codename: Tango [05-17-2013] #
 
 * Updating logistics for all files to be out of beta
