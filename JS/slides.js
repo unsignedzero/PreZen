@@ -8,8 +8,8 @@
  *
  *
  * Created 01-25-2013
- * Updated 05-17-2013
- * Version 0.6.0.0 Tango
+ * Updated 10-08-2013
+ * Version 0.6.1.0
  * Created by David Tran (unsignedzero)
  */
 
@@ -20,13 +20,13 @@ PreZenSettings.externDrawFunctionArray = [
 function(outLayerAry, width, height, settingsObj, supportFunc) {
   "use strict";
 
-  var animTime = settingsObj.animTime;
-  var outlineShift = settingsObj.outlineShift;
+  var animTime = settingsObj.animTime,
+      outlineShift = settingsObj.outlineShift,
 
-  var radius = height*0.3;
-  var circle;
+      radius = height*0.3,
+      circle,
 
-  var state = supportFunc.generatorStateObject(settingsObj, supportFunc),
+      state = supportFunc.generatorStateObject(settingsObj, supportFunc),
       textGen;
 
   state.curx = width/2;

@@ -6,8 +6,8 @@
  *
  *
  * Created 01-29-2013
- * Updated 05-17-2013
- * Version 0.6.0.0 Tango
+ * Updated 10-08-2013
+ * Version 0.6.1.0
  * Created by David Tran (unsignedzero)
  */
 
@@ -37,14 +37,14 @@ var PreZenSettings = {
   // Show Slide Numbers
   showSlideNumber:true,
 
-  //
+  // Sets PreZen to clean the layers once we leave a slide
   autoClean:true,
 
   /*Sets the max amount of layers PreZen should assume a slide should have
    *Adding more slides than specified here will have unexpected results
    *and extra layers will not load correctly when going forward.
    *Going backwards we will see everything but the extra layers will NOT
-   *be removed
+   *be removed.
    */
   externMaxLayerCount:9,
 
