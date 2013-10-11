@@ -34,6 +34,10 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+## 0.6.1.1 [10-11-2013] #
+
+* Fixed annoyed slide bug referencing the wrong file.
+
 ## 0.6.1.0 [10-08-2013] #
 
 * Added .gitignore to repo.

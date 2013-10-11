@@ -8,8 +8,8 @@
  *
  *
  * Created 01-25-2013
- * Updated 10-08-2013
- * Version 0.6.1.0
+ * Updated 10-11-2013
+ * Version 0.6.1.1
  * Created by David Tran (unsignedzero)
  */
 
@@ -486,7 +486,7 @@ function(outLayerAry, width, height, settingsObj, supportFunc) {
       supportFunc.center);
   imgDrawObj.drawImage(outLayerAry[3], width/4, height/4);
 
-  imgDrawObj.pushImage2('IMG/IPS_ON.png', 2.5, 2,
+  imgDrawObj.pushImage2('IMG/IPS_On.png', 2.5, 2,
       supportFunc.center);
   imgDrawObj.drawImage(outLayerAry[5], width/4, height/4);
   imgDrawObj.pushImage2('IMG/IPS_Off.png', 2.5, 2,
