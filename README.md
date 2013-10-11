@@ -1,6 +1,6 @@
 # PreZen JS #
 
-PreZen is a PowerPoint-like code library that allows one to code up a 
+PreZen is a PowerPoint-like code library that allows one to code up a
 presentation rather than drag and drop it. Its main use is to allow one to
 code up demos and use them inside a browser rather than take many
 images of the animation and combine them together. As a plus side,
@@ -12,7 +12,7 @@ to create codes. (In progress). With this update, creating slides will
 be much easier.
 
 If one codes it up using relative values, as positions for all the content,
-then it can potentially scale up and work on any display size, 
+then it can potentially scale up and work on any display size,
 if done correctly.
 
 In addition, I have left function calls so that one doesn't have to click on
@@ -33,6 +33,18 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 * Add button/key to jump to a specific slide/segment
 
 # Version/Changelog #
+
+## 0.6.1.1 [10-11-2013] #
+
+* Fixed annoyed slide bug referencing the wrong file.
+
+## 0.6.1.0 [10-08-2013] #
+
+* Added .gitignore to repo.
+* Upgraded to kinetjc 4.6.0
+* Adding package.json file and spec folder. No real tests created yet.
+* Cleaned up coding and added more comments.
+* Moved all JS files into its own folder.
 
 ## 0.6.0.0 Codename: Tango [05-17-2013] #
 
@@ -59,12 +71,12 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 * Removed unused style tag in index.html
 * Added missing Create date for PreZenSettings.js, PreZenTestCode.js and
   main.js
-* Renamed bulletTextPosGenerator to drawTextGenerator and removed the old 
+* Renamed bulletTextPosGenerator to drawTextGenerator and removed the old
   definition
 * Cleaned up visual/miscellaneous issues spotted on final run
 * Converted the last part of the slides to use generators
   All slides now use the new generator model
-* Updated KineticJS library to version 4.5.1 
+* Updated KineticJS library to version 4.5.1
   (no issues on Chrome or Firefox just yet)
 * Shrunk font size for a few slides
 * Updated permissions on LIB and IMG files to be read-only all
@@ -109,7 +121,7 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 ## 0.6.0.0 Beta 2 [05-15-2013] #
 ### Generator Branch #
 
-* Updated PreZen slides file and settings to simply the creation of slides 
+* Updated PreZen slides file and settings to simply the creation of slides
   It is passed an array, rather than pushing elements on it. One less global
   variable needed.
 * Part 2 of the slides are converted to use generators
@@ -198,7 +210,7 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 * Added Jwerty Library so user can control slides via arrow keys
 * Created API so external libraries/user can control PreZen on the outside
 * Refactored redundant code across slides and PreZen
-* Common functions to all slides can be added to PreZen once, rather 
+* Common functions to all slides can be added to PreZen once, rather
   than per slide via supportFunc
 * Similar common CONSTANTS and values can be added to setObj, which will
   make it common to all slides

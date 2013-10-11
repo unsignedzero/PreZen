@@ -12,8 +12,8 @@
  * will scale correctly
  *
  * Created 01-25-2013
- * Updated 05-17-2013
- * Version 0.6.0.0 Tango
+ * Updated 10-08-2013
+ * Version 0.6.1.0
  * Created by David Tran (unsignedzero)
  */
 
@@ -51,9 +51,9 @@ var zxPowerPoint = (function(settings) {
     alert("WARNING:externWidth not set. Default 800");
     width = 800;
   }
-  if (width === undefined) {
+  if (autoClean === undefined) {
     alert("WARNING:autoClean not set. Default true");
-    width = true;
+    autoClean = true;
   }
   if (height === undefined) {
     alert("WARNING:externHeight not set. Default 1000");
@@ -100,6 +100,7 @@ var zxPowerPoint = (function(settings) {
   if (DEBUG) {
     hideButtons = false;
   }
+
 //////////////////////////////////////////////////////////////////////////////
 // Creates the default variables it needs/uses
   var stage = new Kinetic.Stage({
@@ -123,6 +124,7 @@ var zxPowerPoint = (function(settings) {
   var slideIndexMax = slideArray.length - 1;
 
   var globalCurAnim = {};
+
 //////////////////////////////////////////////////////////////////////////////
 // Creates a settings object and pass to each slide
   var setObj = {
@@ -140,6 +142,7 @@ var zxPowerPoint = (function(settings) {
   };
 
   var hasInitialized = false;
+
 //////////////////////////////////////////////////////////////////////////////
 // Creates a support object that passes local functions to the board
 // Contained here are all local functions that will be used by PreZen
@@ -196,6 +199,7 @@ var zxPowerPoint = (function(settings) {
     });
     return temp;
   };
+
 // Kinetic Object Creation Simplified
   supportFunc.drawText = function(x, y, str, fontDelSize, font) {
     // Faster call to Kinetic.Text
@@ -214,10 +218,11 @@ var zxPowerPoint = (function(settings) {
   };
 
   supportFunc.createBullet = function(x, y, fontDelSize) {
+    // Creates bullets for text
     "use strict";
 
     fontDelSize = fontDelSize ? fontDelSize : height/32;
-    // Creates bullets for text
+
     return new Kinetic.Circle({
       x: x-1.5*fontDelSize,
       y: y+fontDelSize/2,
@@ -226,6 +231,7 @@ var zxPowerPoint = (function(settings) {
       radius: fontDelSize/2
     });
   };
+
 // Meta Functions
   supportFunc.clean = function(outLayerAry, setObj) {
     // Empties the layers used
@@ -242,6 +248,7 @@ var zxPowerPoint = (function(settings) {
     }
   };
 
+  // Relinks of global functions. Doesn't speed up all browsers in all cases...
   supportFunc.floor = Math.floor;
   supportFunc.abs = Math.abs;
   supportFunc.sqrt = Math.sqrt;
@@ -309,6 +316,7 @@ var zxPowerPoint = (function(settings) {
 
     return input.createBullet(x, y, fontSize);
   };
+
 //////////////////////////////////////////////////////////////////////////////
 // Generator Models and support functions
 // For this codeset to work we assume that externFont and height are
@@ -359,8 +367,8 @@ var zxPowerPoint = (function(settings) {
 
     return {
       mainText : function(){
-
         // Returns the new mainText coords
+        "use strict";
 
         if ( !firstCall ){
           curx += maintextx;
@@ -375,8 +383,8 @@ var zxPowerPoint = (function(settings) {
         };
       },
       subText : function(){
-
         // Returns the new mainText coords
+        "use strict";
 
         if ( !firstCall ){
           curx += subtextx;
@@ -392,6 +400,7 @@ var zxPowerPoint = (function(settings) {
       }
     };
   };
+
   supportFunc.drawTextGenerator = function( input ){
     // This function combines textPosGenerator with bullets
     // giving users more options
@@ -428,6 +437,8 @@ var zxPowerPoint = (function(settings) {
     retObj = {
       bulMainText : function (layer, str){
         // Text function sets text as mainText
+        "use strict";
+
         curObj = textPosObj.mainText();
 
         input.x = curObj.x + mainBulXShift;
@@ -448,6 +459,8 @@ var zxPowerPoint = (function(settings) {
 
       bulSubText : function (layer, str){
         // Text function sets text as subText
+        "use strict";
+
         curObj = textPosObj.subText();
 
         input.x = curObj.x + subBulXShift;
@@ -506,8 +519,8 @@ var zxPowerPoint = (function(settings) {
 
     return {
       pushImage : function(path){
-
         // Adds the image to the array but creates the index as well
+        "use strict";
 
         curImg = new Image();
         curImg.src = path;
@@ -530,8 +543,8 @@ var zxPowerPoint = (function(settings) {
       },
 
       pushImage2 : function(path, scalex, scaley, alignFunc){
-
-        // Stores meta information for draw
+        // Stores meta information for draw as well as stores the image
+        "use strict";
 
         var ret = this.pushImage(path);
 
@@ -549,6 +562,8 @@ var zxPowerPoint = (function(settings) {
       },
 
       drawImage : function(layer, posx, posy){
+        // Creates the images at posx, posy on layer
+        "use strict";
 
         var temp = new Kinetic.Image({
           x: posx,
@@ -567,10 +582,12 @@ var zxPowerPoint = (function(settings) {
 
       curImage : function(){
         // Allows users to access the "last" element in the array
+
         return curImg;
       }
     };
   };
+
 // Support functions that set default state for the generators
   supportFunc.generatorStateObject = function(settingsObj, supportFunc){
     // Assembles a generic state object that will be used in the generators
@@ -597,6 +614,7 @@ var zxPowerPoint = (function(settings) {
 
   supportFunc.setProConState = function(state, settingsObj){
     // Sets the default state to be used in a Pros/Cons slide
+    "use strict";
 
     state.mainTexty = 4*settingsObj.fontSize;
     state.subTexty = 2*settingsObj.fontSize;
@@ -615,6 +633,8 @@ var zxPowerPoint = (function(settings) {
 
   supportFunc.setNumberedListState = function(state, settingsObj){
     // Sets the default state in numbered list
+    "use strict";
+
     state.curx = width/2;
     state.cury = height/4;
     state.mainBulXShift = -2*settingsObj.fontSize;
@@ -628,11 +648,14 @@ var zxPowerPoint = (function(settings) {
 
     return state;
   };
+
 //////////////////////////////////////////////////////////////////////////////
 // Load functions
 // This are basic functions to load the next slide or segment
   function nextSegment(outLayerAry) {
     // Call to load next anim if possible
+    "use strict";
+
     if (slideLayer+1 < slideLayerMax) {
       slideLayer += 1;
       fadeIn(outLayerAry[slideLayer]).start();
@@ -643,6 +666,8 @@ var zxPowerPoint = (function(settings) {
 
   function previousSegment(outLayerAry) {
     // Call to unload previous anim if possible
+    "use strict";
+
     if (slideLayer > 0) {
       fadeOut(outLayerAry[slideLayer]).start();
       slideLayer -= 1;
@@ -653,6 +678,8 @@ var zxPowerPoint = (function(settings) {
 
   function nextSlide(outLayerAry) {
     // Call to load the previous slide
+    "use strict";
+
     if (slideIndex < slideIndexMax)
       fadeOutAll(outLayerAry, loadNextSlide).start();
     else
@@ -661,6 +688,8 @@ var zxPowerPoint = (function(settings) {
 
   function previousSlide(outLayerAry) {
     // Call to load the previous slide
+    "use strict";
+
     if (slideIndex > 0)
       fadeOutAll(outLayerAry, loadPreviousSlide).start();
     else
@@ -669,12 +698,17 @@ var zxPowerPoint = (function(settings) {
 
   function loadNextSlide() {
     // Loads the next slide if possible
+    "use strict";
+
     if (slideIndex < slideIndexMax) {
       slideLayer = 0;
       slideIndex += 1;
+
       preLoadSlideFunction();
+
       slideLayerMax = slideArray[slideIndex](globalOutLayerAry,
-      width, height, setObj, supportFunc);
+        width, height, setObj, supportFunc);
+
       drawMeta(globalOutLayerAry[0], supportFunc, setObj);
       fadeIn(globalOutLayerAry[slideLayer]).start();
     }
@@ -682,26 +716,37 @@ var zxPowerPoint = (function(settings) {
 
   function loadPreviousSlide() {
     // Loads the previous slide if possible
+    "use strict";
+
     if (slideIndex > 0) {
       slideIndex -= 1;
       preLoadSlideFunction();
+
       slideLayerMax = slideArray[slideIndex](globalOutLayerAry,
-      width, height, setObj, supportFunc);
+        width, height, setObj, supportFunc);
+
       slideLayer = slideLayerMax-1;
+
       drawMeta(globalOutLayerAry[0], supportFunc, setObj);
       fadeInAll(globalOutLayerAry).start();
     }
   }
+
 // Meta
   function preLoadSlideFunction() {
     // Preforms any cleanup function needed for the slide is actually loaded
+    "use strict";
+
     if ( autoClean )
       supportFunc.clean(globalOutLayerAry, setObj);
   }
+
 //////////////////////////////////////////////////////////////////////////////
 // Internal Support Functions
   function getLayerStatus(OuterLayer) {
     // Creates a boolean of all active layers
+    "use strict";
+
     var i, max = slideLayerMax;
     var ret = [];
 
@@ -713,6 +758,7 @@ var zxPowerPoint = (function(settings) {
 
     return ret;
   }
+
 //////////////////////////////////////////////////////////////////////////////
 // Animations for load functions
   function fadeIn(OutLayer, nextFunc) {
@@ -821,6 +867,8 @@ var zxPowerPoint = (function(settings) {
 
   function fadeInSelected(OutLayerAry, SelectAry, nextFunc) {
     // Fades in selected layers, regardless of opacity
+    "use strict";
+
     globalCurAnim.end = true;
     var curVal, i, max = slideLayerMax;
 
@@ -862,6 +910,8 @@ var zxPowerPoint = (function(settings) {
 
   function fadeOutAll(OutLayerAry, nextFunc, nextFuncArgs) {
     // Fades out all layers, whose opacity is larger than 0.5
+    "use strict";
+
     globalCurAnim.end = true;
     var i, max = slideLayerMax;
     var seeLayer = [];
@@ -908,10 +958,12 @@ var zxPowerPoint = (function(settings) {
     return globalCurAnim(timerLength, OutLayerAry,
         nextFunc, nextFuncArgs);
   }
+
 //////////////////////////////////////////////////////////////////////////////
 // Resize Functions
   function reSizeSupport(newWidth, newHeight) {
     // Loads the new values to resize the screen
+    "use strict";
 
     // Add ratio checks
     width  = newWidth;
@@ -928,6 +980,8 @@ var zxPowerPoint = (function(settings) {
 
   function reSize(OutLayerAry, width, height) {
     // Call this function to resize the screen
+    "use strict";
+
     // Save State
     globalUIBlock = true;
 
@@ -949,6 +1003,7 @@ var zxPowerPoint = (function(settings) {
   function reSizeFadeOutUI(funcArgs) {
     // reSize part 2. Fades out and in the UI
     // DO NOT call this function directly
+    "use strict";
 
     // Saves local variables so repeatedly calls don't slow it down
     var localTimerLength = timerLength;
@@ -1004,6 +1059,7 @@ var zxPowerPoint = (function(settings) {
 
   function reSizeAfter(funcArgs) {
     // Clean up reSizing function
+    "use strict";
 
     preLoadSlideFunction();
     slideLayerMax = slideArray[slideIndex](globalOutLayerAry,
@@ -1016,6 +1072,7 @@ var zxPowerPoint = (function(settings) {
 
     fadeInSelected(funcArgs.OutLayerAry, funcArgs.state).start();
   }
+
 //////////////////////////////////////////////////////////////////////////////
 // Key UI Code
   function frontUI(localBackLayer, localFrontLayer, width, height) {
@@ -1068,10 +1125,14 @@ var zxPowerPoint = (function(settings) {
       globalDebugLayer.add(drawBox);
 
       debugMsg = (function(drawLayer, width, height) {
+        "use strict";
+
         var debugMsg = supportFunc.middle(supportFunc.drawText(
           width*0.1+5, height*0.9-outlineShift, "DEBUG ON"));
+
         debugMsg.setFill('white');
         drawLayer.add(debugMsg);
+
         return function(msg) {
           debugMsg.setText(msg);
           drawLayer.draw();
@@ -1094,28 +1155,28 @@ var zxPowerPoint = (function(settings) {
     // Sets up the buttons and interface the user can use
     "use strict";
 
-    var squareSide = setObj.minDim/16;
-    var squarePad  = 20 + outlineShift;
-    var msgBoxHeight = height*0.3;
-    var actionBoxHeight = height*0.1-outlineShift;
+    var squareSide = setObj.minDim/16,
+        squarePad  = 20 + outlineShift,
+        msgBoxHeight = height*0.3,
+        actionBoxHeight = height*0.1-outlineShift,
 
-    var outLayerAry = globalOutLayerAry;
+        outLayerAry = globalOutLayerAry,
 
-    var transObjAry = [{}, {}, {}, {}];
+        transObjAry = [{}, {}, {}, {}],
 
-    var transFunAry = [previousSegment, nextSegment,
-                       previousSlide, nextSlide];
+        transFunAry = [previousSegment, nextSegment,
+                       previousSlide, nextSlide],
 
-    var shiftDown = squareSide*1 + squarePad;
-    var msgBox;
+        shiftDown = squareSide*1 + squarePad,
+        msgBox,
 
-    var i = 0;
-    var max = 4;
+        i = 0,
+        max = 4,
 
-    var x, y, text, textObj;
-    var temp;
+        x, y, text, textObj,
+        temp,
 
-    var navButtons = [];
+        navButtons = [];
 
     // Draw all the movement boxes
     if (showButtons) {
@@ -1331,6 +1392,7 @@ var zxPowerPoint = (function(settings) {
               ptr.start();
             })();
           }
+
           // Sets up animation fadeout
           else{
             globalUIBlock = true;
@@ -1386,17 +1448,21 @@ var zxPowerPoint = (function(settings) {
 
   function drawMeta(metaLayer, supportFunc, setObj) {
     // Draws the meta data that updates frequently
+    "use strict";
+
     if (showSlideNumber)
       metaLayer.add(supportFunc.drawText(
           width/16, height/16, slideIndex,
           setObj.fontSize+10, setObj.fontFamily));
   }
+
 //////////////////////////////////////////////////////////////////////////////
 // MsgBox functions
   function msgBoxChange() {
     // This is overwritten internally by drawInterface
     // so that it changes size on resizing the screen
   }
+
 //////////////////////////////////////////////////////////////////////////////
 // Debug Functions
   function debugMsg(msg) {
@@ -1404,9 +1470,11 @@ var zxPowerPoint = (function(settings) {
     // so resizing works correctly
     console.log(msg);
   }
+
 //////////////////////////////////////////////////////////////////////////////
 // Extern Method calls
   function externStartUI() {
+    // Allows a user to start this UI
     "use strict";
 
     if (!hasInitialized) {
@@ -1441,11 +1509,13 @@ var zxPowerPoint = (function(settings) {
   }
 
   function externResize() {
+    // Extern call to resize canvas
     "use strict";
 
     if (!globalUIBlock)
       reSize(globalOutLayerAry, window.innerWidth-10, window.innerHeight-10);
   }
+
 //////////////////////////////////////////////////////////////////////////////
 // Public accessor functions
   self.startUI = function() {
@@ -1485,6 +1555,7 @@ var zxPowerPoint = (function(settings) {
     if (!globalUIBlock)
       previousSlide(globalOutLayerAry);
   };
+
 //////////////////////////////////////////////////////////////////////////////
   return{
     msgBoxChange    : self.msgBoxChange,
@@ -1500,3 +1571,4 @@ var zxPowerPoint = (function(settings) {
 
 // As the slides object is no longer needed globally, we will remove the reference
 PreZenSettings = undefined;
+
