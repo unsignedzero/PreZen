@@ -9,8 +9,8 @@
  * and enumerated here
  *
  * Created 03-02-2013
- * Updated 05-17-2013
- * Version 0.6.0.0 Tango
+ * Updated 10-08-2013
+ * Version 0.6.1.0
  * Created by David Tran (unsignedzero)
  */
 
@@ -26,6 +26,7 @@
 PreZenSettings.supportFunc = {
   bezierExample : function(outLayerA, outLayerB, outLayerC, outLayerD, minDim,
     width, height, setObj){
+    // Constructs the bezier example
     "use strict";
 
     var pointa, pointb, pointc, linea, lineb, linec, shifta, shiftb, shiftc,
@@ -224,15 +225,17 @@ PreZenSettings.supportFunc = {
 
   drawPixelCircle : function (LocalLayer, supportFunc,
       width, height, side, size, alt) {
+    // Draws the pixelated circle example
     "use strict";
-    var floor = supportFunc.floor;
-    var sqrt  = supportFunc.sqrt;
-    var abs   = supportFunc.abs;
 
-    var rad = size&1 ? (size>>1)-1 : size>>1;
-    var sub = size&1 ? (size>>1) : (size>>1) - 0.5;
+    var floor = supportFunc.floor,
+        sqrt  = supportFunc.sqrt,
+        abs   = supportFunc.abs,
 
-    var x, y, i, max, del, fill, tempval, stroke;
+        rad = size&1 ? (size>>1)-1 : size>>1,
+        sub = size&1 ? (size>>1) : (size>>1) - 0.5,
+
+        x, y, i, max, del, fill, tempval, stroke;
 
     LocalLayer.removeChildren();
     max = size * size;
@@ -278,6 +281,8 @@ PreZenSettings.supportFunc = {
 
   drawCircleArray : function(state, layer, colorfunc){
     var i, max, x, y, boardWidth, squareSide, sizeCount;
+      // Draws Simple Circle Array showing how LEDs can display info
+      "use strict";
 
       x = typeof state.x === "number" ? state.x : 0;
       y = typeof state.y === "number" ? state.y : 0;
@@ -336,6 +341,7 @@ PreZenSettings.supportFunc = {
   },
 
   pixelCircleDemo : function(outLayerAry, width, height, settingsObj, supportFunc){
+    // Creates a circle from a given array of pixels
     "use strict";
 
     // Creates the demo
@@ -460,6 +466,7 @@ PreZenSettings.supportFunc = {
   },
 
   slide27Canvas :  function(outLayerAry, width, height, settingsObj, supportFunc){
+    // Draws grid patterns to show what happens on pixel overlay
     "use strict";
 
     var floor = supportFunc.floor,
@@ -472,6 +479,7 @@ PreZenSettings.supportFunc = {
     i = 0;
     sizeCount = 4;
     max = sizeCount*sizeCount;
+
     // Draws first demo board
     while(i < max) {
       squareObj.x = width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide;
@@ -483,6 +491,7 @@ PreZenSettings.supportFunc = {
     i = 0;
     sizeCount = 3;
     max = sizeCount*sizeCount;
+
     // Draws second demo board
     while(i < max) {
       squareObj.x = width/4 +(boardWidth/2) - floor(i/sizeCount)*squareSide;
@@ -518,6 +527,7 @@ PreZenSettings.supportFunc = {
   },
 
   slide28Canvas : function(outLayerAry, width, height, settingsObj, supportFunc){
+    // Vector v Pixel demo
     "use strict";
 
     var floor    = supportFunc.floor,
@@ -581,6 +591,7 @@ PreZenSettings.supportFunc = {
   },
 
   slide29Canvas : function(outLayerAry, width, height, settingsObj, supportFunc){
+    // Vector Zoom Demo
     "use strict";
 
     var fontSize = settingsObj.fontSize,
@@ -627,6 +638,7 @@ PreZenSettings.supportFunc = {
 
     i = 0;
     max = 2;
+
     // Create the interactive buttons for the demo
     while(i < max) {
       x = width/4 + (i&1?-minDim/16:minDim/16);
