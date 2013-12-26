@@ -26,6 +26,8 @@ Electrical Engineering Colloquium Class, as of 04-28-2013.
 
 Created by unsignedzero and started on 01-25-2013 as an idea.
 
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/unsignedzero/prezen/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
 # TO DO #
 ### PreZEN #
 
@@ -33,6 +35,8 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 * Add button/key to jump to a specific slide/segment
 
 # Version/Changelog #
+
+* Added BitDeli Badge.
 
 ## 0.6.1.1 [10-11-2013] #
 
