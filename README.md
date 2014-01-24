@@ -2,24 +2,15 @@
 
 PreZen is a PowerPoint-like code library that allows one to code up a
 presentation rather than drag and drop it. Its main use is to allow one to
-code up demos and use them inside a browser rather than take many
-images of the animation and combine them together. As a plus side,
-this is built on Javascript so it will load on mostly all modern browsers
-that can run the KineticJS library.
+code up presentations and use them inside a browser rather than download
+a PowerPoint and load it. Since this is built on JavaScript,
+it will load on most modern browsers.
 
-Eventually the slides will be updated to use generators to make it easier
-to create codes. (In progress). With this update, creating slides will
-be much easier.
+If the content is relatively placed, it can scale up and down correctly.
 
-If one codes it up using relative values, as positions for all the content,
-then it can potentially scale up and work on any display size,
-if done correctly.
-
-In addition, I have left function calls so that one doesn't have to click on
-the arrows keys to advance forward to go back to the previous slide. Jwerty
-is used in the background, see main.js, to read inputs from the keyboard.
-As of now, this is fixed but might be changeable in the future. Similarly, one
-can also resize and show "notes" on a slide via the keyboard.
+In addition, the library itself has hooks if reading the mouse input is
+not a viable option. Jwerty is used to read in user input so it can also be
+controlled directly via the keyboard.
 
 Included is a sample slide that I have used for my presentation in my
 Electrical Engineering Colloquium Class, as of 04-28-2013.
@@ -36,6 +27,7 @@ Created by unsignedzero and started on 01-25-2013 as an idea.
 
 # Version/Changelog #
 
+* Cleaned up README.md so its easier to read.
 * Added BitDeli Badge.
 
 ## 0.6.1.1 [10-11-2013] #
